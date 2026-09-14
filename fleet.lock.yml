@@ -21,9 +21,9 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 3314
-    poids_ko: 101855
-    licence: ABSENTE
+    fichiers: 3315
+    poids_ko: 101861
+    licence: presente
     commits_90j: 100
     topics: ["layer-method", shinkiro]
     racines: [., "_bmad-output/planning-artifacts", "eslint-plugin-lafusee", packages/sdk, preview]
@@ -180,10 +180,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 70
-    poids_ko: 233
+    fichiers: 71
+    poids_ko: 237
     licence: presente
-    commits_90j: 31
+    commits_90j: 35
     topics: ["layer-execution", shinkiro]
     racines: [., bridge, cockpit, engine, setup]
     artefacts:
