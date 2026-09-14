@@ -113,6 +113,14 @@ d'argumenter qu'il connaît le process : il le montre.
 
 ## Navigation
 
+**Pour construire** — commence par là, dans cet ordre :
+
+- [`AGENTS.md`](AGENTS.md) — ordre de construction, tests de vie, règles de contribution
+- [`docs/MATURITE.md`](docs/MATURITE.md) — ce qui est fini, bouchonné ou aspirationnel. **À lire avant de planifier.**
+- [`docs/INTERFACES.md`](docs/INTERFACES.md) — contrats entre composants et inventaire des secrets
+
+**Pour comprendre** :
+
 - [`docs/PORTFOLIO.md`](docs/PORTFOLIO.md) — comment chaque composant sert les sept produits commerciaux
 - [`docs/CLOISON.md`](docs/CLOISON.md) — ce qui n'appartient pas à Shinkiro, et pourquoi
 
