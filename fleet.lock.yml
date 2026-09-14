@@ -25,6 +25,7 @@ composants:
     licence: ABSENTE
     commits_90j: 100
     topics: ["layer-method", shinkiro]
+    racines: [., "_bmad-output/planning-artifacts", "eslint-plugin-lafusee", packages/sdk, preview]
     artefacts:
       dockerfile: [Dockerfile]
       next: [next.config.ts]
@@ -42,6 +43,7 @@ composants:
     licence: ABSENTE
     commits_90j: 0
     topics: ["layer-method", shinkiro]
+    racines: [interface/templates, "reference/interactive-demos"]
     artefacts:
       index_html: [interface/templates/index.html]
   - nom: ADVERT_01
@@ -53,6 +55,7 @@ composants:
     licence: ABSENTE
     commits_90j: 0
     topics: ["layer-method", shinkiro]
+    racines: [., "_bmad-output/planning-artifacts", "_bmad-output/strategic-interface-amara"]
     artefacts:
       next: [next.config.js]
       index_html: [ADVERTIS_TRANSFER/interface/templates/index.html, "_bmad-output/strategic-interface-amara/index.html"]
@@ -68,6 +71,7 @@ composants:
     licence: ABSENTE
     commits_90j: 41
     topics: ["layer-method", shinkiro]
+    racines: [.]
     artefacts:
       dockerfile: [Dockerfile]
       next: [next.config.ts]
@@ -84,6 +88,7 @@ composants:
     licence: ABSENTE
     commits_90j: 0
     topics: ["layer-method", shinkiro]
+    racines: [., "advertis-app", interface/templates, "reference/interactive-demos"]
     artefacts:
       next: ["advertis-app/next.config.js"]
       index_html: [interface/templates/index.html]
@@ -99,6 +104,7 @@ composants:
     licence: presente
     commits_90j: 1
     topics: ["layer-tools", shinkiro]
+    racines: [app, workers]
     artefacts:
       next: [app/next.config.ts]
       package: [app/package.json, workers/package.json]
@@ -113,6 +119,7 @@ composants:
     licence: ABSENTE
     commits_90j: 0
     topics: ["layer-method", shinkiro]
+    racines: [.]
     artefacts:
       next: [next.config.ts]
       vercel: [vercel.json]
@@ -128,6 +135,7 @@ composants:
     licence: presente
     commits_90j: 1
     topics: ["layer-tools", shinkiro]
+    racines: [.]
   - nom: charadesign-generator
     branche: main
     prive: true
@@ -137,6 +145,7 @@ composants:
     licence: presente
     commits_90j: 1
     topics: ["layer-tools", shinkiro]
+    racines: ["lsi-cd-app"]
     artefacts:
       index_html: ["lsi-cd-app/index.html"]
       package: ["lsi-cd-app/package.json"]
@@ -149,6 +158,7 @@ composants:
     licence: presente
     commits_90j: 2
     topics: ["layer-execution", shinkiro]
+    racines: [.]
     artefacts:
       package: [package.json]
   - nom: datacollector
@@ -160,6 +170,7 @@ composants:
     licence: presente
     commits_90j: 2
     topics: ["layer-tools", shinkiro]
+    racines: [.]
     artefacts:
       index_html: [index.html]
       python: [main.py, requirements.txt, server.py]
@@ -173,6 +184,7 @@ composants:
     licence: presente
     commits_90j: 31
     topics: ["layer-execution", shinkiro]
+    racines: [., bridge, cockpit, engine, setup]
     artefacts:
       compose: ["deploy/dan-hermes/docker-compose.yml", "deploy/sas-admin/docker-compose.yml", "docker-compose.yml"]
       dockerfile: [Dockerfile, bridge/Dockerfile, "deploy/sas-admin/gateway/Dockerfile"]
@@ -190,6 +202,7 @@ composants:
     licence: presente
     commits_90j: 5
     topics: ["layer-company", shinkiro]
+    racines: [.]
     artefacts:
       dockerfile: [Dockerfile]
       index_html: [index.html]
@@ -202,6 +215,7 @@ composants:
     licence: presente
     commits_90j: 1
     topics: ["layer-tools", shinkiro]
+    racines: [.]
     artefacts:
       index_html: [index.html]
   - nom: hermes-cockpit
@@ -213,6 +227,7 @@ composants:
     licence: presente
     commits_90j: 20
     topics: ["layer-execution", shinkiro]
+    racines: [.]
     artefacts:
       compose: ["docker-compose.yaml"]
       dockerfile: [Dockerfile]
@@ -227,6 +242,7 @@ composants:
     licence: presente
     commits_90j: 2
     topics: ["layer-execution", shinkiro]
+    racines: [.]
     artefacts:
       systemd: [ops/hulysse.service]
       package: [package.json]
@@ -239,6 +255,7 @@ composants:
     licence: presente
     commits_90j: 1
     topics: ["layer-method", shinkiro]
+    racines: [.]
     artefacts:
       index_html: [index.html]
   - nom: la-barre
@@ -250,6 +267,7 @@ composants:
     licence: presente
     commits_90j: 13
     topics: ["layer-tools", shinkiro]
+    racines: [., sources/02_dossier_MT0020, sources/04_outils, sources/99_archive]
     artefacts:
       index_html: [index.html]
       package: [package.json]
@@ -262,6 +280,7 @@ composants:
     licence: presente
     commits_90j: 1
     topics: ["layer-method", shinkiro]
+    racines: [views]
   - nom: market-expansion-system
     branche: main
     prive: true
@@ -271,6 +290,7 @@ composants:
     licence: presente
     commits_90j: 1
     topics: ["layer-method", shinkiro]
+    racines: []
   - nom: radar
     branche: main
     prive: false
@@ -280,6 +300,7 @@ composants:
     licence: presente
     commits_90j: 10
     topics: ["layer-execution", shinkiro]
+    racines: [., briefs, briefs/rh]
     artefacts:
       dockerfile: [Dockerfile]
       pages_edge: [briefs/_headers, briefs/_redirects]
@@ -295,6 +316,7 @@ composants:
     licence: presente
     commits_90j: 3
     topics: ["layer-index", shinkiro]
+    racines: []
   - nom: talos
     branche: main
     prive: true
@@ -304,6 +326,29 @@ composants:
     licence: presente
     commits_90j: 2
     topics: ["layer-execution", shinkiro]
+    racines: [., "radar-mcp"]
     artefacts:
       systemd: [ops/talos.service]
       package: [package.json, "radar-mcp/package.json"]
+
+# Dépôts du compte ne portant PAS le topic shinkiro. Liste brute : certains sont
+# légitimement hors flotte (employeur, client, labo) et fleet.yml:hors_perimetre
+# les écarte nommément. Ce qui reste après soustraction est non classé.
+depots_du_compte: 39
+sans_topic:
+  - 15B_Stories
+  - ADVERT-web
+  - ADVERTIS-Matanga
+  - BlackNoteWeb
+  - BrandForge
+  - CosmicMachine
+  - Folio_Spark
+  - Matanga-Creative-dashboard
+  - Tauri-v1
+  - atlas-of-recorded-sound
+  - matanga-hermes-mcp
+  - neo-kinara
+  - project_spawt
+  - project_spawt_mobile_ci
+  - spawt-ci-mobile-v1-mvp
+  - spawt-meute-quiz

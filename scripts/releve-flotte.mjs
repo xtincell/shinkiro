@@ -81,6 +81,14 @@ for (const nom of depots) {
   const arbre = blobs.map((b) => b.chemin);
   const poids_ko = Math.round(blobs.reduce((n, b) => n + b.taille, 0) / 1024);
 
+  /* Racines déployables : répertoires (profondeur <= 2) portant un marqueur de
+   * point d'entrée. Trois composants du programme ont leur entrée en sous-dossier ;
+   * sans ce fait, un `racine:` déclaré dans fleet.yml n'est vérifiable par rien. */
+  const racines = [...new Set(arbre
+    .filter((p) => /(^|\/)(package\.json|Dockerfile|requirements\.txt|pyproject\.toml)$|\.html$/.test(p))
+    .map((p) => { const d = p.split("/").slice(0, -1); return d.length ? d.join("/") : "."; })
+    .filter((d) => d.split("/").length <= 2))].sort();
+
   const artefacts = {};
   for (const [cle, re] of SIGNAUX) {
     const hits = arbre.filter((p) => re.test(p)).sort();
@@ -101,6 +109,7 @@ for (const nom of depots) {
     licence: arbre.some((p) => /^LICEN[SC]E(\.[a-z]+)?$/i.test(p)) ? "presente" : "ABSENTE",
     topics,
     commits_90j: Number(gh(`repos/${OWNER}/${nom}/commits?since=${depuis}&per_page=100`, "length") || 0),
+    racines,
     artefacts,
   });
   process.stderr.write(`  ${nom.padEnd(26)} ${String(arbre.length).padStart(5)} fichiers · ${String(poids_ko).padStart(7)} Ko\n`);
@@ -142,12 +151,32 @@ for (const d of releve) {
   out += `    licence: ${d.licence}\n`;
   out += `    commits_90j: ${d.commits_90j}\n`;
   out += `    topics: ${liste(d.topics)}\n`;
+  out += `    racines: ${liste(d.racines)}\n`;
   const cles = Object.keys(d.artefacts);
   if (cles.length) {
     out += `    artefacts:\n`;
     for (const k of cles) out += `      ${k}: ${liste(d.artefacts[k])}\n`;
   }
 }
+
+/* Tous les dépôts du compte, topic ou pas. Ce qui n'est pas dans la flotte et
+ * n'est pas explicitement écarté par fleet.yml:hors_perimetre est non classé —
+ * c'est ainsi que cinq outils ont vécu hors de tout manifeste. Le relevé donne
+ * la liste brute ; la soustraction est un jugement, elle appartient à l'audit. */
+/* /user/repos, pas /users/{owner}/repos : le second ne renvoie que les dépôts
+ * publics, or la flotte est majoritairement privée — il en cachait dix-neuf. */
+const tous = gh(`user/repos?per_page=100&affiliation=owner`, ".[].name")
+  .split("\n").filter(Boolean);
+const sansTopic = tous.filter((n) => !depots.includes(n)).sort();
+
+out += `
+# Dépôts du compte ne portant PAS le topic ${TOPIC}. Liste brute : certains sont
+# légitimement hors flotte (employeur, client, labo) et fleet.yml:hors_perimetre
+# les écarte nommément. Ce qui reste après soustraction est non classé.
+depots_du_compte: ${tous.length}
+sans_topic:
+`;
+for (const n of sansTopic) out += `  - ${n}\n`;
 
 const dest = "fleet.lock.yml";
 const sansDate = (t) => t.replace(/^releve_le:.*$/m, "");

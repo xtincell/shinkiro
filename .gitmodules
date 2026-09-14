@@ -1,0 +1,15 @@
+[submodule "tools/indice-maturite"]
+	path = tools/indice-maturite
+	url = https://github.com/xtincell/indice-maturite.git
+[submodule "tools/market-expansion-system"]
+	path = tools/market-expansion-system
+	url = https://github.com/xtincell/market-expansion-system.git
+[submodule "tools/generateur-approches"]
+	path = tools/generateur-approches
+	url = https://github.com/xtincell/generateur-approches.git
+[submodule "tools/character-engine"]
+	path = tools/character-engine
+	url = https://github.com/xtincell/character-engine.git
+[submodule "tools/datacollector"]
+	path = tools/datacollector
+	url = https://github.com/xtincell/datacollector.git

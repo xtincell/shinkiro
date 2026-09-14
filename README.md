@@ -119,16 +119,27 @@ Outils légers, chacun dans son dépôt et monté en submodule sous `tools/`.
 
 **Pour construire** — commence par là, dans cet ordre :
 
-- [`fleet.yml`](fleet.yml) — le manifeste des dix-sept composants. `make clone-all` matérialise la flotte.
+- [`fleet.yml`](fleet.yml) — le manifeste des dix-sept composants : **le jugement**, écrit à la main. `make clone-all` matérialise la flotte.
+- [`fleet.lock.yml`](fleet.lock.yml) — **les faits**, régénérés par `make releve`. Ne pas éditer.
 - [`AGENTS.md`](AGENTS.md) — ordre de construction, tests de vie, règles de contribution
 - [`docs/TOPOLOGIE.md`](docs/TOPOLOGIE.md) — les cinq modes de déploiement, les points d'entrée en sous-dossier, les chevauchements structurels
 - [`docs/MATURITE.md`](docs/MATURITE.md) — ce qui est fini, bouchonné ou aspirationnel. **À lire avant de planifier.**
 - [`docs/INTERFACES.md`](docs/INTERFACES.md) — contrats entre composants et inventaire des secrets
 
+**Pour vérifier** — le dispositif qui empêche cette documentation de pourrir :
+
+- [`docs/DERIVE.md`](docs/DERIVE.md) — pourquoi le manifeste se recalcule, et ce que l'audit contrôle
+- [`docs/adr/`](docs/adr/) — la série `SHK-`, les décisions qui arbitrent entre composants
+
 **Pour comprendre** :
 
 - [`docs/PORTFOLIO.md`](docs/PORTFOLIO.md) — comment chaque composant sert les sept produits commerciaux
 - [`docs/CLOISON.md`](docs/CLOISON.md) — ce qui n'appartient pas à Shinkiro, et pourquoi
+
+Un dépôt appartient au programme s'il porte le topic `shinkiro`, et **par ce seul
+fait**. C'est ce que le relevé interroge : un dépôt sans le topic n'existe pas pour
+la flotte, un dépôt avec le topic mais absent de `fleet.yml` est une dérive, et
+l'audit dit l'un comme l'autre.
 
 Les dépôts du programme portent le topic [`shinkiro`](https://github.com/search?q=user%3Axtincell+topic%3Ashinkiro&type=repositories),
 plus un topic de couche : `layer-method`, `layer-company`, `layer-execution`, `layer-tools`.

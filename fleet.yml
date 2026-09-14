@@ -38,6 +38,7 @@
 
 owner: xtincell
 version: 2
+programme: shinkiro        # ce dépôt-ci : il porte le manifeste, il n'y figure pas
 plateforme_vps: coolify        # galahad patrouille et purge ses images ;
                                # hermes-cockpit s'y déploie ; galahad porte une
                                # skill diagnostic-coolify.json

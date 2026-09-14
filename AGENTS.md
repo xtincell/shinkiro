@@ -76,3 +76,29 @@ cd ADVE-project && npm ci && npx prisma generate && npm test
   techniques peuvent rester en anglais.
 - **Ne remonte jamais la technologie au catalogue commercial.** Voir `docs/PORTFOLIO.md` :
   ce qui se vend n'est pas ce qui livre.
+
+
+---
+
+## Avant de committer quoi que ce soit dans ce dépôt
+
+```bash
+make releve                       # les faits se recalculent, jamais ne s'écrivent
+node scripts/signaux-flotte.mjs   # attendu : « COHÉRENT — aucune dérive »
+```
+
+Trois règles, et l'audit les fait respecter :
+
+1. **Ne jamais éditer `fleet.lock.yml` à la main.** C'est un relevé. Pour le
+   corriger, corrige la réalité puis relance `make releve`.
+2. **Ne jamais réintroduire un fait dans `fleet.yml`** — volumétrie, comptage,
+   branche, topics. Le signal `faits-dans-le-jugement` refuse la régression.
+3. **Un nouveau composant, c'est trois gestes** : le topic `shinkiro` sur le dépôt,
+   une entrée dans `fleet.yml`, et `make releve`. Sans le premier il est invisible ;
+   sans le second il est non jugé ; l'audit dit lequel manque.
+
+Pour poser une décision qui engage plusieurs composants, lis
+[`docs/adr/README.md`](docs/adr/README.md) : une ADR acceptée nomme le contrôle qui
+la défend, et ce contrôle doit exister.
+
+Le pourquoi de tout ceci est dans [`docs/DERIVE.md`](docs/DERIVE.md).
