@@ -195,10 +195,15 @@ composants:
       src: [agent-loop, config, cron, heartbeat, hooks, index, journal, mcp, memory, ollama, soul, telegram, tools]
       radar-mcp: Pont MCP vers radar — index.js et test-client.mjs.
       memory-seed: [MEMORY.md, infra.md, projets.md]
-    duplication: >-
-      src/ recouvre galahad/engine/src/. Le moteur existe en trois exemplaires
-      — galahad, talos, hulysse — alors que le README de galahad promet « une
-      image moteur, trois rôles ». C'est la dette structurelle n°1.
+    divergence: {avec: hulysse, chemin: src, mesure_pct: 17, le: 2026-09-14}   # SHK-0003
+    attention: >-
+      Même moteur que hulysse, à 17 % près — journal.js, ollama.js et telegram.js
+      sont identiques à l'octet. Ce qui les sépare est fonctionnel, pas structurel :
+      talos porte cron, heartbeat et le pont MCP vers radar ; hulysse porte goals et
+      veille. C'est la duplication réelle du programme, et la seule.
+      Aucun recouvrement avec galahad, qui diverge de 73 % : moteur différent,
+      agnostique au fournisseur de modèle. Chiffres reproductibles par
+      scripts/mesure-divergence.mjs.
 
   - nom: hulysse
     couche: execution
@@ -213,7 +218,10 @@ composants:
     contient:
       src: [agent-loop, config, goals, hooks, index, journal, memory, telegram, tools]
       memory-seed: [MEMORY.md, infra.md, projets.md]
-    duplication: Même moteur que talos et galahad. Voir talos.duplication.
+    divergence: {avec: talos, chemin: src, mesure_pct: 17, le: 2026-09-14}   # SHK-0003
+    attention: >-
+      Même moteur que talos. Voir talos.attention — et non galahad, dont il
+      diverge de 71 %.
 
   - nom: danmem
     couche: execution

@@ -53,3 +53,4 @@ aucun`, et dit pourquoi. C'est une déclaration, pas un oubli.
 |---|---|---|
 | [SHK-0001](SHK-0001-programme-et-deux-etages.md) | Le programme, et ses deux étages | Accepted |
 | [SHK-0002](SHK-0002-argos-unifie-et-autonome.md) | Argos : une bibliothèque, deux surfaces | Accepted |
+| [SHK-0003](SHK-0003-deux-moteurs-pas-trois.md) | Deux moteurs, pas trois | Accepted |

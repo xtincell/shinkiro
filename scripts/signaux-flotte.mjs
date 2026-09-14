@@ -13,7 +13,8 @@
  * qui énonce une règle vérifiable nomme ici le contrôle qui la défend.
  */
 
-import { readFileSync, existsSync, statSync, readdirSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -247,6 +248,44 @@ const SIGNAUX = {
     }
     return erreurs;
   },
+
+  /* SHK-0003 — une affirmation de duplication sans chiffre est une opinion, et
+   * une opinion écrite dans un manifeste finit par être lue comme un fait. Ce
+   * manifeste a porté « le moteur existe en trois exemplaires, dette
+   * structurelle n°1 » : c'était faux, et un plan en a découlé.
+   *
+   * Toute déclaration de divergence porte donc sa mesure et sa date. Quand les
+   * deux dépôts se trouvent clonés côte à côte, le contrôle la REFAIT : un
+   * chiffre déclaré à plus de dix points de la réalité est une dérive, pas une
+   * approximation. Sinon il vérifie seulement qu'elle n'a pas plus de 90 jours. */
+  "divergence-perimee": () =>
+    composantsFY.flatMap((c) => {
+      const d = c.divergence;
+      if (!d) return [];
+      const manquants = ["avec", "chemin", "mesure_pct", "le"].filter((k) => !(k in d));
+      if (manquants.length) return [`${c.nom} — divergence déclarée sans ${manquants.join(", ")}`];
+
+      /* Re-mesure si les deux dépôts sont là : ROOT est le répertoire qui
+       * accueille make clone-all, soit le parent de shinkiro. */
+      const ici = join(RACINE, "..", c.nom, d.chemin);
+      const la  = join(RACINE, "..", d.avec, d.chemin);
+      if (existsSync(ici) && existsSync(la)) {
+        try {
+          const sortie = execFileSync(process.execPath,
+            [join(RACINE, "scripts/mesure-divergence.mjs"), ici, la],
+            { encoding: "utf8", timeout: 60000 });
+          const reel = Number(sortie.match(/^mesure_pct:\s*(\d+)/m)?.[1]);
+          if (Number.isFinite(reel) && Math.abs(reel - Number(d.mesure_pct)) > 10)
+            return [`${c.nom} — divergence déclarée ${d.mesure_pct} % avec ${d.avec}, mesurée ${reel} % à l'instant`];
+          return [];
+        } catch { /* la mesure a échoué : on retombe sur le contrôle de fraîcheur */ }
+      }
+
+      const jours = Math.floor((Date.now() - Date.parse(String(d.le))) / 864e5);
+      return jours > 90
+        ? [`${c.nom} — divergence avec ${d.avec} mesurée il y a ${jours} jours, jamais revérifiée`]
+        : [];
+    }),
 
   /* La série SHK ne survit que si l'audit la lit. Une ADR acceptée qui énonce
    * une règle vérifiable nomme son signal ; sans quoi la décision est écrite
