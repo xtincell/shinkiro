@@ -13,8 +13,12 @@
 
 OWNER  := xtincell
 ROOT   := ..
-REFS   := $(shell sed -n 's/^  - nom: //p' fleet.yml)
-VERSES := indice-maturite market-expansion-system generateur-approches character-engine datacollector
+# Les deux étages sortent de fleet.yml, jamais d'une liste tenue à la main :
+# une liste en dur est exactement la chose qui dérive. Un composant `reference`
+# se clone à côté ; un composant `verse` vit sous tools/ en submodule, et
+# clone-all ne doit pas en faire un second exemplaire.
+REFS   := $(shell awk '/^  - nom: /{n=$$3} /^    etage: reference/{print n}' fleet.yml)
+VERSES := $(shell awk '/^  - nom: /{n=$$3} /^    etage: verse/{print n}' fleet.yml)
 
 .PHONY: clone-all pull-all status build-order tools releve derive help
 
@@ -26,7 +30,8 @@ clone-all:
 	  if [ -d "$(ROOT)/$$r/.git" ]; then printf "  = %s\n" "$$r"; \
 	  else printf "  + %s\n" "$$r"; gh repo clone $(OWNER)/$$r "$(ROOT)/$$r" -- -q || printf "  ! %s inaccessible\n" "$$r"; fi; \
 	done
-	@printf "\nFlotte dans %s. Ordre de construction : make build-order\n" "$(ROOT)"
+	@printf "\n%s composants autonomes dans %s. Les outils versés sont sous tools/ : make tools\n" "$(words $(REFS))" "$(ROOT)"
+	@printf "Ordre de construction : make build-order\n"
 
 pull-all:
 	@for r in $(REFS); do \
@@ -54,7 +59,7 @@ build-order:
 
 tools:
 	@git submodule update --init --recursive
-	@printf "Outils versés : %s\n" "$(VERSES)"
+	@printf "Outils versés sous tools/ : %s\n" "$(VERSES)"
 
 # ── le relevé ──────────────────────────────────────────────────────────────
 # fleet.yml est le jugement, fleet.lock.yml sont les faits. Les faits se
