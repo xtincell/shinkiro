@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le programme — Shinkiro</title>
+<meta name="description" content="Shinkiro — le programme, la suite, et le dispositif qui l'empêche de dériver">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9673;</text></svg>">
+</head>
+<body>
+<header class="bandeau"><div class="bandeau-int">
+<a class="marque" href="index.html">◉ SHIN<span>KIRO</span></a>
+<nav class="nav"><a href="index.html" aria-current="page">Accueil</a><a href="suite.html">La suite</a><a href="catalogue.html">Le catalogue</a><a href="topologie.html">Topologie</a><a href="decisions.html">Décisions</a><a href="dispositif.html">Anti-dérive</a><a href="livrables.html">Livrables</a><a href="perimetre.html">Périmètre</a></nav>
+</div></header>
+<main>
+
+<h1>Shinkiro</h1>
+<p class="intro">Le programme qui industrialise la chaîne de valeur créative — du brief au
+livrable, du diagnostic au paiement. 17 composants, 10 dérivés déclarés, et un dispositif qui
+empêche cette page de mentir.</p>
+
+<div class="grille grille-4">
+  <div class="carte"><div class="chiffre">17</div><div class="chiffre-lib">composants</div></div>
+  <div class="carte"><div class="chiffre">22</div><div class="chiffre-lib">dépôts relevés</div></div>
+  <div class="carte"><div class="chiffre">6 298</div><div class="chiffre-lib">fichiers</div></div>
+  <div class="carte"><div class="chiffre">187 Mo</div><div class="chiffre-lib">d'arbre</div></div>
+</div>
+
+<h2 id="a-ne-pas-confondre">Trois noms, trois choses</h2>
+<div class="grille grille-3">
+  <div class="carte"><h3>Shinkiro</h3><p class="sous"><strong>Le programme, et la suite.</strong>
+  Il ne porte aucun code de produit : le manifeste, l'ordre de construction, les décisions,
+  l'audit, et la présentation qu'il génère de lui-même.</p></div>
+  <div class="carte"><h3><code>galahad</code></h3><p class="sous"><strong>Un produit du
+  portefeuille.</strong> Une équipe d'IA organisée en agents qui fait tourner l'agence en
+  autonomie depuis un serveur dédié.</p></div>
+  <div class="carte"><h3>ADVE</h3><p class="sous"><strong>La méthode.</strong> La couche
+  décisionnelle : elle dit quoi construire et pourquoi. Son dépôt canonique est
+  <code>ADVE-project</code>.</p></div>
+</div>
+<p><span class="source">docs/adr/SHK-0001-programme-et-deux-etages.md</span></p>
+
+<h2 id="la-these">La thèse</h2>
+<blockquote><p>Aucune structure de classe mondiale ne sert correctement le marché créatif en Afrique francophone. Les groupes internationaux maintiennent des bureaux à Abidjan, Douala, Dakar — des boîtes aux lettres. Leurs méthodologies restent à Paris ou Londres. Le client africain reçoit un service de tier 3 au prix du tier 1. Les agences locales ont du talent, de l'intuition, de la débrouillardise. Mais rien de codifié, rien de reproductible, rien de mesurable. Chaque projet est un artisanat. C'est ce qui empêche le marché de scaler.</p></blockquote>
+<p>Shinkiro <strong>industrialise</strong> la chaîne de valeur créative — du brief au livrable, du diagnostic au paiement.</p>
+<p><strong>ADVE est la courroie.</strong> Elle a cessé d'être un produit posé à côté du business pour devenir la couche décisionnelle au-dessus : elle dit quoi construire et pourquoi ; les couches en dessous disent comment.</p>
+<pre class="code"><code>                        ┌──────────────────────────┐
+                        │           ADVE           │
+                        │ méthode · courroie · moat│
+                        └────────────┬─────────────┘
+                                     │
+              DIAGNOSTIC → SCORE DE MATURITÉ 0-5 → PLAN DE TRANSFORMATION
+                                     │
+     ┌───────────────┬───────────────┼───────────────┬───────────────┐
+     ▼               ▼                               ▼               ▼
+ ┌────────┐    ┌────────────┐                  ┌───────────┐  ┌──────────────┐
+ │   01   │    │     02     │                  │    03     │  │      04      │
+ │MÉTHODE │    │ ENTREPRISE │                  │ EXÉCUTION │  │ OUTILS MÉTIER│
+ │La Fusée│    │ UPgraders  │                  │  galahad  │  │   La Barre   │
+ │  ADVE  │    │            │                  │agents·VPS │  │    Argos     │
+ └───┬────┘    └────────────┘                  └───────────┘  └──────────────┘
+     │
+     └──────────────► BOUCLE D'APPRENTISSAGE ──────────────► retour vers ADVE</code></pre>
+<hr>
+
+<h2 id="les-quatre-couches">Les quatre couches</h2>
+<p>Ce ne sont pas des étages hiérarchiques : c'est le trajet d'une affirmation, de sa
+formulation à sa démonstration.</p>
+<div class="grille grille-2">
+  <div class="carte">
+    <h3>01 · Méthode</h3><p class="sous">la propriété intellectuelle</p>
+    <div class="ets"><a class="et" href="composants/adve-project.html">ADVE-project</a><a class="et" href="composants/la-fusee-blueprint.html">la-fusee-blueprint</a><a class="et" href="composants/indice-maturite.html">indice-maturite</a><a class="et" href="composants/market-expansion-system.html">market-expansion-system</a></div>
+  </div>
+  <div class="carte">
+    <h3>02 · Entreprise</h3><p class="sous">ce qui parle au marché</p>
+    <div class="ets"><a class="et" href="composants/galahad-landing.html">galahad-landing</a></div>
+  </div>
+  <div class="carte">
+    <h3>03 · Exécution</h3><p class="sous">agents et infrastructure</p>
+    <div class="ets"><a class="et" href="composants/galahad.html">galahad</a><a class="et" href="composants/radar.html">radar</a><a class="et" href="composants/talos.html">talos</a><a class="et" href="composants/hulysse.html">hulysse</a><a class="et" href="composants/danmem.html">danmem</a><a class="et" href="composants/hermes-cockpit.html">hermes-cockpit</a></div>
+  </div>
+  <div class="carte">
+    <h3>04 · Outils métier</h3><p class="sous">ce qui démontre</p>
+    <div class="ets"><a class="et" href="composants/la-barre.html">la-barre</a><a class="et" href="composants/argos-studio.html">Argos-studio</a><a class="et" href="composants/charadesign-generator.html">charadesign-generator</a><a class="et" href="composants/generateur-approches.html">generateur-approches</a><a class="et" href="composants/character-engine.html">character-engine</a><a class="et" href="composants/datacollector.html">datacollector</a></div>
+  </div>
+</div>
+
+<h2 id="entrer">Par où entrer</h2>
+<div class="grille grille-2">
+  <a class="carte" href="suite.html"><h3>La suite →</h3><p class="sous">Les 17
+  composants, un par un : rôle, déploiement, volumétrie relevée, ce qui manque, points de
+  vigilance. Sans filtre.</p></a>
+  <a class="carte" href="catalogue.html"><h3>Le catalogue →</h3><p class="sous">Les sept
+  produits, ce qui les livre, leurs livrables dérivés du code — chaque ligne sourcée — et ce
+  qui manque pour les vendre.</p></a>
+  <a class="carte" href="dispositif.html"><h3>Le dispositif anti-dérive →</h3><p class="sous">
+  Pourquoi le manifeste se recalcule, les quatorze contrôles, et l'angle mort assumé.</p></a>
+  <a class="carte" href="decisions.html"><h3>Les décisions →</h3><p class="sous">La série
+  <code>SHK-</code> : ce qui arbitre entre composants, et le signal qui défend chaque ADR.</p></a>
+</div>
+</main>
+<footer class="pied">
+<p>Généré par <code>portail/construire.mjs</code> depuis <code>fleet.yml</code>,
+<code>fleet.lock.yml</code> et <code>docs/</code>. Relevé du 2026-09-14.
+Rien n'est écrit ici à la main : ce qui est faux dans le portail est faux dans le manifeste.</p>
+</footer>
+</body>
+</html>

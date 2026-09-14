@@ -181,9 +181,9 @@ composants:
     prive: true
     langue: JavaScript
     fichiers: 71
-    poids_ko: 237
+    poids_ko: 236
     licence: presente
-    commits_90j: 35
+    commits_90j: 36
     topics: ["layer-execution", shinkiro]
     racines: [., bridge, cockpit, engine, setup]
     artefacts:
@@ -297,9 +297,9 @@ composants:
     prive: false
     langue: HTML
     fichiers: 69
-    poids_ko: 1772
+    poids_ko: 1771
     licence: presente
-    commits_90j: 10
+    commits_90j: 11
     topics: ["layer-execution", shinkiro]
     racines: [., briefs, briefs/rh]
     artefacts:

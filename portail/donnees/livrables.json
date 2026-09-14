@@ -1,0 +1,188 @@
+{
+  "extrait_le": "2026-09-14",
+  "familles": [
+    {
+      "source": "la-barre/app/production.js",
+      "titre": "La production créative",
+      "quoi": "Ce qu'un livrable créatif exige pour être fini — et ce que coûte chaque pièce manquante.",
+      "types": [
+        {
+          "cle": "asset",
+          "rang": 0,
+          "nom": "L'asset",
+          "extensions": "jpg · png · mp4",
+          "quoi": "le fichier plat, celui qu'on regarde et qu'on fait valider",
+          "pour": "le client, la revue",
+          "cout": "rien à montrer : le livrable n'existe qu'en tête",
+          "signable": false
+        },
+        {
+          "cle": "bat",
+          "rang": 1,
+          "nom": "Le BAT",
+          "extensions": "psd · ai · indd · aep",
+          "quoi": "le montage source, bon à tirer, signé et daté",
+          "pour": "l'imprimeur, le prestataire",
+          "cout": "aucune correction possible sans tout refaire, et l'erreur d'impression est pour l'agence",
+          "signable": true
+        },
+        {
+          "cle": "simulation",
+          "rang": 2,
+          "nom": "La simulation",
+          "extensions": "jpg · png",
+          "quoi": "le rendu sur fond blanc, à l'échelle, avec ses repères",
+          "pour": "le contrôle technique avant remise",
+          "cout": "personne n'a vu le livrable à sa taille réelle",
+          "signable": false
+        },
+        {
+          "cle": "storyboard",
+          "rang": 0,
+          "nom": "Le storyboard",
+          "extensions": "pdf · jpg",
+          "quoi": "le film raconté en planches — et une ébauche d'animation si le temps le permet",
+          "pour": "la présentation client, avant toute production",
+          "cout": "on présente un film que personne ne peut se représenter",
+          "signable": false
+        },
+        {
+          "cle": "ouvert",
+          "rang": 4,
+          "nom": "Les sources",
+          "extensions": "psd · ai · indd · aep · prproj",
+          "quoi": "les fichiers de travail, rangés et nommés",
+          "pour": "l'agence, la reprise dans six mois",
+          "cout": "le livrable ne se reprend que depuis zéro, et la personne qui l'a fait emporte le dossier en partant",
+          "signable": false
+        },
+        {
+          "cle": "situation",
+          "rang": 3,
+          "nom": "La mise en situation",
+          "extensions": "jpg · png",
+          "quoi": "le livrable dans son support — un 4×3 en rue, une gondole en rayon",
+          "pour": "la présentation client",
+          "cout": "on fait valider un visuel que personne n'a vu à trois mètres",
+          "signable": false
+        }
+      ],
+      "regles": [
+        {
+          "condition": "lourd",
+          "exige": "avantSignature ? [\"storyboard\"] : [\"storyboard\", \"asset\", \"bat\"]"
+        },
+        {
+          "condition": "t === \"social\" || t === \"kv\"",
+          "exige": "[\"asset\"]"
+        },
+        {
+          "condition": "t === \"goodies\"",
+          "exige": "avantSignature ? [\"asset\"] : [\"asset\", \"bat\", \"situation\"]"
+        }
+      ],
+      "regle_par_defaut": "avantSignature ? [\"asset\"] : [\"asset\", \"bat\", \"simulation\", \"situation\"]"
+    },
+    {
+      "source": "ADVE-project/src/server/services/artemis/tools/deliverable-compiler.ts",
+      "titre": "Le document stratégique",
+      "quoi": "Les sorties d'une séquence assemblées en document exportable.",
+      "flux": "Sequence DONE → getCompletedSequences() → compile(sequenceKey) → export",
+      "formats": [
+        {
+          "format": "PDF",
+          "pour": "Formal documents (manifeste, brandbook, offre, audit)"
+        },
+        {
+          "format": "HTML",
+          "pour": "Presentations, interactive dashboards"
+        },
+        {
+          "format": "JSON",
+          "pour": "Structured data (design tokens, KPI frameworks, calendars)"
+        }
+      ],
+      "suivi": {
+        "source": "ADVE-project/src/server/services/campaign-deliverable/index.ts",
+        "etats": "GREEN/AMBER/RED",
+        "calcul": "status × deadline_proximity × blockers"
+      }
+    },
+    {
+      "source": "market-expansion-system/METHODE.md",
+      "titre": "Le déploiement multi-marchés",
+      "quoi": "Un master, N marchés, sans perdre la marque.",
+      "produit": null,
+      "ecarts": "| Écart | Ce qui change | Exemple vécu |\n|---|---|---|\n| **Langue** | Titraille, signature, mentions légales | Ghana en anglais — « Fuel Their Dreams » |\n| **Marque** | Le produit vendu diffère selon le pays | Ghana bascule sur Peak, les autres restent Bonnet Rouge |\n| **Produit / SKU** | Format, grammage, prix affiché | IMP 400 g vs sachet 15 g à 100 FCFA |\n| **Réglementaire** | Mentions obligatoires, allégations autorisées | Allégations nutritionnelles selon marché |\n\nTout autre écart demandé est un écart de confort. Il se refuse, ou il se facture.\n\n---",
+      "chaine": "1. **Cadrer** — plateforme applicable, liste des marchés, écarts connus par marché.\n   Sortie : la matrice de déploiement, remplie *avant* le premier crayon.\n2. **Concevoir** — une seule big idea, arbitrée. Le master est produit dans le format le plus\n   contraint (généralement le 4×3), jamais dans le plus confortable.\n3. **Valider le master** — un seul aller-retour client sur le master. Tant qu'il n'est pas\n   validé, aucune variante n'est lancée. C'est la règle qui économise le plus de temps.\n4. **Décliner** — variantes marché, puis déclinaisons formats. Jamais l'inverse.\n5. **Contrôler** — relecture des mentions par marché, conformité charte, puis Ready-To-Print.\n6. **Bon à tirer** — un BAT par marché, tracé.\n\n---",
+      "gabarits": [
+        {
+          "fichier": "cadrage-briefs.csv",
+          "source": "market-expansion-system/gabarits/cadrage-briefs.csv",
+          "colonnes": [
+            "ndeg",
+            "client",
+            "marque",
+            "cluster",
+            "pays",
+            "projet",
+            "type",
+            "niveau",
+            "statut",
+            "brief_etat",
+            "prio",
+            "avancement",
+            "responsable",
+            "date_reception",
+            "entree",
+            "entre_par",
+            "deadline",
+            "deadline_hard",
+            "livrables",
+            "doc_brief",
+            "comm"
+          ],
+          "lignes": 6
+        },
+        {
+          "fichier": "cadrage-matrice.csv",
+          "source": "market-expansion-system/gabarits/cadrage-matrice.csv",
+          "colonnes": [
+            "ndeg",
+            "pays",
+            "code",
+            "marque",
+            "langue",
+            "sku",
+            "formats",
+            "ecart_type",
+            "ecart_declare",
+            "mentions_legales",
+            "imprimeur",
+            "date_bat",
+            "statut"
+          ],
+          "lignes": 9
+        },
+        {
+          "fichier": "matrice-deploiement-modele.csv",
+          "source": "market-expansion-system/gabarits/matrice-deploiement-modele.csv",
+          "colonnes": [
+            "marché",
+            "code",
+            "marque",
+            "langue",
+            "SKU concerné",
+            "formats",
+            "écart déclaré",
+            "mentions légales",
+            "imprimeur",
+            "date BAT",
+            "statut"
+          ],
+          "lignes": 9
+        }
+      ]
+    }
+  ]
+}

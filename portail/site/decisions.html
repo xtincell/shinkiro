@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Décisions — Shinkiro</title>
+<meta name="description" content="La série SHK — 3 décisions de flotte">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9673;</text></svg>">
+</head>
+<body>
+<header class="bandeau"><div class="bandeau-int">
+<a class="marque" href="index.html">◉ SHIN<span>KIRO</span></a>
+<nav class="nav"><a href="index.html">Accueil</a><a href="suite.html">La suite</a><a href="catalogue.html">Le catalogue</a><a href="topologie.html">Topologie</a><a href="decisions.html" aria-current="page">Décisions</a><a href="dispositif.html">Anti-dérive</a><a href="livrables.html">Livrables</a><a href="perimetre.html">Périmètre</a></nav>
+</div></header>
+<main>
+
+<h1>Les décisions de flotte</h1>
+<p>Une seconde série d'ADR, à côté des 192 d'ADVE-project. C'est un risque assumé : les séries parallèles meurent, l'une prend le pas et l'autre se fossilise. Deux règles la maintiennent en vie.</p>
+<h2 id="regle-1-elle-ne-gouverne-qu-entre-composants">Règle 1 — elle ne gouverne qu'entre composants</h2>
+<p>Une décision interne à un composant reste chez lui. <code>ADVE-project</code> garde sa série <code>ADR-NNNN</code> sous <code>docs/governance/adr/</code>, et rien ici ne la remplace.</p>
+<p><code>SHK-</code> n'arbitre que ce qu'aucun dépôt ne peut trancher seul : le partage d'une source entre deux composants, le rang d'un composant dans le programme, la frontière entre ce qui est référencé et ce qui est versé.</p>
+<p>Le préfixe existe pour qu'aucune collision de numéro ne soit possible : <code>SHK-0001</code> et <code>ADR-0001</code> ne se confondent pas, même cités hors contexte.</p>
+<h2 id="regle-2-l-audit-la-lit">Règle 2 — l'audit la lit</h2>
+<p>Toute ADR <code>Accepted</code> qui énonce une règle vérifiable déclare un <strong>signal d'audit</strong>, et ce signal existe dans <code>galahad/engine/skills/audit-fleet.json</code>.</p>
+<p>    ## Signal d'audit     <code>id-du-signal</code> — ce qui est attendu, et ce qui constitue une violation.</p>
+<p>Une ADR sans signal est une ADR que personne ne vérifie : l'audit la signale comme telle. Une décision qu'aucun contrôle ne défend n'a pas d'effet, et vaut mieux écrite nulle part qu'écrite et ignorée — c'est ainsi qu'on obtient un document qui affirme le contraire de la réalité.</p>
+<p>Une ADR peut légitimement n'avoir aucun signal — elle porte alors <code>Signal d'audit : aucun</code>, et dit pourquoi. C'est une déclaration, pas un oubli.</p>
+<h2 id="forme">Forme</h2>
+<p><code>docs/adr/SHK-NNNN-slug.md</code>, numéros attribués dans l'ordre, jamais réutilisés.</p>
+<p>    # SHK-NNNN — Titre</p>
+<ul><li><strong>Statut</strong> : Proposed | Accepted | Superseded by SHK-NNNN</li><li><strong>Date</strong> : AAAA-MM-JJ</li><li><strong>Composants</strong> : ceux que la décision engage</li></ul>
+<p>    ## Contexte      ce qui a été constaté, avec de quoi le recouper     ## Décision      ce qui est tranché     ## Signal d'audit  comment on vérifie que ça tient     ## Portée        ce que la décision ne dit pas</p>
+
+<section id="shk-0001-le-programme-et-ses-deux-etages">
+<h1 id="shk-0001-le-programme-et-ses-deux-etages">SHK-0001 — Le programme, et ses deux étages</h1>
+<ul><li><strong>Statut</strong> : Accepted</li><li><strong>Date</strong> : 2026-09-14</li><li><strong>Composants</strong> : tous les dépôts portant le topic <code>shinkiro</code></li></ul>
+<h2 id="contexte">Contexte</h2>
+<p>Trois noms circulaient pour trois choses différentes, et le même mot désignait tantôt l'ensemble, tantôt une de ses pièces. « Galahad 360 » nommait le programme entier ; <code>galahad</code> nommait aussi une équipe d'agents auto-hébergée, qui n'en est qu'un composant. Une confusion de ce genre ne reste pas verbale longtemps : elle finit en dépôt créé deux fois.</p>
+<p>Elle l'a déjà fait. <code>ADVE-project/docs/governance/adr/0100-argos-hunter-backend-port.md</code>, daté du 14 juin 2026, ouvre son contexte par <em>« Argos n'était <strong>pas déployable</strong> — 0 % de backend »</em> et réimplémente le harvester à neuf.</p>
+<p>Le même jour, dans <code>Argos-studio</code>, il y avait 184 fichiers. Une API v1 complète — <code>agencies</code>, <code>awards</code>, <code>brands</code>, <code>assets</code>, <code>markets</code>, <code>references</code>, <code>sectors</code>, <code>years</code>, <code>ingest/dossier</code> — un <code>schema.prisma</code>, une migration <code>20260512171730_init</code> et un seed. Le tout posé en un seul commit le 15 mai, et intouché depuis. C'est vérifiable en une commande :</p>
+<p>    gh api 'repos/xtincell/Argos-studio/commits?until=2026-06-14T23:59:59Z&amp;per_page=1'</p>
+<p>Un mois d'écart. Un backend reconstruit parce que rien, nulle part, ne disait que l'autre existait. Le coût n'est pas le temps perdu : c'est qu'il y a désormais deux modèles de dossier de campagne à tenir d'accord.</p>
+<p>Deuxième constat, de nature différente : les composants n'ont pas la même masse. Le relevé déterministe donne 101 855 Ko d'arbre pour <code>ADVE-project</code> contre 233 Ko pour <code>galahad</code> — 437 pour 1. Les traiter pareil, c'est soit imposer à un outil de trois fichiers la cérémonie d'un dépôt de 3 314, soit charger le programme de cent mégaoctets à chaque clonage.</p>
+<h2 id="decision">Décision</h2>
+<p><strong>Shinkiro est le programme, et la suite.</strong> Il ne contient aucun code de produit : il porte le manifeste, l'ordre de construction, les décisions de flotte, l'audit, et la présentation qu'il génère de lui-même. <code>galahad</code> est un produit du portefeuille — une équipe d'IA qui fait tourner l'agence en autonomie depuis un serveur dédié — et non un simple composant de livraison. ADVE est la méthode, et son dépôt canonique est <code>ADVE-project</code>. Ces trois noms ne sont pas interchangeables, et le README l'énonce avant toute autre chose.</p>
+<p><strong>Un composant appartient à un étage, et un seul.</strong></p>
+<div class="table-enveloppe"><table><thead><tr><th></th><th><code>reference</code></th><th><code>verse</code></th></tr></thead><tbody><tr><td>Ce que c'est</td><td>composant autonome</td><td>outil léger</td></tr><tr><td>Son dépôt</td><td>le sien, son cycle, sa CI</td><td>le sien aussi</td></tr><tr><td>Dans shinkiro</td><td>cloné à côté par <code>make clone-all</code></td><td>submodule sous <code>tools/</code></td></tr><tr><td>Critère</td><td>se déploie et se vérifie seul</td><td>ne vit que dans le flux d'un autre</td></tr><tr><td>Côté client</td><td>s'adopte seul</td><td>ne s'adopte pas seul</td></tr></tbody></table></div>
+<p>Le critère n'est pas la taille — c'est l'autonomie. Et cette autonomie n'est pas une commodité de dépôt : <strong>c'est une propriété commerciale</strong>. Shinkiro est une suite, et une suite s'achète par morceaux. <code>reference</code> nomme ce qu'un client peut prendre seul — <code>radar</code> sans rien d'autre, <code>la-barre</code> sur un poste, <code>galahad</code> sur son propre serveur. <code>verse</code> nomme ce qui n'a de sens que dans le flux d'un autre.</p>
+<p>La taille n'explique qu'une chose : pourquoi les deux étages ne peuvent pas être un seul. Verser <code>ADVE-project</code> en submodule imposerait ses 100 Mo à quiconque clone le programme pour lire trois fichiers de doctrine.</p>
+<p><strong>Le programme ne porte aucun code de produit.</strong> Sa propre surface de présentation fait exception, et ce n'en est pas une : un portail généré depuis <code>fleet.yml</code> est une lecture du manifeste, pas une application. Le placer ailleurs créerait une source partagée sans propriétaire — ce que <code>SHK-0002</code> interdit.</p>
+<p><strong>L'appartenance au programme se déclare par le topic <code>shinkiro</code></strong>, et par lui seul. C'est ce que le relevé interroge ; un dépôt sans le topic n'existe pas pour la flotte, un dépôt avec le topic mais absent de <code>fleet.yml</code> est une dérive.</p>
+<p><strong><code>fleet.yml</code> porte le jugement, <code>fleet.lock.yml</code> porte les faits.</strong> Le premier est écrit à la main et dit à quoi sert un composant ; le second est régénéré par <code>make releve</code> et dit ce qu'il est. Trois champs du premier — <code>vitalite</code>, <code>licence</code>, <code>deploiement.mode</code> — ressemblent à des faits mais sont des jugements : c'est précisément leur contradiction par le second qui constitue un signal.</p>
+<h2 id="signal-d-audit">Signal d'audit</h2>
+<ul><li><code>non-classe</code> — un dépôt du compte qui ne porte pas le topic <code>shinkiro</code> et que <code>hors_perimetre</code> n'écarte pas nommément. Constaté : cinq outils vivaient hors de tout manifeste avant le 14 septembre 2026.</li><li><code>absent-du-manifeste</code> — un dépôt qui porte le topic mais n'apparaît dans <code>fleet.yml</code> ni comme composant, ni comme lignée morte. Il est entré dans la flotte sans être jugé.</li><li><code>etage-invalide</code> — un composant dont <code>etage</code> n'est ni <code>reference</code> ni <code>verse</code>, ou qui se déclare versé sans submodule correspondant sous <code>tools/</code>. Constaté : les cinq outils versés l'étaient sur le papier seulement.</li><li><code>faits-dans-le-jugement</code> — un champ factuel réapparu dans <code>fleet.yml</code>. La scission ne tient que si personne ne la défait par commodité.</li><li><code>licence-absente</code>, <code>vitalite-dementie</code>, <code>racine-fantome</code>, <code>entree-fantome</code> — les trois champs de jugement démentis par le relevé, plus le point d'entrée.</li><li><code>releve-perime</code> — un <code>fleet.lock.yml</code> de plus de quinze jours redevient ce qu'il remplaçait : un instantané qui affirme.</li></ul>
+<p>Le signal qui aurait épargné l'ADR-0100 — <em>deux composants, un seul produit</em> — n'est pas dans cette liste. Il demande une recherche de code à travers les dépôts, donc un jeton, donc le workflow et non la patrouille ; et il n'a de sens qu'une fois désigné le dépôt canonique d'Argos. Il relève de <code>SHK-0002</code>, et c'est là qu'il sera écrit. Le nommer ici sans l'implémenter aurait produit exactement ce que cette ADR combat : un document qui affirme un contrôle absent.</p>
+<h2 id="portee">Portée</h2>
+<p>Cette ADR ne dit pas où tel composant doit aller — <code>fleet.yml</code> le dit, composant par composant, et se corrige sans ADR.</p>
+<p>Elle ne crée pas de monorepo et n'impose pas un mode de déploiement unique. Cinq modes coexistent — Coolify, systemd, Vercel, Docker autonome, statique — parce qu'ils correspondent à cinq réalités ; les uniformiser casserait ce qui tourne. <code>docs/TOPOLOGIE.md</code> en tient le détail.</p>
+<p>Elle ne dit rien du contenu des composants. Un dépôt reste maître de ses propres décisions ; <code>SHK-</code> n'arbitre qu'entre eux.</p>
+<p><span class="source">docs/adr/SHK-0001-programme-et-deux-etages.md</span></p></section>
+<hr>
+<section id="shk-0002-argos-une-bibliotheque-deux-surfaces">
+<h1 id="shk-0002-argos-une-bibliotheque-deux-surfaces">SHK-0002 — Argos : une bibliothèque, deux surfaces</h1>
+<ul><li><strong>Statut</strong> : Accepted</li><li><strong>Date</strong> : 2026-09-14</li><li><strong>Composants</strong> : <code>Argos-studio</code>, <code>ADVE-project</code></li></ul>
+<h2 id="contexte">Contexte</h2>
+<p><code>ADR-0100</code> d'ADVE-project, datée du 14 juin 2026, constate <em>« Argos n'était <strong>pas déployable</strong> — 0 % de backend »</em> et réimplémente le harvester à neuf. <code>Argos-studio</code> existait depuis le 15 mai, 184 fichiers, API v1 complète. Le récit de cette dérive est dans <a href="dispositif.html"><code>docs/DERIVE.md</code></a>.</p>
+<p>Mais le relevé des deux modèles dément la lecture simple — « deux fois la même chose ». Ce n'est pas le cas, et c'est ce qui rend l'arbitrage possible.</p>
+<p><strong><code>Argos-studio</code> porte une bibliothèque.</strong> Neuf entités relationnelles autour de <code>Reference</code> : une taxonomie de patterns (<code>patternKind</code>, <code>manipulationMode</code>, <code>funnelStage</code>, piliers ADVE, <code>operationGoals</code>, <code>victoryTypes</code>), une preuve de performance à niveau d'attribution explicite — <code>PROVEN_CAUSAL</code>, <code>CORRELATED</code>, <code>ESTIMATED</code>, <code>CLAIMED</code> — la filiation entre campagnes, les annotations d'expert, la provenance nominative du chercheur. Plus une API v1 sur neuf familles de ressources et une voie d'entrée <code>POST /api/v1/ingest/dossier</code>, validée en Zod et <strong>idempotente sur le slug</strong> : une resoumission amende au lieu de dupliquer.</p>
+<p><strong><code>ADVE-project/src/server/services/seshat/argos/</code> porte une gouvernance.</strong> Un <code>CampaignReferenceDossier</code> à champs JSON — <code>dna</code>, <code>editorial</code>, <code>sources</code> — mais surtout ce que le studio n'a pas : un verdict de sûreté <strong>déterministe et sans LLM</strong> (<code>PASS</code> / <code>QUARANTINE</code> / <code>REJECT</code>, auto-publication si et seulement si <code>PASS</code>), le passage obligé par le LLM Gateway, les intents <code>SESHAT_HARVEST_REFERENCE</code> et <code>OPERATOR_CREATE_REFERENCE_DOSSIER</code> avec leurs SLO, la parité manual-first, et le lien <code>intentEmissionId</code> vers le journal de gouvernance.</p>
+<p>Le recouvrement réel est étroit mais coûteux : les deux persistent une référence de campagne avec marque, secteur, marché et sources, et les deux ont une notion de publication. <strong>Deux modèles à tenir d'accord, indéfiniment.</strong></p>
+<h2 id="decision">Décision</h2>
+<p><strong><code>Argos-studio</code> est canonique pour la bibliothèque.</strong> Un seul modèle de référence, une seule taxonomie, une seule échelle d'attribution. C'est là que vit le fonds.</p>
+<p><strong><code>ADVE-project</code> en devient un client gouverné.</strong> Il garde intégralement ce qui fait sa valeur et que le studio n'a pas — mais comme <strong>politique au-dessus d'une source partagée</strong>, plus comme seconde bibliothèque :</p>
+<ol><li>Le Hunter récolte via le Gateway, inchangé.</li><li><code>computeSafetyVerdict</code> rend son verdict, déterministe, inchangé.</li><li><strong>Sur <code>PASS</code> uniquement</strong>, le dossier est projeté en <code>research-dossier-v1</code> et poussé sur <code>POST /api/v1/ingest/dossier</code>. L'idempotence sur le slug fait que rejouer est sans danger.</li><li><code>CampaignReferenceDossier</code> cesse d'être la bibliothèque et devient le <strong>journal de gouvernance</strong> : ce qui a été récolté, par quel intent, quel verdict, par qui, quand. C'est une trace d'audit, pas un fonds documentaire.</li><li>Les lectures publiques — <code>listPublicDossiers</code>, <code>getPublicDossierByRef</code> — passent par l'API v1 du studio.</li></ol>
+<p><strong>L'autonomie des deux est préservée, et c'est une contrainte, pas un effet de bord.</strong> <code>Argos-studio</code> se déploie seul sur Vercel depuis <code>app/</code> : c'est sa raison d'être, la bibliothèque publique et son moteur de recherche. <code>ADVE-project</code> fonctionne sans lui : le studio injoignable, la porte de gouvernance continue de juger et de journaliser, et la projection se rejoue plus tard — l'idempotence est ce qui rend ce report sûr.</p>
+<p><strong>Les trois interdits vendor d'ADR-0100 restent entiers.</strong> Ils portent sur <code>docs/external-design/argos-hunter-v1/</code>, qui n'est ni importé, ni exécuté, ni modifié. Cette ADR ne les touche pas.</p>
+<p><strong><code>ADR-0100</code> est amendée, non annulée.</strong> Son port est valable et le reste : la gouvernance qu'elle a construite est précisément ce qui manquait au studio. Seule sa prémisse — <em>« 0 % de backend »</em> — est corrigée.</p>
+<h2 id="signal-d-audit">Signal d'audit</h2>
+<ul><li><code>source-partagee</code> — lorsque deux composants se partagent une source, <code>fleet.yml</code> le déclare : un <code>produit</code> commun, exactement un <code>role: canonique</code>, et tout <code>role: client</code> nomme l'interface <code>via</code> par laquelle il y accède. Zéro canonique signifie que personne ne possède la source ; deux signifient qu'on a rebâti ce qui existait.</li></ul>
+<p>C'est le contrôle qui aurait épargné ADR-0100 : contraint de déclarer qui possède Argos, son auteur aurait trouvé <code>Argos-studio</code>.</p>
+<p>Il est volontairement déclaratif et sans réseau, donc exécutable par la patrouille à coût nul. Une recherche de code à travers les dépôts dirait mieux, mais exige un jeton, donc le workflow, donc une seule exécution par semaine — et surtout elle ne détecte qu'un symbole déjà dupliqué, quand celui-ci détecte l'intention de le faire.</p>
+<h2 id="portee">Portée</h2>
+<p>Cette ADR ne fusionne pas les dépôts. Absorber <code>Argos-studio</code> dans <code>ADVE-project</code> détruirait l'autonomie qui est l'objet même de la contrainte posée.</p>
+<p>Elle ne dicte pas le calendrier du branchement. Le côté ADVE est un dépôt gouverné — 192 ADR, plugin ESLint maison, intents et SLO — et son propre processus décide comment et quand. <code>SHK-</code> arbitre entre composants ; il ne légifère pas à l'intérieur.</p>
+<p>Elle ne traite pas de la migration des dossiers déjà récoltés côté ADVE. Ils sont rejouables sur la voie d'entrée, précisément parce qu'elle est idempotente.</p>
+<p><span class="source">docs/adr/SHK-0002-argos-unifie-et-autonome.md</span></p></section>
+<hr>
+<section id="shk-0003-deux-moteurs-pas-trois">
+<h1 id="shk-0003-deux-moteurs-pas-trois">SHK-0003 — Deux moteurs, pas trois</h1>
+<ul><li><strong>Statut</strong> : Accepted</li><li><strong>Date</strong> : 2026-09-14</li><li><strong>Composants</strong> : <code>galahad</code>, <code>talos</code>, <code>hulysse</code></li></ul>
+<h2 id="contexte">Contexte</h2>
+<p>Ce manifeste a porté, sur <code>talos</code>, la note suivante :</p>
+<blockquote><p><em><code>src/</code> recouvre <code>galahad/engine/src/</code>. Le moteur existe en trois exemplaires — galahad, talos, hulysse — alors que le README de galahad promet « une image moteur, trois rôles ». C'est la dette structurelle n°1.</em></p></blockquote>
+<p>Elle était fausse, et un plan de fusion par <code>git subtree</code> en a découlé. Personne ne l'avait mesurée : trois répertoires portant les mêmes noms de fichiers avaient suffi à conclure.</p>
+<p>La mesure, reproductible par <code>scripts/mesure-divergence.mjs</code> :</p>
+<div class="table-enveloppe"><table><thead><tr><th>Paire</th><th>Fichiers partagés</th><th>Divergence</th></tr></thead><tbody><tr><td><code>talos</code> ↔ <code>hulysse</code></td><td>10</td><td><strong>17 %</strong></td></tr><tr><td><code>galahad</code> ↔ <code>talos</code></td><td>9</td><td>73 %</td></tr><tr><td><code>galahad</code> ↔ <code>hulysse</code></td><td>9</td><td>71 %</td></tr></tbody></table></div>
+<p><strong>Il n'y a pas trois exemplaires. Il y en a deux, et un troisième moteur différent.</strong></p>
+<p><code>talos</code> et <code>hulysse</code> sont bien le même moteur : <code>journal.js</code>, <code>ollama.js</code> et <code>telegram.js</code> sont <strong>identiques à l'octet</strong>, <code>tools.js</code> ne diffère que par ses commentaires. Ce qui les sépare est fonctionnel, pas structurel — <code>talos</code> porte <code>cron</code>, <code>heartbeat</code> et le pont MCP vers radar ; <code>hulysse</code> porte <code>goals</code> et <code>veille</code>.</p>
+<p><code>galahad</code> est autre chose. Aucun de ses fichiers n'est identique à son homologue. Là où les deux autres appellent <code>ollama.js</code>, il appelle <code>brain.js</code>, agnostique au fournisseur. Il porte <code>roles.js</code>, <code>skill-runner.js</code>, <code>integrations.js</code>, <code>jobs.js</code> — que ni l'un ni l'autre n'a. Son <code>agent-loop.js</code> fait 47 lignes contre 105 et 96 : une session roulante par processus, là où les autres persistent des fils dans <code>sessions.json</code> avec compaction.</p>
+<p>Et la promesse citée à l'appui de la note ne disait pas ce qu'on lui faisait dire. « Une seule image, trois rôles » désigne <strong>chef, guardian et traveler</strong> — trois personas de galahad, déjà livrés par <code>roles.js</code> en pure configuration :</p>
+<blockquote><p><em>A role is pure configuration: the same engine binary runs any of them.</em></p></blockquote>
+<p>Cette promesse est tenue, à l'intérieur de galahad. Elle n'a jamais porté sur <code>talos</code> ni <code>hulysse</code>.</p>
+<h2 id="decision">Décision</h2>
+<p><strong>La convergence porte sur <code>talos</code> et <code>hulysse</code>, et sur eux seuls.</strong> Ils deviennent un moteur unique à deux rôles — exactement le motif que <code>galahad</code> a déjà éprouvé avec <code>roles.js</code> : <code>cron</code>, <code>heartbeat</code> et le pont MCP d'un côté, <code>goals</code> et <code>veille</code> de l'autre, deviennent des capacités de rôle et non deux forks. Les trois fichiers identiques à l'octet cessent d'exister en double le jour où la fusion est faite.</p>
+<p><strong><code>galahad</code> ne fusionne pas.</strong> À 73 % et 71 %, ce ne serait pas une fusion mais une réécriture, et elle détruirait ce qui fait sa valeur propre — l'agnosticisme au fournisseur, le <code>skill-runner</code> qui porte cet audit même, les rôles, les jobs. Le programme assume deux moteurs : l'un agnostique et outillé, l'autre lié à Ollama et multi-fils.</p>
+<p><strong>Aucune duplication ne s'affirme plus sans être chiffrée.</strong> Une déclaration de divergence dans <code>fleet.yml</code> porte sa mesure, son chemin et sa date. Le chiffre est reproductible par <code>scripts/mesure-divergence.mjs</code>, qui compte par plus longue sous-séquence commune — la seule mesure indépendante de l'ordre des arguments.</p>
+<h2 id="signal-d-audit">Signal d'audit</h2>
+<ul><li><code>divergence-perimee</code> — toute <code>divergence:</code> déclarée porte <code>avec</code>, <code>chemin</code>, <code>mesure_pct</code> et <code>le</code>. Quand les deux dépôts se trouvent clonés côte à côte, le contrôle <strong>refait la mesure</strong> : plus de dix points d'écart avec le chiffre déclaré est une dérive, pas une approximation. Sinon il vérifie que la mesure a moins de quatre-vingt-dix jours.</li></ul>
+<p>Une opinion écrite dans un manifeste finit par être lue comme un fait, puis par fonder un plan. C'est ce qui vient de se produire, et c'est ce que ce contrôle empêche de recommencer.</p>
+<h2 id="portee">Portée</h2>
+<p>Cette ADR n'exécute pas la fusion de <code>talos</code> et <code>hulysse</code>. Ce sont deux agents en service sur le VPS, sous systemd ; leur convergence est un travail de code à mener avec ses tests de vie, pas un effet de bord documentaire.</p>
+<p>Elle ne dit rien du protocole MCP <code>talos ↔ radar</code>, qui reste à reconstituer depuis <code>radar-mcp/test-client.mjs</code>. C'est un prérequis à la fusion : <code>mcp.js</code> doit devenir une capacité de rôle, et on ne déplace pas ce qu'on ne sait pas décrire.</p>
+<p>Elle ne révise pas la promesse de <code>galahad</code>. Elle est tenue.</p>
+<p><span class="source">docs/adr/SHK-0003-deux-moteurs-pas-trois.md</span></p></section>
+</main>
+<footer class="pied">
+<p>Généré par <code>portail/construire.mjs</code> depuis <code>fleet.yml</code>,
+<code>fleet.lock.yml</code> et <code>docs/</code>. Relevé du 2026-09-14.
+Rien n'est écrit ici à la main : ce qui est faux dans le portail est faux dans le manifeste.</p>
+</footer>
+</body>
+</html>

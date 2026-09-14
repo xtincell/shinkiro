@@ -14,7 +14,7 @@ insuffisante pour trancher.
 | Composant | État | Ce qui tourne | Ce qui manque |
 |---|---|---|---|
 | `ADVE-project` (La Fusée) | **produit** | v6.19, cap APOGEE atteint (7/7 Neteru), 192 ADR, 17 workflows, `packages/sdk`, Next.js + Prisma + Playwright + plugin ESLint maison | Le contrôle SLO **n'a jamais mesuré** : la base de prod est injoignable depuis les runners (`ECONNREFUSED`). Correctif de workflow en cours, cause d'infrastructure non résolue. |
-| `galahad` | **utilisable** | **70 fichiers.** Moteur de 15 modules sans dépendance npm · bridge Claude · cockpit · assistant de configuration · patrouille par cron (dont purge des images Coolify) · **sas-admin**, passerelle Python d'émission et révocation de jetons avec fermeture de ports · routage Caddy et Traefik · MIT | Le moteur existe **en trois exemplaires** — ici, dans `talos` et dans `hulysse` — alors que le README promet « une image, trois rôles ». Dette structurelle n°1. |
+| `galahad` | **utilisable** | **70 fichiers.** Moteur de 15 modules sans dépendance npm · bridge Claude · cockpit · assistant de configuration · patrouille par cron (dont purge des images Coolify) · **sas-admin**, passerelle Python d'émission et révocation de jetons avec fermeture de ports · routage Caddy et Traefik · licence propriétaire | **Produit du portefeuille** (05 · Content Operations, 04 · Content Velocity System), pas seulement un composant de livraison. Aucun recouvrement avec `talos` ni `hulysse` : 73 % et 71 % de divergence mesurée. Sa promesse « une image, trois rôles » — chef, guardian, traveler — est tenue par `roles.js`. |
 | `radar` | **utilisable** | **69 fichiers.** API façon PostgREST sur 8 tables, flux RSS et JSON, ingestion LLM local, front complet (dashboard, direction, entrées, équipe, faits, gabarits, gantt, gel, archive, bilan) avec ses fontes, `_headers` et `_redirects` | Une seule instance déployée, pour Shinkiro. L'instance agence n'existe pas. Pas de `docs/`. Requiert **Postgres** — seule dépendance externe dure de la flotte. |
 | `talos` | **partiel** | **28 fichiers.** Rôle Guardian · 13 modules dont `cron`, `mcp`, `ollama`, `soul` · `radar-mcp/` avec client de test · `memory-seed/` · unité systemd et installateur | Le contrat MCP vers `radar` **n'est écrit nulle part**. Son `src/` recouvre celui de `galahad`. Figé depuis le 5 juillet. |
 | `hulysse` | **partiel** | **23 fichiers.** Rôle Traveler · 9 modules, dont `goals` qui lui est propre · `memory-seed/` · unité systemd | README **identique** à celui de `talos`, au mot près. Son `src/` recouvre celui de `galahad`. Figé depuis le 5 juillet. |
@@ -35,11 +35,14 @@ insuffisante pour trancher.
 1. **La méthode est éclatée en huit dépôts** sous trois orthographes — ADVE, ADVERTIS,
    AVERTIS. `ADVE-project` est canonique ; les cinq autres sont des lignées mortes à archiver
    après récupération du meilleur README (celui de `LaFusee_ADVE`).
-2. **Le moteur existe en trois exemplaires.** `galahad/engine/src/`, `talos/src/` et
-   `hulysse/src/` portent les mêmes modules, alors que le README de `galahad` promet « une
-   image moteur, trois rôles ». La fusion par `git subtree` doit préserver les spécificités :
-   `brain`, `goals`, `heartbeat`, `integrations`, `jobs`, `roles`, `skill-runner` côté
-   galahad ; `cron`, `mcp`, `ollama`, `soul` et `radar-mcp/` côté talos ; `goals` côté hulysse.
+2. **Deux moteurs, pas trois — et c'est mesuré.** `talos` et `hulysse` divergent de **17 %**
+   (`journal.js`, `ollama.js` et `telegram.js` sont identiques à l'octet) : c'est la
+   duplication réelle, et la seule. `galahad` diverge d'eux de 73 % et 71 % — moteur
+   différent, agnostique au fournisseur, porteur de `roles`, `skill-runner`, `integrations`
+   et `jobs`. La convergence porte sur `talos` ↔ `hulysse` et sur eux seuls, en préservant
+   `cron`, `heartbeat` et `radar-mcp/` d'un côté, `goals` et `veille` de l'autre. Voir
+   [`SHK-0003`](adr/SHK-0003-deux-moteurs-pas-trois.md). L'affirmation « trois exemplaires »
+   qui figurait ici n'avait jamais été mesurée, et elle était fausse.
 3. **Aucun contrat d'interface n'est écrit.** Voir `docs/INTERFACES.md` — rédigé à partir du
    code, à confirmer par les auteurs.
 4. **Le clone local d'`ADVERT_01` porte 111 modifications non commitées.** À trancher avant

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interfaces — Shinkiro</title>
+<meta name="description" content="Interfaces">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9673;</text></svg>">
+</head>
+<body>
+<header class="bandeau"><div class="bandeau-int">
+<a class="marque" href="index.html">◉ SHIN<span>KIRO</span></a>
+<nav class="nav"><a href="index.html">Accueil</a><a href="suite.html">La suite</a><a href="catalogue.html">Le catalogue</a><a href="topologie.html">Topologie</a><a href="decisions.html">Décisions</a><a href="dispositif.html">Anti-dérive</a><a href="livrables.html">Livrables</a><a href="perimetre.html">Périmètre</a></nav>
+</div></header>
+<main>
+<h1 id="contrats-d-interface">Contrats d'interface</h1>
+<p><strong>Ces contrats sont déduits du code, pas déclarés par leurs auteurs.</strong> Ils sont donnés pour qu'un agent puisse travailler ; chacun est à confirmer avant d'être traité comme une spécification.</p>
+<p>Établi par relevé exhaustif au 14 septembre 2026. Ce qui est <strong>constaté</strong> est marqué comme tel ; ce qui reste <strong>à écrire</strong> l'est aussi — et ce second groupe est le plus important.</p>
+<h2 id="radar-api-de-donnees">radar — API de données</h2>
+<p>Interface façon PostgREST sur <code>/rest/v1/&lt;table&gt;</code>. Tables et colonnes en <strong>liste blanche</strong> : tout ce qui n'y figure pas est refusé, ce n'est pas un oubli mais une protection.</p>
+<div class="table-enveloppe"><table><thead><tr><th>Table</th><th>Clé</th><th>Rôle</th></tr></thead><tbody><tr><td><code>briefs</code></td><td><code>id</code></td><td>Le projet. Clé métier : <code>ndeg</code>.</td></tr><tr><td><code>clients</code> · <code>client_markets</code> · <code>client_contacts</code></td><td><code>id</code></td><td>Référentiel client. <code>data</code> en JSONB.</td></tr><tr><td><code>task_events</code></td><td><code>id</code></td><td><strong>Le journal.</strong> Chaque changement d'état y laisse une trace horodatée.</td></tr><tr><td><code>comments</code></td><td><code>id</code></td><td>Fil par <code>ndeg</code>.</td></tr><tr><td><code>brief_assets</code></td><td><code>id</code></td><td>Visuels. Écriture REST interdite — passer par <code>/visuels</code>.</td></tr><tr><td><code>app_config</code></td><td><code>key</code></td><td>Configuration.</td></tr></tbody></table></div>
+<p>Filtres supportés : <code>eq</code> <code>neq</code> <code>gte</code> <code>lte</code> <code>is</code> <code>in</code> <code>cs</code>, plus <code>select</code> / <code>order</code> / <code>limit</code>.</p>
+<p><strong>Le journal est le contrat qui compte.</strong> <code>task_events</code> est ce qui rend la mesure avant/après possible sans déclaratif : <code>at</code>, <code>ndeg</code>, <code>statut_old</code>, <code>statut_new</code>, <code>resp_old</code>, <code>resp_new</code>, <code>kind</code>, <code>summary</code>. Toute intégration qui modifie un brief <strong>doit</strong> écrire son événement, sinon la preuve se perd.</p>
+<h3 id="flux-sortants">Flux sortants</h3>
+<ul><li><code>GET /feed.xml</code> — RSS 2.0</li><li><code>GET /activity.json</code> — JSON Feed 1.1</li></ul>
+<p>Alimentés automatiquement par <code>task_events</code>. C'est par là qu'un système externe observe Radar sans l'interroger.</p>
+<h3 id="entree-libre">Entrée libre</h3>
+<p><code>POST /ingest</code> — texte brut → LLM local (Ollama) → tâches structurées. Tout entre en <code>statut = Reçu</code> et <code>brief_etat = déduit</code>. <strong>Repli sans perte si Ollama est injoignable</strong> : le texte est conservé, la structuration est différée.</p>
+<h2 id="talos-radar-mcp">talos ↔ radar — MCP</h2>
+<p><code>talos/radar-mcp/</code> contient <code>index.js</code>, son <code>package.json</code> et un <code>test-client.mjs</code>. C'est le pont MCP qui expose Radar au rôle Guardian.</p>
+<p><strong>Le protocole n'est décrit nulle part.</strong> Il existe un client de test — c'est le point de départ pour le reconstituer, puis le figer ici. Tant que ce n'est pas fait, toute modification de l'API Radar peut casser Talos sans que rien ne le signale.</p>
+<h2 id="galahad-sas-admin-le-sas-de-securite">galahad — sas-admin, le sas de sécurité</h2>
+<p><code>galahad/deploy/sas-admin/</code> porte une passerelle Python (<code>gateway/app.py</code>, Dockerfile, <code>requirements.txt</code>, compose) et trois scripts : <code>close-ports.sh</code>, <code>issue-fable-token.py</code>, <code>revoke-token.py</code>.</p>
+<p>C'est l'<strong>émission et la révocation de jetons</strong>, plus la fermeture de ports sur l'hôte. Aucun agent ne doit toucher à ce répertoire sans comprendre ce qu'il ouvre et ce qu'il ferme.</p>
+<h2 id="galahad-patrouille">galahad — patrouille</h2>
+<p><code>deploy/patrol/</code> tourne par cron (<code>galahad-patrol.cron</code>) : <code>brain-health.sh</code>, <code>deliver-watchdog.sh</code>, <code>deliver.sh</code>, <code>purge.sh</code>, <code>prune-coolify-images.sh</code>.</p>
+<p>La patrouille <strong>purge les images Coolify</strong> — c'est l'une des trois preuves que Coolify est la plateforme du VPS. Voir <a href="topologie.html"><code>TOPOLOGIE.md</code></a>.</p>
+<h2 id="galahad-competences-d-agent">galahad — compétences d'agent</h2>
+<p><code>engine/skills/</code> contient <code>audit-coherence.json</code> et <code>diagnostic-coolify.json</code>, décrites dans <code>engine/skills/README.md</code>. Le format des compétences est un contrat interne au moteur.</p>
+<h2 id="galahad-roles">galahad — rôles</h2>
+<p>Une image moteur, trois conteneurs portant le même code avec un rôle différent.</p>
+<div class="table-enveloppe"><table><thead><tr><th>Rôle</th><th>Fichier</th><th>Contrat</th></tr></thead><tbody><tr><td><strong>Chef</strong></td><td><code>engine/roles/chef.md</code></td><td>Face humaine. Route le travail et délègue.</td></tr><tr><td><strong>Guardian</strong></td><td><code>engine/roles/guardian.md</code></td><td>Patrouille santé et QA. Une patrouille de routine est <strong>un pur contrôle shell, à coût nul en tokens</strong> — le cerveau ne s'éveille qu'à l'anomalie.</td></tr><tr><td><strong>Traveler</strong></td><td><code>engine/roles/traveler.md</code></td><td>Explorateur autonome, bâtisseur de nuit. <strong>Demande avant de livrer.</strong></td></tr></tbody></table></div>
+<p>Le cerveau est <strong>n'importe quel endpoint compatible OpenAI</strong>. Aucune dépendance à un fournisseur : ne pas en introduire.</p>
+<h2 id="secrets">Secrets</h2>
+<p>Inventaire par dépôt. <strong>Aucun n'est dans ce dépôt</strong> — il faut les demander.</p>
+<div class="table-enveloppe"><table><thead><tr><th>Dépôt</th><th>Secret</th><th>Usage</th></tr></thead><tbody><tr><td><code>ADVE-project</code></td><td><code>DATABASE_URL</code></td><td>Postgres de production. Injoignable depuis les runners GitHub — c'est un problème ouvert, pas une configuration à copier.</td></tr><tr><td><code>radar</code></td><td><code>DATABASE_URL</code></td><td>Postgres de l'instance. Une instance = une base.</td></tr><tr><td><code>radar</code></td><td>mot de passe partagé</td><td>Mur d'authentification email + mot de passe.</td></tr><tr><td><code>galahad</code></td><td>jeton Telegram</td><td>Canal opérateur.</td></tr><tr><td><code>galahad</code></td><td>clé du endpoint LLM</td><td>Compatible OpenAI, fournisseur libre.</td></tr></tbody></table></div>
+<p>Chacun a son <code>.env.example</code> — sauf <code>la-barre</code>, qui n'en a pas besoin : aucun serveur, aucun compte.</p>
+<h2 id="ce-qui-n-a-pas-de-contrat-et-devrait">Ce qui n'a pas de contrat, et devrait</h2>
+<p>Quatre liaisons existent dans les faits mais ne sont spécifiées nulle part. Elles sont listées ici pour qu'un agent sache qu'il improvise s'il y touche.</p>
+<div class="table-enveloppe"><table><thead><tr><th>Liaison</th><th>État</th></tr></thead><tbody><tr><td><code>talos/radar-mcp</code> → <code>radar</code></td><td>Code présent, client de test présent, <strong>protocole non écrit</strong></td></tr><tr><td><code>hermes-cockpit</code> → <code>radar</code> et <code>danmem</code></td><td>Le cockpit lit leur santé — <strong>format des sondes non écrit</strong></td></tr><tr><td><code>danmem</code> ↔ <code>galahad/engine/src/memory.js</code></td><td>Deux couches mémoire, <strong>articulation non établie</strong></td></tr><tr><td><code>la-barre</code> → <code>radar</code></td><td><strong>Aucun lien.</strong> La Barre décide, Radar journalise — la mesure avant/après en dépend</td></tr></tbody></table></div>
+<p>La dernière est la plus coûteuse : sans elle, le sixième critère de gouvernance du portefeuille — la méthode de preuve — n'est pas tenable pour le Transformation Pilot.</p>
+<p><span class="source">docs/INTERFACES.md</span></p>
+</main>
+<footer class="pied">
+<p>Généré par <code>portail/construire.mjs</code> depuis <code>fleet.yml</code>,
+<code>fleet.lock.yml</code> et <code>docs/</code>. Relevé du 2026-09-14.
+Rien n'est écrit ici à la main : ce qui est faux dans le portail est faux dans le manifeste.</p>
+</footer>
+</body>
+</html>

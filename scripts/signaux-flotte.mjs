@@ -16,6 +16,8 @@
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { join, dirname } from "node:path";
+import { parseYaml } from "./yaml.mjs";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 const RACINE = process.env.SHINKIRO_HOME || join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -28,107 +30,8 @@ if (!FY || !LK) {
   process.exit(0);
 }
 
-/* ── lecture YAML, sous-ensemble suffisant et structurel ────────────────
- * Lire ces deux fichiers à coups d'expressions régulières casse dès que le
- * manifeste gagne un niveau d'indentation — c'est arrivé à la première
- * écriture de ce script, sur le bloc `contient:` de galahad. Un lecteur par
- * indentation tient là où les regex lâchent, et coûte quarante lignes plutôt
- * qu'une dépendance à maintenir.
- *
- * Couvre ce que les deux fichiers utilisent : maps imbriquées, listes de maps,
- * flow inline {a: 1, b: [x]}, scalaires de bloc >- et |, commentaires. */
-
-/* En YAML, un « # » précédé d'une espace ouvre un commentaire — sauf entre
- * guillemets. `programme: shinkiro   # ce dépôt-ci` vaut « shinkiro », pas la
- * phrase entière ; sans cette règle, aucune valeur commentée n'est lisible. */
-const sansCommentaire = (v) => {
-  let guillemet = null;
-  for (let i = 0; i < v.length; i++) {
-    const c = v[i];
-    if (guillemet) { if (c === guillemet) guillemet = null; continue; }
-    if (c === '"' || c === "'") { guillemet = c; continue; }
-    if (c === "#" && (i === 0 || /\s/.test(v[i - 1]))) return v.slice(0, i);
-  }
-  return v;
-};
-
-const deflow = (v) => {
-  v = sansCommentaire(v).trim();
-  if (v.startsWith("{") && v.endsWith("}")) {
-    const o = {};
-    for (const part of decoupeFlow(v.slice(1, -1))) {
-      const i = part.indexOf(":");
-      if (i > 0) o[part.slice(0, i).trim()] = deflow(part.slice(i + 1));
-    }
-    return o;
-  }
-  if (v.startsWith("[") && v.endsWith("]")) return decoupeFlow(v.slice(1, -1)).map(deflow);
-  if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) return v.slice(1, -1);
-  return v;
-};
-
-/* Découpe sur les virgules de premier niveau : une virgule dans "a, b" ou dans
- * [x, y] n'est pas un séparateur. */
-const decoupeFlow = (s) => {
-  const out = []; let prof = 0, cur = "", guillemet = null;
-  for (const c of s) {
-    if (guillemet) { cur += c; if (c === guillemet) guillemet = null; continue; }
-    if (c === '"' || c === "'") { guillemet = c; cur += c; continue; }
-    if (c === "{" || c === "[") prof++;
-    if (c === "}" || c === "]") prof--;
-    if (c === "," && prof === 0) { out.push(cur); cur = ""; continue; }
-    cur += c;
-  }
-  if (cur.trim()) out.push(cur);
-  return out.map((x) => x.trim()).filter(Boolean);
-};
-
-function parseYaml(texte) {
-  const lignes = texte.split("\n")
-    .filter((l) => l.trim() && !/^\s*#/.test(l))
-    .map((l) => ({ indent: l.match(/^ */)[0].length, txt: l.trim(), brut: l }));
-
-  let i = 0;
-  const bloc = (indentMin) => {
-    /* Une liste si la première ligne du bloc commence par « - », sinon une map. */
-    const liste = i < lignes.length && lignes[i].txt.startsWith("- ");
-    const out = liste ? [] : {};
-    while (i < lignes.length && lignes[i].indent >= indentMin) {
-      const { indent, txt } = lignes[i];
-      if (indent > indentMin) { i++; continue; }        // continuation d'un scalaire de bloc
-      if (liste !== txt.startsWith("- ")) break;
-
-      if (liste) {
-        const corps = txt.slice(2);
-        const j = corps.indexOf(":");
-        if (corps.startsWith("{") || j < 0) { out.push(deflow(corps)); i++; continue; }
-        /* « - nom: x » ouvre un élément dont les champs suivent à indent + 2 */
-        const el = {};
-        el[corps.slice(0, j).trim()] = deflow(corps.slice(j + 1));
-        i++;
-        if (i < lignes.length && lignes[i].indent > indent) Object.assign(el, bloc(lignes[i].indent));
-        out.push(el);
-        continue;
-      }
-
-      const j = txt.indexOf(":");
-      const cle = txt.slice(0, j).trim();
-      const reste = txt.slice(j + 1).trim();
-      i++;
-      if (reste && !/^[>|][-+]?$/.test(reste)) { out[cle] = deflow(reste); continue; }
-      /* scalaire de bloc, ou map imbriquée */
-      if (i < lignes.length && lignes[i].indent > indent) {
-        if (/^[>|]/.test(reste)) {
-          const buf = [];
-          while (i < lignes.length && lignes[i].indent > indent) buf.push(lignes[i++].txt);
-          out[cle] = buf.join(" ");
-        } else out[cle] = bloc(lignes[i].indent);
-      } else out[cle] = "";
-    }
-    return out;
-  };
-  return bloc(0);
-}
+/* Le lecteur YAML vit dans yaml.mjs — une seule implémentation, importée ici
+ * et par le portail. Corrigée une fois, correcte partout. */
 
 const fleet = parseYaml(FY);
 const lock  = parseYaml(LK);
@@ -138,6 +41,7 @@ const lignesMortesFY = (fleet.lignees_mortes || []).map((e) => e.nom).filter(Boo
 const horsPerimetre  = new Set(Object.values(fleet.hors_perimetre || {}).flat());
 const composantsLK   = lock.composants || [];
 const sansTopic      = lock.sans_topic || [];
+const derives        = fleet.derives_non_canon || [];
 
 const parNom   = Object.fromEntries(composantsLK.map((c) => [c.nom, c]));
 const declares = new Set([...composantsFY.map((c) => c.nom), ...lignesMortesFY]);
@@ -286,6 +190,56 @@ const SIGNAUX = {
         ? [`${c.nom} — divergence avec ${d.avec} mesurée il y a ${jours} jours, jamais revérifiée`]
         : [];
     }),
+
+  /* Le manifeste et le portefeuille numérotaient les produits différemment —
+   * 00/04/05 d'un côté, 01 à 07 de l'autre — et les TROIS valeurs déclarées
+   * étaient fausses. Personne ne l'avait vu parce qu'aucun contrôle ne lisait
+   * les deux fichiers ensemble. Une dérive n'a pas besoin de deux dépôts pour
+   * exister : deux documents du même dépôt suffisent. */
+  "produit-inconnu": () => {
+    const doc = lire("docs/PORTFOLIO.md");
+    if (!doc) return ["docs/PORTFOLIO.md introuvable — la liste des produits n'a plus de référence"];
+    const connus = [...doc.matchAll(/^\|\s*(\d{2})\s*\|\s*\*\*(.+?)\*\*/gm)]
+      .map((m) => `${m[1]} · ${m[2].trim()}`);
+    if (!connus.length) return ["docs/PORTFOLIO.md ne déclare aucun produit — le tableau a changé de forme"];
+    return composantsFY.flatMap((c) =>
+      [].concat(c.produits_portefeuille || []).filter(Boolean)
+        .filter((p) => !connus.includes(p))
+        .map((p) => `${c.nom} — produit « ${p} » absent de docs/PORTFOLIO.md (connus : ${connus.join(" · ")})`));
+  },
+
+  /* Les skills encodent une partie de la méthode et n'ont pas suivi le
+   * programme. Elles vivent hors de tout dépôt, donc hors de portée des onze
+   * autres signaux — l'audit n'inspecte que GitHub. Le seul contrôle possible
+   * est déclaratif : chaque dérivé nomme le composant qui fait foi, et ce
+   * composant existe. Un dérivé dont le canon a disparu est une copie devenue
+   * la seule source, sans que personne l'ait décidé. */
+  "derive-sans-canon": () =>
+    derives.flatMap((d) => {
+      const manquants = ["nom", "ou", "canon"].filter((k) => !d?.[k]);
+      if (manquants.length) return [`dérivé ${d?.nom || "(sans nom)"} — déclaré sans ${manquants.join(", ")}`];
+      if (d.canon === "hors-programme") return [];
+      return declares.has(d.canon) ? []
+        : [`${d.nom} — canon déclaré « ${d.canon} », qui n'est pas un composant de fleet.yml`];
+    }),
+
+  /* Le portail est généré depuis fleet.yml et fleet.lock.yml. S'il a été
+   * publié avant leur dernière modification, il montre un programme qui
+   * n'existe plus — et il le montre à qui vient regarder. Comparer des dates
+   * ne suffirait pas : le manifeste peut changer deux fois le même jour. On
+   * compare donc l'empreinte exacte que le portail a inscrite en se générant. */
+  "portail-perime": () => {
+    const src = lire("portail/site/source.json");
+    if (!src) return existsSync(join(RACINE, "portail/construire.mjs"))
+      ? ["portail/site/source.json absent — le portail n'a jamais été généré"] : [];
+    let decl;
+    try { decl = JSON.parse(src); } catch { return ["portail/site/source.json illisible"]; }
+    const reelle = createHash("sha256")
+      .update(lire("fleet.yml") || "").update(lire("fleet.lock.yml") || "")
+      .digest("hex").slice(0, 16);
+    return decl.empreinte_sources === reelle ? []
+      : [`portail généré sur un manifeste qui a changé depuis (${decl.empreinte_sources} ≠ ${reelle}) — lancer node portail/construire.mjs`];
+  },
 
   /* La série SHK ne survit que si l'audit la lit. Une ADR acceptée qui énonce
    * une règle vérifiable nomme son signal ; sans quoi la décision est écrite

@@ -16,9 +16,16 @@ apparaître au catalogue.
 
 *Source : Creative Next — Product Portfolio.*
 
-Le client achète une réduction de délai, une hausse de volume, une couverture de marchés —
-pas un agent Telegram ni un pipeline. Shinkiro travaille derrière le rideau : il rend les
-promesses tenables, et surtout **démontrables**.
+**C'est une règle de nommage, pas de visibilité.** Le client achète une réduction de délai,
+une hausse de volume, une couverture de marchés — on ne lui vend pas « des agents IA », on
+lui vend **une agence qui tourne toute seule sur un serveur dédié**. Même logiciel, autre
+cadrage. `galahad` est à ce titre un produit du portefeuille, pas seulement un composant de
+livraison.
+
+Shinkiro est **une suite**, et une suite se montre. Ses outils s'adoptent seuls ou ensemble
+— c'est exactement ce que recouvre la distinction `reference` / `verse` de `SHK-0001`. Ce
+que le catalogue ne fait jamais, c'est nommer une technologie là où le client attend un
+résultat.
 
 ## L'architecture commerciale
 
@@ -26,11 +33,11 @@ promesses tenables, et surtout **démontrables**.
 CE QUI SE VEND
 FREE CHECK → PAID AUDIT → PILOT → SYSTEM → OPERATIONS → EXPANSION
     │            │          │        │          │           │
-────┼────────────┼──────────┼────────┼──────────┼───────────┼──── LE RIDEAU
+────┼────────────┼──────────┼────────┼──────────┼───────────┼──── CE QU'ON NOMME
     ▼            ▼          ▼        ▼          ▼           ▼
  Indice de   La Fusée   La Barre  La Barre   galahad    Market Exp.
  maturité      Argos      Radar    galahad    Radar       System
-CE QUI LIVRE — SHINKIRO
+CE QUI LIVRE — LA SUITE SHINKIRO
 ```
 
 ## Le branchement, produit par produit
@@ -74,6 +81,15 @@ propose, l'humain valide, et la trace survit à la mission.
 3. Fermer la boucle de mesure d'**Argos** — sans elle, pas de Creative Intelligence vendable.
 4. Mettre **La Barre** en vitrine : une page, une démo, un README qui raconte le brief-au-BAT.
 5. Valider la grille tarifaire sur coûts réels et premiers pilotes.
-6. **Tenir le rideau.** Shinkiro se montre en entretien technique et en due diligence, jamais en proposition commerciale.
+6. **Réécrire `galahad-landing` pour le bon acheteur.** Elle dit aujourd'hui « self-hosted
+   team of autonomous AI agents » et « self-host in 60 seconds » — écrit pour un développeur
+   qui veut auto-héberger. Le produit s'adresse à un patron d'agence qui veut que sa boîte
+   tourne sans lui. Elle vend la technologie au lieu du résultat, ce que la règle ci-dessus
+   interdit précisément.
 
 > Les prix affichés sont une grille de positionnement, à valider sur coûts et pilotes réels.
+
+> **Ce document est interne.** Il montre la correspondance produit → composant, donc la
+> mécanique derrière l'offre. Il n'a sa place ni sur une page produit, ni dans une
+> proposition commerciale — non parce que la suite serait secrète, mais parce qu'un client
+> n'achète pas un tableau de correspondances.

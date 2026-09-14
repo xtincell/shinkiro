@@ -80,7 +80,7 @@ couches en dessous disent comment.
 
 | Dépôt | Rôle |
 |---|---|
-| [`galahad`](https://github.com/xtincell/galahad) | **Canonique.** Équipe d'agents LLM coordonnés sur un seul VPS, pilotée depuis Telegram, agnostique au fournisseur. Zéro build, zéro port entrant, MIT. |
+| [`galahad`](https://github.com/xtincell/galahad) | **Canonique, et produit du portefeuille.** Une équipe d'IA organisée en agents qui fait tourner l'agence en autonomie depuis un serveur dédié. Pilotée depuis Telegram, agnostique au fournisseur. Zéro build, zéro port entrant. |
 | [`talos`](https://github.com/xtincell/talos) | Rôle **Guardian** — patrouille santé et QA code. |
 | [`hulysse`](https://github.com/xtincell/hulysse) | Rôle **Traveler** — explorateur autonome, bâtisseur de nuit. |
 | [`danmem`](https://github.com/xtincell/danmem) | Couche mémoire — peers, deriver, dialectique. |
@@ -125,6 +125,12 @@ Outils légers, chacun dans son dépôt et monté en submodule sous `tools/`.
 - [`docs/TOPOLOGIE.md`](docs/TOPOLOGIE.md) — les cinq modes de déploiement, les points d'entrée en sous-dossier, les chevauchements structurels
 - [`docs/MATURITE.md`](docs/MATURITE.md) — ce qui est fini, bouchonné ou aspirationnel. **À lire avant de planifier.**
 - [`docs/INTERFACES.md`](docs/INTERFACES.md) — contrats entre composants et inventaire des secrets
+
+**Pour regarder** :
+
+- [`portail/`](portail/) — le portail : la suite composant par composant, le catalogue et
+  ses livrables. Généré depuis le manifeste, jamais écrit à la main.
+  `node portail/construire.mjs`
 
 **Pour vérifier** — le dispositif qui empêche cette documentation de pourrir :
 

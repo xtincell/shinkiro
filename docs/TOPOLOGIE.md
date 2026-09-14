@@ -62,24 +62,41 @@ la flotte.
 Ils ne sont pas des bugs. Ce sont des décisions qui n'ont jamais été écrites, et
 chacune coûtera cher à qui l'ignore.
 
-### 1 · Le moteur existe en trois exemplaires
+### 1 · Deux moteurs, pas trois
 
-`galahad/engine/src/`, `talos/src/` et `hulysse/src/` portent les mêmes modules —
-`agent-loop`, `config`, `hooks`, `journal`, `memory`, `telegram`, `tools`.
+Cette section affirmait le contraire : *« le moteur existe en trois exemplaires …
+c'est la dette structurelle n°1 »*. Personne ne l'avait mesurée — trois
+répertoires portant les mêmes noms de fichiers avaient suffi à conclure, et un
+plan de fusion par `git subtree` en avait découlé.
 
-Or le README de `galahad` promet : *« une image moteur ; chaque conteneur est le
-même code portant un rôle différent »*. La promesse et le dépôt divergent.
+La mesure, reproductible par `scripts/mesure-divergence.mjs` :
 
-Spécificités par exemplaire — c'est ce qui devra être préservé à la fusion :
+| Paire | Fichiers partagés | Divergence |
+|---|---|---|
+| `talos` ↔ `hulysse` | 10 | **17 %** |
+| `galahad` ↔ `talos` | 9 | 73 % |
+| `galahad` ↔ `hulysse` | 9 | 71 % |
 
-| | En plus |
-|---|---|
-| `galahad/engine` | `brain`, `goals`, `heartbeat`, `integrations`, `jobs`, `roles`, `skill-runner` |
-| `talos` | `cron`, `mcp`, `ollama`, `soul`, plus `radar-mcp/` |
-| `hulysse` | `goals` |
+`talos` et `hulysse` sont bien le même moteur : `journal.js`, `ollama.js` et
+`telegram.js` sont **identiques à l'octet**, `tools.js` ne diffère que par ses
+commentaires. Ce qui les sépare est fonctionnel — `cron`, `heartbeat` et le pont
+MCP chez l'un ; `goals` et `veille` chez l'autre.
 
-**C'est la dette structurelle n°1.** La fusion par `git subtree` doit conserver
-les trois historiques.
+`galahad` est autre chose. Aucun fichier identique à son homologue. Là où les
+deux autres appellent `ollama.js`, il appelle `brain.js`, agnostique au
+fournisseur. Il porte `roles.js`, `skill-runner.js`, `integrations.js` et
+`jobs.js`, que ni l'un ni l'autre n'a. Son `agent-loop.js` fait 47 lignes contre
+105 et 96 : une session roulante contre des fils persistés avec compaction.
+
+Et la promesse citée à l'appui de l'ancienne section ne disait pas ce qu'on lui
+faisait dire. *« Une seule image, trois rôles »* désigne **chef, guardian et
+traveler** — trois personas de `galahad`, déjà livrés par `roles.js` en pure
+configuration. Elle est tenue, et n'a jamais porté sur `talos` ni `hulysse`.
+
+**La convergence porte donc sur `talos` et `hulysse`, et sur eux seuls.** Voir
+[`SHK-0003`](adr/SHK-0003-deux-moteurs-pas-trois.md). Le signal
+`divergence-perimee` refait la mesure dès que les deux dépôts sont clonés côte à
+côte : un chiffre déclaré à plus de dix points du réel est une dérive.
 
 ### 2 · Deux cockpits
 
