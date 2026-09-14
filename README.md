@@ -101,20 +101,45 @@ d'argumenter qu'il connaît le process : il le montre.
 
 ---
 
-## Outils hors dépôt
+## Outils versés
 
-| Outil | Contenu |
+Outils légers, chacun dans son dépôt et monté en submodule sous `tools/`.
+
+| Dépôt | Rôle |
 |---|---|
-| **Market Expansion System** | Décliner une campagne d'un marché à N marchés sans perdre la marque. Formalisé depuis un déploiement réel sur **neuf pays**, avec bascule de marque et de langue au Ghana. |
-| **Matrice de déploiement** | Par marché : code, marque, langue, SKU, formats, écart déclaré, mentions légales, imprimeur, date BAT, statut. |
-| **Indice de maturité créative ADVE** | Seize questions, quatre axes, un niveau de 0 à 5, et une prescription. |
+| [`indice-maturite`](https://github.com/xtincell/indice-maturite) | **Produit 00 du portefeuille** — le diagnostic d'entrée gratuit. Seize questions, quatre axes, score 0-5, prescription. [En ligne](https://xtincell.github.io/indice-maturite/). |
+| [`market-expansion-system`](https://github.com/xtincell/market-expansion-system) | **Produit 04** — décliner une campagne d'un marché à N marchés sans perdre la marque. Preuve terrain sur **neuf pays**, bascule de marque et de langue au Ghana. Inclut la matrice de déploiement et les gabarits de cadrage. |
+| [`generateur-approches`](https://github.com/xtincell/generateur-approches) | Générateur d'approches publicitaires, sans API ni dépendance. |
+| [`character-engine`](https://github.com/xtincell/character-engine) | Moteur à 48 paramètres et règles de direction artistique. |
+| [`datacollector`](https://github.com/xtincell/datacollector) | Collecte multi-sources pour l'intelligence marketing. |
 
 ---
 
 ## Navigation
 
+**Pour construire** — commence par là, dans cet ordre :
+
+- [`fleet.yml`](fleet.yml) — le manifeste des dix-sept composants : **le jugement**, écrit à la main. `make clone-all` matérialise la flotte.
+- [`fleet.lock.yml`](fleet.lock.yml) — **les faits**, régénérés par `make releve`. Ne pas éditer.
+- [`AGENTS.md`](AGENTS.md) — ordre de construction, tests de vie, règles de contribution
+- [`docs/TOPOLOGIE.md`](docs/TOPOLOGIE.md) — les cinq modes de déploiement, les points d'entrée en sous-dossier, les chevauchements structurels
+- [`docs/MATURITE.md`](docs/MATURITE.md) — ce qui est fini, bouchonné ou aspirationnel. **À lire avant de planifier.**
+- [`docs/INTERFACES.md`](docs/INTERFACES.md) — contrats entre composants et inventaire des secrets
+
+**Pour vérifier** — le dispositif qui empêche cette documentation de pourrir :
+
+- [`docs/DERIVE.md`](docs/DERIVE.md) — pourquoi le manifeste se recalcule, et ce que l'audit contrôle
+- [`docs/adr/`](docs/adr/) — la série `SHK-`, les décisions qui arbitrent entre composants
+
+**Pour comprendre** :
+
 - [`docs/PORTFOLIO.md`](docs/PORTFOLIO.md) — comment chaque composant sert les sept produits commerciaux
 - [`docs/CLOISON.md`](docs/CLOISON.md) — ce qui n'appartient pas à Shinkiro, et pourquoi
+
+Un dépôt appartient au programme s'il porte le topic `shinkiro`, et **par ce seul
+fait**. C'est ce que le relevé interroge : un dépôt sans le topic n'existe pas pour
+la flotte, un dépôt avec le topic mais absent de `fleet.yml` est une dérive, et
+l'audit dit l'un comme l'autre.
 
 Les dépôts du programme portent le topic [`shinkiro`](https://github.com/search?q=user%3Axtincell+topic%3Ashinkiro&type=repositories),
 plus un topic de couche : `layer-method`, `layer-company`, `layer-execution`, `layer-tools`.

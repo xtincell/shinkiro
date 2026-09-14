@@ -1,0 +1,158 @@
+name: Dérive de flotte (hebdomadaire)
+
+# Ce workflow voit GitHub : topics, licences, arborescences, vitalité. La
+# patrouille galahad, elle, voit le VPS. Deux points d'exécution parce qu'ils
+# voient deux réalités différentes ; aucun des deux ne suffit seul.
+#
+# Trois états, jamais deux. Un contrôle qui ne peut pas mesurer n'est pas un
+# contrôle qui passe : il échoue en rouge et le dit. C'est la leçon des 541
+# fausses issues ouvertes par un slo-check qui confondait « aucune violation »
+# et « base de données injoignable ».
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"      # lundi 07:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  derive:
+    name: Relevé, signaux, et issue unique
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+
+      # ── 1. le relevé, qui exige un jeton lisant les dépôts privés ───────
+      # GITHUB_TOKEN ne voit que ce dépôt-ci ; la flotte est à 23 dépôts, en
+      # majorité privés. Sans FLEET_TOKEN, l'étape ne ment pas : elle déclare
+      # qu'elle n'a pas pu mesurer.
+      - name: Relevé de flotte
+        id: releve
+        env:
+          GH_TOKEN: ${{ secrets.FLEET_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "etat=non-mesurable" >> "$GITHUB_OUTPUT"
+            echo "detail=secret FLEET_TOKEN absent — le relevé ne peut pas lire les dépôts privés" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          node scripts/releve-flotte.mjs 2> releve.log || code=$?
+          # 3 = relevé incomplet : des dépôts n'ont pas pu être lus, et le script a
+          # refusé d'écrire un lock amputé. Une amputation se lirait comme une dérive.
+          if [ "${code:-0}" = "3" ]; then
+            echo "etat=non-mesurable" >> "$GITHUB_OUTPUT"
+            echo "detail=relevé incomplet — des dépôts n'ont pas pu être lus ; le jeton couvre-t-il toute la flotte ?" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ "${code:-0}" != "0" ]; then
+            echo "etat=non-mesurable" >> "$GITHUB_OUTPUT"
+            echo "detail=le relevé a échoué (code ${code}) — voir releve.log" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if git diff --quiet --exit-code fleet.lock.yml; then
+            echo "etat=conforme" >> "$GITHUB_OUTPUT"
+          else
+            echo "etat=derive" >> "$GITHUB_OUTPUT"
+            git --no-pager diff fleet.lock.yml > releve.diff
+          fi
+
+      # ── 2. les signaux, qui ne demandent aucun réseau ───────────────────
+      # Ils confrontent fleet.yml à fleet.lock.yml. Même si le relevé n'a pas
+      # pu tourner, ceci reste mesurable — sur un lock potentiellement vieux,
+      # ce que le signal releve-perime dira lui-même.
+      - name: Signaux de dérive
+        id: signaux
+        run: |
+          if node scripts/signaux-flotte.mjs --strict > signaux.txt 2>&1; then
+            echo "etat=conforme" >> "$GITHUB_OUTPUT"
+          else
+            echo "etat=derive" >> "$GITHUB_OUTPUT"
+          fi
+          cat signaux.txt
+
+      # ── 3. une issue, toujours la même ──────────────────────────────────
+      # Titre stable, recherche par label, mise à jour sur place. Un titre qui
+      # contient un identifiant d'exécution fabrique une issue par passage et
+      # n'est jamais dédoublonnable : c'est exactement ce qui en a produit 541.
+      - name: Ouvrir, rafraîchir ou clore l'issue de dérive
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          ETAT_RELEVE: ${{ steps.releve.outputs.etat }}
+          DETAIL_RELEVE: ${{ steps.releve.outputs.detail }}
+          ETAT_SIGNAUX: ${{ steps.signaux.outputs.etat }}
+        with:
+          script: |
+            const fs = require('fs');
+            const lire = (f, n) => { try { return fs.readFileSync(f, 'utf8').slice(0, n); } catch { return ''; } };
+            const TITRE = 'Dérive de flotte — contrôle hebdomadaire';
+            const LABEL = 'fleet-drift';
+            const { ETAT_RELEVE = '', DETAIL_RELEVE = '', ETAT_SIGNAUX = '' } = process.env;
+
+            const nonMesurable = ETAT_RELEVE === 'non-mesurable';
+            const derive = ETAT_RELEVE === 'derive' || ETAT_SIGNAUX === 'derive';
+
+            const bloc = (titre, contenu) => contenu ? ['### ' + titre, '```', contenu, '```', ''] : [];
+            const corps = [
+              nonMesurable ? '## Contrôle NON MESURABLE'
+                : derive ? '## Dérive constatée' : '## Flotte conforme',
+              '',
+              `Relevé : \`${ETAT_RELEVE || 'non exécuté'}\` · Signaux : \`${ETAT_SIGNAUX || 'non exécuté'}\``,
+              `Exécution : ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              '',
+              ...(nonMesurable ? ['> ' + DETAIL_RELEVE, '>',
+                   '> Un contrôle qui ne peut pas mesurer n\'est pas un contrôle qui passe.',
+                   '> Tant que ceci dure, la conformité affichée ne vaut rien.', ''] : []),
+              ...bloc('Signaux', lire('signaux.txt', 6000)),
+              ...bloc('Ce qui a bougé dans la flotte', lire('releve.diff', 6000)),
+              ...bloc('Journal du relevé', lire('releve.log', 2000)),
+              '---',
+              'Généré par `.github/workflows/fleet-drift.yml`. Cette issue est mise à jour',
+              'sur place à chaque passage — elle n\'est jamais dupliquée, et elle se ferme',
+              'toute seule quand la flotte redevient conforme.',
+            ].join('\n');
+
+            const { data: ouvertes } = await github.rest.issues.listForRepo({
+              ...context.repo, state: 'open', labels: LABEL });
+
+            if (!derive && !nonMesurable) {
+              for (const i of ouvertes) {
+                await github.rest.issues.createComment({ ...context.repo, issue_number: i.number,
+                  body: 'Flotte redevenue conforme — fermeture automatique.' });
+                await github.rest.issues.update({ ...context.repo, issue_number: i.number, state: 'closed' });
+              }
+              core.info('Flotte conforme. Rien à signaler.');
+              return;
+            }
+
+            if (ouvertes.length) {
+              await github.rest.issues.update({ ...context.repo, issue_number: ouvertes[0].number, body: corps });
+              core.info(`Issue #${ouvertes[0].number} rafraîchie.`);
+            } else {
+              const { data: n } = await github.rest.issues.create({
+                ...context.repo, title: TITRE, body: corps, labels: [LABEL] });
+              core.info(`Issue #${n.number} ouverte.`);
+            }
+
+      # ── 4. l'état du job reflète la mesure, pas l'inverse ────────────────
+      - name: Conclure
+        if: always()
+        env:
+          RELEVE: ${{ steps.releve.outputs.etat }}
+          DETAIL: ${{ steps.releve.outputs.detail }}
+          SIGNAUX: ${{ steps.signaux.outputs.etat }}
+        run: |
+          echo "relevé  : ${RELEVE:-non exécuté}"
+          echo "signaux : ${SIGNAUX:-non exécuté}"
+          if [ "$RELEVE" = "non-mesurable" ]; then
+            echo "::error::Le relevé n'a pas pu mesurer — ${DETAIL}"
+            exit 1
+          fi
+          if [ "$SIGNAUX" = "derive" ]; then echo "::error::Signaux de dérive — voir l'issue"; exit 1; fi
+          if [ "$RELEVE" = "derive" ]; then echo "::error::Le relevé a changé — voir l'issue"; exit 1; fi
+          echo "Flotte conforme."

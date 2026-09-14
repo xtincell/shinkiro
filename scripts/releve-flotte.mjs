@@ -1,0 +1,204 @@
+#!/usr/bin/env node
+/* releve-flotte.mjs — régénère fleet.lock.yml depuis la réalité GitHub.
+ *
+ * fleet.yml porte le JUGEMENT : descriptions, arbitrages, points de vigilance,
+ * ordre de construction. Écrit à la main, jamais généré.
+ *
+ * fleet.lock.yml porte les FAITS : volumétrie, topics, licence, branche,
+ * vitalité, artefacts de déploiement. Ils périment au prochain commit, donc ils
+ * se recalculent. Le diff du .lock est ce qui a bougé dans la flotte.
+ *
+ * Aucune dépendance npm — gh fournit l'authentification.
+ *   node scripts/releve-flotte.mjs [--owner xtincell] [--topic shinkiro]
+ */
+
+import { execFileSync } from "node:child_process";
+import { writeFileSync, readFileSync, existsSync } from "node:fs";
+
+const arg = (n, d) => {
+  const i = process.argv.indexOf(`--${n}`);
+  return i > -1 ? process.argv[i + 1] : d;
+};
+const OWNER = arg("owner", "xtincell");
+const TOPIC = arg("topic", "shinkiro");
+const JOURS = 90;
+
+/* Un appel qui échoue rend "" — indiscernable d'un résultat vide. Un jeton qui
+ * lit certains dépôts et pas d'autres produirait alors un relevé amputé, et
+ * l'amputation se lirait comme une DÉRIVE au lieu d'une NON-MESURE. C'est
+ * exactement la confusion qui a fait ouvrir 541 fausses issues ailleurs.
+ * Les échecs sont donc comptés, et le relevé refuse de s'écrire s'il y en a. */
+const echecs = [];
+const gh = (path, jq) => {
+  try {
+    const a = ["api", path];
+    if (jq) a.push("--jq", jq);
+    return execFileSync("gh", a, { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 }).trim();
+  } catch (e) {
+    echecs.push(`${path} — ${String(e.stderr || e.message).trim().split("\n")[0].slice(0, 160)}`);
+    return "";
+  }
+};
+
+/* Artefacts de déploiement, détectés dans l'arborescence. L'ordre compte :
+ * Coolify pilote un docker-compose, donc « compose » se lit avant « dockerfile »,
+ * sinon un déploiement Coolify passe pour un Docker autonome. */
+const SIGNAUX = [
+  ["compose",    /(^|\/)docker-compose\.ya?ml$/i],
+  ["dockerfile", /(^|\/)Dockerfile$/],
+  ["systemd",    /\.service$/],
+  ["next",       /(^|\/)next\.config\.[tjm]s$/],
+  ["vercel",     /(^|\/)vercel\.json$/],
+  ["pages_edge", /(^|\/)(_redirects|_headers|netlify\.toml|wrangler\.toml)$/],
+  ["index_html", /(^|\/)index\.html$/],
+  ["package",    /(^|\/)package\.json$/],
+  ["python",     /(^|\/)(requirements\.txt|pyproject\.toml|server\.py|main\.py)$/],
+  ["prisma",     /(^|\/)prisma\//],
+  ["workflows",  /^\.github\/workflows\//],
+  ["env_example",/(^|\/)\.env\.example$/],
+];
+
+const depots = gh(
+  `search/repositories?q=user:${OWNER}+topic:${TOPIC}&per_page=100`,
+  ".items[].name"
+).split("\n").filter(Boolean).sort();
+
+if (!depots.length) {
+  console.error(`Aucun dépôt portant le topic « ${TOPIC} » chez ${OWNER}. gh est-il authentifié ?`);
+  process.exit(1);
+}
+
+const depuis = new Date(Date.now() - JOURS * 864e5).toISOString().slice(0, 10);
+const releve = [];
+
+for (const nom of depots) {
+  const meta = JSON.parse(
+    gh(`repos/${OWNER}/${nom}`,
+       "{branche:.default_branch, prive:.private, archive:.archived, langue:.language}") || "{}");
+
+  /* Les tailles viennent de l'arbre, pas de repos.size : ce dernier est calculé
+   * en tâche de fond par GitHub et renvoie 0 sur un dépôt fraîchement créé. Un
+   * chiffre qui bouge sans que rien n'ait bougé fabrique de fausses dérives ;
+   * la somme des blobs est déterministe et sort de l'appel déjà fait. */
+  const blobs = gh(`repos/${OWNER}/${nom}/git/trees/${meta.branche}?recursive=1`,
+                   '.tree[] | select(.type=="blob") | "\\(.size)\\t\\(.path)"')
+    .split("\n").filter(Boolean)
+    .map((l) => { const i = l.indexOf("\t"); return { taille: +l.slice(0, i) || 0, chemin: l.slice(i + 1) }; });
+
+  const arbre = blobs.map((b) => b.chemin);
+  if (!arbre.length && !meta.archive)
+    echecs.push(`${nom} — arbre vide sur la branche ${meta.branche} : dépôt inaccessible plutôt que vide ?`);
+  const poids_ko = Math.round(blobs.reduce((n, b) => n + b.taille, 0) / 1024);
+
+  /* Racines déployables : répertoires (profondeur <= 2) portant un marqueur de
+   * point d'entrée. Trois composants du programme ont leur entrée en sous-dossier ;
+   * sans ce fait, un `racine:` déclaré dans fleet.yml n'est vérifiable par rien. */
+  const racines = [...new Set(arbre
+    .filter((p) => /(^|\/)(package\.json|Dockerfile|requirements\.txt|pyproject\.toml)$|\.html$/.test(p))
+    .map((p) => { const d = p.split("/").slice(0, -1); return d.length ? d.join("/") : "."; })
+    .filter((d) => d.split("/").length <= 2))].sort();
+
+  const artefacts = {};
+  for (const [cle, re] of SIGNAUX) {
+    const hits = arbre.filter((p) => re.test(p)).sort();
+    if (hits.length) artefacts[cle] = hits.slice(0, 4);
+  }
+
+  const topics = gh(`repos/${OWNER}/${nom}/topics`, '.names | join(",")')
+    .split(",").filter(Boolean).sort();
+
+  releve.push({
+    nom,
+    branche: meta.branche || "?",
+    prive: !!meta.prive,
+    archive: !!meta.archive,
+    langue: meta.langue || null,
+    fichiers: arbre.length,
+    poids_ko,
+    licence: arbre.some((p) => /^LICEN[SC]E(\.[a-z]+)?$/i.test(p)) ? "presente" : "ABSENTE",
+    topics,
+    commits_90j: Number(gh(`repos/${OWNER}/${nom}/commits?since=${depuis}&per_page=100`, "length") || 0),
+    racines,
+    artefacts,
+  });
+  process.stderr.write(`  ${nom.padEnd(26)} ${String(arbre.length).padStart(5)} fichiers · ${String(poids_ko).padStart(7)} Ko\n`);
+}
+
+/* Sérialisation YAML minimale — pas de dépendance pour écrire vingt lignes. */
+const esc = (v) =>
+  typeof v === "string" && /[:#\-{}[\],&*?|>'"%@`]|^\s|\s$|^$/.test(v) ? JSON.stringify(v) : v;
+const liste = (a) => (a.length ? `[${a.map(esc).join(", ")}]` : "[]");
+
+let out = `# fleet.lock.yml — RELEVÉ AUTOMATIQUE, NE PAS ÉDITER À LA MAIN
+#
+# Régénéré par scripts/releve-flotte.mjs depuis l'API GitHub.
+# Le jugement — descriptions, arbitrages, vigilance — vit dans fleet.yml.
+# Ici, uniquement des faits, et uniquement des faits déterministes : la
+# volumétrie est la somme des blobs de l'arbre, pas repos.size, qui est calculé
+# en tâche de fond et vaut 0 sur un dépôt neuf.
+#
+#   make releve                régénère ce fichier
+#   git diff fleet.lock.yml    ce qui a bougé dans la flotte depuis le dernier relevé
+#
+releve_le: "${new Date().toISOString().slice(0, 10)}"
+owner: ${OWNER}
+topic: ${TOPIC}
+fenetre_vitalite_jours: ${JOURS}
+depots: ${releve.length}
+
+composants:
+`;
+
+for (const d of releve) {
+  out += `  - nom: ${d.nom}\n`;
+  out += `    branche: ${d.branche}\n`;
+  out += `    prive: ${d.prive}\n`;
+  if (d.archive) out += `    archive: true\n`;
+  out += `    langue: ${d.langue ? esc(d.langue) : "null"}\n`;
+  out += `    fichiers: ${d.fichiers}\n`;
+  out += `    poids_ko: ${d.poids_ko}\n`;
+  out += `    licence: ${d.licence}\n`;
+  out += `    commits_90j: ${d.commits_90j}\n`;
+  out += `    topics: ${liste(d.topics)}\n`;
+  out += `    racines: ${liste(d.racines)}\n`;
+  const cles = Object.keys(d.artefacts);
+  if (cles.length) {
+    out += `    artefacts:\n`;
+    for (const k of cles) out += `      ${k}: ${liste(d.artefacts[k])}\n`;
+  }
+}
+
+/* Tous les dépôts du compte, topic ou pas. Ce qui n'est pas dans la flotte et
+ * n'est pas explicitement écarté par fleet.yml:hors_perimetre est non classé —
+ * c'est ainsi que cinq outils ont vécu hors de tout manifeste. Le relevé donne
+ * la liste brute ; la soustraction est un jugement, elle appartient à l'audit. */
+/* /user/repos, pas /users/{owner}/repos : le second ne renvoie que les dépôts
+ * publics, or la flotte est majoritairement privée — il en cachait dix-neuf. */
+const tous = gh(`user/repos?per_page=100&affiliation=owner`, ".[].name")
+  .split("\n").filter(Boolean);
+const sansTopic = tous.filter((n) => !depots.includes(n)).sort();
+
+out += `
+# Dépôts du compte ne portant PAS le topic ${TOPIC}. Liste brute : certains sont
+# légitimement hors flotte (employeur, client, labo) et fleet.yml:hors_perimetre
+# les écarte nommément. Ce qui reste après soustraction est non classé.
+depots_du_compte: ${tous.length}
+sans_topic:
+`;
+for (const n of sansTopic) out += `  - ${n}\n`;
+
+if (echecs.length) {
+  console.error(`\nRELEVÉ INCOMPLET — ${echecs.length} appel(s) à l'API en échec :`);
+  for (const e of echecs.slice(0, 10)) console.error(`  ${e}`);
+  if (echecs.length > 10) console.error(`  … et ${echecs.length - 10} autre(s)`);
+  console.error(`\nfleet.lock.yml n'est PAS réécrit : un relevé amputé se lirait comme une dérive.`);
+  console.error(`Cause probable : jeton absent, expiré, ou sans accès en lecture sur tous les dépôts.`);
+  process.exit(3);
+}
+
+const dest = "fleet.lock.yml";
+const sansDate = (t) => t.replace(/^releve_le:.*$/m, "");
+const avant = existsSync(dest) ? readFileSync(dest, "utf8") : "";
+writeFileSync(dest, out);
+const etat = !avant ? "création" : sansDate(avant) === sansDate(out) ? "aucun changement" : "CHANGEMENTS — lire le diff";
+process.stderr.write(`\n${dest} — ${releve.length} composants · ${etat}\n`);
