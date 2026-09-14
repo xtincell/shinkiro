@@ -1,0 +1,191 @@
+# Shinkiro — manifeste de flotte
+#
+# Le fichier qu'un agent lit en premier. Il dit quoi cloner, dans quel ordre,
+# et dans quel état chaque composant se trouve réellement.
+#
+# etage: reference | verse
+#   reference — composant autonome avec sa CI, son déploiement, son cycle.
+#               Cloné à côté, jamais absorbé.
+#   verse     — outil léger sans CI ni déploiement propre.
+#               Dépôt propre ET submodule sous tools/.
+#
+# maturite: produit | utilisable | partiel | a-qualifier | gele
+# Voir docs/MATURITE.md pour le détail de chaque état.
+
+owner: xtincell
+version: 1
+
+composants:
+
+  # ── couche 01 · méthode ────────────────────────────────────────────────
+  - nom: ADVE-project
+    couche: method
+    etage: reference
+    maturite: produit
+    licence: proprietaire
+    ordre_construction: 5
+    deploiement: https://lafusee-app.vercel.app
+    vitalite: actif
+    note: >-
+      La Fusée v6.19. 150 Mo, 17 workflows, 192 ADR. Le plus lourd et le plus
+      strict — ne jamais commencer par lui.
+
+  - nom: la-fusee-blueprint
+    couche: method
+    etage: reference
+    maturite: produit
+    licence: proprietaire
+    vitalite: gele
+    note: Doctrine, pas code. Ne pas chercher à l'exécuter.
+
+  - nom: indice-maturite
+    couche: method
+    etage: verse
+    maturite: produit
+    licence: proprietaire
+    deploiement: https://xtincell.github.io/indice-maturite/
+    vitalite: actif
+    produit_portefeuille: "00 · Creative Opportunity Check"
+
+  - nom: market-expansion-system
+    couche: method
+    etage: verse
+    maturite: produit
+    licence: proprietaire
+    vitalite: actif
+    produit_portefeuille: "04 · Content Expansion Modules"
+    note: Preuve terrain sur neuf marchés, bascule marque et langue au Ghana.
+
+  # ── couche 02 · entreprise ─────────────────────────────────────────────
+  - nom: galahad-landing
+    couche: company
+    etage: reference
+    maturite: partiel
+    licence: proprietaire
+    vitalite: actif
+    note: >-
+      À trancher — sert-elle le produit galahad ou le programme Shinkiro ?
+      Aucune page publiée à ce jour.
+
+  # ── couche 03 · exécution ──────────────────────────────────────────────
+  - nom: galahad
+    couche: execution
+    etage: reference
+    maturite: utilisable
+    licence: MIT
+    ordre_construction: 1
+    vitalite: actif
+    note: >-
+      Moteur d'agents, zéro dépendance npm, zéro build. Se lance et se vérifie
+      seul. Point de départ obligatoire.
+
+  - nom: radar
+    couche: execution
+    etage: reference
+    maturite: utilisable
+    licence: MIT
+    ordre_construction: 2
+    vitalite: actif
+    note: >-
+      Fournit task_events — le journal dont dépend toute mesure avant/après.
+      Une instance = une équipe = une base. Reste autonome.
+
+  - nom: talos
+    couche: execution
+    etage: reference
+    maturite: partiel
+    licence: proprietaire
+    ordre_construction: 3
+    vitalite: fige
+    absorber_dans: galahad/engine/agents/talos
+    note: Rôle Guardian. Module déguisé en dépôt.
+
+  - nom: hulysse
+    couche: execution
+    etage: reference
+    maturite: partiel
+    licence: proprietaire
+    ordre_construction: 3
+    vitalite: fige
+    absorber_dans: galahad/engine/agents/hulysse
+    note: Rôle Traveler. Module déguisé en dépôt.
+
+  - nom: danmem
+    couche: execution
+    etage: reference
+    maturite: a-qualifier
+    licence: proprietaire
+    ordre_construction: 3
+    vitalite: fige
+    absorber_dans: galahad/engine/memory/danmem
+    note: Aucun README. Couche mémoire.
+
+  - nom: hermes-cockpit
+    couche: execution
+    etage: reference
+    maturite: a-qualifier
+    licence: proprietaire
+    vitalite: actif
+    note: >-
+      Cockpit de santé lisant radar et danmem, plus une page portail client
+      Matanga. Le code est propre ; la page Matanga est une vue de déploiement.
+
+  # ── couche 04 · outils métier ──────────────────────────────────────────
+  - nom: la-barre
+    couche: tools
+    etage: reference
+    maturite: utilisable
+    licence: proprietaire
+    ordre_construction: 4
+    vitalite: actif
+    note: Pièce maîtresse. Aucun serveur, aucun compte — on double-clique.
+
+  - nom: Argos-studio
+    couche: tools
+    etage: reference
+    maturite: partiel
+    licence: proprietaire
+    ordre_construction: 6
+    vitalite: relance-prioritaire
+    produit_portefeuille: "05 · Content Performance Loop"
+    note: >-
+      Bloque un produit vendable. Manque la boucle de mesure reliant la
+      bibliothèque aux résultats client.
+
+  - nom: charadesign-generator
+    couche: tools
+    etage: reference
+    maturite: utilisable
+    licence: proprietaire
+    ordre_construction: 6
+    vitalite: gele
+
+  - nom: generateur-approches
+    couche: tools
+    etage: verse
+    maturite: utilisable
+    licence: proprietaire
+    vitalite: gele
+
+  - nom: character-engine
+    couche: tools
+    etage: verse
+    maturite: utilisable
+    licence: proprietaire
+    vitalite: gele
+
+  - nom: datacollector
+    couche: tools
+    etage: verse
+    maturite: utilisable
+    licence: proprietaire
+    vitalite: gele
+
+# ── hors flotte ─────────────────────────────────────────────────────────
+# Ne jamais cloner avec make clone-all. Voir docs/CLOISON.md.
+hors_perimetre:
+  employeur: [Matanga-Creative-dashboard, matanga-hermes-mcp, ADVERTIS-Matanga]
+  client:    [spawt-meute-quiz, spawt-ci-mobile-v1-mvp, project_spawt, project_spawt_mobile_ci]
+  labo:      [neo-kinara, 15B_Stories, atlas-of-recorded-sound, CosmicMachine, Tauri-v1, BlackNoteWeb]
+  adjacent:  [Folio_Spark]
+  archives:  [LaFusee_ADVE, ADVE_v8, ADVERTIS_v01, AVERTIS_web_v01, ADVERT_01, ADVERT-web, BrandForge]
