@@ -120,8 +120,27 @@ passe : il échoue en rouge et le dit. C'est la leçon exacte des 541 fausses is
 
 > **Prérequis** — le relevé lit vingt-trois dépôts, en majorité privés.
 > `GITHUB_TOKEN` ne voit que le dépôt courant : le workflow a besoin d'un secret
-> `FLEET_TOKEN` avec la portée `repo` en lecture. Sans lui, il n'échoue pas en
-> silence — il déclare qu'il n'a pas pu mesurer.
+> `FLEET_TOKEN`, jeton *fine-grained* sur tous les dépôts, permission **Contents :
+> Read-only** et rien d'autre. Sans lui, il n'échoue pas en silence — il déclare
+> qu'il n'a pas pu mesurer.
+>
+> **Et un jeton partiel est traité comme aucun jeton.** Un accès qui couvre
+> certains dépôts et pas d'autres produirait un relevé amputé, et l'amputation se
+> lirait comme une *dérive* — des composants qui « disparaissent » de la flotte.
+> Le script compte donc ses échecs d'API, refuse d'écrire `fleet.lock.yml` s'il y
+> en a un seul, et sort en 3. Le workflow traduit ce 3 en `non-mesurable`.
+>
+> Le même piège guette l'arbre vide : un dépôt inaccessible et un dépôt réellement
+> vide rendent la même chose. Un arbre vide sur un dépôt non archivé est donc
+> compté comme un échec, pas comme un fait.
+
+### Un workflow planifié ne tourne que depuis la branche par défaut
+
+Tant que `fleet-drift.yml` n'est pas sur `main`, GitHub Actions ne le voit pas :
+`gh workflow list` ne le liste pas, `gh workflow run` ne le trouve pas, et le cron
+ne se déclenche jamais. Aucune erreur nulle part — le contrôle est simplement absent.
+C'est la forme la plus silencieuse de la maladie : un dispositif anti-dérive qui a
+lui-même dérivé en n'étant jamais installé.
 
 ## 3 · Les décisions, adossées aux contrôles
 

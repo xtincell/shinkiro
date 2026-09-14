@@ -23,12 +23,19 @@ const OWNER = arg("owner", "xtincell");
 const TOPIC = arg("topic", "shinkiro");
 const JOURS = 90;
 
+/* Un appel qui échoue rend "" — indiscernable d'un résultat vide. Un jeton qui
+ * lit certains dépôts et pas d'autres produirait alors un relevé amputé, et
+ * l'amputation se lirait comme une DÉRIVE au lieu d'une NON-MESURE. C'est
+ * exactement la confusion qui a fait ouvrir 541 fausses issues ailleurs.
+ * Les échecs sont donc comptés, et le relevé refuse de s'écrire s'il y en a. */
+const echecs = [];
 const gh = (path, jq) => {
   try {
     const a = ["api", path];
     if (jq) a.push("--jq", jq);
     return execFileSync("gh", a, { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 }).trim();
-  } catch {
+  } catch (e) {
+    echecs.push(`${path} — ${String(e.stderr || e.message).trim().split("\n")[0].slice(0, 160)}`);
     return "";
   }
 };
@@ -79,6 +86,8 @@ for (const nom of depots) {
     .map((l) => { const i = l.indexOf("\t"); return { taille: +l.slice(0, i) || 0, chemin: l.slice(i + 1) }; });
 
   const arbre = blobs.map((b) => b.chemin);
+  if (!arbre.length && !meta.archive)
+    echecs.push(`${nom} — arbre vide sur la branche ${meta.branche} : dépôt inaccessible plutôt que vide ?`);
   const poids_ko = Math.round(blobs.reduce((n, b) => n + b.taille, 0) / 1024);
 
   /* Racines déployables : répertoires (profondeur <= 2) portant un marqueur de
@@ -177,6 +186,15 @@ depots_du_compte: ${tous.length}
 sans_topic:
 `;
 for (const n of sansTopic) out += `  - ${n}\n`;
+
+if (echecs.length) {
+  console.error(`\nRELEVÉ INCOMPLET — ${echecs.length} appel(s) à l'API en échec :`);
+  for (const e of echecs.slice(0, 10)) console.error(`  ${e}`);
+  if (echecs.length > 10) console.error(`  … et ${echecs.length - 10} autre(s)`);
+  console.error(`\nfleet.lock.yml n'est PAS réécrit : un relevé amputé se lirait comme une dérive.`);
+  console.error(`Cause probable : jeton absent, expiré, ou sans accès en lecture sur tous les dépôts.`);
+  process.exit(3);
+}
 
 const dest = "fleet.lock.yml";
 const sansDate = (t) => t.replace(/^releve_le:.*$/m, "");

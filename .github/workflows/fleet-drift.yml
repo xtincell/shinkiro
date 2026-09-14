@@ -41,9 +41,17 @@ jobs:
             echo "detail=secret FLEET_TOKEN absent — le relevé ne peut pas lire les dépôts privés" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          if ! node scripts/releve-flotte.mjs 2> releve.log; then
+          node scripts/releve-flotte.mjs 2> releve.log || code=$?
+          # 3 = relevé incomplet : des dépôts n'ont pas pu être lus, et le script a
+          # refusé d'écrire un lock amputé. Une amputation se lirait comme une dérive.
+          if [ "${code:-0}" = "3" ]; then
             echo "etat=non-mesurable" >> "$GITHUB_OUTPUT"
-            echo "detail=le relevé a échoué — voir releve.log" >> "$GITHUB_OUTPUT"
+            echo "detail=relevé incomplet — des dépôts n'ont pas pu être lus ; le jeton couvre-t-il toute la flotte ?" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ "${code:-0}" != "0" ]; then
+            echo "etat=non-mesurable" >> "$GITHUB_OUTPUT"
+            echo "detail=le relevé a échoué (code ${code}) — voir releve.log" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           if git diff --quiet --exit-code fleet.lock.yml; then
@@ -134,12 +142,17 @@ jobs:
       # ── 4. l'état du job reflète la mesure, pas l'inverse ────────────────
       - name: Conclure
         if: always()
+        env:
+          RELEVE: ${{ steps.releve.outputs.etat }}
+          DETAIL: ${{ steps.releve.outputs.detail }}
+          SIGNAUX: ${{ steps.signaux.outputs.etat }}
         run: |
-          echo "relevé  : ${{ steps.releve.outputs.etat }}"
-          echo "signaux : ${{ steps.signaux.outputs.etat }}"
-          case "${{ steps.releve.outputs.etat }}" in
-            non-mesurable) echo "::error::Le relevé n'a pas pu mesurer — ${{ steps.releve.outputs.detail }}"; exit 1 ;;
-          esac
-          [ "${{ steps.signaux.outputs.etat }}" = "derive" ] && { echo "::error::Signaux de dérive — voir l'issue"; exit 1; }
-          [ "${{ steps.releve.outputs.etat }}" = "derive" ] && { echo "::error::Le relevé a changé — voir l'issue"; exit 1; }
+          echo "relevé  : ${RELEVE:-non exécuté}"
+          echo "signaux : ${SIGNAUX:-non exécuté}"
+          if [ "$RELEVE" = "non-mesurable" ]; then
+            echo "::error::Le relevé n'a pas pu mesurer — ${DETAIL}"
+            exit 1
+          fi
+          if [ "$SIGNAUX" = "derive" ]; then echo "::error::Signaux de dérive — voir l'issue"; exit 1; fi
+          if [ "$RELEVE" = "derive" ]; then echo "::error::Le relevé a changé — voir l'issue"; exit 1; fi
           echo "Flotte conforme."
