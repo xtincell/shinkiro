@@ -8,13 +8,15 @@
 #   make status      état git de chaque composant
 #   make build-order rappelle l'ordre de construction
 #   make tools       initialise les outils versés (submodules)
+#   make releve      régénère fleet.lock.yml depuis GitHub
+#   make derive      relève et échoue si le .lock committé ne reflète plus la réalité
 
 OWNER  := xtincell
 ROOT   := ..
 REFS   := $(shell sed -n 's/^  - nom: //p' fleet.yml)
 VERSES := indice-maturite market-expansion-system generateur-approches character-engine datacollector
 
-.PHONY: clone-all pull-all status build-order tools help
+.PHONY: clone-all pull-all status build-order tools releve derive help
 
 help:
 	@sed -n 's/^#   //p' Makefile
@@ -45,7 +47,7 @@ build-order:
 	@echo "2 · radar         le journal task_events, base de toute mesure"
 	@echo "3 · talos/hulysse/danmem   modules du moteur, pas avant que galahad tourne"
 	@echo "4 · la-barre      poste de travail — ouvrir index.html, rien à installer"
-	@echo "5 · ADVE-project  150 Mo, 17 workflows, 192 ADR — EN DERNIER"
+	@echo "5 · ADVE-project  ~100 Mo, 17 workflows, 192 ADR — EN DERNIER"
 	@echo "6 · Argos-studio / charadesign-generator   autonomes"
 	@echo ""
 	@echo "Détail et tests de vie : AGENTS.md"
@@ -53,3 +55,19 @@ build-order:
 tools:
 	@git submodule update --init --recursive
 	@printf "Outils versés : %s\n" "$(VERSES)"
+
+# ── le relevé ──────────────────────────────────────────────────────────────
+# fleet.yml est le jugement, fleet.lock.yml sont les faits. Les faits se
+# recalculent ; leur diff est ce qui a bougé dans la flotte.
+
+releve:
+	@node scripts/releve-flotte.mjs
+
+# En CI : relève, puis échoue si le fichier committé n'est plus à jour.
+# Le diff affiché EST le rapport — pas besoin d'en écrire un autre.
+derive: releve
+	@git diff --quiet --exit-code fleet.lock.yml || { \
+	  printf "\nDÉRIVE — fleet.lock.yml committé ne reflète plus GitHub :\n\n"; \
+	  git --no-pager diff fleet.lock.yml; \
+	  printf "\nCorriger avec : make releve && git add fleet.lock.yml\n"; exit 1; }
+	@echo "Flotte conforme au relevé committé."

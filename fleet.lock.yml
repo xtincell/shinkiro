@@ -1,0 +1,309 @@
+# fleet.lock.yml — RELEVÉ AUTOMATIQUE, NE PAS ÉDITER À LA MAIN
+#
+# Régénéré par scripts/releve-flotte.mjs depuis l'API GitHub.
+# Le jugement — descriptions, arbitrages, vigilance — vit dans fleet.yml.
+# Ici, uniquement des faits, et uniquement des faits déterministes : la
+# volumétrie est la somme des blobs de l'arbre, pas repos.size, qui est calculé
+# en tâche de fond et vaut 0 sur un dépôt neuf.
+#
+#   make releve                régénère ce fichier
+#   git diff fleet.lock.yml    ce qui a bougé dans la flotte depuis le dernier relevé
+#
+releve_le: "2026-09-14"
+owner: xtincell
+topic: shinkiro
+fenetre_vitalite_jours: 90
+depots: 23
+
+composants:
+  - nom: ADVE-project
+    branche: main
+    prive: false
+    langue: TypeScript
+    fichiers: 3314
+    poids_ko: 101855
+    licence: ABSENTE
+    commits_90j: 100
+    topics: ["layer-method", shinkiro]
+    artefacts:
+      dockerfile: [Dockerfile]
+      next: [next.config.ts]
+      index_html: ["docs/design-system/upgraders/ui_kits/dashboard/index.html", "docs/design-system/upgraders/ui_kits/marketing/index.html", "docs/external-design/argos-hunter-v1/index.html"]
+      package: ["docs/external-design/argos-hunter-v1/package.json", "eslint-plugin-lafusee/package.json", package.json, packages/sdk/package.json]
+      prisma: [prisma/migrations/20260429000000_apogee_baseline/migration.sql, prisma/migrations/20260430000000_add_ptah_forge/migration.sql, prisma/migrations/20260430120000_add_superasset/migration.sql, prisma/migrations/20260430130000_brand_vault_phase10/migration.sql]
+      workflows: [".github/workflows/build-image.yml", .github/workflows/chromatic.yml, .github/workflows/ci.yml, .github/workflows/claude.yml]
+      env_example: [.env.example]
+  - nom: ADVERTIS_v01
+    branche: main
+    prive: false
+    langue: HTML
+    fichiers: 77
+    poids_ko: 3566
+    licence: ABSENTE
+    commits_90j: 0
+    topics: ["layer-method", shinkiro]
+    artefacts:
+      index_html: [interface/templates/index.html]
+  - nom: ADVERT_01
+    branche: main
+    prive: false
+    langue: HTML
+    fichiers: 532
+    poids_ko: 11669
+    licence: ABSENTE
+    commits_90j: 0
+    topics: ["layer-method", shinkiro]
+    artefacts:
+      next: [next.config.js]
+      index_html: [ADVERTIS_TRANSFER/interface/templates/index.html, "_bmad-output/strategic-interface-amara/index.html"]
+      package: [package.json]
+      prisma: [prisma/migrations/20260205130627_init/migration.sql, prisma/migrations/20260205160145_add_password_hash/migration.sql, prisma/migrations/migration_lock.toml, prisma/schema.prisma]
+      env_example: [.env.example]
+  - nom: ADVE_v8
+    branche: claude/la-fusee-v2-rebuild-9omp5v
+    prive: false
+    langue: TypeScript
+    fichiers: 286
+    poids_ko: 3413
+    licence: ABSENTE
+    commits_90j: 41
+    topics: ["layer-method", shinkiro]
+    artefacts:
+      dockerfile: [Dockerfile]
+      next: [next.config.ts]
+      package: [package.json]
+      prisma: [prisma/migrations/20260705204205_init/migration.sql, prisma/migrations/20260705232043_user_digest_optout/migration.sql, prisma/migrations/20260706005918_intake_llm_prefill/migration.sql, prisma/migrations/migration_lock.toml]
+      workflows: [.github/workflows/ci.yml]
+      env_example: [.env.example]
+  - nom: AVERTIS_web_v01
+    branche: main
+    prive: false
+    langue: TypeScript
+    fichiers: 787
+    poids_ko: 16544
+    licence: ABSENTE
+    commits_90j: 0
+    topics: ["layer-method", shinkiro]
+    artefacts:
+      next: ["advertis-app/next.config.js"]
+      index_html: [interface/templates/index.html]
+      package: ["advertis-app/package.json", package.json]
+      prisma: ["advertis-app/prisma/schema.prisma", "advertis-app/prisma/seed-artemis-complete.mjs", "advertis-app/prisma/seed-artemis-pillars.mjs", "advertis-app/prisma/seed-brand-os.mjs"]
+      env_example: ["advertis-app/.env.example"]
+  - nom: Argos-studio
+    branche: main
+    prive: false
+    langue: TypeScript
+    fichiers: 185
+    poids_ko: 38378
+    licence: presente
+    commits_90j: 1
+    topics: ["layer-tools", shinkiro]
+    artefacts:
+      next: [app/next.config.ts]
+      package: [app/package.json, workers/package.json]
+      prisma: [app/prisma/migrations/20260512171730_init/migration.sql, app/prisma/migrations/migration_lock.toml, app/prisma/schema.prisma, app/prisma/seed.ts]
+      env_example: [app/.env.example, workers/.env.example]
+  - nom: LaFusee_ADVE
+    branche: main
+    prive: false
+    langue: TypeScript
+    fichiers: 689
+    poids_ko: 8454
+    licence: ABSENTE
+    commits_90j: 0
+    topics: ["layer-method", shinkiro]
+    artefacts:
+      next: [next.config.ts]
+      vercel: [vercel.json]
+      package: [package.json]
+      prisma: [prisma/schema.prisma, "prisma/seed-demo.ts", "prisma/seed-e2e.ts", prisma/seed.ts]
+      env_example: [.env.example]
+  - nom: character-engine
+    branche: main
+    prive: true
+    langue: HTML
+    fichiers: 12
+    poids_ko: 60
+    licence: presente
+    commits_90j: 1
+    topics: ["layer-tools", shinkiro]
+  - nom: charadesign-generator
+    branche: main
+    prive: true
+    langue: JavaScript
+    fichiers: 20
+    poids_ko: 350
+    licence: presente
+    commits_90j: 1
+    topics: ["layer-tools", shinkiro]
+    artefacts:
+      index_html: ["lsi-cd-app/index.html"]
+      package: ["lsi-cd-app/package.json"]
+  - nom: danmem
+    branche: main
+    prive: true
+    langue: JavaScript
+    fichiers: 5
+    poids_ko: 15
+    licence: presente
+    commits_90j: 2
+    topics: ["layer-execution", shinkiro]
+    artefacts:
+      package: [package.json]
+  - nom: datacollector
+    branche: main
+    prive: true
+    langue: HTML
+    fichiers: 15
+    poids_ko: 111
+    licence: presente
+    commits_90j: 2
+    topics: ["layer-tools", shinkiro]
+    artefacts:
+      index_html: [index.html]
+      python: [main.py, requirements.txt, server.py]
+      env_example: [.env.example]
+  - nom: galahad
+    branche: main
+    prive: true
+    langue: JavaScript
+    fichiers: 70
+    poids_ko: 233
+    licence: presente
+    commits_90j: 31
+    topics: ["layer-execution", shinkiro]
+    artefacts:
+      compose: ["deploy/dan-hermes/docker-compose.yml", "deploy/sas-admin/docker-compose.yml", "docker-compose.yml"]
+      dockerfile: [Dockerfile, bridge/Dockerfile, "deploy/sas-admin/gateway/Dockerfile"]
+      systemd: ["deploy/systemd/galahad-docker-firewall.service"]
+      index_html: [cockpit/index.html, setup/index.html]
+      package: [bridge/package.json, engine/package.json]
+      python: ["deploy/sas-admin/gateway/requirements.txt"]
+      env_example: [.env.example, "deploy/dan-hermes/.env.example", "deploy/sas-admin/.env.example"]
+  - nom: galahad-landing
+    branche: main
+    prive: false
+    langue: HTML
+    fichiers: 4
+    poids_ko: 24
+    licence: presente
+    commits_90j: 5
+    topics: ["layer-company", shinkiro]
+    artefacts:
+      dockerfile: [Dockerfile]
+      index_html: [index.html]
+  - nom: generateur-approches
+    branche: main
+    prive: true
+    langue: HTML
+    fichiers: 3
+    poids_ko: 37
+    licence: presente
+    commits_90j: 1
+    topics: ["layer-tools", shinkiro]
+    artefacts:
+      index_html: [index.html]
+  - nom: hermes-cockpit
+    branche: main
+    prive: true
+    langue: HTML
+    fichiers: 7
+    poids_ko: 56
+    licence: presente
+    commits_90j: 20
+    topics: ["layer-execution", shinkiro]
+    artefacts:
+      compose: ["docker-compose.yaml"]
+      dockerfile: [Dockerfile]
+      index_html: [index.html]
+      package: [package.json]
+  - nom: hulysse
+    branche: main
+    prive: true
+    langue: JavaScript
+    fichiers: 23
+    poids_ko: 58
+    licence: presente
+    commits_90j: 2
+    topics: ["layer-execution", shinkiro]
+    artefacts:
+      systemd: [ops/hulysse.service]
+      package: [package.json]
+  - nom: indice-maturite
+    branche: main
+    prive: false
+    langue: HTML
+    fichiers: 3
+    poids_ko: 10
+    licence: presente
+    commits_90j: 1
+    topics: ["layer-method", shinkiro]
+    artefacts:
+      index_html: [index.html]
+  - nom: la-barre
+    branche: main
+    prive: true
+    langue: JavaScript
+    fichiers: 148
+    poids_ko: 3850
+    licence: presente
+    commits_90j: 13
+    topics: ["layer-tools", shinkiro]
+    artefacts:
+      index_html: [index.html]
+      package: [package.json]
+  - nom: la-fusee-blueprint
+    branche: main
+    prive: true
+    langue: HTML
+    fichiers: 13
+    poids_ko: 683
+    licence: presente
+    commits_90j: 1
+    topics: ["layer-method", shinkiro]
+  - nom: market-expansion-system
+    branche: main
+    prive: true
+    langue: null
+    fichiers: 6
+    poids_ko: 11
+    licence: presente
+    commits_90j: 1
+    topics: ["layer-method", shinkiro]
+  - nom: radar
+    branche: main
+    prive: false
+    langue: HTML
+    fichiers: 69
+    poids_ko: 1772
+    licence: presente
+    commits_90j: 10
+    topics: ["layer-execution", shinkiro]
+    artefacts:
+      dockerfile: [Dockerfile]
+      pages_edge: [briefs/_headers, briefs/_redirects]
+      index_html: [briefs/index.html]
+      package: [package.json]
+      env_example: [.env.example]
+  - nom: shinkiro
+    branche: main
+    prive: true
+    langue: Makefile
+    fichiers: 6
+    poids_ko: 22
+    licence: presente
+    commits_90j: 3
+    topics: ["layer-index", shinkiro]
+  - nom: talos
+    branche: main
+    prive: true
+    langue: JavaScript
+    fichiers: 28
+    poids_ko: 155
+    licence: presente
+    commits_90j: 2
+    topics: ["layer-execution", shinkiro]
+    artefacts:
+      systemd: [ops/talos.service]
+      package: [package.json, "radar-mcp/package.json"]

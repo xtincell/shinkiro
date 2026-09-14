@@ -30,7 +30,7 @@ L'ordre n'est pas arbitraire : chaque étape rend la suivante vérifiable.
 | 2 | Le tracker | `radar` | Postgres + Node stdlib. Fournit le **journal d'événements** dont dépend toute mesure avant/après. |
 | 3 | Les modules d'agents | `talos`, `hulysse`, `danmem` | Guardian, Traveler, mémoire. Ne les construis pas avant que `galahad` tourne : ce sont des rôles du même moteur. |
 | 4 | Le poste de travail | `la-barre` | Aucun serveur, aucun compte. Se teste en ouvrant `index.html`. |
-| 5 | La méthode | `ADVE-project` | 150 Mo, 17 workflows, Next.js + Prisma. **Le plus lourd — en dernier.** Lis ses 192 ADR avant de toucher quoi que ce soit. |
+| 5 | La méthode | `ADVE-project` | ~100 Mo d'arbre, 17 workflows, Next.js + Prisma. **Le plus lourd — en dernier.** Lis ses 192 ADR avant de toucher quoi que ce soit. |
 | 6 | Les outils spécialisés | `Argos-studio`, `charadesign-generator` | Autonomes, sans dépendance sur le reste. |
 
 **Ne commence jamais par `ADVE-project`.** C'est le dépôt le plus impressionnant et le plus
