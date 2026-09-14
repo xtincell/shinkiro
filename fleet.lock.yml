@@ -13,7 +13,8 @@ releve_le: "2026-09-14"
 owner: xtincell
 topic: shinkiro
 fenetre_vitalite_jours: 90
-depots: 23
+depots: 22
+# shinkiro est le dépôt du programme : il porte ce fichier, il n'y figure pas.
 
 composants:
   - nom: ADVE-project
@@ -307,16 +308,6 @@ composants:
       index_html: [briefs/index.html]
       package: [package.json]
       env_example: [.env.example]
-  - nom: shinkiro
-    branche: main
-    prive: true
-    langue: Makefile
-    fichiers: 6
-    poids_ko: 22
-    licence: presente
-    commits_90j: 3
-    topics: ["layer-index", shinkiro]
-    racines: []
   - nom: talos
     branche: main
     prive: true

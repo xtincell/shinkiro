@@ -68,10 +68,25 @@ if (!depots.length) {
   process.exit(1);
 }
 
+/* Le dépôt du programme est exclu du relevé. Il porte le manifeste, il n'y
+ * figure pas — SHK-0001 le dit déjà pour fleet.yml, et la raison vaut doublement
+ * ici : un fichier ne peut pas enregistrer l'état du commit qui le contient.
+ * Écrire fleet.lock.yml change shinkiro, ce qui périme la ligne shinkiro du
+ * fichier qu'on vient d'écrire. Le relevé ne serait JAMAIS vert, et une alarme
+ * qui sonne toujours cesse d'être lue — c'est le mal qu'il combat.
+ *
+ * Le nom est lu dans fleet.yml plutôt que codé en dur : c'est le seul endroit où
+ * le relevé consulte le jugement, et il ne lui demande qu'une chose — qui il est. */
+const PROGRAMME = (() => {
+  try { return readFileSync("fleet.yml", "utf8").match(/^programme:\s*([A-Za-z0-9_.\-]+)/m)?.[1] || null; }
+  catch { return null; }
+})();
+
 const depuis = new Date(Date.now() - JOURS * 864e5).toISOString().slice(0, 10);
 const releve = [];
 
 for (const nom of depots) {
+  if (nom === PROGRAMME) continue;
   const meta = JSON.parse(
     gh(`repos/${OWNER}/${nom}`,
        "{branche:.default_branch, prive:.private, archive:.archived, langue:.language}") || "{}");
@@ -144,7 +159,8 @@ releve_le: "${new Date().toISOString().slice(0, 10)}"
 owner: ${OWNER}
 topic: ${TOPIC}
 fenetre_vitalite_jours: ${JOURS}
-depots: ${releve.length}
+depots: ${releve.length}${PROGRAMME ? `
+# ${PROGRAMME} est le dépôt du programme : il porte ce fichier, il n'y figure pas.` : ""}
 
 composants:
 `;

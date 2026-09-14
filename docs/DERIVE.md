@@ -134,6 +134,22 @@ passe : il échoue en rouge et le dit. C'est la leçon exacte des 541 fausses is
 > vide rendent la même chose. Un arbre vide sur un dépôt non archivé est donc
 > compté comme un échec, pas comme un fait.
 
+### Le dépôt du programme ne se relève pas lui-même
+
+Un fichier ne peut pas enregistrer l'état du commit qui le contient. Écrire
+`fleet.lock.yml` change `shinkiro` — son nombre de fichiers, son poids, ses
+commits — ce qui périme à l'instant même la ligne `shinkiro` du fichier qu'on
+vient d'écrire. Le relevé ne serait jamais vert.
+
+`SHK-0001` le disait déjà pour `fleet.yml` : le programme porte le manifeste, il
+n'y figure pas. La raison vaut doublement pour le relevé, et pour une raison que
+ce dispositif connaît bien — **une alarme qui sonne toujours cesse d'être lue.**
+
+Le défaut n'a pas été trouvé par relecture : il l'a été au premier passage réel du
+workflow, qui a signalé `shinkiro` passant de 6 à 21 fichiers en fusionnant sa
+propre PR. Le constat était juste ; c'est sa répétition garantie qui était le
+défaut.
+
 ### Un workflow planifié ne tourne que depuis la branche par défaut
 
 Tant que `fleet-drift.yml` n'est pas sur `main`, GitHub Actions ne le voit pas :
