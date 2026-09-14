@@ -16,11 +16,14 @@ insuffisante pour trancher.
 | `hulysse` | **partiel** | Rôle Traveler, même forme que `talos` | Idem : module déguisé en dépôt. README identique à celui de `talos` — à différencier. |
 | `danmem` | **à qualifier** | 5 Ko, `src/`, `package.json` | **Aucun README.** Couche mémoire (peers, deriver, dialectique, S0→S7) décrite seulement dans la description GitHub. |
 | `la-barre` | **utilisable** | Poste de travail DC, zéro serveur zéro compte, README de 14 Ko, `servir.mjs` | Pas de `docs/`, pas de Dockerfile, pas de `.env.example`. La mesure avant/après du pilote n'est pas branchée. |
-| `Argos-studio` | **partiel** | 36 Mo de TypeScript, bibliothèque de campagnes, `docs/` fourni | README de 2,2 Ko pour 36 Mo de code. **La boucle de mesure vers les résultats client manque** — sans elle, pas de Content Performance Loop vendable. |
-| `charadesign-generator` | **utilisable** | Pipeline LSI-CD v3.4, UI Atelier clair, tracker 9 étapes | README de 2,4 Ko. Autonome, faible enjeu. |
+| `Argos-studio` | **partiel · relance prioritaire** | 36 Mo de TypeScript, bibliothèque de campagnes, `docs/` fourni | README de 2,2 Ko pour 36 Mo de code. **La boucle de mesure vers les résultats client manque** — sans elle, pas de Content Performance Loop vendable. |
+| `charadesign-generator` | **utilisable · gelé** | Pipeline LSI-CD v3.4, UI Atelier clair, tracker 9 étapes | README de 2,4 Ko. Autonome, faible enjeu. |
 | `la-fusee-blueprint` | **produit** | Atlas doctrinal, vue philosophique interactive | C'est de la doctrine, pas du code. Ne pas chercher à l'exécuter. |
 | `galahad-landing` | **partiel** | Page publique, 13 Ko | **À trancher** : sert-elle le produit `galahad` ou le programme Shinkiro ? Les deux ne s'adressent pas au même public. |
 | `hermes-cockpit` | **à qualifier** | 118 Ko, HTML | Ni README ni description. Porte le même nom qu'un dépôt Matanga — **vérifier de quel côté de la cloison il tombe** avant de le documenter. |
+| `indice-maturite` | **produit** | HTML autonome, 16 questions / 4 axes / score 0-5, **déployé** sur GitHub Pages | Aucun. C'est le produit 00 du portefeuille, et il est en ligne. |
+| `market-expansion-system` | **produit** | Méthode, matrice modèle, gabarits calqués sur le schéma Radar. Preuve terrain neuf marchés | Aucun manque fonctionnel. Reste à en faire une offre packagée. |
+| `generateur-approches` · `character-engine` · `datacollector` | **utilisable** | Outils DA autonomes, sans dépendance externe | **Gelés — sans reprise prévue.** Versionnés pour ne plus vivre sur un disque. |
 | `BrandForge` | **archivé** | — | README vide, aucun commit depuis février. Soit il devient le Brand Distinctiveness System, soit il reste archivé. |
 
 ## Dette structurelle connue

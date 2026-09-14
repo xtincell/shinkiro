@@ -6,6 +6,10 @@ quel ordre bâtir, comment les pièces se parlent, ni ce qui est déjà fait.
 
 ## Avant de commencer
 
+0. **Lis `fleet.yml`, puis lance `make clone-all`.** Le manifeste décrit les dix-sept
+   composants — couche, maturité, licence, ordre de construction, vitalité réelle — et la
+   commande les matérialise tous à côté de cet index. C'est ton point d'entrée.
+   `make build-order` rappelle la séquence, `make status` donne l'état de chacun.
 1. **Accès.** La plupart des dépôts sont privés. Sans invitation ou token, tu ne vois rien.
    Demande l'accès avant de planifier quoi que ce soit.
 2. **Lis `docs/MATURITE.md` en premier.** Il dit ce qui est fini, bouchonné ou aspirationnel.

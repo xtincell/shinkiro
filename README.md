@@ -101,13 +101,17 @@ d'argumenter qu'il connaît le process : il le montre.
 
 ---
 
-## Outils hors dépôt
+## Outils versés
 
-| Outil | Contenu |
+Outils légers, chacun dans son dépôt et monté en submodule sous `tools/`.
+
+| Dépôt | Rôle |
 |---|---|
-| **Market Expansion System** | Décliner une campagne d'un marché à N marchés sans perdre la marque. Formalisé depuis un déploiement réel sur **neuf pays**, avec bascule de marque et de langue au Ghana. |
-| **Matrice de déploiement** | Par marché : code, marque, langue, SKU, formats, écart déclaré, mentions légales, imprimeur, date BAT, statut. |
-| **Indice de maturité créative ADVE** | Seize questions, quatre axes, un niveau de 0 à 5, et une prescription. |
+| [`indice-maturite`](https://github.com/xtincell/indice-maturite) | **Produit 00 du portefeuille** — le diagnostic d'entrée gratuit. Seize questions, quatre axes, score 0-5, prescription. [En ligne](https://xtincell.github.io/indice-maturite/). |
+| [`market-expansion-system`](https://github.com/xtincell/market-expansion-system) | **Produit 04** — décliner une campagne d'un marché à N marchés sans perdre la marque. Preuve terrain sur **neuf pays**, bascule de marque et de langue au Ghana. Inclut la matrice de déploiement et les gabarits de cadrage. |
+| [`generateur-approches`](https://github.com/xtincell/generateur-approches) | Générateur d'approches publicitaires, sans API ni dépendance. |
+| [`character-engine`](https://github.com/xtincell/character-engine) | Moteur à 48 paramètres et règles de direction artistique. |
+| [`datacollector`](https://github.com/xtincell/datacollector) | Collecte multi-sources pour l'intelligence marketing. |
 
 ---
 
@@ -115,6 +119,7 @@ d'argumenter qu'il connaît le process : il le montre.
 
 **Pour construire** — commence par là, dans cet ordre :
 
+- [`fleet.yml`](fleet.yml) — le manifeste des dix-sept composants. `make clone-all` matérialise la flotte.
 - [`AGENTS.md`](AGENTS.md) — ordre de construction, tests de vie, règles de contribution
 - [`docs/MATURITE.md`](docs/MATURITE.md) — ce qui est fini, bouchonné ou aspirationnel. **À lire avant de planifier.**
 - [`docs/INTERFACES.md`](docs/INTERFACES.md) — contrats entre composants et inventaire des secrets
