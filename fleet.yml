@@ -55,6 +55,7 @@ composants:
     ordre_construction: 5
     deploiement: {mode: vercel, url: "https://lafusee-app.vercel.app"}
     stack: [next, prisma, typescript, storybook, playwright]
+    source_partagee: {produit: argos, role: client, via: "POST /api/v1/ingest/dossier"}   # SHK-0002
     description: >-
       La Fusée v6.19 — Industry OS du marché créatif africain, et dépôt
       canonique de la méthode ADVE. Un brief entre en PDF, le diagnostic tombe
@@ -287,6 +288,7 @@ composants:
     deploiement: {mode: vercel, racine: app, aussi: workers}
     stack: [next, prisma, tailwind, biome]
     produit_portefeuille: "05 · Content Performance Loop"
+    source_partagee: {produit: argos, role: canonique}   # SHK-0002
     description: >-
       La plus grande bibliothèque qualifiée de campagnes — répertoire éditorial
       de patterns créatifs, exploitable en moteur de recherche public ou via

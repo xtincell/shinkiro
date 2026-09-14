@@ -80,7 +80,7 @@ qui constitue un signal :
 | `licence: proprietaire` | `licence: ABSENTE` |
 | `deploiement: {racine: views}` | `racines: [.]` |
 
-## 2 · Dix contrôles, deux points d'exécution
+## 2 · Onze contrôles, deux points d'exécution
 
 `scripts/signaux-flotte.mjs` porte les contrôles. Chacun n'écrit **rien** quand tout
 va bien, et une ligne par anomalie sinon.
@@ -101,6 +101,7 @@ node scripts/signaux-flotte.mjs --strict     # sort en 1 s'il trouve (pour la CI
 | `entree-fantome` | un point d'entrée statique annoncé sous une racine vide |
 | `faits-dans-le-jugement` | la scission défaite par commodité |
 | `etage-invalide` | un outil versé sur le papier seulement |
+| `source-partagee` | une source que personne ne possède, ou que deux composants revendiquent |
 | `adr-sans-signal` | une décision que rien ne défend — ou qui cite un contrôle inexistant |
 | `releve-perime` | un relevé qui redevient un instantané |
 

@@ -215,6 +215,39 @@ const SIGNAUX = {
         : [`${c.nom} — déclaré versé, aucun submodule tools/${c.nom} dans .gitmodules`];
     }),
 
+  /* SHK-0002 — deux composants qui se partagent une source doivent le dire, et
+   * dire qui la possède. C'est le contrôle qui aurait épargné l'ADR-0100 : son
+   * auteur, contraint de déclarer qui possède Argos, aurait trouvé Argos-studio
+   * au lieu de reconstruire son backend un mois plus tard.
+   *
+   * Déclaratif et sans réseau, donc exécutable par la patrouille à coût nul. Une
+   * recherche de code dirait mieux, mais ne détecte qu'un symbole DÉJÀ dupliqué —
+   * celui-ci détecte l'intention de le faire. */
+  "source-partagee": () => {
+    const parts = composantsFY.flatMap((c) =>
+      [].concat(c.source_partagee || []).filter((x) => x && x.produit)
+        .map((x) => ({ composant: c.nom, ...x })));
+
+    const produits = [...new Set(parts.map((p) => p.produit))];
+    const erreurs = [];
+
+    for (const prod of produits) {
+      const groupe = parts.filter((p) => p.produit === prod);
+      const canoniques = groupe.filter((p) => p.role === "canonique");
+      if (canoniques.length === 0)
+        erreurs.push(`source « ${prod} » — aucun composant ne la possède (${groupe.map((g) => g.composant).join(", ")})`);
+      if (canoniques.length > 1)
+        erreurs.push(`source « ${prod} » — ${canoniques.length} composants se déclarent canoniques : ${canoniques.map((c) => c.composant).join(", ")}`);
+      for (const g of groupe) {
+        if (!["canonique", "client"].includes(g.role))
+          erreurs.push(`${g.composant} — role « ${g.role } » sur « ${prod} » : attendu canonique ou client`);
+        else if (g.role === "client" && !g.via)
+          erreurs.push(`${g.composant} — client de « ${prod} » sans interface déclarée (champ via)`);
+      }
+    }
+    return erreurs;
+  },
+
   /* La série SHK ne survit que si l'audit la lit. Une ADR acceptée qui énonce
    * une règle vérifiable nomme son signal ; sans quoi la décision est écrite
    * et rien ne la défend. Une ADR peut déclarer « aucun » — c'est un choix,
