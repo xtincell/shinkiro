@@ -80,7 +80,7 @@ couches en dessous disent comment.
 
 | Dépôt | Rôle |
 |---|---|
-| [`galahad`](https://github.com/xtincell/galahad) | **Canonique.** Équipe d'agents LLM coordonnés sur un seul VPS, pilotée depuis Telegram, agnostique au fournisseur. Zéro build, zéro port entrant, MIT. |
+| [`galahad`](https://github.com/xtincell/galahad) | **Canonique, et produit du portefeuille.** Une équipe d'IA organisée en agents qui fait tourner l'agence en autonomie depuis un serveur dédié. Pilotée depuis Telegram, agnostique au fournisseur. Zéro build, zéro port entrant. |
 | [`talos`](https://github.com/xtincell/talos) | Rôle **Guardian** — patrouille santé et QA code. |
 | [`hulysse`](https://github.com/xtincell/hulysse) | Rôle **Traveler** — explorateur autonome, bâtisseur de nuit. |
 | [`danmem`](https://github.com/xtincell/danmem) | Couche mémoire — peers, deriver, dialectique. |

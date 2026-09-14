@@ -36,9 +36,11 @@ mégaoctets à chaque clonage.
 
 ## Décision
 
-**Shinkiro est le programme.** Il ne contient aucun code applicatif : il porte le
-manifeste, l'ordre de construction, les décisions de flotte et l'audit. `galahad`
-est un produit parmi d'autres. ADVE est la méthode, et son dépôt canonique est
+**Shinkiro est le programme, et la suite.** Il ne contient aucun code de produit :
+il porte le manifeste, l'ordre de construction, les décisions de flotte, l'audit,
+et la présentation qu'il génère de lui-même. `galahad`
+est un produit du portefeuille — une équipe d'IA qui fait tourner l'agence en
+autonomie depuis un serveur dédié — et non un simple composant de livraison. ADVE est la méthode, et son dépôt canonique est
 `ADVE-project`. Ces trois noms ne sont pas interchangeables, et le README l'énonce
 avant toute autre chose.
 
@@ -50,11 +52,22 @@ avant toute autre chose.
 | Son dépôt | le sien, son cycle, sa CI | le sien aussi |
 | Dans shinkiro | cloné à côté par `make clone-all` | submodule sous `tools/` |
 | Critère | se déploie et se vérifie seul | ne vit que dans le flux d'un autre |
+| Côté client | s'adopte seul | ne s'adopte pas seul |
 
-Le critère n'est pas la taille — c'est l'autonomie. La taille explique seulement
-pourquoi les deux étages ne peuvent pas être un seul : verser `ADVE-project` en
-submodule imposerait ses 100 Mo à quiconque clone le programme pour lire trois
-fichiers de doctrine.
+Le critère n'est pas la taille — c'est l'autonomie. Et cette autonomie n'est pas
+une commodité de dépôt : **c'est une propriété commerciale**. Shinkiro est une
+suite, et une suite s'achète par morceaux. `reference` nomme ce qu'un client peut
+prendre seul — `radar` sans rien d'autre, `la-barre` sur un poste, `galahad` sur
+son propre serveur. `verse` nomme ce qui n'a de sens que dans le flux d'un autre.
+
+La taille n'explique qu'une chose : pourquoi les deux étages ne peuvent pas être
+un seul. Verser `ADVE-project` en submodule imposerait ses 100 Mo à quiconque
+clone le programme pour lire trois fichiers de doctrine.
+
+**Le programme ne porte aucun code de produit.** Sa propre surface de
+présentation fait exception, et ce n'en est pas une : un portail généré depuis
+`fleet.yml` est une lecture du manifeste, pas une application. Le placer ailleurs
+créerait une source partagée sans propriétaire — ce que `SHK-0002` interdit.
 
 **L'appartenance au programme se déclare par le topic `shinkiro`**, et par lui
 seul. C'est ce que le relevé interroge ; un dépôt sans le topic n'existe pas pour

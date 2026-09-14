@@ -55,6 +55,7 @@ composants:
     ordre_construction: 5
     deploiement: {mode: vercel, url: "https://lafusee-app.vercel.app"}
     stack: [next, prisma, typescript, storybook, playwright]
+    produits_portefeuille: ["07 · Creative Transformation Program", "02 · Creative Operations Audit"]
     source_partagee: {produit: argos, role: client, via: "POST /api/v1/ingest/dossier"}   # SHK-0002
     description: >-
       La Fusée v6.19 — Industry OS du marché créatif africain, et dépôt
@@ -84,7 +85,7 @@ composants:
     licence: proprietaire
     vitalite: actif
     deploiement: {mode: pages, url: "https://xtincell.github.io/indice-maturite/", entree: index.html}
-    produit_portefeuille: "00 · Creative Opportunity Check"
+    produits_portefeuille: ["01 · Creative Opportunity Check"]
     description: >-
       Le diagnostic d'entrée. Seize questions, quatre axes, un niveau de 0 à 5,
       et une prescription. Seul produit du catalogue où l'outil est l'offre.
@@ -96,7 +97,7 @@ composants:
     licence: proprietaire
     vitalite: actif
     deploiement: {mode: document}
-    produit_portefeuille: "04 · Content Expansion Modules"
+    produits_portefeuille: ["06 · Content Expansion Modules"]
     description: >-
       Décliner une campagne d'un marché à N marchés sans perdre la marque.
       Quatre types d'écart autorisés — langue, marque, SKU, réglementaire.
@@ -115,17 +116,24 @@ composants:
     licence: proprietaire
     vitalite: actif
     deploiement: {mode: docker, entree: index.html}
-    description: Page publique du produit galahad. Dockerfile plus un index.html.
+    description: Page produit de galahad. Dockerfile plus un index.html.
     attention: >-
-      À trancher — sert-elle le produit galahad ou le programme Shinkiro ?
-      Les deux ne s'adressent pas au même public. Aucune page publiée à ce jour.
+      Le « à trancher » est tranché, et par le fichier lui-même : zéro occurrence
+      de Shinkiro, d'ADVE, de La Fusée, de Radar ou de La Barre ; 26 de « agent »,
+      10 de « VPS », 8 de « Telegram ». C'est bien la page de galahad.
+      Mais elle s'adresse au MAUVAIS ACHETEUR — « self-hosted team of autonomous
+      AI agents », « self-host in 60 seconds », écrit pour un développeur qui
+      veut auto-héberger. Le produit s'adresse à un patron d'agence qui veut que
+      sa boîte tourne sans lui. Elle vend la technologie au lieu du résultat,
+      ce que la règle de nommage du portefeuille interdit précisément.
+      Aucune page publiée à ce jour.
 
   # ── couche 03 · exécution ──────────────────────────────────────────────
   - nom: galahad
     couche: execution
     etage: reference
     maturite: utilisable
-    licence: MIT
+    licence: proprietaire
     vitalite: actif
     ordre_construction: 1
     deploiement:
@@ -135,9 +143,12 @@ composants:
       roles: [chef, guardian, traveler, claude-bridge]
       routage: [routing/Caddyfile.example, routing/traefik-dynamic.example.yml]
       systemd: deploy/systemd/galahad-docker-firewall.service
+    produits_portefeuille: ["05 · Content Operations", "04 · Content Velocity System"]
     description: >-
-      Équipe d'agents LLM coordonnés sur un seul VPS, pilotée depuis Telegram,
-      agnostique au fournisseur de modèle. Une image moteur, trois rôles.
+      Une équipe d'IA organisée en agents qui fait tourner l'agence en autonomie
+      depuis un serveur dédié. Coordonnés sur un seul VPS, pilotés depuis
+      Telegram, agnostiques au fournisseur de modèle. Une image, trois rôles.
+      C'est un PRODUIT du portefeuille, pas seulement un composant de livraison.
     contient:
       engine: >-
         15 modules — agent-loop, brain, config, goals, heartbeat, hooks,
@@ -160,10 +171,11 @@ composants:
     couche: execution
     etage: reference
     maturite: utilisable
-    licence: MIT
+    licence: proprietaire
     vitalite: actif
     ordre_construction: 2
     deploiement: {mode: docker, port: 3000, requiert: postgres, front: "briefs/ (_headers, _redirects)"}
+    produits_portefeuille: ["03 · Transformation Pilot", "05 · Content Operations"]
     description: >-
       Tracker de tâches auto-hébergeable. Backend Node en stdlib, API façon
       PostgREST sur Postgres, flux RSS et JSON, ingestion des retours clients
@@ -267,6 +279,7 @@ composants:
     vitalite: actif
     ordre_construction: 4
     deploiement: {mode: statique, entree: index.html, serveur_optionnel: servir.mjs}
+    produits_portefeuille: ["03 · Transformation Pilot", "04 · Content Velocity System"]
     description: >-
       Le poste de travail du directeur de la création. Du brief au livrable, et
       les talents qui les font. Aucun serveur, aucun compte : on double-clique.
@@ -295,7 +308,7 @@ composants:
     ordre_construction: 6
     deploiement: {mode: vercel, racine: app, aussi: workers}
     stack: [next, prisma, tailwind, biome]
-    produit_portefeuille: "05 · Content Performance Loop"
+    produits_portefeuille: ["02 · Creative Operations Audit"]
     source_partagee: {produit: argos, role: canonique}   # SHK-0002
     description: >-
       La plus grande bibliothèque qualifiée de campagnes — répertoire éditorial
@@ -350,6 +363,34 @@ composants:
     description: >-
       Collecte multi-sources pour l'intelligence marketing. Front HTML plus un
       serveur Python. Développé pour UPGRADERS SARL.
+
+# ── dérivés non canon ───────────────────────────────────────────────────
+# Des skills Claude encodent une partie de la méthode. Elles N'ONT PAS suivi
+# l'évolution du programme : ce sont des copies figées, pas des sources.
+#
+# Elles n'entrent donc PAS dans la flotte. Les y verser ferait exactement ce que
+# SHK-0002 interdit — deux porteurs d'une même source, sans propriétaire désigné.
+# Le dépôt nommé `canon` fait foi ; la skill est en retard par construction.
+#
+# Elles sont listées ici pour une seule raison : sans cela elles sont invisibles
+# à tout. L'audit n'inspecte que des dépôts GitHub, et une skill vivant dans un
+# compte Claude n'est vue par aucun des douze signaux. C'est l'angle mort connu
+# du dispositif, et le déclarer est la seule chose qu'on puisse en faire.
+derives_non_canon:
+  - {nom: adve-cult-marketing,             ou: compte-claude, canon: ADVE-project}
+  - {nom: charadesign-lsi-cd,              ou: compte-claude, canon: charadesign-generator,
+     note: "existe aussi en zip local non versionné : 03 OUTILS & DEV/charadesign-lsi-cd.skill"}
+  - {nom: go-to-market-strategy,           ou: compte-claude, canon: ADVE-project}
+  - {nom: strategic-annual-planning,       ou: compte-claude, canon: ADVE-project}
+  - {nom: kv-ooh-expert,                   ou: compte-claude, canon: la-barre}
+  - {nom: advertising-key-visual-director, ou: disque-non-versionne, canon: la-barre,
+     note: "03 OUTILS & DEV/0 ADVE PROJECT DOC/advertising-key-visual-director/SKILL.md"}
+  - {nom: kubo-titling,                    ou: compte-claude, canon: la-fusee-blueprint}
+  - {nom: xtincell-voice,                  ou: compte-claude, canon: hors-programme,
+     note: "voix personnelle, pas la méthode — aucun dépôt ne la porte ni ne doit la porter"}
+  - {nom: xtincell-sparring-partner,       ou: compte-claude, canon: hors-programme}
+  - {nom: iris,                            ou: disque-non-versionne, canon: hors-programme,
+     note: "~/.claude/skills/iris — suivi opérationnel personnel"}
 
 # ── lignées archivées ───────────────────────────────────────────────────
 # Portent le topic shinkiro pour l'historique, hors flotte vivante.
