@@ -17,6 +17,7 @@ import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { parseYaml } from "./yaml.mjs";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 const RACINE = process.env.SHINKIRO_HOME || join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -221,6 +222,24 @@ const SIGNAUX = {
       return declares.has(d.canon) ? []
         : [`${d.nom} — canon déclaré « ${d.canon} », qui n'est pas un composant de fleet.yml`];
     }),
+
+  /* Le portail est généré depuis fleet.yml et fleet.lock.yml. S'il a été
+   * publié avant leur dernière modification, il montre un programme qui
+   * n'existe plus — et il le montre à qui vient regarder. Comparer des dates
+   * ne suffirait pas : le manifeste peut changer deux fois le même jour. On
+   * compare donc l'empreinte exacte que le portail a inscrite en se générant. */
+  "portail-perime": () => {
+    const src = lire("portail/site/source.json");
+    if (!src) return existsSync(join(RACINE, "portail/construire.mjs"))
+      ? ["portail/site/source.json absent — le portail n'a jamais été généré"] : [];
+    let decl;
+    try { decl = JSON.parse(src); } catch { return ["portail/site/source.json illisible"]; }
+    const reelle = createHash("sha256")
+      .update(lire("fleet.yml") || "").update(lire("fleet.lock.yml") || "")
+      .digest("hex").slice(0, 16);
+    return decl.empreinte_sources === reelle ? []
+      : [`portail généré sur un manifeste qui a changé depuis (${decl.empreinte_sources} ≠ ${reelle}) — lancer node portail/construire.mjs`];
+  },
 
   /* La série SHK ne survit que si l'audit la lit. Une ADR acceptée qui énonce
    * une règle vérifiable nomme son signal ; sans quoi la décision est écrite

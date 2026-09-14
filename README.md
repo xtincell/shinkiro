@@ -126,6 +126,12 @@ Outils légers, chacun dans son dépôt et monté en submodule sous `tools/`.
 - [`docs/MATURITE.md`](docs/MATURITE.md) — ce qui est fini, bouchonné ou aspirationnel. **À lire avant de planifier.**
 - [`docs/INTERFACES.md`](docs/INTERFACES.md) — contrats entre composants et inventaire des secrets
 
+**Pour regarder** :
+
+- [`portail/`](portail/) — le portail : la suite composant par composant, le catalogue et
+  ses livrables. Généré depuis le manifeste, jamais écrit à la main.
+  `node portail/construire.mjs`
+
 **Pour vérifier** — le dispositif qui empêche cette documentation de pourrir :
 
 - [`docs/DERIVE.md`](docs/DERIVE.md) — pourquoi le manifeste se recalcule, et ce que l'audit contrôle

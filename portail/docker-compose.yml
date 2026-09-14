@@ -1,0 +1,10 @@
+# Piloté par Coolify : base directory `portail`, pas de port publié ici —
+# Traefik route par FQDN, comme pour hermes-cockpit.
+services:
+  portail:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    expose:
+      - "80"

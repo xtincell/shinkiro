@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hulysse — Shinkiro</title>
+<meta name="description" content="Rôle Traveler — explorateur autonome et bâtisseur de nuit. Veille, objectifs, repli LLM. Demande avant de livrer.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9673;</text></svg>">
+</head>
+<body>
+<header class="bandeau"><div class="bandeau-int">
+<a class="marque" href="../index.html">◉ SHIN<span>KIRO</span></a>
+<nav class="nav"><a href="../index.html">Accueil</a><a href="../suite.html">La suite</a><a href="../catalogue.html">Le catalogue</a><a href="../topologie.html">Topologie</a><a href="../decisions.html">Décisions</a><a href="../dispositif.html">Anti-dérive</a><a href="../livrables.html">Livrables</a><a href="../perimetre.html">Périmètre</a></nav>
+</div></header>
+<main>
+
+<p class="fil"><a href="../index.html">Shinkiro</a> › <a href="../suite.html">La suite</a> ›
+Exécution</p>
+
+<h1><code>hulysse</code></h1>
+<div class="ets" style="margin:-.4rem 0 1rem">
+  <span class="et et-reference">reference</span> <span class="et et-partiel">partiel</span> <span class="et et-fige">fige</span>
+  <span class="et">Exécution</span>
+  <span class="et">proprietaire</span>
+  <span class="et">privé</span>
+</div>
+
+<p class="intro">Rôle Traveler — explorateur autonome et bâtisseur de nuit. Veille, objectifs, repli LLM. Demande avant de livrer.</p>
+
+
+
+<div class="encart encart-attention"><div class="encart-titre">Point de vigilance</div><p>Même moteur que talos. Voir talos.attention — et non galahad, dont il diverge de 71 %.</p></div>
+
+
+<div class="encart "><div class="encart-titre">Divergence mesurée</div><p>Diverge de <code>talos</code> de <strong>17 %</strong>
+     sur <code>src</code>, mesuré le 2026-09-14.
+     Reproductible : <code>node scripts/mesure-divergence.mjs</code>.</p></div>
+
+
+
+<h2 id="deploiement">Déploiement</h2>
+<div class="table-enveloppe"><table><tbody><tr><td><code>mode</code></td><td><code>systemd</code></td></tr><tr><td><code>unite</code></td><td><code>ops/hulysse.service</code></td></tr><tr><td><code>installateur</code></td><td><code>ops/install.sh</code></td></tr></tbody></table></div>
+<p><span class="source">fleet.yml</span> — mode constaté dans le dépôt, jamais supposé.</p>
+
+<h2 id="releve">Ce que le relevé constate</h2>
+<div class="grille grille-3">
+  <div class="carte"><div class="chiffre">23</div><div class="chiffre-lib">fichiers</div></div>
+  <div class="carte"><div class="chiffre">58 Ko</div><div class="chiffre-lib">d'arbre</div></div>
+  <div class="carte"><div class="chiffre">2</div><div class="chiffre-lib">commits / 90 j</div></div>
+</div>
+<div class="table-enveloppe"><table><tbody>
+<tr><td>branche</td><td><code>main</code></td></tr>
+<tr><td>langue</td><td><code>JavaScript</code></td></tr>
+<tr><td>fichier LICENSE</td><td><span class="et et-actif">présent</span></td></tr>
+<tr><td>topics</td><td><code>layer-execution</code> <code>shinkiro</code></td></tr>
+<tr><td>racines déployables</td><td><code>.</code></td></tr>
+</tbody></table></div>
+<h3>Artefacts détectés</h3>
+<div class="table-enveloppe"><table><tbody><tr><td><code>systemd</code></td><td><code>ops/hulysse.service</code></td></tr><tr><td><code>package</code></td><td><code>package.json</code></td></tr></tbody></table></div>
+<p><span class="source">fleet.lock.yml</span> — relevé du 2026-09-14, régénéré par <code>make releve</code>.</p>
+
+<h2 id="contient">Ce qu'il contient</h2>
+<div class="table-enveloppe"><table><tbody><tr><td><code>src</code></td><td><code>agent-loop</code> <code>config</code> <code>goals</code> <code>hooks</code> <code>index</code> <code>journal</code> <code>memory</code> <code>telegram</code> <code>tools</code></td></tr><tr><td><code>memory-seed</code></td><td><code>MEMORY.md</code> <code>infra.md</code> <code>projets.md</code></td></tr></tbody></table></div>
+<p><span class="source">fleet.yml</span></p>
+
+
+
+<h2 id="depot">Le dépôt</h2>
+<p><a href="https://github.com/xtincell/hulysse">https://github.com/xtincell/hulysse</a></p>
+</main>
+<footer class="pied">
+<p>Généré par <code>portail/construire.mjs</code> depuis <code>fleet.yml</code>,
+<code>fleet.lock.yml</code> et <code>docs/</code>. Relevé du 2026-09-14.
+Rien n'est écrit ici à la main : ce qui est faux dans le portail est faux dans le manifeste.</p>
+</footer>
+</body>
+</html>

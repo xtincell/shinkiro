@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La suite — Shinkiro</title>
+<meta name="description" content="Les 17 composants du programme">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9673;</text></svg>">
+</head>
+<body>
+<header class="bandeau"><div class="bandeau-int">
+<a class="marque" href="index.html">◉ SHIN<span>KIRO</span></a>
+<nav class="nav"><a href="index.html">Accueil</a><a href="suite.html" aria-current="page">La suite</a><a href="catalogue.html">Le catalogue</a><a href="topologie.html">Topologie</a><a href="decisions.html">Décisions</a><a href="dispositif.html">Anti-dérive</a><a href="livrables.html">Livrables</a><a href="perimetre.html">Périmètre</a></nav>
+</div></header>
+<main>
+
+<h1>La suite</h1>
+<p class="intro">17 composants. Chacun s'adopte seul ou dans la suite —
+c'est ce que recouvre la distinction <code>reference</code> / <code>verse</code> : ce qu'un
+client peut prendre seul, contre ce qui n'a de sens que dans le flux d'un autre.</p>
+
+<div class="filtres">
+  <button class="filtre" data-cle="couche" data-val="method" aria-pressed="false">Méthode</button><button class="filtre" data-cle="couche" data-val="company" aria-pressed="false">Entreprise</button><button class="filtre" data-cle="couche" data-val="execution" aria-pressed="false">Exécution</button><button class="filtre" data-cle="couche" data-val="tools" aria-pressed="false">Outils métier</button>
+  <button class="filtre" data-cle="etage" data-val="reference" aria-pressed="false">reference</button><button class="filtre" data-cle="etage" data-val="verse" aria-pressed="false">verse</button>
+  <button class="filtre" data-cle="maturite" data-val="produit" aria-pressed="false">produit</button><button class="filtre" data-cle="maturite" data-val="utilisable" aria-pressed="false">utilisable</button><button class="filtre" data-cle="maturite" data-val="partiel" aria-pressed="false">partiel</button><button class="filtre" data-cle="maturite" data-val="a-qualifier" aria-pressed="false">a-qualifier</button>
+  <button class="filtre" data-raz="1">tout</button>
+</div>
+
+<div class="table-enveloppe"><table id="flotte">
+<thead><tr><th>Composant</th><th>Couche</th><th>Étage</th><th>Maturité</th><th>Vitalité</th>
+<th>Déploiement</th><th class="n">Fichiers</th><th class="n">Poids</th><th class="n">90 j</th></tr></thead>
+<tbody><tr data-couche="method" data-etage="reference" data-maturite="produit">
+      <td><a href="composants/adve-project.html"><code>ADVE-project</code></a></td>
+      <td>Méthode</td>
+      <td><span class="et et-reference">reference</span></td>
+      <td><span class="et et-produit">produit</span></td>
+      <td><span class="et et-actif">actif</span></td>
+      <td><code>vercel</code></td>
+      <td class="n">3315</td>
+      <td class="n">99 Mo</td>
+      <td class="n">100</td>
+    </tr>
+<tr data-couche="method" data-etage="reference" data-maturite="produit">
+      <td><a href="composants/la-fusee-blueprint.html"><code>la-fusee-blueprint</code></a></td>
+      <td>Méthode</td>
+      <td><span class="et et-reference">reference</span></td>
+      <td><span class="et et-produit">produit</span></td>
+      <td><span class="et et-gele">gele</span></td>
+      <td><code>statique</code></td>
+      <td class="n">13</td>
+      <td class="n">683 Ko</td>
+      <td class="n">1</td>
+    </tr>
+<tr data-couche="method" data-etage="verse" data-maturite="produit">
+      <td><a href="composants/indice-maturite.html"><code>indice-maturite</code></a></td>
+      <td>Méthode</td>
+      <td><span class="et et-verse">verse</span></td>
+      <td><span class="et et-produit">produit</span></td>
+      <td><span class="et et-actif">actif</span></td>
+      <td><code>pages</code></td>
+      <td class="n">3</td>
+      <td class="n">10 Ko</td>
+      <td class="n">1</td>
+    </tr>
+<tr data-couche="method" data-etage="verse" data-maturite="produit">
+      <td><a href="composants/market-expansion-system.html"><code>market-expansion-system</code></a></td>
+      <td>Méthode</td>
+      <td><span class="et et-verse">verse</span></td>
+      <td><span class="et et-produit">produit</span></td>
+      <td><span class="et et-actif">actif</span></td>
+      <td><code>document</code></td>
+      <td class="n">6</td>
+      <td class="n">11 Ko</td>
+      <td class="n">1</td>
+    </tr>
+<tr data-couche="company" data-etage="reference" data-maturite="partiel">
+      <td><a href="composants/galahad-landing.html"><code>galahad-landing</code></a></td>
+      <td>Entreprise</td>
+      <td><span class="et et-reference">reference</span></td>
+      <td><span class="et et-partiel">partiel</span></td>
+      <td><span class="et et-actif">actif</span></td>
+      <td><code>docker</code></td>
+      <td class="n">4</td>
+      <td class="n">24 Ko</td>
+      <td class="n">5</td>
+    </tr>
+<tr data-couche="execution" data-etage="reference" data-maturite="utilisable">
+      <td><a href="composants/galahad.html"><code>galahad</code></a></td>
+      <td>Exécution</td>
+      <td><span class="et et-reference">reference</span></td>
+      <td><span class="et et-utilisable">utilisable</span></td>
+      <td><span class="et et-actif">actif</span></td>
+      <td><code>coolify</code></td>
+      <td class="n">71</td>
+      <td class="n">236 Ko</td>
+      <td class="n">36</td>
+    </tr>
+<tr data-couche="execution" data-etage="reference" data-maturite="utilisable">
+      <td><a href="composants/radar.html"><code>radar</code></a></td>
+      <td>Exécution</td>
+      <td><span class="et et-reference">reference</span></td>
+      <td><span class="et et-utilisable">utilisable</span></td>
+      <td><span class="et et-actif">actif</span></td>
+      <td><code>docker</code></td>
+      <td class="n">69</td>
+      <td class="n">1.7 Mo</td>
+      <td class="n">11</td>
+    </tr>
+<tr data-couche="execution" data-etage="reference" data-maturite="partiel">
+      <td><a href="composants/talos.html"><code>talos</code></a></td>
+      <td>Exécution</td>
+      <td><span class="et et-reference">reference</span></td>
+      <td><span class="et et-partiel">partiel</span></td>
+      <td><span class="et et-fige">fige</span></td>
+      <td><code>systemd</code></td>
+      <td class="n">28</td>
+      <td class="n">155 Ko</td>
+      <td class="n">2</td>
+    </tr>
+<tr data-couche="execution" data-etage="reference" data-maturite="partiel">
+      <td><a href="composants/hulysse.html"><code>hulysse</code></a></td>
+      <td>Exécution</td>
+      <td><span class="et et-reference">reference</span></td>
+      <td><span class="et et-partiel">partiel</span></td>
+      <td><span class="et et-fige">fige</span></td>
+      <td><code>systemd</code></td>
+      <td class="n">23</td>
+      <td class="n">58 Ko</td>
+      <td class="n">2</td>
+    </tr>
+<tr data-couche="execution" data-etage="reference" data-maturite="a-qualifier">
+      <td><a href="composants/danmem.html"><code>danmem</code></a></td>
+      <td>Exécution</td>
+      <td><span class="et et-reference">reference</span></td>
+      <td><span class="et et-a-qualifier">a-qualifier</span></td>
+      <td><span class="et et-fige">fige</span></td>
+      <td><code>module</code></td>
+      <td class="n">5</td>
+      <td class="n">15 Ko</td>
+      <td class="n">2</td>
+    </tr>
+<tr data-couche="execution" data-etage="reference" data-maturite="utilisable">
+      <td><a href="composants/hermes-cockpit.html"><code>hermes-cockpit</code></a></td>
+      <td>Exécution</td>
+      <td><span class="et et-reference">reference</span></td>
+      <td><span class="et et-utilisable">utilisable</span></td>
+      <td><span class="et et-actif">actif</span></td>
+      <td><code>coolify</code></td>
+      <td class="n">7</td>
+      <td class="n">56 Ko</td>
+      <td class="n">20</td>
+    </tr>
+<tr data-couche="tools" data-etage="reference" data-maturite="utilisable">
+      <td><a href="composants/la-barre.html"><code>la-barre</code></a></td>
+      <td>Outils métier</td>
+      <td><span class="et et-reference">reference</span></td>
+      <td><span class="et et-utilisable">utilisable</span></td>
+      <td><span class="et et-actif">actif</span></td>
+      <td><code>statique</code></td>
+      <td class="n">148</td>
+      <td class="n">3.8 Mo</td>
+      <td class="n">13</td>
+    </tr>
+<tr data-couche="tools" data-etage="reference" data-maturite="partiel">
+      <td><a href="composants/argos-studio.html"><code>Argos-studio</code></a></td>
+      <td>Outils métier</td>
+      <td><span class="et et-reference">reference</span></td>
+      <td><span class="et et-partiel">partiel</span></td>
+      <td><span class="et et-relance-prioritaire">relance-prioritaire</span></td>
+      <td><code>vercel</code></td>
+      <td class="n">185</td>
+      <td class="n">37 Mo</td>
+      <td class="n">1</td>
+    </tr>
+<tr data-couche="tools" data-etage="reference" data-maturite="utilisable">
+      <td><a href="composants/charadesign-generator.html"><code>charadesign-generator</code></a></td>
+      <td>Outils métier</td>
+      <td><span class="et et-reference">reference</span></td>
+      <td><span class="et et-utilisable">utilisable</span></td>
+      <td><span class="et et-gele">gele</span></td>
+      <td><code>statique</code></td>
+      <td class="n">20</td>
+      <td class="n">350 Ko</td>
+      <td class="n">1</td>
+    </tr>
+<tr data-couche="tools" data-etage="verse" data-maturite="utilisable">
+      <td><a href="composants/generateur-approches.html"><code>generateur-approches</code></a></td>
+      <td>Outils métier</td>
+      <td><span class="et et-verse">verse</span></td>
+      <td><span class="et et-utilisable">utilisable</span></td>
+      <td><span class="et et-gele">gele</span></td>
+      <td><code>statique</code></td>
+      <td class="n">3</td>
+      <td class="n">37 Ko</td>
+      <td class="n">1</td>
+    </tr>
+<tr data-couche="tools" data-etage="verse" data-maturite="utilisable">
+      <td><a href="composants/character-engine.html"><code>character-engine</code></a></td>
+      <td>Outils métier</td>
+      <td><span class="et et-verse">verse</span></td>
+      <td><span class="et et-utilisable">utilisable</span></td>
+      <td><span class="et et-gele">gele</span></td>
+      <td><code>statique</code></td>
+      <td class="n">12</td>
+      <td class="n">60 Ko</td>
+      <td class="n">1</td>
+    </tr>
+<tr data-couche="tools" data-etage="verse" data-maturite="utilisable">
+      <td><a href="composants/datacollector.html"><code>datacollector</code></a></td>
+      <td>Outils métier</td>
+      <td><span class="et et-verse">verse</span></td>
+      <td><span class="et et-utilisable">utilisable</span></td>
+      <td><span class="et et-gele">gele</span></td>
+      <td><code>docker</code></td>
+      <td class="n">15</td>
+      <td class="n">111 Ko</td>
+      <td class="n">2</td>
+    </tr></tbody>
+</table></div>
+<p><span class="source">fleet.yml</span> <span class="source">fleet.lock.yml</span></p>
+
+<h2 id="ordre">L'ordre de construction</h2>
+<p>Un agent qui découvre le programme ne commence pas où il veut.</p>
+<div class="table-enveloppe"><table><thead><tr><th>#</th><th>Composant</th><th>Pourquoi là</th></tr></thead><tbody>
+<tr><td><code>1</code></td>
+    <td><a href="composants/galahad.html"><code>galahad</code></a></td>
+    <td>Une équipe d'IA organisée en agents qui fait tourner l'agence en autonomie depuis un serveur dédié. Coordonnés sur un seul VPS, pilotés depuis Telegra…</td></tr><tr><td><code>2</code></td>
+    <td><a href="composants/radar.html"><code>radar</code></a></td>
+    <td>Reste autonome. Une instance = une équipe = une base.…</td></tr><tr><td><code>4</code></td>
+    <td><a href="composants/la-barre.html"><code>la-barre</code></a></td>
+    <td>Le poste de travail du directeur de la création. Du brief au livrable, et les talents qui les font. Aucun serveur, aucun compte : on double-clique.…</td></tr><tr><td><code>5</code></td>
+    <td><a href="composants/adve-project.html"><code>ADVE-project</code></a></td>
+    <td>Le plus lourd et le plus strict du programme. Gouvernance à 192 ADR, un plugin ESLint maison, dix PR ouvertes. Ne jamais commencer par lui.…</td></tr><tr><td><code>6</code></td>
+    <td><a href="composants/argos-studio.html"><code>Argos-studio</code></a></td>
+    <td>La plus grande bibliothèque qualifiée de campagnes — répertoire éditorial de patterns créatifs, exploitable en moteur de recherche public ou via API e…</td></tr><tr><td><code>6</code></td>
+    <td><a href="composants/charadesign-generator.html"><code>charadesign-generator</code></a></td>
+    <td>Pipeline LSI-CD v3.4 de bout en bout — de l'archétype triangulé à la sortie multi-vues. Tracker en neuf étapes, UI Atelier clair.…</td></tr>
+</tbody></table></div>
+<p><span class="source">fleet.yml</span> · détail dans <code>AGENTS.md</code></p>
+
+<script>
+(function () {
+  var actifs = {};
+  var lignes = [].slice.call(document.querySelectorAll('#flotte tbody tr'));
+  function appliquer() {
+    lignes.forEach(function (tr) {
+      var ok = Object.keys(actifs).every(function (k) {
+        return !actifs[k].length || actifs[k].indexOf(tr.dataset[k]) > -1;
+      });
+      tr.hidden = !ok;
+    });
+  }
+  document.querySelectorAll('.filtre').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.dataset.raz) {
+        actifs = {};
+        document.querySelectorAll('.filtre').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        return appliquer();
+      }
+      var k = b.dataset.cle, v = b.dataset.val;
+      actifs[k] = actifs[k] || [];
+      var i = actifs[k].indexOf(v);
+      if (i > -1) { actifs[k].splice(i, 1); b.setAttribute('aria-pressed', 'false'); }
+      else { actifs[k].push(v); b.setAttribute('aria-pressed', 'true'); }
+      appliquer();
+    });
+  });
+})();
+</script>
+</main>
+<footer class="pied">
+<p>Généré par <code>portail/construire.mjs</code> depuis <code>fleet.yml</code>,
+<code>fleet.lock.yml</code> et <code>docs/</code>. Relevé du 2026-09-14.
+Rien n'est écrit ici à la main : ce qui est faux dans le portail est faux dans le manifeste.</p>
+</footer>
+</body>
+</html>

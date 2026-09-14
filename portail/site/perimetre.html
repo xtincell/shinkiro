@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Périmètre — Shinkiro</title>
+<meta name="description" content="Ce qui appartient au programme, et ce qui n'y appartient pas">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9673;</text></svg>">
+</head>
+<body>
+<header class="bandeau"><div class="bandeau-int">
+<a class="marque" href="index.html">◉ SHIN<span>KIRO</span></a>
+<nav class="nav"><a href="index.html">Accueil</a><a href="suite.html">La suite</a><a href="catalogue.html">Le catalogue</a><a href="topologie.html">Topologie</a><a href="decisions.html">Décisions</a><a href="dispositif.html">Anti-dérive</a><a href="livrables.html">Livrables</a><a href="perimetre.html" aria-current="page">Périmètre</a></nav>
+</div></header>
+<main>
+
+<h1>Le périmètre</h1>
+<p class="intro">Ce qui appartient au programme, ce qui n'y appartient pas, et ce qui
+ressemble à un actif du programme sans en être un.</p>
+
+<h2 id="derives">Dérivés non canon — 10 skills</h2>
+<p>Des skills encodent une partie de la méthode. Elles <strong>n'ont pas suivi l'évolution
+du programme</strong> : ce sont des copies figées, pas des sources. Les verser dans la flotte
+ferait deux porteurs d'une même source sans propriétaire désigné — ce que
+<a href="decisions.html#shk-0002-argos-une-bibliotheque-deux-surfaces">SHK-0002</a> interdit.</p>
+<div class="encart encart-attention"><div class="encart-titre">Angle mort assumé</div>
+<p>L'audit n'inspecte que des dépôts GitHub. Une skill vivant dans un compte Claude
+n'est vue par <strong>aucun</strong> des contrôles. Les déclarer ici est tout ce qu'on peut
+en faire.</p></div>
+<div class="table-enveloppe"><table><thead><tr><th>Skill</th><th>Où elle vit</th><th>Qui fait foi</th><th>Note</th></tr></thead><tbody>
+<tr><td><code>adve-cult-marketing</code></td><td><code>compte-claude</code></td>
+  <td><a href="composants/adve-project.html"><code>ADVE-project</code></a></td>
+  <td>—</td></tr>
+<tr><td><code>charadesign-lsi-cd</code></td><td><code>compte-claude</code></td>
+  <td><a href="composants/charadesign-generator.html"><code>charadesign-generator</code></a></td>
+  <td>existe aussi en zip local non versionné : 03 OUTILS &amp; DEV/charadesign-lsi-cd.skill</td></tr>
+<tr><td><code>go-to-market-strategy</code></td><td><code>compte-claude</code></td>
+  <td><a href="composants/adve-project.html"><code>ADVE-project</code></a></td>
+  <td>—</td></tr>
+<tr><td><code>strategic-annual-planning</code></td><td><code>compte-claude</code></td>
+  <td><a href="composants/adve-project.html"><code>ADVE-project</code></a></td>
+  <td>—</td></tr>
+<tr><td><code>kv-ooh-expert</code></td><td><code>compte-claude</code></td>
+  <td><a href="composants/la-barre.html"><code>la-barre</code></a></td>
+  <td>—</td></tr>
+<tr><td><code>advertising-key-visual-director</code></td><td><code>disque-non-versionne</code></td>
+  <td><a href="composants/la-barre.html"><code>la-barre</code></a></td>
+  <td>03 OUTILS &amp; DEV/0 ADVE PROJECT DOC/advertising-key-visual-director/SKILL.md</td></tr>
+<tr><td><code>kubo-titling</code></td><td><code>compte-claude</code></td>
+  <td><a href="composants/la-fusee-blueprint.html"><code>la-fusee-blueprint</code></a></td>
+  <td>—</td></tr>
+<tr><td><code>xtincell-voice</code></td><td><code>compte-claude</code></td>
+  <td><span class="et">hors programme</span></td>
+  <td>voix personnelle, pas la méthode — aucun dépôt ne la porte ni ne doit la porter</td></tr>
+<tr><td><code>xtincell-sparring-partner</code></td><td><code>compte-claude</code></td>
+  <td><span class="et">hors programme</span></td>
+  <td>—</td></tr>
+<tr><td><code>iris</code></td><td><code>disque-non-versionne</code></td>
+  <td><span class="et">hors programme</span></td>
+  <td>~/.claude/skills/iris — suivi opérationnel personnel</td></tr>
+</tbody></table></div>
+<p><span class="source">fleet.yml</span></p>
+
+<h2 id="lignees">Lignées archivées — 5</h2>
+<p>La méthode a été éclatée en plusieurs dépôts sous trois orthographes. <code>ADVE-project</code>
+est canonique ; celles-ci portent le topic pour l'historique, hors flotte vivante.</p>
+<div class="table-enveloppe"><table><thead><tr><th>Dépôt</th><th>Fichiers</th><th>Note</th></tr></thead><tbody>
+<tr><td><code>LaFusee_ADVE</code></td><td>689</td><td>vercel.json présent — a été déployé. Son README est meilleur que celui du canonique : à récupérer avant archivage.</td></tr>
+<tr><td><code>ADVE_v8</code></td><td>286</td><td>branche par défaut claude/la-fusee-v2-rebuild-9omp5v, pas main. Dockerfile, CI, 7 migrations.</td></tr>
+<tr><td><code>AVERTIS_web_v01</code></td><td>787</td><td>application complète sous advertis-app/ — next, prisma, seeds ARTEMIS. Coquille dans le nom du dépôt.</td></tr>
+<tr><td><code>ADVERTIS_v01</code></td><td>77</td><td>8-Pillar Brand Strategy System. Lignée antérieure.</td></tr>
+<tr><td><code>ADVERT_01</code></td><td>532</td><td>première tentative de produit. 111 modifications non commitées dans le clone local.</td></tr>
+</tbody></table></div>
+<p><span class="source">fleet.yml</span> <span class="source">fleet.lock.yml</span></p>
+
+<h2 id="cloison">La cloison</h2>
+<p>Ce document existe pour une raison simple : <strong>ce qui n'appartient pas à Shinkiro ne doit jamais y entrer</strong>, même par commodité.</p>
+<h2 id="matanga-est-l-employeur-pas-le-produit">MATANGA est l'employeur, pas le produit</h2>
+<div class="table-enveloppe"><table><thead><tr><th>Dépôt</th><th>Nature</th></tr></thead><tbody><tr><td><code>Matanga-Creative-dashboard</code></td><td>Travail salarié</td></tr><tr><td><code>matanga-hermes-mcp</code></td><td>Travail salarié</td></tr><tr><td><code>ADVERTIS-Matanga</code></td><td>Travail salarié</td></tr></tbody></table></div>
+<p>Ces dépôts <strong>ne rejoignent jamais Shinkiro</strong>, ne portent pas la marque ADVE en public et ne servent pas d'argument de consultance. C'est une question de propriété, pas de rangement.</p>
+<p>Ils portent le topic <code>employer-work</code>.</p>
+<h2 id="spawt-appartient-a-spawt">Spawt appartient à Spawt</h2>
+<div class="table-enveloppe"><table><thead><tr><th>Dépôt</th><th>Nature</th></tr></thead><tbody><tr><td><code>spawt-meute-quiz</code> · <code>spawt-ci-mobile-v1-mvp</code> · <code>project_spawt</code> · <code>project_spawt_mobile_ci</code></td><td>Produit client</td></tr></tbody></table></div>
+<p>Utilisables comme <strong>cas d'usage documenté</strong>, jamais comme actif du programme.</p>
+<p>Ils portent le topic <code>client-work</code>.</p>
+<h2 id="le-laboratoire">Le laboratoire</h2>
+<div class="table-enveloppe"><table><thead><tr><th>Dépôt</th><th>Nature</th></tr></thead><tbody><tr><td><code>neo-kinara</code></td><td>cRPG narratif rogue-lite</td></tr><tr><td><code>15B_Stories</code></td><td>Moteur narratif à choix</td></tr><tr><td><code>atlas-of-recorded-sound</code></td><td>Généalogie navigable de 285 genres musicaux</td></tr><tr><td><code>CosmicMachine</code></td><td>Prototype créatif</td></tr><tr><td><code>Tauri-v1</code></td><td>Application de comptabilité</td></tr><tr><td><code>BlackNoteWeb</code></td><td>Le premier dépôt</td></tr></tbody></table></div>
+<p>Recherche personnelle. Ce n'est pas du bruit — c'est de la curiosité assumée — mais ça ne doit pas brouiller la lecture du profil. Topic <code>lab</code>.</p>
+<h2 id="adjacent-mais-dehors">Adjacent, mais dehors</h2>
+<p><code>Folio_Spark</code> est le portfolio personnel. Il vend <strong>la personne</strong>, pas la méthode. Il reste sur le compte personnel et hors de l'organisation.</p>
+<h2 id="a-trancher">À trancher</h2>
+<p><code>hermes-cockpit</code> — sans README ni description, et il porte le même nom qu'un dépôt Matanga. Vérifier de quel côté de la cloison il tombe avant de le documenter.</p>
+<div class="table-enveloppe"><table><thead><tr><th>Nature</th><th>Dépôts</th></tr></thead><tbody>
+<tr><td><code>employeur</code></td><td><code>Matanga-Creative-dashboard</code> <code>matanga-hermes-mcp</code> <code>ADVERTIS-Matanga</code></td></tr>
+<tr><td><code>client</code></td><td><code>spawt-meute-quiz</code> <code>spawt-ci-mobile-v1-mvp</code> <code>project_spawt</code> <code>project_spawt_mobile_ci</code></td></tr>
+<tr><td><code>labo</code></td><td><code>neo-kinara</code> <code>15B_Stories</code> <code>atlas-of-recorded-sound</code> <code>CosmicMachine</code> <code>Tauri-v1</code> <code>BlackNoteWeb</code></td></tr>
+<tr><td><code>adjacent</code></td><td><code>Folio_Spark</code></td></tr>
+<tr><td><code>archives</code></td><td><code>ADVERT-web</code> <code>BrandForge</code></td></tr>
+</tbody></table></div>
+<p><span class="source">fleet.yml</span> <span class="source">docs/CLOISON.md</span></p>
+</main>
+<footer class="pied">
+<p>Généré par <code>portail/construire.mjs</code> depuis <code>fleet.yml</code>,
+<code>fleet.lock.yml</code> et <code>docs/</code>. Relevé du 2026-09-14.
+Rien n'est écrit ici à la main : ce qui est faux dans le portail est faux dans le manifeste.</p>
+</footer>
+</body>
+</html>

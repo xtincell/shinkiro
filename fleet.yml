@@ -43,6 +43,24 @@ plateforme_vps: coolify        # galahad patrouille et purge ses images ;
                                # hermes-cockpit s'y déploie ; galahad porte une
                                # skill diagnostic-coolify.json
 
+# ── la présentation ─────────────────────────────────────────────────────
+# Le portail n'est PAS un composant : il n'a pas de dépôt à lui, il vit dans
+# celui-ci. L'inscrire parmi les composants ferait chercher un dépôt « portail »
+# à la moitié des signaux, et ils répondraient à côté.
+#
+# Il est généré depuis fleet.yml, fleet.lock.yml et docs/ — un portail écrit à
+# la main serait faux la semaine suivante, ce qui est la maladie même que ce
+# dépôt combat. Sa fraîcheur est tenue par le signal portail-perime, qui compare
+# l'empreinte des sources inscrite dans site/source.json à celle du manifeste.
+presentation:
+  racine: portail
+  generateur: portail/construire.mjs
+  sortie: portail/site
+  entree: index.html
+  deploiement: {mode: coolify, compose: portail/docker-compose.yml, image: "nginx:1.27-alpine"}
+  donnees: {livrables: portail/donnees/livrables.json, extracteur: portail/extraire-livrables.mjs}
+  lit: [fleet.yml, fleet.lock.yml, "docs/*.md", "docs/adr/SHK-*.md", scripts/signaux-flotte.mjs, docs/PORTFOLIO.md]
+
 composants:
 
   # ── couche 01 · méthode ────────────────────────────────────────────────

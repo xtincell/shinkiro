@@ -80,7 +80,7 @@ qui constitue un signal :
 | `licence: proprietaire` | `licence: ABSENTE` |
 | `deploiement: {racine: views}` | `racines: [.]` |
 
-## 2 · Douze contrôles, deux points d'exécution
+## 2 · 15 contrôles, deux points d'exécution
 
 `scripts/signaux-flotte.mjs` porte les contrôles. Chacun n'écrit **rien** quand tout
 va bien, et une ligne par anomalie sinon.
@@ -103,6 +103,9 @@ node scripts/signaux-flotte.mjs --strict     # sort en 1 s'il trouve (pour la CI
 | `etage-invalide` | un outil versé sur le papier seulement |
 | `source-partagee` | une source que personne ne possède, ou que deux composants revendiquent |
 | `divergence-perimee` | une duplication affirmée sans chiffre, ou dont le chiffre a menti |
+| `produit-inconnu` | un produit déclaré dans `fleet.yml` que `docs/PORTFOLIO.md` ne connaît pas |
+| `derive-sans-canon` | un dérivé non canon dont le dépôt de référence n'existe pas |
+| `portail-perime` | un portail généré sur un manifeste qui a changé depuis |
 | `adr-sans-signal` | une décision que rien ne défend — ou qui cite un contrôle inexistant |
 | `releve-perime` | un relevé qui redevient un instantané |
 

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les livrables — Shinkiro</title>
+<meta name="description" content="Ce que le client reçoit, extrait du code">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9673;</text></svg>">
+</head>
+<body>
+<header class="bandeau"><div class="bandeau-int">
+<a class="marque" href="index.html">◉ SHIN<span>KIRO</span></a>
+<nav class="nav"><a href="index.html">Accueil</a><a href="suite.html">La suite</a><a href="catalogue.html">Le catalogue</a><a href="topologie.html">Topologie</a><a href="decisions.html">Décisions</a><a href="dispositif.html">Anti-dérive</a><a href="livrables.html" aria-current="page">Livrables</a><a href="perimetre.html">Périmètre</a></nav>
+</div></header>
+<main>
+
+<h1>Les livrables</h1>
+<p class="intro">Aucun document du programme ne dit ce que le client reçoit. Le code, lui, le
+dit — dans trois dépôts. Cette page l'extrait à la source : <strong>chaque ligne porte son
+chemin</strong>, et rien n'est affirmé qui n'ait été lu.</p>
+<p>Extrait le 2026-09-14 par <code>portail/extraire-livrables.mjs</code>.</p>
+
+
+<h2 id="la-production-creative">La production créative</h2>
+<p>Ce qu'un livrable créatif exige pour être fini — et ce que coûte chaque pièce manquante. <span class="source">la-barre/app/production.js</span></p>
+
+<div class="table-enveloppe"><table>
+<thead><tr><th>Livrable</th><th>Formats</th><th>Ce que c'est</th><th>Pour qui</th><th>Ce que coûte son absence</th></tr></thead><tbody>
+<tr>
+  <td><strong>L'asset</strong></td>
+  <td><code>jpg · png · mp4</code></td><td>le fichier plat, celui qu'on regarde et qu'on fait valider</td><td>le client, la revue</td>
+  <td>rien à montrer : le livrable n'existe qu'en tête</td></tr>
+<tr>
+  <td><strong>Le storyboard</strong></td>
+  <td><code>pdf · jpg</code></td><td>le film raconté en planches — et une ébauche d'animation si le temps le permet</td><td>la présentation client, avant toute production</td>
+  <td>on présente un film que personne ne peut se représenter</td></tr>
+<tr>
+  <td><strong>Le BAT</strong> <span class="et et-produit">signable</span></td>
+  <td><code>psd · ai · indd · aep</code></td><td>le montage source, bon à tirer, signé et daté</td><td>l'imprimeur, le prestataire</td>
+  <td>aucune correction possible sans tout refaire, et l'erreur d'impression est pour l'agence</td></tr>
+<tr>
+  <td><strong>La simulation</strong></td>
+  <td><code>jpg · png</code></td><td>le rendu sur fond blanc, à l'échelle, avec ses repères</td><td>le contrôle technique avant remise</td>
+  <td>personne n'a vu le livrable à sa taille réelle</td></tr>
+<tr>
+  <td><strong>La mise en situation</strong></td>
+  <td><code>jpg · png</code></td><td>le livrable dans son support — un 4×3 en rue, une gondole en rayon</td><td>la présentation client</td>
+  <td>on fait valider un visuel que personne n'a vu à trois mètres</td></tr>
+<tr>
+  <td><strong>Les sources</strong></td>
+  <td><code>psd · ai · indd · aep · prproj</code></td><td>les fichiers de travail, rangés et nommés</td><td>l'agence, la reprise dans six mois</td>
+  <td>le livrable ne se reprend que depuis zéro, et la personne qui l'a fait emporte le dossier en partant</td></tr>
+</tbody></table></div>
+
+<h3>Ce qu'un support exige</h3>
+<p>Un support ne demande pas les quatre étages. Règles telles qu'elles sont exécutées :</p>
+<div class="table-enveloppe"><table><thead><tr><th>Si</th><th>Alors</th></tr></thead><tbody>
+<tr><td><code>lourd</code></td><td><code>avantSignature ? [&quot;storyboard&quot;] : [&quot;storyboard&quot;, &quot;asset&quot;, &quot;bat&quot;]</code></td></tr>
+<tr><td><code>t === &quot;social&quot; || t === &quot;kv&quot;</code></td><td><code>[&quot;asset&quot;]</code></td></tr>
+<tr><td><code>t === &quot;goodies&quot;</code></td><td><code>avantSignature ? [&quot;asset&quot;] : [&quot;asset&quot;, &quot;bat&quot;, &quot;situation&quot;]</code></td></tr>
+<tr><td><em>sinon</em></td><td><code>avantSignature ? [&quot;asset&quot;] : [&quot;asset&quot;, &quot;bat&quot;, &quot;simulation&quot;, &quot;situation&quot;]</code></td></tr>
+</tbody></table></div>
+<p><span class="source">la-barre/app/production.js — fonction exiges()</span></p>
+
+
+
+
+
+
+
+
+
+
+<hr>
+
+<h2 id="le-document-strategique">Le document stratégique</h2>
+<p>Les sorties d'une séquence assemblées en document exportable. <span class="source">ADVE-project/src/server/services/artemis/tools/deliverable-compiler.ts</span></p>
+
+
+
+
+
+<h3>Le flux</h3><pre class="code"><code>Sequence DONE → getCompletedSequences() → compile(sequenceKey) → export</code></pre>
+<div class="table-enveloppe"><table><thead><tr><th>Format</th><th>Pour</th></tr></thead><tbody>
+<tr><td><code>PDF</code></td><td>Formal documents (manifeste, brandbook, offre, audit)</td></tr>
+<tr><td><code>HTML</code></td><td>Presentations, interactive dashboards</td></tr>
+<tr><td><code>JSON</code></td><td>Structured data (design tokens, KPI frameworks, calendars)</td></tr>
+</tbody></table></div>
+<h3>Le suivi</h3>
+<p>États <code>GREEN/AMBER/RED</code>, calculés depuis <code>status × deadline_proximity × blockers</code>
+— sauf surcharge opérateur explicite. <span class="source">ADVE-project/src/server/services/campaign-deliverable/index.ts</span></p>
+
+
+
+
+
+
+<hr>
+
+<h2 id="le-deploiement-multi-marches">Le déploiement multi-marchés</h2>
+<p>Un master, N marchés, sans perdre la marque. <span class="source">market-expansion-system/METHODE.md</span></p>
+
+
+
+
+
+
+
+
+
+
+<h3>Les écarts autorisés</h3><div class="table-enveloppe"><table><thead><tr><th>Écart</th><th>Ce qui change</th><th>Exemple vécu</th></tr></thead><tbody><tr><td><strong>Langue</strong></td><td>Titraille, signature, mentions légales</td><td>Ghana en anglais — « Fuel Their Dreams »</td></tr><tr><td><strong>Marque</strong></td><td>Le produit vendu diffère selon le pays</td><td>Ghana bascule sur Peak, les autres restent Bonnet Rouge</td></tr><tr><td><strong>Produit / SKU</strong></td><td>Format, grammage, prix affiché</td><td>IMP 400 g vs sachet 15 g à 100 FCFA</td></tr><tr><td><strong>Réglementaire</strong></td><td>Mentions obligatoires, allégations autorisées</td><td>Allégations nutritionnelles selon marché</td></tr></tbody></table></div>
+<p>Tout autre écart demandé est un écart de confort. Il se refuse, ou il se facture.</p>
+<hr>
+<h3>La chaîne</h3><ol><li><strong>Cadrer</strong> — plateforme applicable, liste des marchés, écarts connus par marché. Sortie : la matrice de déploiement, remplie <em>avant</em> le premier crayon.</li><li><strong>Concevoir</strong> — une seule big idea, arbitrée. Le master est produit dans le format le plus contraint (généralement le 4×3), jamais dans le plus confortable.</li><li><strong>Valider le master</strong> — un seul aller-retour client sur le master. Tant qu'il n'est pas validé, aucune variante n'est lancée. C'est la règle qui économise le plus de temps.</li><li><strong>Décliner</strong> — variantes marché, puis déclinaisons formats. Jamais l'inverse.</li><li><strong>Contrôler</strong> — relecture des mentions par marché, conformité charte, puis Ready-To-Print.</li><li><strong>Bon à tirer</strong> — un BAT par marché, tracé.</li></ol>
+<hr>
+<h3>Les gabarits</h3>
+<div class="table-enveloppe"><table><thead><tr><th>Fichier</th><th>Colonnes</th></tr></thead><tbody>
+<tr><td><code>cadrage-briefs.csv</code></td>
+  <td><span class="et">ndeg</span> <span class="et">client</span> <span class="et">marque</span> <span class="et">cluster</span> <span class="et">pays</span> <span class="et">projet</span> <span class="et">type</span> <span class="et">niveau</span> <span class="et">statut</span> <span class="et">brief_etat</span> <span class="et">prio</span> <span class="et">avancement</span> <span class="et">responsable</span> <span class="et">date_reception</span> <span class="et">entree</span> <span class="et">entre_par</span> <span class="et">deadline</span> <span class="et">deadline_hard</span> <span class="et">livrables</span> <span class="et">doc_brief</span> <span class="et">comm</span></td></tr>
+<tr><td><code>cadrage-matrice.csv</code></td>
+  <td><span class="et">ndeg</span> <span class="et">pays</span> <span class="et">code</span> <span class="et">marque</span> <span class="et">langue</span> <span class="et">sku</span> <span class="et">formats</span> <span class="et">ecart_type</span> <span class="et">ecart_declare</span> <span class="et">mentions_legales</span> <span class="et">imprimeur</span> <span class="et">date_bat</span> <span class="et">statut</span></td></tr>
+<tr><td><code>matrice-deploiement-modele.csv</code></td>
+  <td><span class="et">marché</span> <span class="et">code</span> <span class="et">marque</span> <span class="et">langue</span> <span class="et">SKU concerné</span> <span class="et">formats</span> <span class="et">écart déclaré</span> <span class="et">mentions légales</span> <span class="et">imprimeur</span> <span class="et">date BAT</span> <span class="et">statut</span></td></tr>
+</tbody></table></div>
+
+</main>
+<footer class="pied">
+<p>Généré par <code>portail/construire.mjs</code> depuis <code>fleet.yml</code>,
+<code>fleet.lock.yml</code> et <code>docs/</code>. Relevé du 2026-09-14.
+Rien n'est écrit ici à la main : ce qui est faux dans le portail est faux dans le manifeste.</p>
+</footer>
+</body>
+</html>
