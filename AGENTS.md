@@ -12,9 +12,12 @@ quel ordre bâtir, comment les pièces se parlent, ni ce qui est déjà fait.
    `make build-order` rappelle la séquence, `make status` donne l'état de chacun.
 1. **Accès.** La plupart des dépôts sont privés. Sans invitation ou token, tu ne vois rien.
    Demande l'accès avant de planifier quoi que ce soit.
-2. **Lis `docs/MATURITE.md` en premier.** Il dit ce qui est fini, bouchonné ou aspirationnel.
+2. **Lis `docs/TOPOLOGIE.md`** — les cinq modes de déploiement, les trois points d'entrée
+   qui ne sont pas à la racine, et les trois chevauchements structurels. C'est là que se
+   trouvent les pièges qu'aucun README ne signale.
+3. **Lis `docs/MATURITE.md`.** Il dit ce qui est fini, bouchonné ou aspirationnel.
    Construire contre le README seul revient à construire contre une fiction.
-3. **Lis `docs/CLOISON.md`.** Certains dépôts ne rejoignent jamais ce programme. Ce n'est pas
+4. **Lis `docs/CLOISON.md`.** Certains dépôts ne rejoignent jamais ce programme. Ce n'est pas
    négociable.
 
 ## Ordre de construction

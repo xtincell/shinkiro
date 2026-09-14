@@ -1,19 +1,34 @@
 # Shinkiro — manifeste de flotte
 #
-# Le fichier qu'un agent lit en premier. Il dit quoi cloner, dans quel ordre,
-# et dans quel état chaque composant se trouve réellement.
+# Établi par relevé exhaustif des arborescences GitHub au 14 septembre 2026.
+# Chaque champ `deploiement` est vérifié dans le dépôt — aucun n'est supposé.
 #
-# etage: reference | verse
-#   reference — composant autonome avec sa CI, son déploiement, son cycle.
-#               Cloné à côté, jamais absorbé.
-#   verse     — outil léger sans CI ni déploiement propre.
-#               Dépôt propre ET submodule sous tools/.
+# etage
+#   reference  composant autonome : son dépôt, son cycle, son déploiement.
+#   verse      outil léger : dépôt propre + submodule sous tools/.
 #
-# maturite: produit | utilisable | partiel | a-qualifier | gele
-# Voir docs/MATURITE.md pour le détail de chaque état.
+# maturite   produit | utilisable | partiel | a-qualifier | gele
+# vitalite   actif | gele | fige | relance-prioritaire   (commits sur 90 j)
+#
+# deploiement.mode — constaté, pas supposé :
+#   coolify   compose piloté par Coolify sur le VPS (Traefik + TLS par FQDN)
+#   systemd   unité .service installée sur l'hôte
+#   docker    Dockerfile autonome, orchestration libre
+#   vercel    application Next en PaaS
+#   pages     statique servi par GitHub Pages
+#   statique  HTML ouvrable sans serveur
+#   document  ni service ni page : méthode, gabarits, doctrine
+#   module    ne se déploie pas seul, passe par son hôte
+#
+# deploiement.racine — sous-dossier du point d'entrée quand il n'est pas à la
+# racine. Trois composants sont dans ce cas ; sans ce champ, un agent les croit
+# non déployables.
 
 owner: xtincell
-version: 1
+version: 2
+plateforme_vps: coolify        # galahad patrouille et purge ses images ;
+                               # hermes-cockpit s'y déploie ; galahad porte une
+                               # skill diagnostic-coolify.json
 
 composants:
 
@@ -23,12 +38,18 @@ composants:
     etage: reference
     maturite: produit
     licence: proprietaire
-    ordre_construction: 5
-    deploiement: https://lafusee-app.vercel.app
     vitalite: actif
-    note: >-
-      La Fusée v6.19. 150 Mo, 17 workflows, 192 ADR. Le plus lourd et le plus
-      strict — ne jamais commencer par lui.
+    ordre_construction: 5
+    deploiement: {mode: vercel, url: "https://lafusee-app.vercel.app"}
+    stack: [next, prisma, typescript, storybook, playwright]
+    volumetrie: {fichiers: 3314, poids_mo: 150, migrations_prisma: 122, workflows: 17, adr: 192}
+    description: >-
+      La Fusée v6.19 — Industry OS du marché créatif africain, et dépôt
+      canonique de la méthode ADVE. Un brief entre en PDF, le diagnostic tombe
+      en quinze minutes, la stratégie est écrite sous 48 h.
+    attention: >-
+      Le plus lourd et le plus strict du programme. Gouvernance à 192 ADR, un
+      plugin ESLint maison, dix PR ouvertes. Ne jamais commencer par lui.
 
   - nom: la-fusee-blueprint
     couche: method
@@ -36,16 +57,26 @@ composants:
     maturite: produit
     licence: proprietaire
     vitalite: gele
-    note: Doctrine, pas code. Ne pas chercher à l'exécuter.
+    deploiement: {mode: statique, racine: views, entree: LA_FUSEE_PHILO_VIEW.html}
+    volumetrie: {fichiers: 13, markdown_ko: 600}
+    description: >-
+      Le canon conceptuel. LA_FUSEE_BLUEPRINT.md (146 Ko) est la source de
+      vérité unique : neuf livres cosmogoniques, chacun lisible en trois voix
+      entrelacées. Plus un cahier des charges de 120 Ko et cinq archives.
+    attention: Doctrine, pas code. Ne pas chercher à l'exécuter.
 
   - nom: indice-maturite
     couche: method
     etage: verse
     maturite: produit
     licence: proprietaire
-    deploiement: https://xtincell.github.io/indice-maturite/
     vitalite: actif
+    deploiement: {mode: pages, url: "https://xtincell.github.io/indice-maturite/", entree: index.html}
     produit_portefeuille: "00 · Creative Opportunity Check"
+    volumetrie: {fichiers: 3}
+    description: >-
+      Le diagnostic d'entrée. Seize questions, quatre axes, un niveau de 0 à 5,
+      et une prescription. Seul produit du catalogue où l'outil est l'offre.
 
   - nom: market-expansion-system
     couche: method
@@ -53,8 +84,18 @@ composants:
     maturite: produit
     licence: proprietaire
     vitalite: actif
+    deploiement: {mode: document}
     produit_portefeuille: "04 · Content Expansion Modules"
-    note: Preuve terrain sur neuf marchés, bascule marque et langue au Ghana.
+    volumetrie: {fichiers: 6}
+    description: >-
+      Décliner une campagne d'un marché à N marchés sans perdre la marque.
+      Quatre types d'écart autorisés — langue, marque, SKU, réglementaire.
+      Preuve terrain : neuf marchés, bascule de marque et de langue au Ghana.
+    voir_aussi: >-
+      la-barre implémente déjà la matrice support × marché (app/vue-matrice.js)
+      et une taxonomie d'écarts complémentaire (app/ecarts.js, cinq origines :
+      qui doit la reprise et si elle se facture). Les deux modèles ne sont pas
+      reliés — c'est un chantier ouvert, pas un doublon.
 
   # ── couche 02 · entreprise ─────────────────────────────────────────────
   - nom: galahad-landing
@@ -63,9 +104,12 @@ composants:
     maturite: partiel
     licence: proprietaire
     vitalite: actif
-    note: >-
+    deploiement: {mode: docker, entree: index.html}
+    volumetrie: {fichiers: 4}
+    description: Page publique du produit galahad. Dockerfile plus un index.html.
+    attention: >-
       À trancher — sert-elle le produit galahad ou le programme Shinkiro ?
-      Aucune page publiée à ce jour.
+      Les deux ne s'adressent pas au même public. Aucune page publiée à ce jour.
 
   # ── couche 03 · exécution ──────────────────────────────────────────────
   - nom: galahad
@@ -73,62 +117,135 @@ composants:
     etage: reference
     maturite: utilisable
     licence: MIT
-    ordre_construction: 1
     vitalite: actif
-    note: >-
-      Moteur d'agents, zéro dépendance npm, zéro build. Se lance et se vérifie
-      seul. Point de départ obligatoire.
+    ordre_construction: 1
+    deploiement:
+      mode: coolify
+      aussi: [systemd, docker]
+      compose: docker-compose.yml
+      roles: [chef, guardian, traveler, claude-bridge]
+      routage: [routing/Caddyfile.example, routing/traefik-dynamic.example.yml]
+      systemd: deploy/systemd/galahad-docker-firewall.service
+    volumetrie: {fichiers: 70}
+    description: >-
+      Équipe d'agents LLM coordonnés sur un seul VPS, pilotée depuis Telegram,
+      agnostique au fournisseur de modèle. Une image moteur, trois rôles.
+    contient:
+      engine: >-
+        15 modules — agent-loop, brain, config, goals, heartbeat, hooks,
+        integrations, jobs, journal, memory, roles, skill-runner, telegram,
+        tools. Zéro dépendance npm, zéro build.
+      skills: [audit-coherence.json, diagnostic-coolify.json]
+      bridge: Passerelle Claude — server.js et son Dockerfile.
+      cockpit: cockpit/index.html
+      setup: Assistant de configuration — index.html et server.mjs.
+      patrol: >-
+        brain-health, deliver-watchdog, deliver, purge, prune-coolify-images,
+        pilotés par galahad-patrol.cron.
+      sas-admin: >-
+        Passerelle Python (gateway/app.py) avec émission et révocation de
+        jetons, et fermeture de ports. Le sas de sécurité du VPS.
+      fable: Intégration Fable par cron.
+      dan-hermes: compose, admin_mcp.py, SOUL.md.
 
   - nom: radar
     couche: execution
     etage: reference
     maturite: utilisable
     licence: MIT
-    ordre_construction: 2
     vitalite: actif
-    note: >-
-      Fournit task_events — le journal dont dépend toute mesure avant/après.
-      Une instance = une équipe = une base. Reste autonome.
+    ordre_construction: 2
+    deploiement: {mode: docker, port: 3000, requiert: postgres, front: "briefs/ (_headers, _redirects)"}
+    volumetrie: {fichiers: 69}
+    description: >-
+      Tracker de tâches auto-hébergeable. Backend Node en stdlib, API façon
+      PostgREST sur Postgres, flux RSS et JSON, ingestion des retours clients
+      par LLM local, trois niveaux d'autorité.
+    contient:
+      tables: [briefs, clients, client_markets, client_contacts, task_events, comments, brief_assets, app_config]
+      front: >-
+        dashboard, direction, entrees, equipe, faits, gabarits, gantt, gel,
+        archive, bilan — plus les fontes Familjen Grotesk, Hanken Grotesk et
+        JetBrains Mono.
+    contrat_central: >-
+      task_events est le journal. Toute intégration qui modifie un brief doit y
+      écrire son événement, sinon la mesure avant/après se perd — et avec elle
+      le sixième critère de gouvernance du portefeuille.
+    attention: Reste autonome. Une instance = une équipe = une base.
 
   - nom: talos
     couche: execution
     etage: reference
     maturite: partiel
     licence: proprietaire
-    ordre_construction: 3
     vitalite: fige
-    absorber_dans: galahad/engine/agents/talos
-    note: Rôle Guardian. Module déguisé en dépôt.
+    deploiement: {mode: systemd, unite: ops/talos.service, installateur: ops/install.sh}
+    volumetrie: {fichiers: 28}
+    description: >-
+      Rôle Guardian — gardien du VPS. Refondu sur l'Agent SDK : le cerveau
+      agentique est délégué au moteur, Talos n'écrit que la mémoire stratifiée,
+      la patrouille, le canal, le journal, et câble les garde-fous en dur.
+    contient:
+      src: [agent-loop, config, cron, heartbeat, hooks, index, journal, mcp, memory, ollama, soul, telegram, tools]
+      radar-mcp: Pont MCP vers radar — index.js et test-client.mjs.
+      memory-seed: [MEMORY.md, infra.md, projets.md]
+    duplication: >-
+      src/ recouvre galahad/engine/src/. Le moteur existe en trois exemplaires
+      — galahad, talos, hulysse — alors que le README de galahad promet « une
+      image moteur, trois rôles ». C'est la dette structurelle n°1.
 
   - nom: hulysse
     couche: execution
     etage: reference
     maturite: partiel
     licence: proprietaire
-    ordre_construction: 3
     vitalite: fige
-    absorber_dans: galahad/engine/agents/hulysse
-    note: Rôle Traveler. Module déguisé en dépôt.
+    deploiement: {mode: systemd, unite: ops/hulysse.service, installateur: ops/install.sh}
+    volumetrie: {fichiers: 23}
+    description: >-
+      Rôle Traveler — explorateur autonome et bâtisseur de nuit. Veille,
+      objectifs, repli LLM. Demande avant de livrer.
+    contient:
+      src: [agent-loop, config, goals, hooks, index, journal, memory, telegram, tools]
+      memory-seed: [MEMORY.md, infra.md, projets.md]
+    duplication: Même moteur que talos et galahad. Voir talos.duplication.
 
   - nom: danmem
     couche: execution
     etage: reference
     maturite: a-qualifier
     licence: proprietaire
-    ordre_construction: 3
     vitalite: fige
-    absorber_dans: galahad/engine/memory/danmem
-    note: Aucun README. Couche mémoire.
+    deploiement: {mode: module, hote: galahad}
+    volumetrie: {fichiers: 5}
+    description: >-
+      Serveur de mémoire homebrew — peers, deriver, dialectique, S0→S7. Un
+      seul fichier de code, src/index.mjs.
+    attention: >-
+      Aucun README. Et galahad/engine/src/memory.js couvre déjà une couche
+      mémoire : le rapport entre les deux n'est établi nulle part.
 
   - nom: hermes-cockpit
     couche: execution
     etage: reference
-    maturite: a-qualifier
+    maturite: utilisable
     licence: proprietaire
     vitalite: actif
-    note: >-
-      Cockpit de santé lisant radar et danmem, plus une page portail client
-      Matanga. Le code est propre ; la page Matanga est une vue de déploiement.
+    deploiement:
+      mode: coolify
+      port: 3000
+      compose: docker-compose.yaml
+      pid_host: true
+      capacites: [SYS_PTRACE]
+      redeploiement: ops/redeploy.sh
+    volumetrie: {fichiers: 7}
+    description: >-
+      Cockpit d'exploitation du VPS. Lit la santé de radar et de danmem,
+      détecte les process Talos et Claude sur l'hôte, et sert un portail
+      client. portal.mjs en tout et pour tout.
+    attention: >-
+      galahad porte déjà cockpit/index.html. Deux cockpits coexistent sans que
+      leur partage de responsabilité soit écrit.
 
   # ── couche 04 · outils métier ──────────────────────────────────────────
   - nom: la-barre
@@ -136,29 +253,62 @@ composants:
     etage: reference
     maturite: utilisable
     licence: proprietaire
-    ordre_construction: 4
     vitalite: actif
-    note: Pièce maîtresse. Aucun serveur, aucun compte — on double-clique.
+    ordre_construction: 4
+    deploiement: {mode: statique, entree: index.html, serveur_optionnel: servir.mjs}
+    volumetrie: {fichiers: 148}
+    description: >-
+      Le poste de travail du directeur de la création. Du brief au livrable, et
+      les talents qui les font. Aucun serveur, aucun compte : on double-clique.
+    contient:
+      domaine: >-
+        Modèle métier complet en français — amorce, annotation, avis, axe,
+        bilan, chaine-brief, compilateur, demande, dispositif, ecarts, etats,
+        jurisprudence, priorite, production, regles, renvoi, retroplanning,
+        trace, validation, vault, verdict-cout, version.
+      vues: >-
+        atelier, attentes, bigidea, brief, constater, cycle, decider,
+        direction, equipe, findemois, jurisprudence, livrable, maison,
+        matrice, pipeline, pistes, placer, planche.
+    pepite: >-
+      app/vue-matrice.js implémente la matrice support × marché en trois
+      lectures — calendrier, mur, grille — avec mémoire du mode par dossier.
+      app/ecarts.js classe les écarts par origine et dit qui doit la reprise et
+      si elle se facture. C'est la pièce la plus démonstrative du programme.
 
   - nom: Argos-studio
     couche: tools
     etage: reference
     maturite: partiel
     licence: proprietaire
-    ordre_construction: 6
     vitalite: relance-prioritaire
+    ordre_construction: 6
+    deploiement: {mode: vercel, racine: app, aussi: workers}
+    stack: [next, prisma, tailwind, biome]
+    volumetrie: {fichiers: 185}
     produit_portefeuille: "05 · Content Performance Loop"
-    note: >-
-      Bloque un produit vendable. Manque la boucle de mesure reliant la
-      bibliothèque aux résultats client.
+    description: >-
+      La plus grande bibliothèque qualifiée de campagnes — répertoire éditorial
+      de patterns créatifs, exploitable en moteur de recherche public ou via
+      API et MCP. Données réelles en place : dossiers Apple 1984, Think
+      Different, Get a Mac, Nike Just Do It, Dream Crazy, Find Your Greatness,
+      Patagonia.
+    manque: >-
+      La boucle de mesure reliant la bibliothèque aux résultats client. Sans
+      elle, le module reste un catalogue et le produit 05 n'est pas vendable.
 
   - nom: charadesign-generator
     couche: tools
     etage: reference
     maturite: utilisable
     licence: proprietaire
-    ordre_construction: 6
     vitalite: gele
+    ordre_construction: 6
+    deploiement: {mode: statique, racine: lsi-cd-app, stack: vite, entree: index.html}
+    volumetrie: {fichiers: 20}
+    description: >-
+      Pipeline LSI-CD v3.4 de bout en bout — de l'archétype triangulé à la
+      sortie multi-vues. Tracker en neuf étapes, UI Atelier clair.
 
   - nom: generateur-approches
     couche: tools
@@ -166,6 +316,9 @@ composants:
     maturite: utilisable
     licence: proprietaire
     vitalite: gele
+    deploiement: {mode: statique, entree: index.html}
+    volumetrie: {fichiers: 3}
+    description: Générateur d'approches publicitaires. Sans API ni dépendance externe.
 
   - nom: character-engine
     couche: tools
@@ -173,6 +326,12 @@ composants:
     maturite: utilisable
     licence: proprietaire
     vitalite: gele
+    deploiement: {mode: statique, entree: character_engine.html}
+    volumetrie: {fichiers: 12}
+    description: >-
+      Moteur de character design. schema.json définit 48 paramètres et les
+      règles de direction artistique ; variables.json (36 Ko) porte les profils
+      et bibliothèques. Guides V3, V4, variables, compatibilité et installation.
 
   - nom: datacollector
     couche: tools
@@ -180,6 +339,21 @@ composants:
     maturite: utilisable
     licence: proprietaire
     vitalite: gele
+    deploiement: {mode: docker, entree: index.html, serveur: server.py, requiert: requirements.txt}
+    volumetrie: {fichiers: 15}
+    description: >-
+      Collecte multi-sources pour l'intelligence marketing. Front HTML plus un
+      serveur Python. Développé pour UPGRADERS SARL.
+
+# ── lignées archivées ───────────────────────────────────────────────────
+# Portent le topic shinkiro pour l'historique, hors flotte vivante.
+# ADVE-project est canonique ; ces cinq sont des lignées mortes de la méthode.
+lignees_mortes:
+  - {nom: LaFusee_ADVE,    fichiers: 689, note: "vercel.json présent — a été déployé. Son README est meilleur que celui du canonique : à récupérer avant archivage."}
+  - {nom: ADVE_v8,         fichiers: 286, note: "branche par défaut claude/la-fusee-v2-rebuild-9omp5v, pas main. Dockerfile, CI, 7 migrations."}
+  - {nom: AVERTIS_web_v01, fichiers: 787, note: "application complète sous advertis-app/ — next, prisma, seeds ARTEMIS. Coquille dans le nom du dépôt."}
+  - {nom: ADVERTIS_v01,    fichiers: 77,  note: "8-Pillar Brand Strategy System. Lignée antérieure."}
+  - {nom: ADVERT_01,       fichiers: 532, note: "première tentative de produit. 111 modifications non commitées dans le clone local."}
 
 # ── hors flotte ─────────────────────────────────────────────────────────
 # Ne jamais cloner avec make clone-all. Voir docs/CLOISON.md.
@@ -188,4 +362,4 @@ hors_perimetre:
   client:    [spawt-meute-quiz, spawt-ci-mobile-v1-mvp, project_spawt, project_spawt_mobile_ci]
   labo:      [neo-kinara, 15B_Stories, atlas-of-recorded-sound, CosmicMachine, Tauri-v1, BlackNoteWeb]
   adjacent:  [Folio_Spark]
-  archives:  [LaFusee_ADVE, ADVE_v8, ADVERTIS_v01, AVERTIS_web_v01, ADVERT_01, ADVERT-web, BrandForge]
+  archives:  [ADVERT-web, BrandForge]

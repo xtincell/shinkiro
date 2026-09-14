@@ -4,6 +4,9 @@
 qu'un agent puisse travailler ; chacun est à confirmer avant d'être traité comme une
 spécification.
 
+Établi par relevé exhaustif au 14 septembre 2026. Ce qui est **constaté** est marqué comme
+tel ; ce qui reste **à écrire** l'est aussi — et ce second groupe est le plus important.
+
 ## radar — API de données
 
 Interface façon PostgREST sur `/rest/v1/<table>`. Tables et colonnes en **liste blanche** :
@@ -41,9 +44,34 @@ le texte est conservé, la structuration est différée.
 
 ## talos ↔ radar — MCP
 
-`talos/radar-mcp/` expose Radar au rôle Guardian via MCP. **Le protocole exact n'est pas
-documenté** : à lire dans le code avant toute modification, et à figer dans ce document
-ensuite.
+`talos/radar-mcp/` contient `index.js`, son `package.json` et un `test-client.mjs`. C'est le
+pont MCP qui expose Radar au rôle Guardian.
+
+**Le protocole n'est décrit nulle part.** Il existe un client de test — c'est le point de
+départ pour le reconstituer, puis le figer ici. Tant que ce n'est pas fait, toute
+modification de l'API Radar peut casser Talos sans que rien ne le signale.
+
+## galahad — sas-admin, le sas de sécurité
+
+`galahad/deploy/sas-admin/` porte une passerelle Python (`gateway/app.py`, Dockerfile,
+`requirements.txt`, compose) et trois scripts : `close-ports.sh`, `issue-fable-token.py`,
+`revoke-token.py`.
+
+C'est l'**émission et la révocation de jetons**, plus la fermeture de ports sur l'hôte.
+Aucun agent ne doit toucher à ce répertoire sans comprendre ce qu'il ouvre et ce qu'il ferme.
+
+## galahad — patrouille
+
+`deploy/patrol/` tourne par cron (`galahad-patrol.cron`) : `brain-health.sh`,
+`deliver-watchdog.sh`, `deliver.sh`, `purge.sh`, `prune-coolify-images.sh`.
+
+La patrouille **purge les images Coolify** — c'est l'une des trois preuves que Coolify est la
+plateforme du VPS. Voir [`TOPOLOGIE.md`](TOPOLOGIE.md).
+
+## galahad — compétences d'agent
+
+`engine/skills/` contient `audit-coherence.json` et `diagnostic-coolify.json`, décrites dans
+`engine/skills/README.md`. Le format des compétences est un contrat interne au moteur.
 
 ## galahad — rôles
 
@@ -72,3 +100,18 @@ Inventaire par dépôt. **Aucun n'est dans ce dépôt** — il faut les demander
 
 Chacun a son `.env.example` — sauf `la-barre`, qui n'en a pas besoin : aucun serveur, aucun
 compte.
+
+## Ce qui n'a pas de contrat, et devrait
+
+Quatre liaisons existent dans les faits mais ne sont spécifiées nulle part. Elles sont
+listées ici pour qu'un agent sache qu'il improvise s'il y touche.
+
+| Liaison | État |
+|---|---|
+| `talos/radar-mcp` → `radar` | Code présent, client de test présent, **protocole non écrit** |
+| `hermes-cockpit` → `radar` et `danmem` | Le cockpit lit leur santé — **format des sondes non écrit** |
+| `danmem` ↔ `galahad/engine/src/memory.js` | Deux couches mémoire, **articulation non établie** |
+| `la-barre` → `radar` | **Aucun lien.** La Barre décide, Radar journalise — la mesure avant/après en dépend |
+
+La dernière est la plus coûteuse : sans elle, le sixième critère de gouvernance du
+portefeuille — la méthode de preuve — n'est pas tenable pour le Transformation Pilot.

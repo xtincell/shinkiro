@@ -121,6 +121,7 @@ Outils légers, chacun dans son dépôt et monté en submodule sous `tools/`.
 
 - [`fleet.yml`](fleet.yml) — le manifeste des dix-sept composants. `make clone-all` matérialise la flotte.
 - [`AGENTS.md`](AGENTS.md) — ordre de construction, tests de vie, règles de contribution
+- [`docs/TOPOLOGIE.md`](docs/TOPOLOGIE.md) — les cinq modes de déploiement, les points d'entrée en sous-dossier, les chevauchements structurels
 - [`docs/MATURITE.md`](docs/MATURITE.md) — ce qui est fini, bouchonné ou aspirationnel. **À lire avant de planifier.**
 - [`docs/INTERFACES.md`](docs/INTERFACES.md) — contrats entre composants et inventaire des secrets
 
