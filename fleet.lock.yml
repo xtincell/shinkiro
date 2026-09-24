@@ -9,7 +9,7 @@
 #   make releve                régénère ce fichier
 #   git diff fleet.lock.yml    ce qui a bougé dans la flotte depuis le dernier relevé
 #
-releve_le: "2026-09-14"
+releve_le: "2026-09-24"
 owner: xtincell
 topic: shinkiro
 fenetre_vitalite_jours: 90
@@ -261,12 +261,12 @@ composants:
       index_html: [index.html]
   - nom: la-barre
     branche: main
-    prive: true
+    prive: false
     langue: JavaScript
-    fichiers: 148
-    poids_ko: 3850
+    fichiers: 184
+    poids_ko: 6222
     licence: presente
-    commits_90j: 13
+    commits_90j: 26
     topics: ["layer-tools", shinkiro]
     racines: [., sources/02_dossier_MT0020, sources/04_outils, sources/99_archive]
     artefacts:
@@ -325,7 +325,7 @@ composants:
 # Dépôts du compte ne portant PAS le topic shinkiro. Liste brute : certains sont
 # légitimement hors flotte (employeur, client, labo) et fleet.yml:hors_perimetre
 # les écarte nommément. Ce qui reste après soustraction est non classé.
-depots_du_compte: 39
+depots_du_compte: 40
 sans_topic:
   - 15B_Stories
   - ADVERT-web
@@ -337,6 +337,7 @@ sans_topic:
   - Matanga-Creative-dashboard
   - Tauri-v1
   - atlas-of-recorded-sound
+  - banahealth
   - matanga-hermes-mcp
   - neo-kinara
   - project_spawt

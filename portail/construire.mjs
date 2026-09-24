@@ -55,6 +55,7 @@ const ko = (n) => n == null ? "—"
 const NAV = [
   ["index.html", "Accueil"],
   ["suite.html", "La suite"],
+  ["la-barre.html", "La Barre"],
   ["catalogue.html", "Le catalogue"],
   ["topologie.html", "Topologie"],
   ["decisions.html", "Décisions"],
@@ -102,6 +103,7 @@ Rien n'est écrit ici à la main : ce qui est faux dans le portail est faux dans
 const DOC_VERS_PAGE = {
   "PORTFOLIO.md": "catalogue.html", "TOPOLOGIE.md": "topologie.html",
   "DERIVE.md": "dispositif.html", "CLOISON.md": "perimetre.html",
+  "LA-BARRE.md": "la-barre.html",
   "MATURITE.md": "maturite.html", "INTERFACES.md": "interfaces.html",
   "adr/README.md": "decisions.html",
 };
@@ -189,6 +191,12 @@ ${Object.entries(COUCHES).map(([cle, [nom, quoi]]) => `  <div class="carte">
   </div>`).join("\n")}
 </div>
 
+<section class="entree-metier">
+<h2>La suite, à hauteur de métier</h2>
+<p>${inline(String(composants.find(c => c.nom === "la-barre")?.description || ""))}</p>
+<a href="la-barre.html">Comprendre le parcours La Barre</a>
+<p>${source("fleet.yml")} ${source("docs/LA-BARRE.md")}</p>
+</section>
 <h2 id="entrer">Par où entrer</h2>
 <div class="grille grille-2">
   <a class="carte" href="suite.html"><h3>La suite →</h3><p class="sous">Les ${composants.length}
@@ -331,6 +339,7 @@ ${ech(LIB_COUCHE[c.couche] || c.couche)}</p>
 
 <p class="intro">${inline(String(c.description || ""))}</p>
 
+${c.parcours ? `<p><a class="carte" href="${lienDoc(1)(c.parcours)}">Le parcours métier et ses connexions</a></p>` : ""}
 ${produits.length ? `<h2 id="produits">Ce qu'il sert</h2>
 <div class="grille grille-2">${produits.map((p) =>
   `<a class="carte" href="../produits/${p.slice(0, 2)}.html"><h3>${ech(p)}</h3></a>`).join("")}</div>
@@ -394,6 +403,7 @@ function documents() {
     ["dispositif.html", "docs/DERIVE.md", "Anti-dérive"],
     ["maturite.html", "docs/MATURITE.md", "Maturité"],
     ["interfaces.html", "docs/INTERFACES.md", "Interfaces"],
+    ["la-barre.html", "docs/LA-BARRE.md", "La Barre, du brief à la décision"],
   ];
   for (const [fichier, doc, titre] of DOCS) {
     if (!existe(doc)) continue;
