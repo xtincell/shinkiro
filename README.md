@@ -126,6 +126,10 @@ Outils légers, chacun dans son dépôt et monté en submodule sous `tools/`.
 - [`docs/MATURITE.md`](docs/MATURITE.md) — ce qui est fini, bouchonné ou aspirationnel. **À lire avant de planifier.**
 - [`docs/INTERFACES.md`](docs/INTERFACES.md) — contrats entre composants et inventaire des secrets
 
+**Le parcours métier** — [`La Barre dans Shinkiro`](docs/LA-BARRE.md) relie le brief,
+la revue créative et la production, en distinguant les liens disponibles des
+synchronisations restant à construire.
+
 **Pour regarder** :
 
 - [`portail/`](portail/) — le portail : la suite composant par composant, le catalogue et

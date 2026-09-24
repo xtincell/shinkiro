@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Barre, du brief à la décision — Shinkiro</title>
+<meta name="description" content="La Barre, du brief à la décision">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9673;</text></svg>">
+</head>
+<body>
+<header class="bandeau"><div class="bandeau-int">
+<a class="marque" href="index.html">◉ SHIN<span>KIRO</span></a>
+<nav class="nav"><a href="index.html">Accueil</a><a href="suite.html">La suite</a><a href="la-barre.html" aria-current="page">La Barre</a><a href="catalogue.html">Le catalogue</a><a href="topologie.html">Topologie</a><a href="decisions.html">Décisions</a><a href="dispositif.html">Anti-dérive</a><a href="livrables.html">Livrables</a><a href="perimetre.html">Périmètre</a></nav>
+</div></header>
+<main>
+<h1 id="la-barre-dans-shinkiro">La Barre dans Shinkiro</h1>
+<p>La Barre est le poste de travail du directeur de la création. Dans Shinkiro, elle tient le passage entre une intention créative et une décision explicite : ce qui est proposé, ce qui est retenu, ce qui doit revenir et ce qui peut partir à la production.</p>
+<p><a href="https://labarre.powerupgraders.com/">Ouvrir La Barre</a> · <a href="https://github.com/xtincell/la-barre">Consulter son code</a></p>
+<h2 id="un-parcours-quatre-responsabilites">Un parcours, quatre responsabilités</h2>
+<div class="table-enveloppe"><table><thead><tr><th>Moment</th><th>Responsable</th><th>Passage concret</th></tr></thead><tbody><tr><td>Cadrer</td><td>ADVE / La Fusée</td><td>Le diagnostic et la stratégie alimentent le brief. Le transfert reste manuel.</td></tr><tr><td>Examiner et décider</td><td>La Barre</td><td>Bureau de revue par pièce, version et projet ; critères, retours et verdicts.</td></tr><tr><td>Organiser l'exécution</td><td>Radar / Galahad</td><td>Le registre Radar peut être consulté dans La Barre. Aucun envoi automatique de décisions vers <code>task_events</code> n'est livré.</td></tr><tr><td>Apprendre</td><td>Argos / ADVE</td><td>Les références et le bilan nourrissent la prochaine campagne. La boucle de retour automatique reste à construire.</td></tr></tbody></table></div>
+<p>La cohérence du programme vient du partage des responsabilités. La Barre ne refait ni le diagnostic ADVE, ni le suivi de tâches Radar, ni la bibliothèque Argos. Elle porte le jugement créatif et conserve le contexte de ce jugement.</p>
+<h2 id="le-parcours-du-directeur-de-la-creation">Le parcours du directeur de la création</h2>
+<p>Le <strong>Bureau</strong> présente une pièce à la fois, avec son projet, sa version, son responsable, l'échéance et un accès au brief. Une intention sans image reste identifiée comme telle. Un filtre permet de se concentrer sur un projet.</p>
+<p>Les <strong>Décisions</strong> regroupent les retours client, arbitrages, responsabilités et engagements. Chaque retour client conserve son propre verbatim et les seuls livrables touchés par sa portée. Le nombre de sujets ne doit pas être lu comme un nombre de livrables uniques : deux retours peuvent viser la même pièce.</p>
+<p>Les projets gardent leurs parcours détaillés : brief, stratégie, pistes, KV, déclinaisons, présentation et livraison. Une route retenue ne remplace pas un BAT ; une validation sur une version ne valide pas automatiquement la suivante.</p>
+<h2 id="autonome-et-present-dans-la-suite">Autonome, et présent dans la suite</h2>
+<p>Le code et les données restent dans le périmètre de La Barre. Le portail Shinkiro référence le produit et expose son rôle ; il ne l'embarque pas dans une iframe et ne crée pas de copie de sa base. La Barre renvoie vers Shinkiro par un lien configurable dans <code>MAISON.suite</code>.</p>
+<p>Le stockage de travail est celui du navigateur ou du serveur local configuré. L'export JSON reste la sauvegarde transportable. Un lien entre produits n'est ni une synchronisation, ni une authentification commune.</p>
+<h2 id="ce-que-le-portfolio-demontre">Ce que le portfolio démontre</h2>
+<p>Folio Spark reste le portfolio personnel d'Alexandre Djengue, hors flotte. Le cas La Barre démontre la conception d'un outil de direction créative et son articulation dans Shinkiro : compréhension du métier, architecture de l'information, interaction et implémentation.</p>
+<p>Les retours qualitatifs à l'origine de la refonte sont un signal de conception, pas une mesure d'impact. Aucun gain de temps, taux d'adoption ou résultat commercial n'est revendiqué sans mesure. Les captures publiques doivent venir d'un jeu de démonstration, sans importer les dossiers de travail de l'agence.</p>
+<h2 id="validation-a-mener-avec-les-dc">Validation à mener avec les DC</h2>
+<ul><li>Trouver une pièce, identifier son projet et consulter son brief.</li><li>Rendre un verdict motivé sur la bonne version, puis retrouver sa trace.</li><li>Traiter deux retours distincts sur une même pièce sans additionner leurs impacts.</li><li>Retrouver un dossier et reprendre le travail après rechargement.</li><li>Exporter son travail et comprendre ce qui est effectivement sauvegardé.</li></ul>
+<p>La refonte doit être évaluée sur ces gestes avant de revendiquer une amélioration mesurée de l'UX. Sa disponibilité publique dépend de la publication des changements dans le dépôt La Barre ; le lien du produit peut encore montrer la version précédente.</p>
+<p><span class="source">docs/LA-BARRE.md</span></p>
+</main>
+<footer class="pied">
+<p>Généré par <code>portail/construire.mjs</code> depuis <code>fleet.yml</code>,
+<code>fleet.lock.yml</code> et <code>docs/</code>. Relevé du 2026-09-24.
+Rien n'est écrit ici à la main : ce qui est faux dans le portail est faux dans le manifeste.</p>
+</footer>
+</body>
+</html>

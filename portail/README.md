@@ -18,6 +18,7 @@ node portail/extraire-livrables.mjs  # régénère donnees/livrables.json (néce
 | Page | Source |
 |---|---|
 | Accueil, La suite, fiches composants | `fleet.yml` + `fleet.lock.yml` |
+| Parcours La Barre | `docs/LA-BARRE.md` |
 | Topologie, Anti-dérive, Maturité, Interfaces | `docs/*.md`, rendus tels quels |
 | Décisions | `docs/adr/SHK-*.md` |
 | Les contrôles | extraits de `scripts/signaux-flotte.mjs` |

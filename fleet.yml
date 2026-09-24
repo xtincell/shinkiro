@@ -296,11 +296,13 @@ composants:
     licence: proprietaire
     vitalite: actif
     ordre_construction: 4
-    deploiement: {mode: statique, entree: index.html, serveur_optionnel: servir.mjs}
+    deploiement: {mode: statique, entree: index.html, serveur_optionnel: servir.mjs, url: "https://labarre.powerupgraders.com/"}
     produits_portefeuille: ["03 · Transformation Pilot", "04 · Content Velocity System"]
     description: >-
       Le poste de travail du directeur de la création. Du brief au livrable, et
-      les talents qui les font. Aucun serveur, aucun compte : on double-clique.
+      les talents qui les font. Le bureau réunit une pièce, sa version, son brief
+      et ses critères ; les décisions portent les retours et les engagements.
+      Application autonome, sans compte, avec export JSON.
     contient:
       domaine: >-
         Modèle métier complet en français — amorce, annotation, avis, axe,
@@ -311,6 +313,11 @@ composants:
         atelier, attentes, bigidea, brief, constater, cycle, decider,
         direction, equipe, findemois, jurisprudence, livrable, maison,
         matrice, pipeline, pistes, placer, planche.
+    parcours: docs/LA-BARRE.md
+    manque: >-
+      Le transfert ADVE vers le brief et la boucle de résultats vers Argos
+      restent manuels. Le registre Radar ne constitue pas une synchronisation
+      des décisions vers task_events.
     pepite: >-
       app/vue-matrice.js implémente la matrice support × marché en trois
       lectures — calendrier, mur, grille — avec mémoire du mode par dossier.
