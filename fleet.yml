@@ -362,7 +362,7 @@ composants:
     etage: verse
     maturite: utilisable
     licence: proprietaire
-    vitalite: gele
+    vitalite: actif
     deploiement: {mode: statique, entree: index.html}
     description: Générateur d'approches publicitaires. Sans API ni dépendance externe.
 
@@ -431,7 +431,7 @@ lignees_mortes:
 # Ne jamais cloner avec make clone-all. Voir docs/CLOISON.md.
 hors_perimetre:
   employeur: [Matanga-Creative-dashboard, matanga-hermes-mcp, ADVERTIS-Matanga]
-  client:    [spawt-meute-quiz, spawt-ci-mobile-v1-mvp, project_spawt, project_spawt_mobile_ci]
+  client:    [spawt-meute-quiz, spawt-ci-mobile-v1-mvp, project_spawt, project_spawt_mobile_ci, banahealth]
   labo:      [neo-kinara, 15B_Stories, atlas-of-recorded-sound, CosmicMachine, Tauri-v1, BlackNoteWeb]
   adjacent:  [Folio_Spark]
   archives:  [ADVERT-web, BrandForge]
