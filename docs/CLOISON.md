@@ -26,6 +26,13 @@ Utilisables comme **cas d'usage documenté**, jamais comme actif du programme.
 
 Ils portent le topic `client-work`.
 
+## BanaHealth : projet client
+
+`banahealth` porte le site livré au client et son cycle de maintenance. Il reste
+un projet à suivre et à intégrer dans les parcours du Shinkiro ; son contenu et
+son code client ne deviennent pas un composant réutilisable de la flotte. Cette
+classification ne le retire pas de l’audit des projets actuels.
+
 ## Le laboratoire
 
 | Dépôt | Nature |

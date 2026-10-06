@@ -9,7 +9,7 @@
 #   make releve                régénère ce fichier
 #   git diff fleet.lock.yml    ce qui a bougé dans la flotte depuis le dernier relevé
 #
-releve_le: "2026-09-24"
+releve_le: "2026-10-06"
 owner: xtincell
 topic: shinkiro
 fenetre_vitalite_jours: 90
@@ -21,8 +21,8 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 3315
-    poids_ko: 101861
+    fichiers: 3396
+    poids_ko: 102502
     licence: presente
     commits_90j: 100
     topics: ["layer-method", shinkiro]
@@ -70,7 +70,7 @@ composants:
     fichiers: 286
     poids_ko: 3413
     licence: ABSENTE
-    commits_90j: 41
+    commits_90j: 0
     topics: ["layer-method", shinkiro]
     racines: [.]
     artefacts:
@@ -157,7 +157,7 @@ composants:
     fichiers: 5
     poids_ko: 15
     licence: presente
-    commits_90j: 2
+    commits_90j: 1
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
@@ -183,7 +183,7 @@ composants:
     fichiers: 71
     poids_ko: 236
     licence: presente
-    commits_90j: 36
+    commits_90j: 25
     topics: ["layer-execution", shinkiro]
     racines: [., bridge, cockpit, engine, setup]
     artefacts:
@@ -201,7 +201,7 @@ composants:
     fichiers: 4
     poids_ko: 24
     licence: presente
-    commits_90j: 5
+    commits_90j: 1
     topics: ["layer-company", shinkiro]
     racines: [.]
     artefacts:
@@ -211,14 +211,15 @@ composants:
     branche: main
     prive: true
     langue: HTML
-    fichiers: 3
-    poids_ko: 37
+    fichiers: 5
+    poids_ko: 46
     licence: presente
-    commits_90j: 1
+    commits_90j: 3
     topics: ["layer-tools", shinkiro]
     racines: [.]
     artefacts:
       index_html: [index.html]
+      workflows: [.github/workflows/verify.yml]
   - nom: hermes-cockpit
     branche: main
     prive: true
@@ -226,7 +227,7 @@ composants:
     fichiers: 7
     poids_ko: 56
     licence: presente
-    commits_90j: 20
+    commits_90j: 1
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
@@ -241,7 +242,7 @@ composants:
     fichiers: 23
     poids_ko: 58
     licence: presente
-    commits_90j: 2
+    commits_90j: 1
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
@@ -263,15 +264,16 @@ composants:
     branche: main
     prive: false
     langue: JavaScript
-    fichiers: 184
-    poids_ko: 6222
+    fichiers: 234
+    poids_ko: 7015
     licence: presente
-    commits_90j: 26
+    commits_90j: 76
     topics: ["layer-tools", shinkiro]
     racines: [., sources/02_dossier_MT0020, sources/04_outils, sources/99_archive]
     artefacts:
       index_html: [index.html]
       package: [package.json]
+      workflows: [.github/workflows/verification.yml]
   - nom: la-fusee-blueprint
     branche: main
     prive: true
@@ -299,7 +301,7 @@ composants:
     fichiers: 69
     poids_ko: 1771
     licence: presente
-    commits_90j: 11
+    commits_90j: 3
     topics: ["layer-execution", shinkiro]
     racines: [., briefs, briefs/rh]
     artefacts:
@@ -315,7 +317,7 @@ composants:
     fichiers: 28
     poids_ko: 155
     licence: presente
-    commits_90j: 2
+    commits_90j: 1
     topics: ["layer-execution", shinkiro]
     racines: [., "radar-mcp"]
     artefacts:
