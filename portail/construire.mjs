@@ -170,8 +170,7 @@ empêche cette page de mentir.</p>
   Il ne porte aucun code de produit : le manifeste, l'ordre de construction, les décisions,
   l'audit, et la présentation qu'il génère de lui-même.</p></div>
   <div class="carte"><h3><code>galahad</code></h3><p class="sous"><strong>Un produit du
-  portefeuille.</strong> Une équipe d'IA organisée en agents qui fait tourner l'agence en
-  autonomie depuis un serveur dédié.</p></div>
+  portefeuille.</strong> ${inline(String(composants.find(c => c.nom === "galahad")?.description || ""))}</p></div>
   <div class="carte"><h3>ADVE</h3><p class="sous"><strong>La méthode.</strong> La couche
   décisionnelle : elle dit quoi construire et pourquoi. Son dépôt canonique est
   <code>ADVE-project</code>.</p></div>

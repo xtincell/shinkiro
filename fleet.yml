@@ -154,7 +154,7 @@ composants:
   - nom: galahad
     couche: execution
     etage: reference
-    maturite: utilisable
+    maturite: partiel
     licence: proprietaire
     vitalite: actif
     ordre_construction: 1
@@ -167,16 +167,22 @@ composants:
       systemd: deploy/systemd/galahad-docker-firewall.service
     produits_portefeuille: ["05 · Content Operations", "04 · Content Velocity System"]
     description: >-
-      Une équipe d'IA organisée en agents qui fait tourner l'agence en autonomie
-      depuis un serveur dédié. Coordonnés sur un seul VPS, pilotés depuis
-      Telegram, agnostiques au fournisseur de modèle. Une image, trois rôles.
-      C'est un PRODUIT du portefeuille, pas seulement un composant de livraison.
+      Moteur de procédures, décisions IA et coordination d'infrastructure sur
+      serveur dédié. Rôles configurables, patrouille et travaux délégués ; le
+      jugement modèle est explicite dans les procédures. Produit d'infrastructure
+      autonome et moyen de livraison du portefeuille.
+    attention: >-
+      Le moteur et ses retours ont des réceptions locales ; les surfaces de
+      configuration, le mandat précis, le coût persistant et l'exploitation
+      multi-entreprises ne sont pas reçus. Le garde de commandes n'est pas un
+      sandbox. La mémoire distante Danmem reste un service distinct.
+      Voir docs/RECEPTION-GALAHAD-DANMEM.md.
     contient:
       engine: >-
-        15 modules — agent-loop, brain, config, goals, heartbeat, hooks,
+        Modules — agent-loop, brain, config, goals, heartbeat, hooks,
         integrations, jobs, journal, memory, roles, skill-runner, telegram,
         tools. Zéro dépendance npm, zéro build.
-      skills: [audit-coherence.json, diagnostic-coolify.json]
+      skills: [audit-coherence.json, audit-fleet.json, diagnostic-coolify.json]
       bridge: Passerelle Claude — server.js et son Dockerfile.
       cockpit: cockpit/index.html
       setup: Assistant de configuration — index.html et server.mjs.
@@ -267,16 +273,20 @@ composants:
   - nom: danmem
     couche: execution
     etage: reference
-    maturite: a-qualifier
+    maturite: partiel
     licence: proprietaire
-    vitalite: fige
-    deploiement: {mode: module, hote: galahad}
+    vitalite: actif
+    deploiement: {mode: systemd, entree: src/index.mjs, requiert: postgres}
     description: >-
-      Serveur de mémoire homebrew — peers, deriver, dialectique, S0→S7. Un
-      seul fichier de code, src/index.mjs.
+      Mémoire contextuelle partagée : observations attribuées, rappel hybride,
+      cartes, dérivation et historique de consolidation. File de travaux entre
+      mandataires. Ce contexte ne remplace ni une source métier ni son approbation.
     attention: >-
-      Aucun README. Et galahad/engine/src/memory.js couvre déjà une couche
-      mémoire : le rapport entre les deux n'est établi nulle part.
+      Service HTTP et PostgreSQL distinct du moteur Galahad. La version servie
+      et le canon ont été rapprochés ; schéma et contrats sont versionnés.
+      Les corrections reçues sur copies ne sont pas livrées au service actif.
+      Identités de mandataires, reprise des claims, coût et restauration complète
+      restent ouverts. Voir docs/RECEPTION-GALAHAD-DANMEM.md.
 
   - nom: hermes-cockpit
     couche: execution

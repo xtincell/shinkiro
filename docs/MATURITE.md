@@ -6,6 +6,19 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
 ## Réceptions partielles au 7 octobre 2026
 
+- Galahad : consentement, procédures, décisions indisponibles, seuil de jetons
+  et retour délégué confrontés au canon. Neuf contre-exemples rouges, puis quinze
+  scénarios verts et CI reçue ; [PR #3](https://github.com/xtincell/galahad/pull/3)
+  intégrée au canon. Configuration native, mandat précis, coût et cycle des
+  agents actifs restent ouverts ; aucun redémarrage.
+- Danmem : source servie et schéma retrouvés, puis repris dans
+  [PR #1](https://github.com/xtincell/danmem/pull/1). Neuf contre-exemples rouges,
+  dix-huit cas locaux verts dont reprise croisée Galahad après 503 dans un nouveau
+  processus, une seule exécution et aucun appel IA. CI : dix-neuf cas verts sur
+  l'image pgvector de production, dont rejeu du schéma et rappel sémantique ; le
+  consommateur d'un autre dépôt y est explicitement sauté. Ces réceptions ne
+  valent pas migration du service, restauration de sauvegarde ou seconde TPE.
+  Voir [RECEPTION-GALAHAD-DANMEM.md](RECEPTION-GALAHAD-DANMEM.md).
 - La Fusée 404 : besoin manuel, conversion atomique, conflit/relecture, mission
   exacte dans les deux portails et retrait motivé reçus sur la marque de démo
   BLISS, sans delta IA/Process. La liste console admin vide découverte pendant
