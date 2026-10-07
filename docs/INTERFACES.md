@@ -227,6 +227,28 @@ futur de la vitrine déjà en ligne. Elle conserve le quiz et mène au site actu
 Les magasins mobiles restent annoncés à venir : aucune publication d'app n'est
 déduite du seul fait que le site est en ligne.
 
+Le produit Application mobile conserve son lien La Barre et son dépôt, auxquels
+s’ajoutent branche active, aperçu, console équipe et backend, retrouvés après
+rechargement natif. L’app Expo, la console et le backend ont des sources et
+réceptions distinctes du prototype web gelé. La conservation des opérations hors
+ligne est partiellement corrigée ; favoris, propriétaires de session et rejeu
+d’apprentissage gardent des défauts reproduits. Une base avec RLS activée n’est
+pas une réception des permissions. Voir [la réception application](RECEPTION-SPAWT-APPLICATION.md).
+
+Les liens confidentialité/CGU de l’entrée sont reçus par clic natif vers les pages
+existantes de la vitrine. Leurs textes restent à valider. Les liens profonds du
+produit et la reprise de contexte après connexion ne sont pas reçus par ce raccord.
+
+### Cockpit — conservation et commandes d’exploitation
+
+Tâches/notes JSON, registre propagé et demandes de configuration ont une autorité
+locale. L’acquittement suit la conservation ; l’effet d’un changement de modèle ou
+d’un rafraîchissement doit être constaté dans le consommateur. Les refus partiels
+du portail conservent leur cause sans effacer les lectures disponibles. Ce contrat
+ne remplace pas les décisions Fusée/La Barre, le journal Radar ou les mandats de
+Galahad. Concurrence avec les autres écrivains, fraîcheur, permissions et partage
+des deux cockpits restent à recevoir. Voir [RECEPTION-COCKPIT.md](RECEPTION-COCKPIT.md).
+
 ## indice-maturite → la-fusee — bilan déclaratif conservable
 
 L'Indice conserve ses questions et sa méthode. Un bilan incomplet montre sa

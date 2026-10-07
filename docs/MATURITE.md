@@ -59,6 +59,20 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   réels ; trois références ajoutées par les formulaires natifs et retrouvées dans
   le dossier parent après livraison 410. Publication depuis une version approuvée
   et retour d'apprentissage restent à recevoir.
+- SPAWT application : branche active retrouvée et aperçu ancien de 112 commits
+  raccordé au backend réel, première livraison reçue sur `618e70f`. PR #5 fusionnée
+  au canon `73b61af` : huit pertes de file corrigées, inspecteur explicite et route
+  rectifiée ; 817 tests, quatre sauts et export web reçus en CI. Livraison du
+  correctif, image/bundle et entrée native reçus, consentements non acceptés.
+  Console : 160 tests simulés, fontes exclues du checkout de sources. Quatre défauts
+  favoris/Palais reproduits restent ouverts. Console native non authentifiée et
+  schéma lus sans réception des permissions. Six références produit conservées
+  après rechargement, dont quatre nouveaux accès. Native authentifiée, magasins,
+  isolement/reprise, apprentissage et irrigation de marque ouverts. Voir
+  [RECEPTION-SPAWT-APPLICATION.md](RECEPTION-SPAWT-APPLICATION.md).
+  PR #6 livrée au canon `4d7ee59` : liens d’entrée confidentialité/CGU reçus par
+  clic natif, image et bundle rapprochés. Pages encore en brouillon juridique,
+  consentements non acceptés ; liens profonds lieu/Crew encore à recevoir.
 - DataCollector : collecteurs, CLI/API et interface confrontés à leur rôle.
   Reçu partagé, sauvegarde atomique, erreurs et inconnues conservées ; faux
   sentiment, score de santé et progression simulée retirés. Quatorze tests Python
@@ -66,6 +80,16 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   exports navigateur JSON/PDF et admission au dossier restent ouverts.
   La mention historique « sans dépendance externe » est fausse pour cet outil :
   front HTML, Flask et sources PageSpeed/Reddit/Serper/profil sont distincts.
+- Cockpit d’exploitation : fichier servi identique au canon, santé 200 et routes
+  état/workspace anonymes 401. Cinq ruptures reproduites en VM : faux acquittement
+  de stockage, concurrence de tâches, fichier corrompu remplacé, erreurs réduites
+  à null et lien symbolique sortant du workspace sur fixture. PR #1 fusionnée :
+  conservation, refus, demandes de configuration et lectures partielles réparés ;
+  douze contrôles locaux/HTTP et deux CI verts. Livraison `fbcdb20`, image,
+  fichiers exécutés et volumes reçus ; quatre refus amont 500 deviennent visibles,
+  cause à diagnostiquer. Native authentifiée et effet de
+  commande non reçus. Fraîcheur, écrivains externes, reprise et
+  frontière avec Galahad restent ouvertes. Voir [RECEPTION-COCKPIT.md](RECEPTION-COCKPIT.md).
 - Argos : fonds canonique autonome, contrat manuel et veille facultative
   confrontés à leur code. Onze tests SQLite sur dossier/citations/amendement/
   filiation/seed et dix tests workers hors réseau/LLM payant passent. Le worker

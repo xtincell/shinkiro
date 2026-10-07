@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>hermes-cockpit — Shinkiro</title>
-<meta name="description" content="Cockpit d'exploitation du VPS. Lit la santé de radar et de danmem, détecte les process Talos et Claude sur l'hôte, et sert un portail client. portal.mjs en tout">
+<meta name="description" content="Poste privilégié d'exploitation du VPS : état des services, accès, tâches/notes locales et demandes de configuration. Le portail client est une projection disti">
 <link rel="stylesheet" href="../style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9673;</text></svg>">
 </head>
@@ -20,18 +20,18 @@ Exécution</p>
 
 <h1><code>hermes-cockpit</code></h1>
 <div class="ets" style="margin:-.4rem 0 1rem">
-  <span class="et et-reference">reference</span> <span class="et et-utilisable">utilisable</span> <span class="et et-actif">actif</span>
+  <span class="et et-reference">reference</span> <span class="et et-partiel">partiel</span> <span class="et et-actif">actif</span>
   <span class="et">Exécution</span>
   <span class="et">proprietaire</span>
   <span class="et">privé</span>
 </div>
 
-<p class="intro">Cockpit d'exploitation du VPS. Lit la santé de radar et de danmem, détecte les process Talos et Claude sur l'hôte, et sert un portail client. portal.mjs en tout et pour tout.</p>
+<p class="intro">Poste privilégié d'exploitation du VPS : état des services, accès, tâches/notes locales et demandes de configuration. Le portail client est une projection distincte des dossiers de marque et de campagne.</p>
 
 
 
 
-<div class="encart encart-attention"><div class="encart-titre">Point de vigilance</div><p>galahad porte déjà cockpit/index.html. Deux cockpits coexistent sans que leur partage de responsabilité soit écrit.</p></div>
+<div class="encart encart-attention"><div class="encart-titre">Point de vigilance</div><p>Conservation et lectures partielles réparées sur contrats locaux ; un acquittement n'est pas l'effet d'une commande. Fraîcheur, identité des agents, écrivains externes, restauration et isolation restent à recevoir. Le partage avec galahad/cockpit reste à qualifier par usages. Voir docs/RECEPTION-COCKPIT.md.</p></div>
 
 
 
@@ -44,19 +44,19 @@ Exécution</p>
 
 <h2 id="releve">Ce que le relevé constate</h2>
 <div class="grille grille-3">
-  <div class="carte"><div class="chiffre">7</div><div class="chiffre-lib">fichiers</div></div>
-  <div class="carte"><div class="chiffre">56 Ko</div><div class="chiffre-lib">d'arbre</div></div>
-  <div class="carte"><div class="chiffre">1</div><div class="chiffre-lib">commits / 90 j</div></div>
+  <div class="carte"><div class="chiffre">12</div><div class="chiffre-lib">fichiers</div></div>
+  <div class="carte"><div class="chiffre">77 Ko</div><div class="chiffre-lib">d'arbre</div></div>
+  <div class="carte"><div class="chiffre">2</div><div class="chiffre-lib">commits / 90 j</div></div>
 </div>
 <div class="table-enveloppe"><table><tbody>
 <tr><td>branche</td><td><code>main</code></td></tr>
-<tr><td>langue</td><td><code>HTML</code></td></tr>
+<tr><td>langue</td><td><code>JavaScript</code></td></tr>
 <tr><td>fichier LICENSE</td><td><span class="et et-actif">présent</span></td></tr>
 <tr><td>topics</td><td><code>layer-execution</code> <code>shinkiro</code></td></tr>
 <tr><td>racines déployables</td><td><code>.</code></td></tr>
 </tbody></table></div>
 <h3>Artefacts détectés</h3>
-<div class="table-enveloppe"><table><tbody><tr><td><code>compose</code></td><td><code>docker-compose.yaml</code></td></tr><tr><td><code>dockerfile</code></td><td><code>Dockerfile</code></td></tr><tr><td><code>index_html</code></td><td><code>index.html</code></td></tr><tr><td><code>package</code></td><td><code>package.json</code></td></tr></tbody></table></div>
+<div class="table-enveloppe"><table><tbody><tr><td><code>compose</code></td><td><code>docker-compose.yaml</code></td></tr><tr><td><code>dockerfile</code></td><td><code>Dockerfile</code></td></tr><tr><td><code>index_html</code></td><td><code>index.html</code></td></tr><tr><td><code>package</code></td><td><code>package.json</code></td></tr><tr><td><code>workflows</code></td><td><code>.github/workflows/checks.yml</code></td></tr></tbody></table></div>
 <p><span class="source">fleet.lock.yml</span> — relevé du 2026-10-07, régénéré par <code>make releve</code>.</p>
 
 

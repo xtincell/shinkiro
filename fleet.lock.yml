@@ -227,11 +227,11 @@ composants:
   - nom: hermes-cockpit
     branche: main
     prive: true
-    langue: HTML
-    fichiers: 7
-    poids_ko: 56
+    langue: JavaScript
+    fichiers: 12
+    poids_ko: 77
     licence: presente
-    commits_90j: 1
+    commits_90j: 2
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
@@ -239,6 +239,7 @@ composants:
       dockerfile: [Dockerfile]
       index_html: [index.html]
       package: [package.json]
+      workflows: [.github/workflows/checks.yml]
   - nom: hulysse
     branche: main
     prive: true
