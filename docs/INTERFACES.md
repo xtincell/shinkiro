@@ -249,6 +249,13 @@ ne remplace pas les décisions Fusée/La Barre, le journal Radar ou les mandats 
 Galahad. Concurrence avec les autres écrivains, fraîcheur, permissions et partage
 des deux cockpits restent à recevoir. Voir [RECEPTION-COCKPIT.md](RECEPTION-COCKPIT.md).
 
+Le portail utilise aussi un service hôte distinct et sa base `matanga_portal`.
+Son raccord PostgreSQL périmé est rétabli après lecture du schéma et du rôle ;
+les routes d’accès, codes, visibilité et journal répondent à nouveau. La visibilité
+est une correspondance client → numéros. Adresse stable, autres consommateurs et
+réception des commandes métier restent ouverts ; cette lecture ne recopie pas
+les données de l’employeur dans un registre de marque général.
+
 ## indice-maturite → la-fusee — bilan déclaratif conservable
 
 L'Indice conserve ses questions et sa méthode. Un bilan incomplet montre sa
