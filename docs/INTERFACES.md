@@ -40,7 +40,7 @@ commentaires. Le code refuse un rattachement de média sur un code ambigu.
 La recette du composant reçoit les échecs de lot et de journal, les transitions
 de confidentialité, les médias et le redémarrage. Elle ne reçoit pas les
 permissions métier complètes par rôle, la concurrence des codes, la
-qualification de l'histoire ni le raccord La Barre → Radar. L'accès machine
+qualification de l'histoire ni tous les échanges inter-outils. L'accès machine
 général reste distinct du filtrage humain. Une trace `closed` n'est pas une preuve
 de livraison ni d'accord client. Voir `radar/docs/RECEPTION-JOURNAL.md`.
 
@@ -87,10 +87,46 @@ no-op le conserve. Le portail et les médias partagent la résolution d’un bri
 unique et autorisé, avec refus des codes ambigus et des dossiers privés.
 
 Les tests PostgreSQL et la vérification du code livré ne remplacent pas la
-réception native de la cloche et du portail. Le raccord idempotent La Barre,
-les permissions métier complètes, l’histoire non qualifiée et la reprise dans
+réception native de la cloche et du portail. Les permissions métier complètes,
+l’histoire non qualifiée et la reprise dans
 un autre environnement restent ouverts. Voir
 [le contrat Matanga](https://github.com/xtincell/Matanga-Creative-dashboard/blob/main/docs/RECEPTION-JOURNAL.md).
+
+### La Barre → Radar Matanga — admission, puis rapprochement
+
+[La correction #58](https://github.com/xtincell/Matanga-Creative-dashboard/pull/58)
+raccorde le formulaire de création existant à une lecture serveur de La Barre.
+`RADAR_INSTANCE_ID`, `BARRE_SOURCE_ID`, `BARRE_SOURCE_URL` et `BARRE_CLIENT_MAP`
+désignent la destination, la source et les clients permis. Sans configuration
+explicite : 503, aucune admission. Le navigateur ne fournit aucune URL ni clé.
+
+`GET /sources/la-barre/projects/:id` présente les champs de suivi, leurs
+qualifications, la version source, le reçu précédent et la version des champs
+Radar. `POST` au même chemin reçoit ces versions et la destination. Une
+réponse perdue reprend le reçu existant ; une autre version ou destination
+n'est pas acceptée silencieusement. Brief, liaison et reçu partagent la
+transaction ; le journal canonique produit seul le mouvement métier.
+
+La clé de liaison est `(instance Radar, instance La Barre, project, id source)`.
+Le dossier Radar est identifié par son `briefs.id`, distinct de son code
+lisible. Les reçus privés conservent les identifiants de client et des marques,
+l'empreinte du projet et celle du contexte transféré. Ils suivent la
+confidentialité actuelle du dossier. Une suppression ne déclenche pas une
+recréation automatique.
+
+La Barre conserve le cadrage ; Radar conserve ses états, responsables,
+priorités et accords. L'admission initiale reste Reçu / déduit, non assignée.
+Une reprise conserve les corrections locales indépendantes ; deux changements
+du même champ demandent un choix, invalidé par un nouveau changement Radar.
+Ni la provenance, ni l'admission ne valent accord client ou authentification
+de l'auteur de La Barre. Aucun modèle ou agent n'est nécessaire.
+
+Les codes sont attribués sous verrou entre admissions ; les autres créateurs
+historiques n'ont pas encore ce même écrivain. Le champ marque historique
+reste utilisé dans certains filtres malgré les identifiants distincts
+conservés au reçu. Réception native, rattachement Fusée à l'instance Radar,
+retour des résultats, cycle complet et second locataire restent ouverts.
+Voir [le contrat d'admission](https://github.com/xtincell/Matanga-Creative-dashboard/blob/main/docs/ADMISSION-LA-BARRE.md).
 
 ## talos ↔ radar — MCP
 
@@ -153,7 +189,7 @@ compte.
 
 ## Ce qui n'a pas de contrat, et devrait
 
-Quatre liaisons existent dans les faits mais ne sont spécifiées nulle part. Elles sont
+Trois liaisons existent dans les faits mais ne sont spécifiées nulle part. Elles sont
 listées ici pour qu'un agent sache qu'il improvise s'il y touche.
 
 | Liaison | État |
@@ -161,7 +197,6 @@ listées ici pour qu'un agent sache qu'il improvise s'il y touche.
 | `talos/radar-mcp` → `radar` | Code présent, client de test présent, **protocole non écrit** |
 | `hermes-cockpit` → `radar` et `danmem` | Le cockpit lit leur santé — **format des sondes non écrit** |
 | `danmem` ↔ `galahad/engine/src/memory.js` | Deux couches mémoire, **articulation non établie** |
-| `la-barre` → `radar` | **Aucun lien.** La Barre décide, Radar journalise — la mesure avant/après en dépend |
 
-La dernière est la plus coûteuse : sans elle, le sixième critère de gouvernance du
-portefeuille — la méthode de preuve — n'est pas tenable pour le Transformation Pilot.
+L'admission La Barre → Radar Matanga a désormais un contrat ci-dessus. Elle
+ne reçoit pas encore le cycle de mesure avant/après du Transformation Pilot.
