@@ -318,6 +318,8 @@ composants:
       Conservation et lectures partielles réparées sur contrats locaux ; un
       acquittement n'est pas l'effet d'une commande. Fraîcheur, identité des
       agents, écrivains externes, restauration et isolation restent à recevoir.
+      Le raccord PostgreSQL du portail est réparé ; son endpoint stable et les
+      autres consommateurs restent à recevoir, sans recopier les données client.
       Le partage avec galahad/cockpit reste à qualifier par usages.
       Voir docs/RECEPTION-COCKPIT.md.
 

@@ -86,8 +86,10 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   à null et lien symbolique sortant du workspace sur fixture. PR #1 fusionnée :
   conservation, refus, demandes de configuration et lectures partielles réparés ;
   douze contrôles locaux/HTTP et deux CI verts. Livraison `fbcdb20`, image,
-  fichiers exécutés et volumes reçus ; quatre refus amont 500 deviennent visibles,
-  cause à diagnostiquer. Native authentifiée et effet de
+  fichiers exécutés et volumes reçus. Quatre refus amont 500 révèlent une adresse
+  PostgreSQL périmée ; raccord rétabli, rôle existant reçu en read-only et quatre
+  routes revenues à 200. Le format réel de visibilité reçoit une correction en
+  PR #2, treize contrôles et deux CI verts. Endpoint stable, native authentifiée et effet de
   commande non reçus. Fraîcheur, écrivains externes, reprise et
   frontière avec Galahad restent ouvertes. Voir [RECEPTION-COCKPIT.md](RECEPTION-COCKPIT.md).
 - Argos : fonds canonique autonome, contrat manuel et veille facultative

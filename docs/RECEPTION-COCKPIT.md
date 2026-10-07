@@ -43,6 +43,40 @@ Le portail rapporte maintenant quatre refus HTTP 500 (accès, codes, visibilité
 journal), avec trois lectures disponibles. Leur cause amont reste à diagnostiquer ;
 la nouvelle observabilité ne permet pas d’attribuer la panne à cette livraison.
 
+### Réception du raccord amont et du format de visibilité
+
+Le service hôte `portal-api.service` pointe vers l’ancienne adresse PostgreSQL
+`10.0.1.10`. La base existante `matanga_portal` est retrouvée uniquement dans
+`kgnzh4642i1p30lc2ewsvwk9`, à `10.0.1.17` ; ses quatre tables existent et le rôle
+configuré les lit dans une session explicitement read-only. Le champ `PGHOST`
+du fichier partagé est corrigé, permissions root/0600 conservées ; seul le
+service API est relancé. Processus et configuration effectifs sont relus. Les
+quatre routes répondent 200 ; leurs résultats vides sont maintenant réellement
+lus. Cela ne reçoit pas une restauration de données historiques.
+
+Le premier contrôle immédiat après relance ne retrouve pas encore `PGHOST` dans
+l’environnement observé. La relecture indépendante reçoit le processus effectif ;
+aucune seconde relance. Aucun agent, bot ou PostgreSQL redémarré, aucun contenu,
+code d’accès, droit ou mandat créé/modifié par cette recette.
+
+La réponse réelle `/visible` est `{ client: [numéros, ...] }`, pas une liste.
+Le lecteur introduit dans la PR #1 la refusait à tort. La
+[PR #2](https://github.com/xtincell/hermes-cockpit/pull/2), canon `1ea757b`, reçoit
+ce contrat et refuse les valeurs incompatibles : critère rouge avant correction,
+treize contrôles et deux CI verts après. Le service source garde son format.
+
+Livraison `1ea757b` terminée à 22:26:56Z ; image
+`sha256:1a270b6ed55484787de422f2a42c04b7ec11bd3af5b923a451facdc7fd271070`, trois
+fichiers exécutés et volumes rapprochés. Lecture authentifiée bornée : sept sources
+disponibles, `partial: false`. HTML reçu 200, routes privées anonymes 401. Cela
+reçoit la lecture HTTP et ses formats, pas l’approbation de chaque donnée ou un
+parcours navigateur authentifié.
+
+Le raccord réparé dépend encore d’une adresse de conteneur. Sa stabilité après
+recréation, les autres consommateurs du fichier partagé, la source/déploiement du
+service hôte et ses permissions métier restent à recevoir. Ce point est une dette
+d’exploitation identifiée, pas un nouveau produit ou une fonction à ajouter.
+
 Ces contrôles ne reçoivent pas les écrivains externes, une coupure électrique ou
 un remplacement de lien entre contrôle et ouverture. Fraîcheur de toutes les
 sources, identité réelle des agents, effet appliqué, navigateur authentifié,

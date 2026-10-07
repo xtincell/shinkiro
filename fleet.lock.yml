@@ -229,9 +229,9 @@ composants:
     prive: true
     langue: JavaScript
     fichiers: 12
-    poids_ko: 77
+    poids_ko: 78
     licence: presente
-    commits_90j: 2
+    commits_90j: 3
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
