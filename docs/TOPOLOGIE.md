@@ -1,20 +1,39 @@
 # Topologie de déploiement
 
-Relevé exhaustif des arborescences au 14 septembre 2026. Chaque fait est
-constaté dans un dépôt, aucun n'est supposé.
+Le relevé initial du 14 septembre 2026 est complété par les réceptions datées.
+Une arborescence, une installation réellement servie et un parcours reçu sont
+trois preuves distinctes.
+
+## Correction du 7 octobre — Galahad et Danmem
+
+Danmem est un service HTTP Node sous systemd avec PostgreSQL/pgvector. Il ne
+partage pas l'image des rôles Galahad. Sa file `/jobs` existait sur le VPS mais
+pas dans Git ; sa source et son schéma sont désormais repris dans le canon.
+Les corrections reçues sur copies ne sont pas déployées au service actif.
+
+`galahad/engine/src/memory.js` conserve les cartes et l'index de continuité d'un
+rôle. Danmem conserve les observations partagées et leurs dérivations. L'outbox
+locale Galahad conserve un résultat non acquitté ; Danmem reste propriétaire du
+statut du travail. Ces stockages ont des responsabilités distinctes. Leur
+présence ne reçoit pas l'isolation d'entreprise ni une restauration complète.
+Voir [la réception croisée](RECEPTION-GALAHAD-DANMEM.md).
+
+Les tableaux de modes ci-dessous décrivent le relevé initial, complété pour
+DataCollector. Ils ne remplacent pas les reçus de livraison : La Fusée est
+aujourd'hui livrée par Coolify, et Danmem fonctionne sous systemd.
 
 ## Le principe, et son arbitrage
 
 > *Tout ou presque devrait pouvoir être déployé de manière autonome **et** dans
 > la suite Shinkiro.*
 
-C'est juste, et c'est déjà presque vrai : **quinze composants sur dix-sept sont
-déployables seuls**. Deux exceptions, et elles sont fondées :
+La flotte réunit services, outils et méthodes. Leur autonomie s'éprouve pour
+chaque installation ; elle ne se déduit pas d'un README ou d'un Dockerfile.
 
-| Composant | Pourquoi il ne se déploie pas seul |
+| Composant | Nature et autonomie |
 |---|---|
 | `market-expansion-system` | C'est une **méthode**, pas un service. Elle se lit, se remplit, s'importe dans Radar. Lui donner un conteneur n'aurait aucun sens. |
-| `danmem` | C'est un **module** de `galahad`. Le déployer à part contredirait la conception « une image moteur, trois rôles ». |
+| `danmem` | L'exception initiale était fausse : service HTTP distinct, avec sa base. Son installation et sa restauration restent à recevoir. |
 
 **En revanche, une suite qui monterait d'un seul `docker compose up` serait une
 fiction.** La flotte tourne réellement en cinq modes, et les forcer en un seul
@@ -26,7 +45,7 @@ par un compose racine.
 | Mode | Composants | Artefact constaté |
 |---|---|---|
 | **Coolify** *(le VPS)* | `galahad`, `hermes-cockpit` | compose piloté par Coolify, labels Traefik, TLS par FQDN, réseau `coolify` externe |
-| **systemd** *(l'hôte)* | `talos`, `hulysse`, `galahad` (pare-feu docker) | `ops/*.service` + `ops/install.sh` ; `deploy/systemd/galahad-docker-firewall.service` |
+| **systemd** *(l'hôte)* | `talos`, `hulysse`, `danmem`, `galahad` (pare-feu docker) | unités des rôles ; `danmem.service` observé sur l'hôte ; `deploy/systemd/galahad-docker-firewall.service` |
 | **Vercel** | `ADVE-project`, `Argos-studio` | `next.config.ts`, `vercel.json`, Prisma |
 | **Docker autonome** | `radar`, `galahad-landing` | Dockerfile sans orchestration imposée |
 | **Statique / Pages** | `indice-maturite`, `la-barre`, `charadesign-generator`, `generateur-approches`, `character-engine`, `la-fusee-blueprint`, front `datacollector` | `index.html` ouvrable, ou Pages |
@@ -68,7 +87,17 @@ la flotte.
 Ils ne sont pas des bugs. Ce sont des décisions qui n'ont jamais été écrites, et
 chacune coûtera cher à qui l'ignore.
 
-### 1 · Deux moteurs, pas trois
+### 1 · Dépôts historiques et moteurs servis
+
+**Réception du 7 octobre.** La mesure ci-dessous porte sur les dépôts de
+septembre. Les services Talos et Hulysse présentent aujourd’hui quinze modules
+identiques, dont onze correspondent au Galahad initial. Missions et Agora
+constituent les ajouts servis. Les capacités donneuses des dépôts historiques
+restent à recevoir avant convergence de déploiement. Voir
+[la réception des rôles](RECEPTION-TALOS-HULYSSE.md).
+La conclusion historique qui suit ne doit pas être appliquée au code servi.
+
+#### Mesure Git de septembre
 
 Cette section affirmait le contraire : *« le moteur existe en trois exemplaires …
 c'est la dette structurelle n°1 »*. Personne ne l'avait mesurée — trois
@@ -144,7 +173,7 @@ Le Market Expansion System documente une mécanique que La Barre exécute.
    ┌───▼────┐      ┌──────▼──────┐    ┌──────▼───────┐
    │ danmem │      │    radar    │    │hermes-cockpit│
    │mémoire │      │ task_events │◀───│ santé + portail│
-   │(module)│      │  Postgres   │    │  pid: host    │
+   │ HTTP/PG│      │  Postgres   │    │  pid: host    │
    └────────┘      └──────┬──────┘    └──────────────┘
                           │
                    talos/radar-mcp  ── pont MCP, protocole non documenté
@@ -154,8 +183,9 @@ Le Market Expansion System documente une mécanique que La Barre exécute.
                    └─────────────┘
 ```
 
-`radar` requiert **Postgres**. C'est la seule dépendance externe dure de la
-flotte, avec les endpoints LLM compatibles OpenAI.
+`radar`, Danmem et La Fusée ont des dépendances de persistance. Les endpoints
+LLM et les sources de collecte restent d'autres dépendances à recevoir. Aucune
+promesse d'installation ne peut les réduire à une seule dépendance commune.
 
 ## Ce qui reste à écrire
 
@@ -163,8 +193,8 @@ flotte, avec les endpoints LLM compatibles OpenAI.
    protocole n'est décrit nulle part.
 2. **Le partage cockpit.** Qui affiche quoi, entre `galahad/cockpit` et
    `hermes-cockpit`.
-3. **Le rapport `danmem` ↔ `galahad/engine/src/memory.js`.** Deux couches
-   mémoire, aucune articulation écrite.
+3. **La réception des couches mémoire.** Leurs responsabilités sont décrites
+   ci-dessus ; restauration, droits et reprise de tous les effets restent ouverts.
 4. **La jointure des deux taxonomies d'écart**, et le branchement de
    `la-barre/vue-matrice` sur le Market Expansion System.
 5. **Le câblage `la-barre` → `radar`.** La Barre produit les décisions, Radar

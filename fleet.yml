@@ -154,7 +154,7 @@ composants:
   - nom: galahad
     couche: execution
     etage: reference
-    maturite: utilisable
+    maturite: partiel
     licence: proprietaire
     vitalite: actif
     ordre_construction: 1
@@ -167,16 +167,22 @@ composants:
       systemd: deploy/systemd/galahad-docker-firewall.service
     produits_portefeuille: ["05 · Content Operations", "04 · Content Velocity System"]
     description: >-
-      Une équipe d'IA organisée en agents qui fait tourner l'agence en autonomie
-      depuis un serveur dédié. Coordonnés sur un seul VPS, pilotés depuis
-      Telegram, agnostiques au fournisseur de modèle. Une image, trois rôles.
-      C'est un PRODUIT du portefeuille, pas seulement un composant de livraison.
+      Moteur de procédures, décisions IA et coordination d'infrastructure sur
+      serveur dédié. Rôles configurables, patrouille et travaux délégués ; le
+      jugement modèle est explicite dans les procédures. Produit d'infrastructure
+      autonome et moyen de livraison du portefeuille.
+    attention: >-
+      Le moteur et ses retours ont des réceptions locales ; les surfaces de
+      configuration, le mandat précis, le coût persistant et l'exploitation
+      multi-entreprises ne sont pas reçus. Le garde de commandes n'est pas un
+      sandbox. La mémoire distante Danmem reste un service distinct.
+      Voir docs/RECEPTION-GALAHAD-DANMEM.md.
     contient:
       engine: >-
-        15 modules — agent-loop, brain, config, goals, heartbeat, hooks,
+        Modules — agent-loop, brain, config, goals, heartbeat, hooks,
         integrations, jobs, journal, memory, roles, skill-runner, telegram,
         tools. Zéro dépendance npm, zéro build.
-      skills: [audit-coherence.json, diagnostic-coolify.json]
+      skills: [audit-coherence.json, audit-fleet.json, diagnostic-coolify.json]
       bridge: Passerelle Claude — server.js et son Dockerfile.
       cockpit: cockpit/index.html
       setup: Assistant de configuration — index.html et server.mjs.
@@ -229,22 +235,20 @@ composants:
     vitalite: fige
     deploiement: {mode: systemd, unite: ops/talos.service, installateur: ops/install.sh}
     description: >-
-      Rôle Guardian — gardien du VPS. Refondu sur l'Agent SDK : le cerveau
-      agentique est délégué au moteur, Talos n'écrit que la mémoire stratifiée,
-      la patrouille, le canal, le journal, et câble les garde-fous en dur.
+      Gardien de l’installation : observer la santé, diagnostiquer les incidents
+      et préparer des réparations sous autorité. Son rôle reste distinct de
+      l’exploration et des décisions métier.
     contient:
       src: [agent-loop, config, cron, heartbeat, hooks, index, journal, mcp, memory, ollama, soul, telegram, tools]
       radar-mcp: Pont MCP vers radar — index.js et test-client.mjs.
       memory-seed: [MEMORY.md, infra.md, projets.md]
     divergence: {avec: hulysse, chemin: src, mesure_pct: 17, le: 2026-09-14}   # SHK-0003
     attention: >-
-      Même moteur que hulysse, à 17 % près — journal.js, ollama.js et telegram.js
-      sont identiques à l'octet. Ce qui les sépare est fonctionnel, pas structurel :
-      talos porte cron, heartbeat et le pont MCP vers radar ; hulysse porte goals et
-      veille. C'est la duplication réelle du programme, et la seule.
-      Aucun recouvrement avec galahad, qui diverge de 73 % : moteur différent,
-      agnostique au fournisseur de modèle. Chiffres reproductibles par
-      scripts/mesure-divergence.mjs.
+      La divergence déclarée mesure les dépôts historiques, pas le code servi.
+      Les services Talos et Hulysse utilisent une variante commune de Galahad.
+      Missions et Agora sont réintégrées au canon ; cron, briefing, sessions
+      persistées et MCP restent des capacités donneuses à recevoir.
+      Aucun service actif migré. Voir docs/RECEPTION-TALOS-HULYSSE.md.
 
   - nom: hulysse
     couche: execution
@@ -254,29 +258,37 @@ composants:
     vitalite: fige
     deploiement: {mode: systemd, unite: ops/hulysse.service, installateur: ops/install.sh}
     description: >-
-      Rôle Traveler — explorateur autonome et bâtisseur de nuit. Veille,
-      objectifs, repli LLM. Demande avant de livrer.
+      Explorateur de l’installation et de ses objectifs : observer, préparer
+      et remettre des pistes au domaine compétent. La politique de veille et
+      l’autorité d’action doivent être explicites pour chaque installation.
     contient:
       src: [agent-loop, config, goals, hooks, index, journal, memory, telegram, tools]
       memory-seed: [MEMORY.md, infra.md, projets.md]
     divergence: {avec: talos, chemin: src, mesure_pct: 17, le: 2026-09-14}   # SHK-0003
     attention: >-
-      Même moteur que talos. Voir talos.attention — et non galahad, dont il
-      diverge de 71 %.
+      Dépôt historique et moteur servi diffèrent. Les objectifs clos de l’ancien
+      schéma restent clos dans le moteur corrigé. Veille réactive et fenêtre
+      nocturne ne sont pas assimilées sans réception de configuration.
+      Convergence de déploiement et reprise des conversations ouvertes.
+      Voir docs/RECEPTION-TALOS-HULYSSE.md.
 
   - nom: danmem
     couche: execution
     etage: reference
-    maturite: a-qualifier
+    maturite: partiel
     licence: proprietaire
-    vitalite: fige
-    deploiement: {mode: module, hote: galahad}
+    vitalite: actif
+    deploiement: {mode: systemd, entree: src/index.mjs, requiert: postgres}
     description: >-
-      Serveur de mémoire homebrew — peers, deriver, dialectique, S0→S7. Un
-      seul fichier de code, src/index.mjs.
+      Mémoire contextuelle partagée : observations attribuées, rappel hybride,
+      cartes, dérivation et historique de consolidation. File de travaux entre
+      mandataires. Ce contexte ne remplace ni une source métier ni son approbation.
     attention: >-
-      Aucun README. Et galahad/engine/src/memory.js couvre déjà une couche
-      mémoire : le rapport entre les deux n'est établi nulle part.
+      Service HTTP et PostgreSQL distinct du moteur Galahad. La version servie
+      et le canon ont été rapprochés ; schéma et contrats sont versionnés.
+      Les corrections reçues sur copies ne sont pas livrées au service actif.
+      Identités de mandataires, reprise des claims, coût et restauration complète
+      restent ouverts. Voir docs/RECEPTION-GALAHAD-DANMEM.md.
 
   - nom: hermes-cockpit
     couche: execution

@@ -154,14 +154,15 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 5
-    poids_ko: 15
+    fichiers: 12
+    poids_ko: 60
     licence: presente
-    commits_90j: 1
+    commits_90j: 2
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
       package: [package.json]
+      workflows: [.github/workflows/reception.yml]
   - nom: datacollector
     branche: main
     prive: true
@@ -181,10 +182,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 71
-    poids_ko: 236
+    fichiers: 78
+    poids_ko: 277
     licence: presente
-    commits_90j: 25
+    commits_90j: 28
     topics: ["layer-execution", shinkiro]
     racines: [., bridge, cockpit, engine, setup]
     artefacts:
@@ -194,6 +195,7 @@ composants:
       index_html: [cockpit/index.html, setup/index.html]
       package: [bridge/package.json, engine/package.json]
       python: ["deploy/sas-admin/gateway/requirements.txt"]
+      workflows: [".github/workflows/engine-reception.yml"]
       env_example: [.env.example, "deploy/dan-hermes/.env.example", "deploy/sas-admin/.env.example"]
   - nom: galahad-landing
     branche: main

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>danmem — Shinkiro</title>
-<meta name="description" content="Serveur de mémoire homebrew — peers, deriver, dialectique, S0→S7. Un seul fichier de code, src/index.mjs.">
+<meta name="description" content="Mémoire contextuelle partagée : observations attribuées, rappel hybride, cartes, dérivation et historique de consolidation. File de travaux entre mandataires. C">
 <link rel="stylesheet" href="../style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9673;</text></svg>">
 </head>
@@ -20,18 +20,18 @@ Exécution</p>
 
 <h1><code>danmem</code></h1>
 <div class="ets" style="margin:-.4rem 0 1rem">
-  <span class="et et-reference">reference</span> <span class="et et-a-qualifier">a-qualifier</span> <span class="et et-fige">fige</span>
+  <span class="et et-reference">reference</span> <span class="et et-partiel">partiel</span> <span class="et et-actif">actif</span>
   <span class="et">Exécution</span>
   <span class="et">proprietaire</span>
   <span class="et">privé</span>
 </div>
 
-<p class="intro">Serveur de mémoire homebrew — peers, deriver, dialectique, S0→S7. Un seul fichier de code, src/index.mjs.</p>
+<p class="intro">Mémoire contextuelle partagée : observations attribuées, rappel hybride, cartes, dérivation et historique de consolidation. File de travaux entre mandataires. Ce contexte ne remplace ni une source métier ni son approbation.</p>
 
 
 
 
-<div class="encart encart-attention"><div class="encart-titre">Point de vigilance</div><p>Aucun README. Et galahad/engine/src/memory.js couvre déjà une couche mémoire : le rapport entre les deux n'est établi nulle part.</p></div>
+<div class="encart encart-attention"><div class="encart-titre">Point de vigilance</div><p>Service HTTP et PostgreSQL distinct du moteur Galahad. La version servie et le canon ont été rapprochés ; schéma et contrats sont versionnés. Les corrections reçues sur copies ne sont pas livrées au service actif. Identités de mandataires, reprise des claims, coût et restauration complète restent ouverts. Voir docs/RECEPTION-GALAHAD-DANMEM.md.</p></div>
 
 
 
@@ -39,14 +39,14 @@ Exécution</p>
 
 
 <h2 id="deploiement">Déploiement</h2>
-<div class="table-enveloppe"><table><tbody><tr><td><code>mode</code></td><td><code>module</code></td></tr><tr><td><code>hote</code></td><td><code>galahad</code></td></tr></tbody></table></div>
+<div class="table-enveloppe"><table><tbody><tr><td><code>mode</code></td><td><code>systemd</code></td></tr><tr><td><code>entree</code></td><td><code>src/index.mjs</code></td></tr><tr><td><code>requiert</code></td><td><code>postgres</code></td></tr></tbody></table></div>
 <p><span class="source">fleet.yml</span> — mode constaté dans le dépôt, jamais supposé.</p>
 
 <h2 id="releve">Ce que le relevé constate</h2>
 <div class="grille grille-3">
-  <div class="carte"><div class="chiffre">5</div><div class="chiffre-lib">fichiers</div></div>
-  <div class="carte"><div class="chiffre">15 Ko</div><div class="chiffre-lib">d'arbre</div></div>
-  <div class="carte"><div class="chiffre">1</div><div class="chiffre-lib">commits / 90 j</div></div>
+  <div class="carte"><div class="chiffre">12</div><div class="chiffre-lib">fichiers</div></div>
+  <div class="carte"><div class="chiffre">60 Ko</div><div class="chiffre-lib">d'arbre</div></div>
+  <div class="carte"><div class="chiffre">2</div><div class="chiffre-lib">commits / 90 j</div></div>
 </div>
 <div class="table-enveloppe"><table><tbody>
 <tr><td>branche</td><td><code>main</code></td></tr>
@@ -56,7 +56,7 @@ Exécution</p>
 <tr><td>racines déployables</td><td><code>.</code></td></tr>
 </tbody></table></div>
 <h3>Artefacts détectés</h3>
-<div class="table-enveloppe"><table><tbody><tr><td><code>package</code></td><td><code>package.json</code></td></tr></tbody></table></div>
+<div class="table-enveloppe"><table><tbody><tr><td><code>package</code></td><td><code>package.json</code></td></tr><tr><td><code>workflows</code></td><td><code>.github/workflows/reception.yml</code></td></tr></tbody></table></div>
 <p><span class="source">fleet.lock.yml</span> — relevé du 2026-10-07, régénéré par <code>make releve</code>.</p>
 
 

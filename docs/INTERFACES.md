@@ -7,6 +7,26 @@ spécification.
 Établi par relevé exhaustif au 14 septembre 2026. Ce qui est **constaté** est marqué comme
 tel ; ce qui reste **à écrire** l'est aussi — et ce second groupe est le plus important.
 
+## Galahad ↔ Danmem — contexte et travaux
+
+Danmem est un service distinct. Une observation porte son peer, son contenu,
+sa source et sa strate ; ce contexte ne modifie pas l'autorité d'un dossier
+métier. Les cartes locales du moteur servent la continuité du rôle. Aucune
+recopie globale de briefs ou d'approbations entre ces mémoires n'est reçue.
+
+La file existante reçoit `to`, `skill`, des arguments objet et éventuellement
+une échéance. Le consommateur lit ses pending, réclame atomiquement puis renvoie
+`done` ou `failed`. Le résultat est conservé localement avant acquittement ; un
+retour perdu est retenté sans rejouer la procédure. Danmem protège le premier
+résultat final et accepte son rejeu identique. Un travail n'est pas une validation
+client. Les clés sont globales à l'instance ; les identités et mandats restent ouverts.
+
+La réception croisée utilise PostgreSQL jetable et deux processus Galahad avec
+panne de retour 503. Elle ne reçoit pas une interruption pendant l'effet, le
+bus des agents vivants ni le retour vers une campagne. Les contrats corrigés
+sont dans Git ; les services actifs ne sont pas modifiés par cette réception.
+Voir [RECEPTION-GALAHAD-DANMEM.md](RECEPTION-GALAHAD-DANMEM.md).
+
 ## radar — API de données
 
 Interface façon PostgREST sur `/rest/v1/<table>`. Tables et colonnes en **liste blanche** :
@@ -173,7 +193,10 @@ admission dans le dossier, ouverture hors ligne et repli sans stockage restent
 ## talos ↔ radar — MCP
 
 `talos/radar-mcp/` contient `index.js`, son `package.json` et un `test-client.mjs`. C'est le
-pont MCP qui expose Radar au rôle Guardian.
+pont MCP historique prévu pour exposer Radar au rôle Guardian. Les quinze
+modules actuellement servis n’appellent pas ce client ; ils possèdent une
+intégration HTTP distincte. Le contrat MCP reste une capacité donneuse à recevoir,
+pas une connexion active prouvée. Voir [la réception des rôles](RECEPTION-TALOS-HULYSSE.md).
 
 **Le protocole n'est décrit nulle part.** Il existe un client de test — c'est le point de
 départ pour le reconstituer, puis le figer ici. Tant que ce n'est pas fait, toute
@@ -238,7 +261,7 @@ listées ici pour qu'un agent sache qu'il improvise s'il y touche.
 |---|---|
 | `talos/radar-mcp` → `radar` | Code présent, client de test présent, **protocole non écrit** |
 | `hermes-cockpit` → `radar` et `danmem` | Le cockpit lit leur santé — **format des sondes non écrit** |
-| `danmem` ↔ `galahad/engine/src/memory.js` | Deux couches mémoire, **articulation non établie** |
+| `danmem` ↔ `galahad/engine/src/memory.js` | Responsabilités décrites ci-dessus ; **restauration, droits et parcours vivant non reçus** |
 
 L'admission La Barre → Radar Matanga a désormais un contrat ci-dessus. Elle
 ne reçoit pas encore le cycle de mesure avant/après du Transformation Pilot.

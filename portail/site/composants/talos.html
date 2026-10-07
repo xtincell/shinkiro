@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>talos — Shinkiro</title>
-<meta name="description" content="Rôle Guardian — gardien du VPS. Refondu sur l'Agent SDK : le cerveau agentique est délégué au moteur, Talos n'écrit que la mémoire stratifiée, la patrouille, le">
+<meta name="description" content="Gardien de l’installation : observer la santé, diagnostiquer les incidents et préparer des réparations sous autorité. Son rôle reste distinct de l’exploration e">
 <link rel="stylesheet" href="../style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9673;</text></svg>">
 </head>
@@ -26,12 +26,12 @@ Exécution</p>
   <span class="et">privé</span>
 </div>
 
-<p class="intro">Rôle Guardian — gardien du VPS. Refondu sur l'Agent SDK : le cerveau agentique est délégué au moteur, Talos n'écrit que la mémoire stratifiée, la patrouille, le canal, le journal, et câble les garde-fous en dur.</p>
+<p class="intro">Gardien de l’installation : observer la santé, diagnostiquer les incidents et préparer des réparations sous autorité. Son rôle reste distinct de l’exploration et des décisions métier.</p>
 
 
 
 
-<div class="encart encart-attention"><div class="encart-titre">Point de vigilance</div><p>Même moteur que hulysse, à 17 % près — journal.js, ollama.js et telegram.js sont identiques à l'octet. Ce qui les sépare est fonctionnel, pas structurel : talos porte cron, heartbeat et le pont MCP vers radar ; hulysse porte goals et veille. C'est la duplication réelle du programme, et la seule. Aucun recouvrement avec galahad, qui diverge de 73 % : moteur différent, agnostique au fournisseur de modèle. Chiffres reproductibles par scripts/mesure-divergence.mjs.</p></div>
+<div class="encart encart-attention"><div class="encart-titre">Point de vigilance</div><p>La divergence déclarée mesure les dépôts historiques, pas le code servi. Les services Talos et Hulysse utilisent une variante commune de Galahad. Missions et Agora sont réintégrées au canon ; cron, briefing, sessions persistées et MCP restent des capacités donneuses à recevoir. Aucun service actif migré. Voir docs/RECEPTION-TALOS-HULYSSE.md.</p></div>
 
 
 <div class="encart "><div class="encart-titre">Divergence mesurée</div><p>Diverge de <code>hulysse</code> de <strong>17 %</strong>
