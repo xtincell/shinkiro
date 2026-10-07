@@ -213,7 +213,9 @@ composants:
       Reste autonome. Une instance = une équipe = une base. L’installation
       Matanga garde son portail client, ses accords par visuel et ses créneaux ;
       elle est distincte de l’installation personnelle. Le journal partage son
-      contrat, pas ses données. Tout raccord doit préciser sa destination.
+      contrat, pas ses données. L'admission La Barre est configurée par instance
+      et client, avec reçu atomique ; filtres multimarques, autres créateurs,
+      réception native et retour des résultats restent à recevoir.
 
   - nom: talos
     couche: execution
