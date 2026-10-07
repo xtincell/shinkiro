@@ -377,14 +377,19 @@ composants:
   - nom: charadesign-generator
     couche: tools
     etage: reference
-    maturite: utilisable
+    maturite: partiel
     licence: proprietaire
     vitalite: gele
     ordre_construction: 6
     deploiement: {mode: statique, racine: lsi-cd-app, stack: vite, entree: index.html}
     description: >-
-      Pipeline LSI-CD v3.4 de bout en bout — de l'archétype triangulé à la
-      sortie multi-vues. Tracker en neuf étapes, UI Atelier clair.
+      Atelier LSI-CD : progression de jugement sémantique, de l'archétype au
+      master et aux vues. Bibliothèque, brouillon et checkpoints existants.
+    manque: >-
+      Persistance et orchestration corrigées sur fixtures et en CI ; réception
+      native, propriété des écritures après navigation, arrêt des retours tardifs,
+      import compatible et disponibilité des API de production encore ouverts.
+      Voir docs/RECEPTION-ATELIERS-SPECIALISES.md.
 
   - nom: generateur-approches
     couche: tools
@@ -398,14 +403,18 @@ composants:
   - nom: character-engine
     couche: tools
     etage: verse
-    maturite: utilisable
+    maturite: partiel
     licence: proprietaire
     vitalite: gele
     deploiement: {mode: statique, entree: character_engine.html}
     description: >-
-      Moteur de character design. schema.json définit 48 paramètres et les
-      règles de direction artistique ; variables.json (36 Ko) porte les profils
-      et bibliothèques. Guides V3, V4, variables, compatibilité et installation.
+      Moteur autonome de contraintes de direction artistique pour un personnage,
+      sans nom ni récit générés. Le HTML embarque son schéma ; la bibliothèque
+      externe apporte les valeurs, mais aucun profil n'est présent dans le canon.
+    manque: >-
+      Contradictions manuelles non qualifiées, prompt tronqué et absence de
+      conservation/export du vecteur. Préciser les ancres d'interprétation avant
+      factorisation. Voir docs/RECEPTION-ATELIERS-SPECIALISES.md.
 
   - nom: datacollector
     couche: tools

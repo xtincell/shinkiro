@@ -78,6 +78,17 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   preuve/licence par actif, UX native et projection réelle restent ouverts.
   Voir [RECEPTION-ARGOS.md](RECEPTION-ARGOS.md).
 
+- Ateliers spécialisés : contraintes Character Engine, élaboration d'auteur
+  LSI-CD, exploration CosmicMachine, filiation éditoriale Atlas et carnet de
+  trésorerie Tauri ont des rôles distincts. BlackNote est un canevas sans module
+  métier. Les contre-exemples de conservation et d'ouverture sont reproduits
+  sur fonctions source ; aucune UX native reçue par cette passe. LSI-CD PR #2
+  intégrée : reçu de transaction, checkpoints attendus et échecs empêchant la
+  fausse complétion, douze tests et build verts en CI. Navigation, interruption,
+  import, fournisseurs et transfert du master restent ouverts. Les données
+  financières réelles et les générations payantes n'ont pas été utilisées.
+  Voir [RECEPTION-ATELIERS-SPECIALISES.md](RECEPTION-ATELIERS-SPECIALISES.md).
+
 - La Fusée 403 : raccords qualifiés par instance, édition concurrente protégée,
   trois marques reliées au même suivi Noël, projet et accès uniques en vue groupe
   reçus nativement. Les sept fonctions publiques rendent l'aide IA facultative ;

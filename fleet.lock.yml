@@ -141,15 +141,16 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 20
-    poids_ko: 350
+    fichiers: 23
+    poids_ko: 361
     licence: presente
-    commits_90j: 1
+    commits_90j: 3
     topics: ["layer-tools", shinkiro]
     racines: ["lsi-cd-app"]
     artefacts:
       index_html: ["lsi-cd-app/index.html"]
       package: ["lsi-cd-app/package.json"]
+      workflows: [.github/workflows/verify.yml]
   - nom: danmem
     branche: main
     prive: true
