@@ -98,8 +98,8 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 - Méthode et marque : les apports BrandForge sont confrontés à leurs ruptures,
   dont le rapport réimporté vide et les réponses perdues après interruption.
   Catalogue de métriques distinct de mesures observées ; parité La Fusée non
-  reçue. Dépôt archivé inchangé, clé navigateur publique à révoquer. Atlas
-  doctrinal PR #3 intégrée : vue historique signalée, sources accessibles et
+  reçue. Dépôt archivé inchangé et actuellement privé ; clé navigateur en dur
+  à révoquer. Atlas doctrinal PR #3 intégrée : vue historique signalée, sources accessibles et
   sept détails consultables au clavier ; six tests DOM/CI verts. Schéma,
   méthode appliquée, native et cycle complet restent ouverts. Voir
   [RECEPTION-METHODE-MARQUE.md](RECEPTION-METHODE-MARQUE.md).

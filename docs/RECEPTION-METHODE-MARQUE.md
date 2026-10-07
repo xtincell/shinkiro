@@ -22,8 +22,9 @@ perd deux réponses déjà obtenues ; une saisie de métrique hors borne/date in
 est conservée. Dashboard initial aléatoire, historique React et services de base
 désactivés : aucune mesure réelle reçue. Dossier V2 écrit mais non relu au montage.
 
-Clé fournisseur codée en dur dans les services navigateur publics, validité non
-testée et révocation non reçue. Ne pas redéployer la distribution historique.
+Clé fournisseur codée en dur dans les services navigateur ; dépôt actuellement
+privé, ancien relevé public historique. Validité non testée et révocation non
+reçue. Ne pas redéployer la distribution historique.
 L’entrée côté client ne reçoit pas une authentification serveur. Aucun appel
 payant, donnée métier réelle ou écriture en production pendant cette passe.
 
