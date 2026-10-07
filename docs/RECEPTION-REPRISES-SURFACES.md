@@ -4,9 +4,9 @@ La reprise conserve la continuité du travail ; la surface publiée conserve la
 continuité de la marque. Ces deux fonctions utilisent des objets existants.
 Leurs corrections ne reçoivent pas encore le cycle complet de Shinkiro.
 
-## La Fusée
+## La Fusée — reprise 408, puis contexte et actions 409/410
 
-Version livrée : **6.27.408**, source `7ef4f75f7dc77445dcb37ec50a7323c582b6cd86`.
+Première version livrée : **6.27.408**, source `7ef4f75f7dc77445dcb37ec50a7323c582b6cd86`.
 [CI](https://github.com/xtincell/ADVE-project/actions/runs/37655418483) : 4 054 tests
 unitaires et 57 PostgreSQL. [Image](https://github.com/xtincell/ADVE-project/actions/runs/37655948574)
 bootée avant publication, index
@@ -20,13 +20,45 @@ Sept rendus statiques passent. Le stress reçoit 276 pages HTTP, cinq routes de
 démonstration explicitement exclues, aucun échec ; les forges y sont simulées.
 HTTP et simulation ne constituent pas des écrans ou une production créative réelle.
 
-Natif en production : le compte administrateur sans équipe ne reste plus en
+Natif en production 408 : le compte administrateur sans équipe ne reste plus en
 chargement infini ; il reçoit un état d'absence explicite. Ce résultat ne reçoit
 pas le choix d'équipe administrateur ni un cycle natif de reprise opérateur.
-Le brouillon conserve son UUID tant que le formulaire est monté ; un remontage
-reste à raccorder au mécanisme de brouillon existant. Les éditions ouvertes,
-rattachements d'assets et transferts concurrents restent à éprouver. Le code de
-raison des refus Mestor utilise encore une classification textuelle à corriger.
+Le brouillon conserve son UUID tant que le formulaire est monté ; sa reprise après
+remontage reste ouverte. Les éditions ouvertes, rattachements d'assets et transferts
+concurrents restent à éprouver. La classification textuelle des refus Mestor
+constatée en 408 est corrigée dans le lot 410 ci-dessous.
+
+La version **6.27.409**, source `0e51ec3402ab92794286fcae6f8c3e2ea2cf0819`, reçoit
+le choix d'équipe administrateur et le contexte conservé dans les liens de campagne,
+tâche et reprise. Les états de chargement, erreur et absence sont distincts.
+[CI 409](https://github.com/xtincell/ADVE-project/actions/runs/37666201450) :
+4 068 unitaires et 59 PostgreSQL. Image/runtime reçus. Natif administrateur :
+cinq vues, deux équipes, reprise de démonstration ouverte et retour dans la même
+équipe ; 52 réponses sans erreur HTTP ni exception. Aucune mutation métier.
+
+Version actuelle reçue : **6.27.410**, source
+`1eac0d8899a122f5cb993f4245f7698d4a136b6f`.
+Les campagnes sont lues depuis leur lecteur existant et restent visibles sans tâche.
+« Aucun livrable » n'est pas transformé en santé verte. Les actions et leurs liens
+sont bornés à l'équipe par les services partagés ; le formulaire propose les noms
+de campagnes et une action transverse sans stratégie fictive. Les codes de raison
+structurés sont transmis par les handlers existants. Aucun objet ni Intent ajouté.
+
+23 échecs initiaux conservés ; typage, lints, cycles, 1 592 contrôles de gouvernance,
+63 du portefeuille et 87 PostgreSQL reçus. Les 21 appels HTTP authentifiés et six
+émissions Mestor réelles reçoivent les refus/effets attendus sur fixtures, sans delta
+métier résiduel, IA ni Process. Stress : 276 pages, cinq identités de démonstration
+non reçues, sept forges explicitement simulées.
+[CI 410](https://github.com/xtincell/ADVE-project/actions/runs/37671454496) :
+4 073 unitaires et 87 PostgreSQL.
+[Image 410](https://github.com/xtincell/ADVE-project/actions/runs/37671820167) bootée,
+index `sha256:05ebd6d162667e90e620fcc2e9158fa3837ef6ad47033601731b374715987e12`.
+Déploiement `dk62vg8ohz7djtyeg37k62s4` terminé ; conteneur unique, version et volume
+privé rapprochés. Natif administrateur : cinq vues, cinq campagnes UPgraders sans
+tâche, sélection par nom, formulaire transverse et annulation, campagnes propres
+à Wakanda puis retour ; 101 réponses sans erreur HTTP ni exception, journal complet.
+Aucune mutation métier de production. Les mutations multi-rôles sont reçues
+localement ; le rôle opérateur natif distinct et le cycle large restent ouverts.
 
 Les réceptions précédentes restent bornées : mobile des missions en 406 ; cartes
 d'assets et usages distincts en 407, avec corpus/versions et contraste encore ouverts.
@@ -61,6 +93,11 @@ du profilage. La saisie et restitution du profil, l'app, les droits et la remont
 des apprentissages vers le corpus de marque restent ouverts. Les médias de marque
 ne sont pas exportés ; les profils historiques ne sont pas recalculés.
 
-Le site est en ligne. Son raccordement complet au dossier SPAWT de La Fusée,
-aux versions approuvées et aux retours de mesure reste distinct de ces corrections.
+Le site est en ligne. Les fiches produit existantes Site vitrine et Quiz conservent
+leurs accès actifs et reçoivent trois références : branche publique du site, page
+historique et code du quiz. Deux écritures natives gouvernées, 53 réponses sans
+erreur HTTP ni exception ; ces liens sont retrouvés dans le dossier parent sous
+410 après changement de conteneur. Aucun profil, corpus ni droit modifié.
+La publication depuis une version de marque approuvée et le retour des mesures
+restent distincts de ce raccord d'identité et d'accès.
 Aucun des sept chantiers larges n'est déclaré achevé.

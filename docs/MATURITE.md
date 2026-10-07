@@ -36,16 +36,29 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   réel et reçus terminaux corrigés dans les services partagés. CI : 4 054 tests
   unitaires et 57 PostgreSQL ; HTTP authentifié et build reçus. Image, conteneur,
   version et volume privé rapprochés en production. Écran sans équipe reçu sans
-  chargement infini ; choix d'équipe admin, remount du brouillon, éditions
-  concurrentes ouvertes et cycle métier complet restent à recevoir. La remise
+  chargement infini. Le choix d'équipe admin est reçu ensuite en 409 ; remount
+  du brouillon, éditions concurrentes et cycle métier complet restent ouverts. La remise
   en automatique d'une campagne sans calcul disponible refuse l'écriture.
   Voir [RECEPTION-REPRISES-SURFACES.md](RECEPTION-REPRISES-SURFACES.md).
+- La Fusée 409/410 : contexte d'équipe conservé dans les cinq vues et les liens ;
+  campagnes visibles avant leur première tâche, sans santé verte inventée.
+  Actions et liens métier bornés à l'équipe dans les services existants ; raisons
+  structurées Mestor propagées. CI 410 : 4 073 unitaires et 87 PostgreSQL ;
+  21 appels HTTP authentifiés et six émissions réelles sur fixtures reçus.
+  Image, version servie et volume privé rapprochés. Natif administrateur :
+  cinq vues, deux équipes, campagnes sans tâche et sélecteur par nom ;
+  101 réponses sans erreur HTTP ni exception. Mutations métier reçues localement,
+  rôle opérateur natif distinct, brouillons/versions et cycle complet ouverts.
 - SPAWT : la vitrine principale et la page historique sont distinctes. Le quiz
   conserve six questions ; leurs annonces sont corrigées sur les trois surfaces
   servies. Décompte expiré retiré de l'ancienne page, lien vers la vitrine actuelle,
   CI et livraisons reçues ; bureau et viewports mobiles reçus. Le calcul n'est
   pas changé : 50 tests locaux, dont équilibre des 4 096 parcours. Contact/carte,
   application, droits et irrigation complète du corpus de marque restent ouverts.
+  Les produits Site vitrine et Quiz existants portent leurs accès et branches
+  réels ; trois références ajoutées par les formulaires natifs et retrouvées dans
+  le dossier parent après livraison 410. Publication depuis une version approuvée
+  et retour d'apprentissage restent à recevoir.
 - DataCollector : collecteurs, CLI/API et interface confrontés à leur rôle.
   Reçu partagé, sauvegarde atomique, erreurs et inconnues conservées ; faux
   sentiment, score de santé et progression simulée retirés. Quatorze tests Python

@@ -84,8 +84,9 @@ composants:
       registre ne prouve pas sa disponibilité. Raccords de suivi reçus ; corpus,
       cycles métier et promesses des autres sections publiques restent à recevoir.
       Une reprise conserve la tâche et son reçu ; un ticket résolu ne prouve pas
-      la livraison. Le contexte d'équipe administrateur et la reprise de brouillon
-      après remontage restent à raccorder aux mécanismes existants.
+      la livraison. Contexte d'équipe administrateur, campagnes avant tâche et
+      sélection par nom reçus ; mutations d'actions éprouvées localement. Rôle
+      opérateur natif distinct, brouillons après remontage et versions restent ouverts.
 
   - nom: la-fusee-blueprint
     couche: method
