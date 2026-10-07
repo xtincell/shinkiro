@@ -70,6 +70,28 @@ persistants et sauvegardés pour une instance déployée ; un conteneur applicat
 seul ne conserve pas `/data` lors de son remplacement. La restauration sur un
 même hôte ne reçoit pas l'isolation ou la reprise sur un second serveur.
 
+### Installation Matanga
+
+Le même journal canonique est repris dans
+[Matanga-Creative-dashboard #57](https://github.com/xtincell/Matanga-Creative-dashboard/pull/57).
+L’installation possède sa propre base et son propre stockage ; elle ne partage
+ni les dossiers ni les comptes du Radar personnel. Un raccord doit identifier
+l’instance destinataire et le dossier stable, pas seulement un code de projet.
+
+Matanga conserve ses favoris, rôles/groupes de visuels, créneaux calendrier,
+portail client et évaluations RH. `brief_assets` reste intégralement en lecture
+seule via REST ; les métadonnées passent par `PATCH /visuels/:id`. Le retour
+portail, son commentaire et sa trace sont atomiques. La validation d’un visuel
+ne clôture pas le dossier. Modifier son contexte retire son ancien accord ; un
+no-op le conserve. Le portail et les médias partagent la résolution d’un brief
+unique et autorisé, avec refus des codes ambigus et des dossiers privés.
+
+Les tests PostgreSQL et la vérification du code livré ne remplacent pas la
+réception native de la cloche et du portail. Le raccord idempotent La Barre,
+les permissions métier complètes, l’histoire non qualifiée et la reprise dans
+un autre environnement restent ouverts. Voir
+[le contrat Matanga](https://github.com/xtincell/Matanga-Creative-dashboard/blob/main/docs/RECEPTION-JOURNAL.md).
+
 ## talos ↔ radar — MCP
 
 `talos/radar-mcp/` contient `index.js`, son `package.json` et un `test-client.mjs`. C'est le
