@@ -83,6 +83,9 @@ composants:
       Le plus lourd et le plus strict du programme. La présence d'un outil au
       registre ne prouve pas sa disponibilité. Raccords de suivi reçus ; corpus,
       cycles métier et promesses des autres sections publiques restent à recevoir.
+      Une reprise conserve la tâche et son reçu ; un ticket résolu ne prouve pas
+      la livraison. Le contexte d'équipe administrateur et la reprise de brouillon
+      après remontage restent à raccorder aux mécanismes existants.
 
   - nom: la-fusee-blueprint
     couche: method

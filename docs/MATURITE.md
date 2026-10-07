@@ -24,8 +24,28 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   BLISS, sans delta IA/Process. La liste console admin vide découverte pendant
   cette recette est corrigée et reçue nativement en production 405. Les filtres,
   colonnes et le besoin exact sont reçus ; le clic de dernière ligne masqué par
-  le retour flottant est corrigé au shell et reçu en production 406. Mobile,
-  rôles distincts et cycle production → validation → livraison restent ouverts.
+  le retour flottant est corrigé au shell et reçu en production 406. Le viewport
+  mobile 390 × 844 et son dialogue sont reçus ; rôles distincts et cycle
+  production → validation → livraison restent ouverts.
+- La Fusée 407 : les cartes d'assets regroupent les références à une même URL
+  complète en conservant les lecteurs et usages distincts. Grille, recherche,
+  filtre et dialogues SPAWT reçus en bureau et viewport mobile ; groupe Noël
+  partagé et aperçus produits FrieslandCampina reçus. Les versions stratégiques,
+  la provenance des corpus et le contraste du logo sombre restent à corriger.
+- La Fusée 408 : identité de tâche et de reprise, rejouement explicite, périmètre
+  réel et reçus terminaux corrigés dans les services partagés. CI : 4 054 tests
+  unitaires et 57 PostgreSQL ; HTTP authentifié et build reçus. Image, conteneur,
+  version et volume privé rapprochés en production. Écran sans équipe reçu sans
+  chargement infini ; choix d'équipe admin, remount du brouillon, éditions
+  concurrentes ouvertes et cycle métier complet restent à recevoir. La remise
+  en automatique d'une campagne sans calcul disponible refuse l'écriture.
+  Voir [RECEPTION-REPRISES-SURFACES.md](RECEPTION-REPRISES-SURFACES.md).
+- SPAWT : la vitrine principale et la page historique sont distinctes. Le quiz
+  conserve six questions ; leurs annonces sont corrigées sur les trois surfaces
+  servies. Décompte expiré retiré de l'ancienne page, lien vers la vitrine actuelle,
+  CI et livraisons reçues ; bureau et viewports mobiles reçus. Le calcul n'est
+  pas changé : 50 tests locaux, dont équilibre des 4 096 parcours. Contact/carte,
+  application, droits et irrigation complète du corpus de marque restent ouverts.
 - DataCollector : collecteurs, CLI/API et interface confrontés à leur rôle.
   Reçu partagé, sauvegarde atomique, erreurs et inconnues conservées ; faux
   sentiment, score de santé et progression simulée retirés. Quatorze tests Python
@@ -56,6 +76,8 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 - La Barre : master, adaptation, format, reprises et réception de référence ont
   reçu une correction livrée. Cette réception ne couvre pas l'authentification
   des dépôts ni le retour de décisions et résultats entre tous les outils.
+  La provenance des complétions distingue désormais chaque champ et l'inférence
+  motivée ; l'historique n'est pas réécrit rétroactivement.
 - Indice : bilans incomplets sans note globale, déclaratif explicite, reprise
   locale et exports reçus nativement. Admission du bilan au dossier destinataire,
   fonctionnement hors ligne et repli sans stockage restent à recevoir.
