@@ -283,12 +283,15 @@ composants:
     branche: main
     prive: true
     langue: HTML
-    fichiers: 13
-    poids_ko: 683
+    fichiers: 17
+    poids_ko: 720
     licence: presente
-    commits_90j: 1
+    commits_90j: 3
     topics: ["layer-method", shinkiro]
-    racines: [views]
+    racines: [., views]
+    artefacts:
+      package: [package.json]
+      workflows: [.github/workflows/reception.yml]
   - nom: market-expansion-system
     branche: main
     prive: true
