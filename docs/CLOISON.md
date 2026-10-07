@@ -52,7 +52,11 @@ doit pas brouiller la lecture du profil. Topic `lab`.
 `Folio_Spark` est le portfolio personnel. Il vend **la personne**, pas la méthode. Il reste
 sur le compte personnel et hors de l'organisation.
 
-## À trancher
+## Cockpit : rôle qualifié, accès à cloisonner
 
-`hermes-cockpit` — sans README ni description, et il porte le même nom qu'un dépôt Matanga.
-Vérifier de quel côté de la cloison il tombe avant de le documenter.
+`hermes-cockpit` est confronté à sa source et au service du VPS : poste privilégié
+d’exploitation, avec projection de portail Matanga. Ce rôle permet de documenter
+son fonctionnement ; il ne transfère pas la propriété des données de l’employeur
+au programme. Les données client, secrets et droits du portail restent propres à
+leur installation. Réutilisation commerciale, isolation et partage avec le cockpit
+Galahad restent à qualifier. Voir [RECEPTION-COCKPIT.md](RECEPTION-COCKPIT.md).

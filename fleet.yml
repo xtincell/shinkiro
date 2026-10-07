@@ -300,7 +300,7 @@ composants:
   - nom: hermes-cockpit
     couche: execution
     etage: reference
-    maturite: utilisable
+    maturite: partiel
     licence: proprietaire
     vitalite: actif
     deploiement:
@@ -311,12 +311,15 @@ composants:
       capacites: [SYS_PTRACE]
       redeploiement: ops/redeploy.sh
     description: >-
-      Cockpit d'exploitation du VPS. Lit la santé de radar et de danmem,
-      détecte les process Talos et Claude sur l'hôte, et sert un portail
-      client. portal.mjs en tout et pour tout.
+      Poste privilégié d'exploitation du VPS : état des services, accès,
+      tâches/notes locales et demandes de configuration. Le portail client
+      est une projection distincte des dossiers de marque et de campagne.
     attention: >-
-      galahad porte déjà cockpit/index.html. Deux cockpits coexistent sans que
-      leur partage de responsabilité soit écrit.
+      Conservation et lectures partielles réparées sur contrats locaux ; un
+      acquittement n'est pas l'effet d'une commande. Fraîcheur, identité des
+      agents, écrivains externes, restauration et isolation restent à recevoir.
+      Le partage avec galahad/cockpit reste à qualifier par usages.
+      Voir docs/RECEPTION-COCKPIT.md.
 
   # ── couche 04 · outils métier ──────────────────────────────────────────
   - nom: la-barre
