@@ -9,7 +9,7 @@
 #   make releve                régénère ce fichier
 #   git diff fleet.lock.yml    ce qui a bougé dans la flotte depuis le dernier relevé
 #
-releve_le: "2026-10-06"
+releve_le: "2026-10-07"
 owner: xtincell
 topic: shinkiro
 fenetre_vitalite_jours: 90
@@ -21,8 +21,8 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 3396
-    poids_ko: 102502
+    fichiers: 3408
+    poids_ko: 102590
     licence: presente
     commits_90j: 100
     topics: ["layer-method", shinkiro]
@@ -264,10 +264,10 @@ composants:
     branche: main
     prive: false
     langue: JavaScript
-    fichiers: 234
-    poids_ko: 7015
+    fichiers: 236
+    poids_ko: 7042
     licence: presente
-    commits_90j: 76
+    commits_90j: 79
     topics: ["layer-tools", shinkiro]
     racines: [., sources/02_dossier_MT0020, sources/04_outils, sources/99_archive]
     artefacts:
@@ -298,10 +298,10 @@ composants:
     branche: main
     prive: false
     langue: HTML
-    fichiers: 69
-    poids_ko: 1771
+    fichiers: 73
+    poids_ko: 1798
     licence: presente
-    commits_90j: 3
+    commits_90j: 5
     topics: ["layer-execution", shinkiro]
     racines: [., briefs, briefs/rh]
     artefacts:
@@ -309,6 +309,7 @@ composants:
       pages_edge: [briefs/_headers, briefs/_redirects]
       index_html: [briefs/index.html]
       package: [package.json]
+      workflows: [.github/workflows/reception.yml]
       env_example: [.env.example]
   - nom: talos
     branche: main

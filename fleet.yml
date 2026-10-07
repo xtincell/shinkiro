@@ -205,9 +205,10 @@ composants:
         archive, bilan — plus les fontes Familjen Grotesk, Hanken Grotesk et
         JetBrains Mono.
     contrat_central: >-
-      task_events est le journal. Toute intégration qui modifie un brief doit y
-      écrire son événement, sinon la mesure avant/après se perd — et avec elle
-      le sixième critère de gouvernance du portefeuille.
+      task_events est le journal. Le producteur émet le mouvement dans la
+      transaction du brief ; les intégrations modifient le dossier, sans
+      réécrire sa trace. L'état saisi ne prouve ni livraison ni accord client.
+      La confidentialité historique inconnue reste signalée et non publiée.
     attention: Reste autonome. Une instance = une équipe = une base.
 
   - nom: talos
@@ -317,7 +318,7 @@ composants:
     manque: >-
       Le transfert ADVE vers le brief et la boucle de résultats vers Argos
       restent manuels. Le registre Radar ne constitue pas une synchronisation
-      des décisions vers task_events.
+      des décisions dans Radar avec leur trace.
     pepite: >-
       app/vue-matrice.js implémente la matrice support × marché en trois
       lectures — calendrier, mur, grille — avec mémoire du mode par dossier.

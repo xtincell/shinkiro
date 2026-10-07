@@ -14,7 +14,7 @@ ce qui est proposé, ce qui est retenu, ce qui doit revenir et ce qui peut parti
 |---|---|---|
 | Cadrer | ADVE / La Fusée | Le diagnostic et la stratégie alimentent le brief. Le transfert reste manuel. |
 | Examiner et décider | La Barre | Bureau de revue par pièce, version et projet ; critères, retours et verdicts. |
-| Organiser l'exécution | Radar / Galahad | Le registre Radar peut être consulté dans La Barre. Aucun envoi automatique de décisions vers `task_events` n'est livré. |
+| Organiser l'exécution | Radar / Galahad | Le registre Radar peut être consulté dans La Barre. Aucun envoi automatique de décisions dans Radar avec leur trace n'est livré. |
 | Apprendre | Argos / ADVE | Les références et le bilan nourrissent la prochaine campagne. La boucle de retour automatique reste à construire. |
 
 La cohérence du programme vient du partage des responsabilités. La Barre ne
