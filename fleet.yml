@@ -209,7 +209,11 @@ composants:
       transaction du brief ; les intégrations modifient le dossier, sans
       réécrire sa trace. L'état saisi ne prouve ni livraison ni accord client.
       La confidentialité historique inconnue reste signalée et non publiée.
-    attention: Reste autonome. Une instance = une équipe = une base.
+    attention: >-
+      Reste autonome. Une instance = une équipe = une base. L’installation
+      Matanga garde son portail client, ses accords par visuel et ses créneaux ;
+      elle est distincte de l’installation personnelle. Le journal partage son
+      contrat, pas ses données. Tout raccord doit préciser sa destination.
 
   - nom: talos
     couche: execution
