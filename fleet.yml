@@ -91,14 +91,17 @@ composants:
   - nom: la-fusee-blueprint
     couche: method
     etage: reference
-    maturite: produit
+    maturite: partiel
     licence: proprietaire
     vitalite: gele
     deploiement: {mode: statique, racine: views, entree: LA_FUSEE_PHILO_VIEW.html}
     description: >-
-      Le canon conceptuel. LA_FUSEE_BLUEPRINT.md (146 Ko) est la source de
-      vérité unique : neuf livres cosmogoniques, chacun lisible en trois voix
-      entrelacées. Plus un cahier des charges de 120 Ko et cinq archives.
+      Corpus conceptuel et cahier des charges présents. Leurs engagements
+      gouvernent l'élaboration de marque sans prouver l'implémentation.
+    manque: >-
+      Vue historique explicitée et accès clavier corrigés sur contrats DOM.
+      Régénération du schéma, réception native et révision de méthode appliquée
+      à une décision métier ouvertes. Voir docs/RECEPTION-METHODE-MARQUE.md.
     attention: Doctrine, pas code. Ne pas chercher à l'exécuter.
 
   - nom: indice-maturite

@@ -95,6 +95,15 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   Cela reçoit leur transmission, pas une validation qualitative ou humaine.
   Voir [RECEPTION-ATELIERS-SPECIALISES.md](RECEPTION-ATELIERS-SPECIALISES.md).
 
+- Méthode et marque : les apports BrandForge sont confrontés à leurs ruptures,
+  dont le rapport réimporté vide et les réponses perdues après interruption.
+  Catalogue de métriques distinct de mesures observées ; parité La Fusée non
+  reçue. Dépôt archivé inchangé, clé navigateur publique à révoquer. Atlas
+  doctrinal PR #3 intégrée : vue historique signalée, sources accessibles et
+  sept détails consultables au clavier ; six tests DOM/CI verts. Schéma,
+  méthode appliquée, native et cycle complet restent ouverts. Voir
+  [RECEPTION-METHODE-MARQUE.md](RECEPTION-METHODE-MARQUE.md).
+
 - La Fusée 403 : raccords qualifiés par instance, édition concurrente protégée,
   trois marques reliées au même suivi Noël, projet et accès uniques en vue groupe
   reçus nativement. Les sept fonctions publiques rendent l'aide IA facultative ;
