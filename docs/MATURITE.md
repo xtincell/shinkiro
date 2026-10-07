@@ -87,6 +87,12 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   fausse complétion, douze tests et build verts en CI. Navigation, interruption,
   import, fournisseurs et transfert du master restent ouverts. Les données
   financières réelles et les générations payantes n'ont pas été utilisées.
+  CosmicMachine PR #1 intégrée : sorties sans remplacement, concept et brief
+  réels à l'affinage CLI ; quinze contrôles et trois routes HTTP reçus avec
+  fournisseur simulé. UX native, fournisseur vivant et transfert ouverts.
+  LSI-CD PR #3 conserve les exclusions/règles critiques explicites aux étapes
+  sans intent ; deux contre-exemples puis seize contrôles/build CI verts.
+  Cela reçoit leur transmission, pas une validation qualitative ou humaine.
   Voir [RECEPTION-ATELIERS-SPECIALISES.md](RECEPTION-ATELIERS-SPECIALISES.md).
 
 - La Fusée 403 : raccords qualifiés par instance, édition concurrente protégée,

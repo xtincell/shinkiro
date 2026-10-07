@@ -41,6 +41,47 @@ Aucun déploiement de service reçu. Propriétaire des écritures après navigat
 arrêt des retours tardifs, statut partiel, import versionné et admission du
 master restent ouverts. Aucun parcours large n'est clôturé par ce lot.
 
+## CosmicMachine : sorties et contexte reçus sur fixtures
+
+[PR #1](https://github.com/xtincell/CosmicMachine/pull/1), canon
+`fc123cf513183e702924cba90d4792004fecad6d`. L'écrivain partagé HTTP/CLI
+crée une sortie distincte exclusivement et synchronise le contenu avant reçu.
+L'affinage et les variations CLI transmettent la piste sélectionnée réelle et
+le brief, conservés dans le Markdown. Numéro absent ou ambigu sans requête.
+
+Cinq contre-exemples rouges puis quinze contrôles locaux et CI verts ; six
+appels HTTP réels sur loopback avec fournisseur simulé, quatre fichiers distincts
+relus, erreurs d'écriture/fournisseur sans fausse complétion. Trois processus au
+même instant conservent leurs sorties. Audit npm final sans vulnérabilité signalée
+après corrections compatibles. [CI 37678656994](https://github.com/xtincell/CosmicMachine/actions/runs/37678656994).
+Aucun déploiement, UX native, fournisseur vivant ou transfert reçu. Les droits,
+budgets, reprise des fragments et admission au dossier restent ouverts.
+
+## Méthode LSI-CD et invariants sources
+
+Le codex est une grammaire d'univers réutilisable ; la triangulation produit
+la tension qui se décline dans les directives, couches et hiérarchie. La fiche
+auteur clôt le dossier ; splash et shooting sont optionnels. Les prescriptions
+anti-moyenne ne constituent pas une mesure empirique d'originalité ni une
+validation humaine. Une prose non vide ne reçoit pas leurs critères qualitatifs.
+
+Le raccord injecte la fondation mais certaines étapes ne reçoivent pas l'intent.
+Sur fonctions exactes et fournisseur simulé, les exclusions/règles saisies peuvent
+être absentes si la fondation ne les répète pas. Le contre-exemple est conservé
+dans `preuves-character-design/lsi-contexte-avant.json` du dossier opérateur.
+Aucune violation créative par un modèle vivant n'est déduite de cette preuve.
+
+[PR #3](https://github.com/xtincell/charadesign-generator/pull/3) ferme ce raccord
+au canon `7f4787cc2bff0885d7690562706c04dc86466a57` : les anti-références et règles
+critiques saisies circulent directement dans les étapes sans intent complet.
+Les étapes déjà renseignées ne les dupliquent pas ; aucun interdit déduit.
+Deux contre-exemples rouges puis seize contrôles/build verts en
+[CI 37680618096](https://github.com/xtincell/charadesign-generator/actions/runs/37680618096).
+La méthode et les dépendances sont conservées. Réception de transmission sur
+fixtures, pas respect par le fournisseur, qualité ou accord humain. Aucun
+écran natif ou service déployé reçu ; autres contextes, navigation et transferts
+restent à recevoir.
+
 ## Sources de la passe
 
 Heads rapprochés avant correction : Character Engine `75c5c79`, LSI-CD
