@@ -28,8 +28,14 @@ par un compose racine.
 | **Coolify** *(le VPS)* | `galahad`, `hermes-cockpit` | compose piloté par Coolify, labels Traefik, TLS par FQDN, réseau `coolify` externe |
 | **systemd** *(l'hôte)* | `talos`, `hulysse`, `galahad` (pare-feu docker) | `ops/*.service` + `ops/install.sh` ; `deploy/systemd/galahad-docker-firewall.service` |
 | **Vercel** | `ADVE-project`, `Argos-studio` | `next.config.ts`, `vercel.json`, Prisma |
-| **Docker autonome** | `radar`, `galahad-landing`, `datacollector` | Dockerfile sans orchestration imposée |
-| **Statique / Pages** | `indice-maturite`, `la-barre`, `charadesign-generator`, `generateur-approches`, `character-engine`, `la-fusee-blueprint` | `index.html` ouvrable, ou Pages |
+| **Docker autonome** | `radar`, `galahad-landing` | Dockerfile sans orchestration imposée |
+| **Statique / Pages** | `indice-maturite`, `la-barre`, `charadesign-generator`, `generateur-approches`, `character-engine`, `la-fusee-blueprint`, front `datacollector` | `index.html` ouvrable, ou Pages |
+
+DataCollector ne possède pas de Dockerfile. Son front HTML appelle un serveur
+Flask distinct (`server.py`, dépendances Python) ; ouvrir le HTML ne reçoit pas
+la collecte. La CLI et l'API partagent désormais le reçu et la sauvegarde, sans
+appel agentique. Le serveur de développement reste en boucle locale, sans debug.
+Son déploiement de service TPE et son admission métier restent à recevoir.
 
 ### Coolify est la plateforme, et ce n'est écrit nulle part ailleurs
 

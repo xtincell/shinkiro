@@ -6,6 +6,32 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
 ## Réceptions partielles au 7 octobre 2026
 
+- La Fusée 404 : besoin manuel, conversion atomique, conflit/relecture, mission
+  exacte dans les deux portails et retrait motivé reçus sur la marque de démo
+  BLISS, sans delta IA/Process. La liste console admin vide découverte pendant
+  cette recette est corrigée et reçue nativement en production 405. Les filtres,
+  colonnes et le besoin exact sont reçus ; le clic de dernière ligne masqué par
+  le retour flottant est corrigé au shell et reçu en production 406. Mobile,
+  rôles distincts et cycle production → validation → livraison restent ouverts.
+- DataCollector : collecteurs, CLI/API et interface confrontés à leur rôle.
+  Reçu partagé, sauvegarde atomique, erreurs et inconnues conservées ; faux
+  sentiment, score de santé et progression simulée retirés. Quatorze tests Python
+  et quatre VM Node sans fournisseur, CI main reçue après PR #1. Les fournisseurs,
+  exports navigateur JSON/PDF et admission au dossier restent ouverts.
+  La mention historique « sans dépendance externe » est fausse pour cet outil :
+  front HTML, Flask et sources PageSpeed/Reddit/Serper/profil sont distincts.
+- Argos : fonds canonique autonome, contrat manuel et veille facultative
+  confrontés à leur code. Onze tests SQLite sur dossier/citations/amendement/
+  filiation/seed et dix tests workers hors réseau/LLM payant passent. Le worker
+  conserve la collecte partielle, qualifie ses sources et ne remplace plus une
+  source vivante indisponible par une fixture. Deux PRs en brouillon ; le build
+  CI passe, le lint historique de ces commits reste rouge. La PR #3 ferme le
+  lint complet, avec quatorze tests dont le rendu JSON-LD hostile ; sa CI reçoit
+  les trois jobs intégrité, build et workers sur le commit 31cb881.
+  Aucun déploiement ni collecte vivante reçu. Authentification, isolation,
+  preuve/licence par actif, UX native et projection réelle restent ouverts.
+  Voir [RECEPTION-ARGOS.md](RECEPTION-ARGOS.md).
+
 - La Fusée 403 : raccords qualifiés par instance, édition concurrente protégée,
   trois marques reliées au même suivi Noël, projet et accès uniques en vue groupe
   reçus nativement. Les sept fonctions publiques rendent l'aide IA facultative ;

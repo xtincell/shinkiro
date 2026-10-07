@@ -347,14 +347,16 @@ composants:
     produits_portefeuille: ["02 · Creative Operations Audit"]
     source_partagee: {produit: argos, role: canonique}   # SHK-0002
     description: >-
-      La plus grande bibliothèque qualifiée de campagnes — répertoire éditorial
-      de patterns créatifs, exploitable en moteur de recherche public ou via
-      API et MCP. Données réelles en place : dossiers Apple 1984, Think
-      Different, Get a Mac, Nike Just Do It, Dream Crazy, Find Your Greatness,
-      Patagonia.
+      Bibliothèque canonique autonome d'opérations, actifs, preuves et filiations,
+      avec recherche et admission manuelle. Le corpus bootstrap et la veille sur
+      fixtures ne prouvent pas une couverture vivante. La Fusée gouverne l'usage
+      de références par une marque ; sa projection existante consomme le contrat
+      du studio. Le MCP et la boucle de résultats restent à recevoir.
     manque: >-
-      La boucle de mesure reliant la bibliothèque aux résultats client. Sans
-      elle, le module reste un catalogue et le produit 05 n'est pas vendable.
+      Authentification de l'admission, isolation des consultations privées,
+      provenance/licence par actif, amendements concurrents, réception native
+      et lecture canonique depuis la Fusée. La revue des corrections et la
+      boucle de résultats restent ouvertes ; voir docs/RECEPTION-ARGOS.md.
 
   - nom: charadesign-generator
     couche: tools
@@ -392,13 +394,18 @@ composants:
   - nom: datacollector
     couche: tools
     etage: verse
-    maturite: utilisable
+    maturite: partiel
     licence: proprietaire
-    vitalite: gele
-    deploiement: {mode: docker, entree: index.html, serveur: server.py, requiert: requirements.txt}
+    vitalite: actif
+    deploiement: {mode: statique, entree: index.html, serveur: server.py, requiert: requirements.txt}
     description: >-
-      Collecte multi-sources pour l'intelligence marketing. Front HTML plus un
-      serveur Python. Développé pour UPGRADERS SARL.
+      Acquérir des observations publiques hétérogènes, avec leur périmètre,
+      leur date et leurs erreurs. CLI et serveur Python partagent le même reçu ;
+      l'interface remet ce reçu, sans en déduire une santé ou une décision de marque.
+    attention: >-
+      Front HTML et backend Flask distincts ; aucun Dockerfile dans le dépôt.
+      Les sources réseau et leurs accès restent nécessaires. Raccord métier
+      vers Seshat/Argos, navigateur, fournisseurs et exploitation TPE à recevoir.
 
 # ── dérivés non canon ───────────────────────────────────────────────────
 # Des skills Claude encodent une partie de la méthode. Elles N'ONT PAS suivi

@@ -21,8 +21,8 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 3411
-    poids_ko: 102616
+    fichiers: 3419
+    poids_ko: 102659
     licence: presente
     commits_90j: 100
     topics: ["layer-method", shinkiro]
@@ -166,15 +166,16 @@ composants:
     branche: main
     prive: true
     langue: HTML
-    fichiers: 15
-    poids_ko: 111
+    fichiers: 21
+    poids_ko: 127
     licence: presente
-    commits_90j: 2
+    commits_90j: 5
     topics: ["layer-tools", shinkiro]
     racines: [.]
     artefacts:
       index_html: [index.html]
       python: [main.py, requirements.txt, server.py]
+      workflows: [.github/workflows/receipt.yml]
       env_example: [.env.example]
   - nom: galahad
     branche: main
@@ -265,10 +266,10 @@ composants:
     branche: main
     prive: false
     langue: JavaScript
-    fichiers: 243
-    poids_ko: 7087
+    fichiers: 245
+    poids_ko: 7135
     licence: presente
-    commits_90j: 86
+    commits_90j: 93
     topics: ["layer-tools", shinkiro]
     racines: [., sources/02_dossier_MT0020, sources/04_outils, sources/99_archive]
     artefacts:
