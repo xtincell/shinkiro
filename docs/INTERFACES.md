@@ -124,9 +124,51 @@ de l'auteur de La Barre. Aucun modèle ou agent n'est nécessaire.
 Les codes sont attribués sous verrou entre admissions ; les autres créateurs
 historiques n'ont pas encore ce même écrivain. Le champ marque historique
 reste utilisé dans certains filtres malgré les identifiants distincts
-conservés au reçu. Réception native, rattachement Fusée à l'instance Radar,
-retour des résultats, cycle complet et second locataire restent ouverts.
+conservés au reçu. Le rattachement Fusée est reçu dans son interface ; l'écran
+Radar Matanga, le retour des résultats, le cycle complet et le second locataire
+restent ouverts.
 Voir [le contrat d'admission](https://github.com/xtincell/Matanga-Creative-dashboard/blob/main/docs/ADMISSION-LA-BARRE.md).
+
+## la-fusee ↔ radar — identité et accès au suivi
+
+`BrandNode.sourceRefs` conserve une référence, jamais un état métier copié.
+L'identité est `(system, instance, kind, id)` : pour Radar, `kind=brief`, instance
+explicite et id numérique stable. Le code lisible sert de libellé. Deux instances
+ayant le même id ne sont pas le même dossier. Le lien n'accorde aucun accès.
+
+Le contexte projet est facultatif et qualifie la seule installation La Barre
+déjà raccordée : `LA_BARRE / barre-matanga / project / id`. Les anciennes
+références La Barre sans instance gardent ce contexte canonique ; une autre
+instance est refusée plutôt que lue dans le dépôt global. La lecture conserve
+les entrées valides et signale les rejets ; l'écriture reste stricte. Un historique
+invalide ne peut pas être tronqué par un formulaire ou un import.
+
+Le formulaire, l'import relançable et le chemin agentique partagent le même
+écrivain gouverné. Remplacer les références exige la version lue du nœud ; la
+comparaison et l'écriture sont atomiques. Une édition périmée demande une reprise.
+La projection dédoublonne le suivi d'un projet partagé entre plusieurs marques.
+
+Réception du 7 octobre 2026 : La Fusée 403, commit `414678d`, raccord manuel de
+Bonnet Rouge, Peak et Belle Hollandaise au même brief `491`, code `FRC-076`,
+instance `radar-matanga`, origine `PRJ-EOTY26`. Un projet et un accès sont reçus
+en vue groupe. Anciens liens et pièce partagée conservés ; aucun statut recopié.
+Tests locaux de concurrence et permissions reçus ; autres rôles natifs et
+cycles complets ouverts. Voir [ADR-0200](https://github.com/xtincell/ADVE-project/blob/main/docs/governance/adr/0200-portfolio-identites-radar.md).
+
+## indice-maturite → la-fusee — bilan déclaratif conservable
+
+L'Indice conserve ses questions et sa méthode. Un bilan incomplet montre sa
+couverture sans note globale ni prescription définitive. Un bilan complet reste
+déclaratif : ce n'est ni une performance marché ni une validation de stratégie.
+La reprise locale conserve réponses et version de méthode ; le téléchargement
+Markdown contient les réponses, les inconnues et les limites.
+
+La destination est le dépôt de sources existant du bon dossier Fusée. Exporter
+le bilan ne reçoit ni son admission, ni son analyse, ni l'arbitrage. Aucun second
+registre de marques ou de scores n'est créé. Questionnaire, reprise, bilans
+partiel/complet et téléchargements sont reçus nativement en ligne le 7 octobre ;
+admission dans le dossier, ouverture hors ligne et repli sans stockage restent
+à recevoir. Voir [le contrat de l'outil](https://github.com/xtincell/indice-maturite/blob/main/README.md).
 
 ## talos ↔ radar — MCP
 
