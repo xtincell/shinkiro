@@ -1,6 +1,6 @@
 # SPAWT — application, exploitation et continuité de marque
 
-Réception partielle du 7 octobre 2026. La mise en ligne du site ne reçoit pas
+Réception partielle des 7 et 8 octobre 2026. La mise en ligne du site ne reçoit pas
 l’application, ses magasins ni la boucle d’apprentissage du produit.
 
 ## Rôle dans le Shinkiro
@@ -91,12 +91,33 @@ Après retour du réseau, statut, image, bundle et navigation ont été reçus. 
 assertions prématurées sur un fichier de statut ancien relèvent du dispositif de
 réception ; elles ne sont ni un échec du déploiement ni une panne démontrée de SPAWT.
 
-Quatre contre-exemples distincts restent ouverts : favoris concurrents perdus,
-suppression serveur ressuscitée à l’hydratation, réponse distante après reset
-repeuplant les favoris du compte précédent, même avis rejoué déplaçant encore le
-Palais. Les tests constatent ces mauvais comportements ; ils ne reçoivent pas
-leurs parcours. Isolation et ordre de file, UX des erreurs des callers, reprise
-authentifiée sur deux comptes/appareils, édition et apprentissage restent ouverts.
+Quatre contre-exemples avaient été reproduits sur le store : favoris concurrents
+perdus, suppression distante recréée, réponse tardive après déconnexion et même
+avis déplaçant plusieurs fois le Palais. Les trois premiers critères sont corrigés
+par la [PR #7](https://github.com/xtincell/spawt-ci-mobile-v1-mvp/pull/7), canon
+`49db8c10f9de5806d73c5d8a63b263ef1736e1b3`, CI `37698954673` verte. Cache et
+intentions non acquittées sont persistés ensemble, identifiés par compte, sous la
+clé existante. Le serveur fait foi pour le reste ; une réponse ancienne n’acquitte
+pas un choix contraire plus récent. Le réseau ne bloque pas les gestes locaux.
+Les reprises utilisent les listeners réseau et foreground existants.
+
+Vingt-cinq contrôles supplémentaires, suite app de 842 tests et quatre sauts,
+quatre snapshots, types/vocabulaire/i18n et export web avec assets réels reçus.
+Les refus d’enregistrement sont visibles dans les trois écrans concernés ; une
+liste illisible reste intacte et laisse le reste du compte accessible. La sortie
+purge aussi l’identité persistée, le Palais, les spawts et les consentements ;
+les retours de Gold, statut interne et archétype lancés avant sortie sont écartés.
+
+La politique de purge locale à la déconnexion reste explicite, y compris pour
+les favoris non synchronisés. Le cache historique ne permet pas de distinguer
+un ancien ajout hors ligne d’une suppression distante : il n’est pas promu en
+mutations à rejouer. Ces limites et la recette sur deux comptes/appareils restent
+ouvertes, avec l’isolation de la file des spawts et les autres callbacks.
+Le rejeu d’avis déplaçant le Palais est encore reproduit après ces corrections ;
+il ne devient pas un critère reçu parce que son test constate ce défaut.
+L’avis et son effet sur le Palais étant persistés séparément, la suite doit traiter
+l’écriture interrompue, l’édition et le rejeu ensemble. L’agrégation ADN des lieux
+est un flux distinct déjà présent côté SQL ; elle ne doit pas être dupliquée.
 
 Le helper client ADN ne réalise plus l’écriture distante décrite dans son ancien
 commentaire. L’agrégation serveur existe déjà dans le SQL ; ajouter une seconde
@@ -117,3 +138,19 @@ Rapport et preuves opérateur :
 `preuves-spawt-app/`. Registre : 91 parcours examinés partiellement sur 116,
 25 non audités, aucun parcours large reçu ni chantier clos. Ce rapport ne clôture
 pas les lignées donneuses restantes.
+
+
+Livraison du lot favoris reçue : déploiement `irhw3g306531fua7pa36dv69` terminé à
+23:03:33Z le 7 octobre (UTC), source `49db8c10f9de5806d73c5d8a63b263ef1736e1b3`. Conteneur
+`ao9yhx6fzxhwi1crbswmli1c-225647741816`, image
+`sha256:e13b4fd184d9764d0e18589121641d7190b73be5584f24b59b05f392e976a0d5` ; bundle public 200, empreinte
+`b4419102d512581c71bd691767ba9ba9c9d2e64efb56a0102a5d9e0aab7d8cf3`, raccord backend et marqueurs de continuité rapprochés.
+La configuration autre que le commit et les variables de backend sont conservées.
+Cette relecture reçoit le code servi, pas un parcours authentifié.
+
+[PR #8](https://github.com/xtincell/spawt-ci-mobile-v1-mvp/pull/8), canon
+`db526127a3cc81637fbb6b16aef16c1d89319565`, répare uniquement l’adaptateur Jest CommonJS.
+CI `37699941903`, suite de 843 tests et quatre sauts, export web et autres gates
+verts. Le diff avec le runtime ne touche que documentation et dispositif de test ;
+la configuration Babel de production exclut ce plugin. Le runtime reste sur le
+lot produit qualifié `49db8c1`, sans nouveau déploiement pour ce correctif de test.

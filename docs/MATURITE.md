@@ -65,7 +65,9 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   rectifiée ; 817 tests, quatre sauts et export web reçus en CI. Livraison du
   correctif, image/bundle et entrée native reçus, consentements non acceptés.
   Console : 160 tests simulés, fontes exclues du checkout de sources. Quatre défauts
-  favoris/Palais reproduits restent ouverts. Console native non authentifiée et
+  favoris/Palais reproduits sont bornés dans la réception détaillée ; trois critères
+  de favoris corrigés par PR #7, canon `49db8c1`, 842 tests et CI avec export web.
+  Le rejeu d’avis déplaçant le Palais reste reproduit. Console native non authentifiée et
   schéma lus sans réception des permissions. Six références produit conservées
   après rechargement, dont quatre nouveaux accès. Native authentifiée, magasins,
   isolement/reprise, apprentissage et irrigation de marque ouverts. Voir

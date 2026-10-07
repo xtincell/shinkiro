@@ -231,8 +231,10 @@ Le produit Application mobile conserve son lien La Barre et son dépôt, auxquel
 s’ajoutent branche active, aperçu, console équipe et backend, retrouvés après
 rechargement natif. L’app Expo, la console et le backend ont des sources et
 réceptions distinctes du prototype web gelé. La conservation des opérations hors
-ligne est partiellement corrigée ; favoris, propriétaires de session et rejeu
-d’apprentissage gardent des défauts reproduits. Une base avec RLS activée n’est
+ligne est partiellement corrigée. Les critères de favoris concurrents, suppression
+distante et réponse tardive sont corrigés dans PR #7, avec intention persistée par
+compte ; reprise authentifiée, purge et autres callbacks restent à recevoir.
+Le rejeu d’apprentissage du Palais garde un défaut reproduit. Une base avec RLS activée n’est
 pas une réception des permissions. Voir [la réception application](RECEPTION-SPAWT-APPLICATION.md).
 
 Les liens confidentialité/CGU de l’entrée sont reçus par clic natif vers les pages
