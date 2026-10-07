@@ -1,7 +1,31 @@
 # État de maturité
 
-Ce que le code fait réellement, par opposition à ce que les README annoncent. À relire avant
-toute planification — c'est le document qui évite de construire contre une fiction.
+Les réceptions datées complètent le relevé historique ; ni une arborescence ni
+un déploiement ne constituent une release reçue. Les statuts historiques ci-dessous
+ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
+
+## Réceptions partielles au 7 octobre 2026
+
+- La Fusée 403 : raccords qualifiés par instance, édition concurrente protégée,
+  trois marques reliées au même suivi Noël, projet et accès uniques en vue groupe
+  reçus nativement. Les sept fonctions publiques rendent l'aide IA facultative ;
+  les autres promesses publiques, le corpus complet et les cycles restent ouverts.
+- Radar personnel et installation Matanga sont distincts et déployés. Journal
+  canonique partagé ; admission La Barre → Radar Matanga versionnée et idempotente
+  reçue par API. L'écran Matanga, les autres créateurs de codes, certains filtres
+  multimarques et les permissions métier complètes restent à recevoir.
+- La Barre : master, adaptation, format, reprises et réception de référence ont
+  reçu une correction livrée. Cette réception ne couvre pas l'authentification
+  des dépôts ni le retour de décisions et résultats entre tous les outils.
+- Indice : bilans incomplets sans note globale, déclaratif explicite, reprise
+  locale et exports reçus nativement. Admission du bilan au dossier destinataire,
+  fonctionnement hors ligne et repli sans stockage restent à recevoir.
+
+Le recensement intégral conserve toutes les IP et leurs lignées donneuses. Aucun
+classement historique « gelé » ou « archivé » ne retire une capacité de l'audit.
+Les contrats et limites de circulation figurent dans [INTERFACES.md](INTERFACES.md).
+
+## Relevé historique — 14 septembre 2026
 
 **Établi par relevé exhaustif des arborescences GitHub au 14 septembre 2026.** Les volumétries
 sont comptées, pas estimées. Voir [`fleet.yml`](../fleet.yml) pour le détail par composant et
@@ -33,8 +57,9 @@ insuffisante pour trancher.
 ## Dette structurelle connue
 
 1. **La méthode est éclatée en huit dépôts** sous trois orthographes — ADVE, ADVERTIS,
-   AVERTIS. `ADVE-project` est canonique ; les cinq autres sont des lignées mortes à archiver
-   après récupération du meilleur README (celui de `LaFusee_ADVE`).
+   AVERTIS. `ADVE-project` est canonique ; les autres lignées restent à qualifier
+   sémantiquement avant récupération ou décision d'archivage. Un nom de dépôt
+   ne suffit pas à conclure que ses capacités sont présentes dans le canon.
 2. **Deux moteurs, pas trois — et c'est mesuré.** `talos` et `hulysse` divergent de **17 %**
    (`journal.js`, `ollama.js` et `telegram.js` sont identiques à l'octet) : c'est la
    duplication réelle, et la seule. `galahad` diverge d'eux de 73 % et 71 % — moteur
@@ -43,8 +68,9 @@ insuffisante pour trancher.
    `cron`, `heartbeat` et `radar-mcp/` d'un côté, `goals` et `veille` de l'autre. Voir
    [`SHK-0003`](adr/SHK-0003-deux-moteurs-pas-trois.md). L'affirmation « trois exemplaires »
    qui figurait ici n'avait jamais été mesurée, et elle était fausse.
-3. **Aucun contrat d'interface n'est écrit.** Voir `docs/INTERFACES.md` — rédigé à partir du
-   code, à confirmer par les auteurs.
+3. **Contrats d'interface partiellement reçus.** Voir `docs/INTERFACES.md` : journal
+   Radar, admission La Barre et raccords Fusée documentés ; les autres interfaces
+   ne doivent pas être assimilées à ces réceptions.
 4. **Le clone local d'`ADVERT_01` porte 111 modifications non commitées.** À trancher avant
    d'archiver le dépôt : récupérer ou jeter.
 5. **Deux cockpits coexistent** — `galahad/cockpit/index.html` et le dépôt `hermes-cockpit` —
@@ -53,6 +79,6 @@ insuffisante pour trancher.
    selon le marché (langue, marque, SKU, réglementaire) ; `la-barre/app/ecarts.js` classe *qui
    doit la reprise et si elle se facture* (brief, plateforme, bigidea, agence, donneur). La
    seconde est la plus avancée. Voir [`TOPOLOGIE.md`](TOPOLOGIE.md).
-7. **`la-barre` n'est pas câblé à `radar`.** La Barre produit les décisions, Radar tient le
-   journal `task_events`. Sans le lien, la mesure avant/après du Transformation Pilot — le
-   sixième critère de gouvernance — n'est pas tenable.
+7. **Admission reçue, boucle de résultat ouverte.** La Barre produit le cadrage,
+   Radar Matanga admet le projet avec reçu ; les états restent dans Radar.
+   Cette liaison ne reçoit pas encore la mesure avant/après du cycle complet.

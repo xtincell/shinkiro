@@ -71,17 +71,18 @@ composants:
     licence: proprietaire
     vitalite: actif
     ordre_construction: 5
-    deploiement: {mode: vercel, url: "https://lafusee-app.vercel.app"}
+    deploiement: {mode: coolify, url: "https://powerupgraders.com/lafusee"}
     stack: [next, prisma, typescript, storybook, playwright]
     produits_portefeuille: ["07 · Creative Transformation Program", "02 · Creative Operations Audit"]
     source_partagee: {produit: argos, role: client, via: "POST /api/v1/ingest/dossier"}   # SHK-0002
     description: >-
-      La Fusée v6.19 — Industry OS du marché créatif africain, et dépôt
-      canonique de la méthode ADVE. Un brief entre en PDF, le diagnostic tombe
-      en quinze minutes, la stratégie est écrite sous 48 h.
+      La Fusée — patrimoine de marque, stratégie, actifs et opérations, et dépôt
+      canonique de la méthode ADVE. Sources, travail manuel et assistance
+      facultative partagent les mêmes dossiers et décisions gouvernées.
     attention: >-
-      Le plus lourd et le plus strict du programme. Gouvernance à 192 ADR, un
-      plugin ESLint maison, dix PR ouvertes. Ne jamais commencer par lui.
+      Le plus lourd et le plus strict du programme. La présence d'un outil au
+      registre ne prouve pas sa disponibilité. Raccords de suivi reçus ; corpus,
+      cycles métier et promesses des autres sections publiques restent à recevoir.
 
   - nom: la-fusee-blueprint
     couche: method
@@ -105,8 +106,11 @@ composants:
     deploiement: {mode: pages, url: "https://xtincell.github.io/indice-maturite/", entree: index.html}
     produits_portefeuille: ["01 · Creative Opportunity Check"]
     description: >-
-      Le diagnostic d'entrée. Seize questions, quatre axes, un niveau de 0 à 5,
-      et une prescription. Seul produit du catalogue où l'outil est l'offre.
+      Le diagnostic déclaratif d'entrée. Couverture explicite, bilan conservable
+      et reprise manuelle ; une réponse manquante ne devient pas une note globale.
+    attention: >-
+      Le bilan exporté reste une source à admettre dans le dossier de marque.
+      Son export ne reçoit ni une performance commerciale ni une décision.
 
   - nom: market-expansion-system
     couche: method
@@ -426,9 +430,11 @@ derives_non_canon:
 
 # ── lignées archivées ───────────────────────────────────────────────────
 # Portent le topic shinkiro pour l'historique, hors flotte vivante.
-# ADVE-project est canonique ; ces cinq sont des lignées mortes de la méthode.
+# Clé historique conservée pour les lecteurs. Leur classement ne clôture pas
+# l'audit intégral : capacités donneuses et branches restent à qualifier avant
+# toute décision de récupération ou d'archivage. ADVE-project est le canon actif.
 lignees_mortes:
-  - {nom: LaFusee_ADVE,    note: "vercel.json présent — a été déployé. Son README est meilleur que celui du canonique : à récupérer avant archivage."}
+  - {nom: LaFusee_ADVE,    note: "Lignée historique : doctrine et capacités à confronter au canon actif avant toute décision d'archivage."}
   - {nom: ADVE_v8,         note: "branche par défaut claude/la-fusee-v2-rebuild-9omp5v, pas main. Dockerfile, CI, 7 migrations."}
   - {nom: AVERTIS_web_v01, note: "application complète sous advertis-app/ — next, prisma, seeds ARTEMIS. Coquille dans le nom du dépôt."}
   - {nom: ADVERTIS_v01,    note: "8-Pillar Brand Strategy System. Lignée antérieure."}

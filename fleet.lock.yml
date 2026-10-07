@@ -21,8 +21,8 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 3408
-    poids_ko: 102590
+    fichiers: 3411
+    poids_ko: 102616
     licence: presente
     commits_90j: 100
     topics: ["layer-method", shinkiro]
@@ -251,23 +251,24 @@ composants:
   - nom: indice-maturite
     branche: main
     prive: false
-    langue: HTML
-    fichiers: 3
-    poids_ko: 10
+    langue: JavaScript
+    fichiers: 8
+    poids_ko: 22
     licence: presente
-    commits_90j: 1
+    commits_90j: 3
     topics: ["layer-method", shinkiro]
     racines: [.]
     artefacts:
       index_html: [index.html]
+      workflows: [.github/workflows/verify.yml]
   - nom: la-barre
     branche: main
     prive: false
     langue: JavaScript
-    fichiers: 236
-    poids_ko: 7042
+    fichiers: 243
+    poids_ko: 7087
     licence: presente
-    commits_90j: 79
+    commits_90j: 86
     topics: ["layer-tools", shinkiro]
     racines: [., sources/02_dossier_MT0020, sources/04_outils, sources/99_archive]
     artefacts:
