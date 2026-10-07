@@ -175,6 +175,56 @@ en vue groupe. Anciens liens et pièce partagée conservés ; aucun statut recop
 Tests locaux de concurrence et permissions reçus ; autres rôles natifs et
 cycles complets ouverts. Voir [ADR-0200](https://github.com/xtincell/ADVE-project/blob/main/docs/governance/adr/0200-portfolio-identites-radar.md).
 
+### la-fusee — tâches, reprises et reçus
+
+`CampaignDeliverable` porte la tâche ; `CampaignChangeRequest` conserve sa
+reprise, son motif et sa décision. Le code de tâche utilise l'écrivain existant,
+sous verrou de campagne et maximum historique. Le ticket reprend ce code ou
+l'identifiant complet du livrable ; un préfixe ambigu demande qualification.
+
+Le `requestId` explicite réutilise l'identifiant du ticket existant. Le même
+envoi, même après un nouveau processus, retrouve le même reçu. Un autre contenu
+ou un autre livrable avec cet identifiant est refusé ; sans cet identifiant,
+deux demandes identiques restent deux demandes. Services router et handlers
+Mestor comparent le périmètre déclaré à la vraie campagne. Cette cohérence ne
+remplace pas l'autorisation d'accès.
+
+Résolution et rejet sont terminaux, sous verrou. Rejouer exactement la même
+résolution conserve le reçu ; une autre décision refuse la réouverture. Un
+brief lié appartient à la campagne, le responsable à l'équipe. L'arbitrage local
+ne poste aucun message externe. Résoudre une reprise ne livre pas la tâche.
+
+Retirer le statut manuel de tâche recalcule sa santé. Le calcul automatique
+de santé de campagne n'existe pas encore : la remise correspondante refuse
+l'écriture au lieu de fabriquer du vert. Le choix d'équipe administrateur,
+le brouillon après remontage et la réception native complète restent ouverts.
+Voir [ADR-0202](https://github.com/xtincell/ADVE-project/blob/main/docs/governance/adr/0202-reprises-campagnes-identite.md)
+et [la réception bornée](RECEPTION-REPRISES-SURFACES.md).
+
+### SPAWT — marque, produit et surfaces publiées
+
+Les dépôts SPAWT sont des projets clients de la flotte, et restent inclus dans
+l'audit intégral. La vitrine `spawt.online`, le quiz `quiz.spawt.online` et la page
+historique `bientot.spawt.online` ont des branches et déploiements distincts.
+Une annonce exacte dans un dépôt peut rester périmée dans un autre.
+
+Le Quiz Palais pose l'hypothèse de goût ; un Spawt apporte le comportement ; le
+Taste Reveal rapproche les deux. La sixième question mesure la notoriété du lieu
+(Foule ↔ Secret), sans l'assimiler à son ambiance. Les six questions existantes
+et leurs calculs sont conservés. Les annonces de leurs trois surfaces sont
+reçues après correction ; cette mise à jour manuelle ne constitue pas encore
+une irrigation depuis une version approuvée du dossier de marque dans La Fusée.
+
+La réception future doit rapprocher source de marque, version produit réellement
+servie, modification publiée et retour de mesure. Doctrine, fonctionnalité
+déclarée et résultat utilisateur reçu restent distincts. Aucun agent n'est requis
+pour publier ou corriger ; l'assistance emprunte les mêmes décisions.
+
+La page historique ne porte plus de décompte expiré ni de promesse de remplacement
+futur de la vitrine déjà en ligne. Elle conserve le quiz et mène au site actuel.
+Les magasins mobiles restent annoncés à venir : aucune publication d'app n'est
+déduite du seul fait que le site est en ligne.
+
 ## indice-maturite → la-fusee — bilan déclaratif conservable
 
 L'Indice conserve ses questions et sa méthode. Un bilan incomplet montre sa
