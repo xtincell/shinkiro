@@ -41,7 +41,7 @@ classification ne le retire pas de l’audit des projets actuels.
 | `15B_Stories` | Moteur narratif à choix |
 | `atlas-of-recorded-sound` | Généalogie navigable de 285 genres musicaux |
 | `CosmicMachine` | Prototype créatif |
-| `Tauri-v1` | Application de comptabilité |
+| `Tauri-v1` | Carnet local de trésorerie et justificatifs ; pas de facturation commerciale reçue |
 | `BlackNoteWeb` | Le premier dépôt |
 
 Recherche personnelle. Ce n'est pas du bruit — c'est de la curiosité assumée — mais ça ne

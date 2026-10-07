@@ -196,8 +196,10 @@ ne poste aucun message externe. Résoudre une reprise ne livre pas la tâche.
 
 Retirer le statut manuel de tâche recalcule sa santé. Le calcul automatique
 de santé de campagne n'existe pas encore : la remise correspondante refuse
-l'écriture au lieu de fabriquer du vert. Le choix d'équipe administrateur,
-le brouillon après remontage et la réception native complète restent ouverts.
+l'écriture au lieu de fabriquer du vert. Le choix d'équipe administrateur est
+reçu en 409/410, ainsi que les campagnes sans tâche et le sélecteur par nom.
+Le rôle opérateur natif distinct, le brouillon après remontage et le cycle
+métier complet restent ouverts.
 Voir [ADR-0202](https://github.com/xtincell/ADVE-project/blob/main/docs/governance/adr/0202-reprises-campagnes-identite.md)
 et [la réception bornée](RECEPTION-REPRISES-SURFACES.md).
 

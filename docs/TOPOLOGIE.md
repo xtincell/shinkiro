@@ -56,6 +56,14 @@ la collecte. La CLI et l'API partagent désormais le reçu et la sauvegarde, san
 appel agentique. Le serveur de développement reste en boucle locale, sans debug.
 Son déploiement de service TPE et son admission métier restent à recevoir.
 
+### LSI-CD : front statique et fournisseurs distincts
+
+Le build Vite produit le front ; le proxy fournisseur constaté est un plugin
+du serveur de développement. Un build réussi ne reçoit pas les routes API en
+production. La correction de sauvegarde de la PR #2 est intégrée au canon,
+mais aucune livraison de service ni recette native n'est reçue pour l'atelier.
+Voir [la réception des spécialistes](RECEPTION-ATELIERS-SPECIALISES.md).
+
 ### Coolify est la plateforme, et ce n'est écrit nulle part ailleurs
 
 Trois preuves concordantes dans le code :
