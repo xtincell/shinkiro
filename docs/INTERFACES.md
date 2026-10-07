@@ -14,33 +14,61 @@ tout ce qui n'y figure pas est refusé, ce n'est pas un oubli mais une protectio
 
 | Table | Clé | Rôle |
 |---|---|---|
-| `briefs` | `id` | Le projet. Clé métier : `ndeg`. |
+| `briefs` | `id` | Le dossier. `ndeg` est un code métier actuellement non unique ; il ne remplace pas l'identifiant stable. |
 | `clients` · `client_markets` · `client_contacts` | `id` | Référentiel client. `data` en JSONB. |
-| `task_events` | `id` | **Le journal.** Chaque changement d'état y laisse une trace horodatée. |
+| `task_events` | `id` | **Le journal en lecture seule par REST.** `brief_id` rattache le mouvement ; `private_to` conserve sa confidentialité historique. |
 | `comments` | `id` | Fil par `ndeg`. |
-| `brief_assets` | `id` | Visuels. Écriture REST interdite — passer par `/visuels`. |
+| `brief_assets` | `id` | Visuels. Création/suppression par `/visuels` ; seul PATCH de `caption` passe par REST. |
 | `app_config` | `key` | Configuration. |
 
 Filtres supportés : `eq` `neq` `gte` `lte` `is` `in` `cs`, plus `select` / `order` / `limit`.
 
 **Le journal est le contrat qui compte.** `task_events` est ce qui rend la mesure
 avant/après possible sans déclaratif : `at`, `ndeg`, `statut_old`, `statut_new`, `resp_old`,
-`resp_new`, `kind`, `summary`. Toute intégration qui modifie un brief **doit** écrire son
-événement, sinon la preuve se perd.
+`resp_new`, `kind`, `summary`. Depuis [la correction Radar #3](https://github.com/xtincell/radar/pull/3),
+le producteur émet cette trace dans la transaction du brief, y compris pour une
+écriture SQL autorisée. Une intégration **modifie le dossier et reçoit son résultat** ;
+elle n'écrit pas une seconde fois dans `task_events`. Un changement et sa trace
+échouent ensemble. La seule modification de `updated_at` ne produit pas de mouvement.
+
+La confidentialité du mouvement et celle du dossier courant sont vérifiées à
+la lecture. L'histoire ancienne dont la confidentialité est inconnue reste
+conservée mais non publiée et signalée comme incomplète. La suppression privée
+ne rend pas ses mouvements publics. Ces règles couvrent aussi fichiers et
+commentaires. Le code refuse un rattachement de média sur un code ambigu.
+
+La recette du composant reçoit les échecs de lot et de journal, les transitions
+de confidentialité, les médias et le redémarrage. Elle ne reçoit pas les
+permissions métier complètes par rôle, la concurrence des codes, la
+qualification de l'histoire ni le raccord La Barre → Radar. L'accès machine
+général reste distinct du filtrage humain. Une trace `closed` n'est pas une preuve
+de livraison ni d'accord client. Voir `radar/docs/RECEPTION-JOURNAL.md`.
 
 ### Flux sortants
 
 - `GET /feed.xml` — RSS 2.0
 - `GET /activity.json` — JSON Feed 1.1
 
-Alimentés automatiquement par `task_events`. C'est par là qu'un système externe observe
-Radar sans l'interroger.
+Ils exposent les mouvements publics qualifiés de `task_events`, avec un signal
+d'histoire incomplète. Leur publication publique par défaut et l'option
+`FEED_TOKEN` restent à prendre en compte pour chaque installation. Un ancien
+PostgREST dépourvu du contrat de confidentialité n'est plus un repli public.
 
 ### Entrée libre
 
 `POST /ingest` — texte brut → LLM local (Ollama) → tâches structurées. Tout entre en
 `statut = Reçu` et `brief_etat = déduit`. **Repli sans perte si Ollama est injoignable** :
 le texte est conservé, la structuration est différée.
+Le lot et ses événements sont maintenant atomiques ; une erreur au second
+élément ne laisse pas le premier créé en prétendant que tout est reçu.
+
+### Persistance
+
+PostgreSQL conserve les dossiers et leur journal. `/data` conserve le KV SQLite
+de mots de passe personnels et les binaires des visuels. Les deux doivent être
+persistants et sauvegardés pour une instance déployée ; un conteneur applicatif
+seul ne conserve pas `/data` lors de son remplacement. La restauration sur un
+même hôte ne reçoit pas l'isolation ou la reprise sur un second serveur.
 
 ## talos ↔ radar — MCP
 
