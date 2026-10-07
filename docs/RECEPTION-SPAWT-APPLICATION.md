@@ -135,8 +135,8 @@ approuvée et retour de résultats restent à recevoir.
 
 Rapport et preuves opérateur :
 `audit-shinkiro-2026-09-25/release/AUDIT-SPAWT-APPLICATION.md`,
-`preuves-spawt-app/`. Registre : 91 parcours examinés partiellement sur 116,
-25 non audités, aucun parcours large reçu ni chantier clos. Ce rapport ne clôture
+`preuves-spawt-app/`. Registre : 96 parcours examinés partiellement sur 116,
+20 non audités, aucun parcours large reçu ni chantier clos. Ce rapport ne clôture
 pas les lignées donneuses restantes.
 
 

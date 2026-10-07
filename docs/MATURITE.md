@@ -4,7 +4,7 @@ Les réceptions datées complètent le relevé historique ; ni une arborescence 
 un déploiement ne constituent une release reçue. Les statuts historiques ci-dessous
 ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
-## Réceptions partielles au 7 octobre 2026
+## Réceptions partielles des 7 et 8 octobre 2026
 
 - Galahad : consentement, procédures, décisions indisponibles, seuil de jetons
   et retour délégué confrontés au canon. Neuf contre-exemples rouges, puis quinze
@@ -75,6 +75,14 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   PR #6 livrée au canon `4d7ee59` : liens d’entrée confidentialité/CGU reçus par
   clic natif, image et bundle rapprochés. Pages encore en brouillon juridique,
   consentements non acceptés ; liens profonds lieu/Crew encore à recevoir.
+- 15B Stories : deux œuvres distinctes, Kinara Classic et Nuit Éternelle,
+  conservées. Build et premier démarrage corrigés par PR #1, canon `ea261e6`,
+  trois tests de runtime isolé et CI `37701950166` verts. Neuf observations
+  locales comprennent deux arcs mécaniques simulés et deux exports ZIP ;
+  quatre ruptures sont reproduites dans la reprise, le tour, l'import et les
+  personnalités. Native, modèle facultatif, isolation, stockage durable et
+  rapprochement Ngoma non reçus ; aucun déploiement de service. Voir
+  [RECEPTION-15B-STORIES.md](RECEPTION-15B-STORIES.md).
 - DataCollector : collecteurs, CLI/API et interface confrontés à leur rôle.
   Reçu partagé, sauvegarde atomique, erreurs et inconnues conservées ; faux
   sentiment, score de santé et progression simulée retirés. Quatorze tests Python
