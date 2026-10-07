@@ -87,7 +87,17 @@ la flotte.
 Ils ne sont pas des bugs. Ce sont des décisions qui n'ont jamais été écrites, et
 chacune coûtera cher à qui l'ignore.
 
-### 1 · Deux moteurs, pas trois
+### 1 · Dépôts historiques et moteurs servis
+
+**Réception du 7 octobre.** La mesure ci-dessous porte sur les dépôts de
+septembre. Les services Talos et Hulysse présentent aujourd’hui quinze modules
+identiques, dont onze correspondent au Galahad initial. Missions et Agora
+constituent les ajouts servis. Les capacités donneuses des dépôts historiques
+restent à recevoir avant convergence de déploiement. Voir
+[la réception des rôles](RECEPTION-TALOS-HULYSSE.md).
+La conclusion historique qui suit ne doit pas être appliquée au code servi.
+
+#### Mesure Git de septembre
 
 Cette section affirmait le contraire : *« le moteur existe en trois exemplaires …
 c'est la dette structurelle n°1 »*. Personne ne l'avait mesurée — trois

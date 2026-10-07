@@ -235,22 +235,20 @@ composants:
     vitalite: fige
     deploiement: {mode: systemd, unite: ops/talos.service, installateur: ops/install.sh}
     description: >-
-      Rôle Guardian — gardien du VPS. Refondu sur l'Agent SDK : le cerveau
-      agentique est délégué au moteur, Talos n'écrit que la mémoire stratifiée,
-      la patrouille, le canal, le journal, et câble les garde-fous en dur.
+      Gardien de l’installation : observer la santé, diagnostiquer les incidents
+      et préparer des réparations sous autorité. Son rôle reste distinct de
+      l’exploration et des décisions métier.
     contient:
       src: [agent-loop, config, cron, heartbeat, hooks, index, journal, mcp, memory, ollama, soul, telegram, tools]
       radar-mcp: Pont MCP vers radar — index.js et test-client.mjs.
       memory-seed: [MEMORY.md, infra.md, projets.md]
     divergence: {avec: hulysse, chemin: src, mesure_pct: 17, le: 2026-09-14}   # SHK-0003
     attention: >-
-      Même moteur que hulysse, à 17 % près — journal.js, ollama.js et telegram.js
-      sont identiques à l'octet. Ce qui les sépare est fonctionnel, pas structurel :
-      talos porte cron, heartbeat et le pont MCP vers radar ; hulysse porte goals et
-      veille. C'est la duplication réelle du programme, et la seule.
-      Aucun recouvrement avec galahad, qui diverge de 73 % : moteur différent,
-      agnostique au fournisseur de modèle. Chiffres reproductibles par
-      scripts/mesure-divergence.mjs.
+      La divergence déclarée mesure les dépôts historiques, pas le code servi.
+      Les services Talos et Hulysse utilisent une variante commune de Galahad.
+      Missions et Agora sont réintégrées au canon ; cron, briefing, sessions
+      persistées et MCP restent des capacités donneuses à recevoir.
+      Aucun service actif migré. Voir docs/RECEPTION-TALOS-HULYSSE.md.
 
   - nom: hulysse
     couche: execution
@@ -260,15 +258,19 @@ composants:
     vitalite: fige
     deploiement: {mode: systemd, unite: ops/hulysse.service, installateur: ops/install.sh}
     description: >-
-      Rôle Traveler — explorateur autonome et bâtisseur de nuit. Veille,
-      objectifs, repli LLM. Demande avant de livrer.
+      Explorateur de l’installation et de ses objectifs : observer, préparer
+      et remettre des pistes au domaine compétent. La politique de veille et
+      l’autorité d’action doivent être explicites pour chaque installation.
     contient:
       src: [agent-loop, config, goals, hooks, index, journal, memory, telegram, tools]
       memory-seed: [MEMORY.md, infra.md, projets.md]
     divergence: {avec: talos, chemin: src, mesure_pct: 17, le: 2026-09-14}   # SHK-0003
     attention: >-
-      Même moteur que talos. Voir talos.attention — et non galahad, dont il
-      diverge de 71 %.
+      Dépôt historique et moteur servi diffèrent. Les objectifs clos de l’ancien
+      schéma restent clos dans le moteur corrigé. Veille réactive et fenêtre
+      nocturne ne sont pas assimilées sans réception de configuration.
+      Convergence de déploiement et reprise des conversations ouvertes.
+      Voir docs/RECEPTION-TALOS-HULYSSE.md.
 
   - nom: danmem
     couche: execution

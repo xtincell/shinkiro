@@ -182,10 +182,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 75
-    poids_ko: 256
+    fichiers: 78
+    poids_ko: 277
     licence: presente
-    commits_90j: 26
+    commits_90j: 28
     topics: ["layer-execution", shinkiro]
     racines: [., bridge, cockpit, engine, setup]
     artefacts:

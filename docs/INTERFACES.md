@@ -193,7 +193,10 @@ admission dans le dossier, ouverture hors ligne et repli sans stockage restent
 ## talos ↔ radar — MCP
 
 `talos/radar-mcp/` contient `index.js`, son `package.json` et un `test-client.mjs`. C'est le
-pont MCP qui expose Radar au rôle Guardian.
+pont MCP historique prévu pour exposer Radar au rôle Guardian. Les quinze
+modules actuellement servis n’appellent pas ce client ; ils possèdent une
+intégration HTTP distincte. Le contrat MCP reste une capacité donneuse à recevoir,
+pas une connexion active prouvée. Voir [la réception des rôles](RECEPTION-TALOS-HULYSSE.md).
 
 **Le protocole n'est décrit nulle part.** Il existe un client de test — c'est le point de
 départ pour le reconstituer, puis le figer ici. Tant que ce n'est pas fait, toute

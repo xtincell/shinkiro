@@ -70,6 +70,10 @@ Les contrats et limites de circulation figurent dans [INTERFACES.md](INTERFACES.
 sont comptées, pas estimées. Voir [`fleet.yml`](../fleet.yml) pour le détail par composant et
 [`TOPOLOGIE.md`](TOPOLOGIE.md) pour les modes de déploiement.
 
+**Table historique des arbres Git de septembre : « ce qui tourne » y décrit
+le code recensé, pas une réception des services.** Les réceptions ultérieures
+ci-dessus et les rapports liés priment sur ces états initiaux.
+
 Légende : **produit** = tourne en conditions réelles · **utilisable** = fonctionne, non
 éprouvé à l'échelle · **partiel** = des pans manquent · **à qualifier** = documentation
 insuffisante pour trancher.
@@ -99,14 +103,13 @@ insuffisante pour trancher.
    AVERTIS. `ADVE-project` est canonique ; les autres lignées restent à qualifier
    sémantiquement avant récupération ou décision d'archivage. Un nom de dépôt
    ne suffit pas à conclure que ses capacités sont présentes dans le canon.
-2. **Deux moteurs, pas trois — et c'est mesuré.** `talos` et `hulysse` divergent de **17 %**
-   (`journal.js`, `ollama.js` et `telegram.js` sont identiques à l'octet) : c'est la
-   duplication réelle, et la seule. `galahad` diverge d'eux de 73 % et 71 % — moteur
-   différent, agnostique au fournisseur, porteur de `roles`, `skill-runner`, `integrations`
-   et `jobs`. La convergence porte sur `talos` ↔ `hulysse` et sur eux seuls, en préservant
-   `cron`, `heartbeat` et `radar-mcp/` d'un côté, `goals` et `veille` de l'autre. Voir
-   [`SHK-0003`](adr/SHK-0003-deux-moteurs-pas-trois.md). L'affirmation « trois exemplaires »
-   qui figurait ici n'avait jamais été mesurée, et elle était fausse.
+2. **Convergence servie non représentée dans les dépôts historiques.** La mesure
+   Git de septembre reste reproductible ; elle ne décrit pas les services actuels.
+   Talos et Hulysse servent quinze modules identiques, sur une variante Galahad.
+   Missions/Agora et objectifs compatibles sont reçus dans le moteur canonique,
+   sans migration des agents. Cron, briefing, MCP et sessions persistées restent
+   des capacités donneuses ; politiques de veille, coût et restauration restent
+   ouverts. Voir [la réception des rôles](RECEPTION-TALOS-HULYSSE.md).
 3. **Contrats d'interface partiellement reçus.** Voir `docs/INTERFACES.md` : journal
    Radar, admission La Barre et raccords Fusée documentés ; les autres interfaces
    ne doivent pas être assimilées à ces réceptions.

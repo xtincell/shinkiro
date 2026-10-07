@@ -57,3 +57,11 @@ la rectification des souvenirs, un coût récurrent ou le cycle Noël. Les nouve
 observations S7 ne partent pas vers l'embedding ; l'historique n'est pas purgé.
 Les traitements automatiques peuvent être désactivés. Les services et agents
 actifs ne sont ni migrés, ni reconfigurés, ni redémarrés.
+
+## Talos et Hulysse : capacités actives et donneuses
+
+Le canon Galahad `a9bb98a` (PR #4) reçoit missions isolées et Agora observées dans
+les services, avec 25 scénarios verts et deux CI sur `8acf981`. Six défauts
+reproduits sur le code servi puis deux défauts d’objectifs sont corrigés. Aucun
+agent n’est migré. Le [rapport des rôles](RECEPTION-TALOS-HULYSSE.md) distingue
+ces capacités des sessions, du cron, du briefing et du MCP historiques à recevoir.

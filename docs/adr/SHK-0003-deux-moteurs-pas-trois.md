@@ -89,3 +89,14 @@ Elle ne dit rien du protocole MCP `talos ↔ radar`, qui reste à reconstituer d
 une capacité de rôle, et on ne déplace pas ce qu'on ne sait pas décrire.
 
 Elle ne révise pas la promesse de `galahad`. Elle est tenue.
+
+## Actualisation de portée — 2026-10-07
+
+La mesure et la décision ci-dessus décrivent les dépôts historiques examinés en
+septembre. La lecture des services Talos/Hulysse révèle depuis une convergence
+non représentée dans ces dépôts : quinze modules identiques, onze identiques au
+Galahad initial et quatre portant missions/Agora. Le [rapport de réception](../RECEPTION-TALOS-HULYSSE.md)
+qualifie les capacités actives et donneuses séparément. Cette observation ne
+supprime pas les anciennes capacités et n’exécute aucune migration. Une convergence
+de déploiement doit recevoir leur parité, leurs stocks et leurs politiques ;
+elle ne peut être déduite de la seule mesure Git ni de cette note.
