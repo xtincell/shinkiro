@@ -310,7 +310,7 @@ composants:
     fichiers: 73
     poids_ko: 1798
     licence: presente
-    commits_90j: 5
+    commits_90j: 4
     topics: ["layer-execution", shinkiro]
     racines: [., briefs, briefs/rh]
     artefacts:

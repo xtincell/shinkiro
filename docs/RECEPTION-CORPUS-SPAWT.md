@@ -494,8 +494,8 @@ manquantes. Les cinq progressions historiques restent qualifiées documentaires.
 Rapide/Crew/Explore sont décrits avec leurs drapeaux OFF documentaires ; aucune
 activation réelle déduite. Les rôles quiz/app/portail/admin et paiement web sont
 rapprochés ; mue 30 jours/cinq lieux contre cinq recalculs et seuil 50 restent
-explicitement non arbitrés. Le catalogue et l’échelle d’offres citent
-encore le périmètre B2B V1.5 historique ; ils restent à rapprocher du périmètre final.
+explicitement non arbitrés. À V19, le catalogue et l’échelle d’offres citaient
+encore le périmètre B2B V1.5 historique ; leur rapprochement V21 est reçu ci-dessous.
 
 Provenance INFERRED/AI_PROPOSED, une archive ajoutée (73→74 sur les deux dossiers
 SPAWT), huit sources conservées. Comparaison fédérée : douze sources, deux usages
@@ -515,3 +515,54 @@ Le contrat préparé dans `preuves-projection-marque-spawt/CONTRAT-PROJECTION.md
 réemploie coffre/export/publication : projection limitée et versionnée, refus de
 version périmée, isolation et retour arrière à recevoir. Aucun raccord public
 implémenté par cette note. Aucun des sept chantiers clôturé.
+
+
+## Catalogue et paliers rapprochés des sources finales — V19→21
+
+À 15:24 UTC, les deux champs `produitsCatalogue` et `productLadder` sont amendés
+par Advertis BRAND, après contrôle du runtime 420, de l’administrateur actuel,
+de quatre empreintes documentaires et de la version attendue. Simulation sans
+écriture reçue ; essais locaux : écriture/retry, source corrigée, reprise après
+premier champ et conflit de version. Aucun mécanisme métier supplémentaire.
+
+Cinq offres/cinq paliers conservés : paiement Gold B2C exclusivement web, droits
+lus par l’application ; B2B replacé dans le périmètre final et dashboards sur
+portail, drapeaux OFF documentaires. Montants historiques, identifiants, références,
+catégories et disponibilité PENDING restent identiques. Aucun paiement, activation,
+publication d’offre ni approbation humaine déduits. INFERRED/AI_PROPOSED conservés.
+Le système produit de V19 reste intact. Les neuf avertissements de formats legacy
+d’autres champs sont conservés ; invalidation RTIS normale, sans régénération.
+
+Deux archives supplémentaires (74→76), deux recommandations MESTOR/APPLIED sans
+review humaine et deux émissions OK. Les huit sources et quinze autres piliers
+SPAWT restent identiques ; contrôle fédéré : douze sources, deux usages et
+39 autres contenus/versions/statuts de piliers inchangés. IA 2 431→2 431, processus
+19, actifs 255, fragments 108. Lecture native des conditions et paliers reçue sous
+420 ; screenshot conservé, aucun bilan réseau global déduit. Le site public est
+relu : aucun décompte expiré, six questions et lien vers le quiz ouvert.
+Les deux copies du job privé sont retirées après contrôle de leur empreinte.
+
+Preuves privées : `preuves-offres-finales-spawt/`. Ce rapprochement documentaire
+ne reçoit ni le parcours mobile, ni la projection publique approuvée/versionnée.
+
+## Restauration : contre-exemple réel sur données synthétiques
+
+Le vrai gateway et le vrai rollback 420 sont exercés sur PostgreSQL local isolé.
+Une première écriture de promesse est suivie d’une décision indépendante de canal.
+Compenser la première annonce un succès mais efface la seconde : l’assertion
+exigeant sa préservation est rouge. L’archive du retour arrière n’a pas d’intention
+liée ; la valeur historique reçoit une provenance HUMAN. Zéro écriture de
+production, zéro appel fournisseur et fixture nettoyée. Le succès du runner
+reçoit ce diagnostic ; le contrat de restauration échoue.
+
+Le lot doit étendre spine, versions, gateway et compensation existants : filiation
+de l’amendement, état avant/appliqué vérifiable, restauration ciblée avec refus
+de conflit, contrôle transactionnel de version et accès à la marque résolue.
+Les reçus/certitudes/états doivent suivre la restauration sans nouvelle validation
+humaine implicite. Retry, concurrence réelle, source retirée, archive insuffisante,
+annulation de compensation et refus d’un opérateur étranger restent à recevoir.
+La voie historique de restauration choisie doit converger vers le même écrivain.
+
+Preuves privées : `preuves-restauration-piliers/`. Aucune correction logicielle
+de restauration n’est revendiquée par cette passe ; le raccord public et les
+sept chantiers restent ouverts, sans pourcentage global d’achèvement.
