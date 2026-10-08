@@ -6,6 +6,15 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
 ## Réceptions partielles des 7 et 8 octobre 2026
 
+- La Fusée 425 : résultat de production conservé avant admission transactionnelle
+  des versions, du coffre et du coût déclaré. Reprise après véritable redémarrage
+  local, ids stables et archive préservée reçus sur fixtures ; 24 cas d’admission
+  inclus dans les 219 PostgreSQL, 4 144 unitaires et CI verts. Image bootée puis
+  runtime exact reçus, volume privé et corpus de marque inchangés. Aucune tâche
+  Ptah ni version forgée en production : aucune forge réelle SPAWT/Noël réparée
+  ou reçue. Filiation upstream, octets durables, facture et journal restent ouverts.
+  Aucun parcours large ou chantier fermé. Voir
+  [RECEPTION-ADMISSION-FORGE.md](RECEPTION-ADMISSION-FORGE.md).
 - La Fusée 423 / SPAWT : édition publique choisie depuis Connexions, persistée
   dans le coffre et lue par la vitrine principale et son alias portail. Textes
   et lien existants conservés ; six questions annoncées, aucun décompte expiré.
