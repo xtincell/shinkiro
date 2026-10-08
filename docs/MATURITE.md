@@ -6,6 +6,25 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
 ## Réceptions partielles des 7 et 8 octobre 2026
 
+- Couverture de l’audit : les 116 fiches de parcours ont reçu un examen borné,
+  aucun parcours large n’est accepté intégralement. Les quatorze dernières
+  concernent Folio, Radar, Galahad, Ngoma, les connecteurs Matanga, le cycle
+  d’asset et la seconde entreprise. Le recensement des lignées, les interfaces
+  réelles et les sept chantiers restent ouverts ; aucun pourcentage global.
+- La Fusée 421 : compensation ciblée, provenance conservée, conflits et archives
+  insuffisantes refusés, effet unique au retry entre historique et journal.
+  CI 4 144 unitaires/150 PostgreSQL, dont 21 scénarios adversariaux ; image,
+  migration et runtime exacts reçus. Mutations natives synthétiques locales
+  reçues, dont reprise après interruption et amendement entré par MCP ; en
+  production, dialogue ouvert puis fermé sans annuler une décision réelle.
+  Corpus SPAWT/FrieslandCampina inchangé après livraison. Autres écrivains,
+  projection publique de marque et restauration du SI restent ouverts. Voir
+  [RECEPTION-CORPUS-SPAWT.md](RECEPTION-CORPUS-SPAWT.md).
+- Radar : deux contre-exemples HTTP locaux prouvent qu’un membre peut lire et
+  se réattribuer la tâche ancienne d’un autre responsable, face aux dix-neuf
+  tests existants verts. Le contrat « ses tâches du mois » n’est pas reçu par
+  le filtre `private_to`. Aucune tâche réelle modifiée ; permissions métier,
+  journal/médias associés et réception par rôles restent ouverts.
 - Galahad : consentement, procédures, décisions indisponibles, seuil de jetons
   et retour délégué confrontés au canon. Neuf contre-exemples rouges, puis quinze
   scénarios verts et CI reçue ; [PR #3](https://github.com/xtincell/galahad/pull/3)

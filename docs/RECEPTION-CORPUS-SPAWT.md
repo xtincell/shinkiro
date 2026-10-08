@@ -566,3 +566,91 @@ La voie historique de restauration choisie doit converger vers le même écrivai
 Preuves privées : `preuves-restauration-piliers/`. Aucune correction logicielle
 de restauration n’est revendiquée par cette passe ; le raccord public et les
 sept chantiers restent ouverts, sans pourcentage global d’achèvement.
+
+
+## Couverture du recensement : 116 parcours examinés, aucun reçu intégralement
+
+Le 8 octobre, les quatorze fiches restantes reçoivent un examen borné : quatre
+parcours Folio, deux Radar, un rôle Galahad, un univers Ngoma, quatre connecteurs
+Matanga, un cycle d’asset de La Fusée et l’installation d’une seconde entreprise.
+Les 116 fiches ont désormais une observation ; aucune n’est acceptée intégralement.
+Le recensement reste ouvert : l’examen d’une fiche ne reçoit pas toutes ses lignées,
+ses interfaces ou sa restauration. Aucun pourcentage d’achèvement n’en est déduit.
+
+Deux contre-exemples HTTP sur Radar local isolé sont rouges, face aux dix-neuf
+tests existants verts : un membre lit une tâche ancienne d’un autre responsable
+et peut se la réattribuer. Le filtrage `private_to` ne reçoit donc pas le contrat
+annoncé « ses tâches du mois ». Aucune tâche réelle n’a changé. L’accès machine
+général reste distinct ; le correctif doit couvrir aussi journaux et médias.
+
+La forge existante relie brief, tâche de génération, version d’asset et coffre.
+La lecture du code constate un achèvement enregistré avant la version d’asset,
+puis un retry qui peut sortir immédiatement. L’admission au coffre est aussi
+traitée en meilleur effort. Ces écarts statiques demandent une reproduction
+d’interruption ; aucun fournisseur ni média client n’a été appelé pour cet examen.
+Une URL ou un état ACTIVE ne reçoit ni durabilité binaire ni approbation humaine.
+
+Les lecteurs Folio sont consultés nativement sans envoyer de message. Une
+qualification « venture » dans une fiche Matanga reste à rapprocher du crédit
+employeur correct présent ailleurs ; aucun droit de réutilisation n’est transféré.
+Les connecteurs Matanga sont lus au commit exact, sans consulter de messagerie :
+identité durable des messages, couverture des listes et admission idempotente
+restent à recevoir. Le journal de routine reste distinct d’une simple liste IMAP.
+
+Galahad garde son rôle d’infrastructure, Ngoma son cycle d’incarnation et de monde.
+Aucune permission d’agent actif, session ou passerelle n’est modifiée par l’audit.
+L’installation d’une seconde entreprise doit encore recevoir l’isolation réelle,
+la restauration base et médias, la reprise et le fonctionnement manuel avec agents
+facultatifs. Cloner les dépôts ne constitue pas ce reçu.
+
+Preuves privées : `preuves-parcours-folio/`, `preuves-parcours-radar/`,
+`preuves-role-galahad/`, `preuves-univers-ngoma/`, `preuves-connecteurs-matanga/`,
+`preuves-cycle-asset/`, `preuves-seconde-entreprise/`. Les sept chantiers restent
+ouverts ; les nouveaux écarts alimentent leur périmètre existant.
+
+
+## Compensation ciblée livrée — 421
+
+Le contre-exemple 420 ci-dessus reçoit une correction, ADR-0207, sur le code
+`47ad863781d2305b9c88b91fb7ea289c480294d7`, puis le correctif de fixture
+`00bd3c4a7faa265eec38dbfd2fd79d894066f06a`. Le second ne change aucun
+code applicatif, migration, paquet ou entrée Docker. La première CI avait
+révélé un opérateur de test emprunté à un fichier parallèle puis supprimé ;
+la fixture possède maintenant son propre opérateur, sans retirer de test.
+
+Les versions conservent l’avant, l’appliqué et leur provenance. Le gateway
+commun restaure les feuilles concernées, préserve les décisions indépendantes
+et refuse les conflits, sources changées et archives insuffisantes. Les
+tableaux sont atomiques. Historique et journal retrouvent le même effet au
+retry ; une compensation peut elle-même être compensée. Contrôle d’accès et
+version sont relus sous verrou. Aucune validation HUMAN n’est déduite du retour
+arrière ; aucun lien historique n’est reconstruit par supposition.
+
+CI 37812842810 : 4 144 unitaires et 150 PostgreSQL verts, dont 21 scénarios
+de compensation ; Chromatic 37812842865 et Mission Drift 37812842678 verts.
+Image 37813353453 : construction, base neuve, migrations et extraction PDF
+reçues. Index publié/servi
+`sha256:730d74305de1d1dd79ee992cdc98105a2173227af0395756443b244c07c07805`.
+Une seule demande de livraison ; déploiement `xot4deix30lry9ptgc27yfes`
+terminé à 17:13:14 UTC. Runtime/API publique 6.27.421, utilisateur nextjs
+et volume privé conservés ; 101 migrations appliquées.
+
+Natif local authentifié sur données synthétiques : trois HTTP 200 (compensation,
+retry après arrêt brutal/redémarrage, amendement entré par MCP puis compensé
+par l’écran) et un HTTP 412 attendu sur conflit. Aucune exception ni chargement
+échoué sur ces quatre actions. Le prompt non supporté est remplacé par le Modal
+existant, avec motif et résultat/refus explicites. Aucun nouveau modèle, service,
+agent, page ou type d’intention. Le transport MCP réel et sa filiation sont reçus
+localement ; la première assertion de son runner échouait après une mutation
+réussie, relue sans la rejouer. La clé de recette est révoquée.
+
+Production : catalogue SPAWT V21 relu, dialogue ouvert, soumission à vide
+désactivée puis Retour. Aucune annulation d’une archive réelle soumise. Les
+mutations reçues localement ne sont pas décrites comme des mutations reçues en
+production. Avant/après livraison : 40 piliers, 12 sources, deux usages et
+compteurs IA/processus/actifs/fragments identiques dans SPAWT/FrieslandCampina.
+Les 76 archives SPAWT historiques restent sans checkpoint inventé.
+
+Preuves privées : `preuves-restauration-piliers/`. Les autres compensateurs,
+familles d’écrivains, restauration du SI et projection publique versionnée
+restent ouverts. Cette livraison ne clôture aucun des sept chantiers.
