@@ -21,8 +21,8 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 3435
-    poids_ko: 102783
+    fichiers: 3436
+    poids_ko: 102816
     licence: presente
     commits_90j: 100
     topics: ["layer-method", shinkiro]
