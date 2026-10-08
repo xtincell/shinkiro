@@ -404,3 +404,114 @@ Enfin, ADMIN en session et FOUNDER en base sont expliqués, pour le compte obser
 par l’allowlist fondateur actuelle effectivement relue dans le runtime. Ce cas
 ne prouve pas une session périmée. Aucun droit n’a changé. La rétrogradation,
 suppression et réaffectation des comptes ordinaires restent à éprouver au C7.
+
+
+## Palais documentaire et filiation finale retrouvée — 8 octobre
+
+Sur le runtime 419, `V.productSystem` est renseigné dans le modèle existant,
+V17→18 : cinq axes, les cinq archétypes du PRD historique, cinq stades, un mode
+prévu, deux artefacts et douze règles. Les produits socles référencent les offres
+canoniques. La provenance reste INFERRED/AI_PROPOSED, sans revue humaine. Une
+archive est ajoutée ; six sources, quinze autres piliers et compteurs IA/processus/
+actifs/fragments restent identiques. Recette native : les six dimensions sont lues,
+mais la trace réseau est tronquée ; aucun parcours large accepté. Les liens bruts
+et sous-origines inconnues observés dans cette vue motivent la correction du lecteur.
+
+L’examen du Git, au-delà du checkout partiel mobile, retrouve la passation finale
+et son renvoi à `project_spawt`. L’[amendement du 26 juillet](https://github.com/xtincell/project_spawt/blob/140ddf9eaaf991bed1ba8eff9cdff3bf495d25da/AMENDEMENT_PRD_2026-07-26.md)
+vit sur la branche finale, absent de main lors de la lecture. Il attribue à
+Alexandre le passage aux treize archétypes, l’inclusion B2B/portail, le paiement
+web, la palette brandbook et la base unifiée. Il rétablit une filiation manquante,
+sans prouver disponibilité, bascule de base, publication mobile ou revue humaine
+de la transcription canonique. La mue cinq recalculs app contre 30 jours/cinq
+lieux au PRD et le recouvrement au seuil 50 restent à qualifier explicitement.
+
+Amendement et passation sont admis nativement par « Ajouter une note », analyse
+assistée décochée, en sources DECLARED/EXTRACTED. Deux réponses de sauvegarde
+HTTP 200 relues, textes intégraux reçus après suppression du seul saut final par
+le formulaire ; les six sources précédentes, seize piliers des deux dossiers
+SPAWT et 73 archives restent identiques. IA 2 431→2 431, processus 19, actifs 255,
+fragments 108. La liste retrouve les quatre rôles : app, portail, quiz et données.
+Aucune action d’exploitation décrite par ces documents n’est exécutée au dépôt.
+
+À l’issue du dépôt des sources, la transcription V18 du Palais reste celle du
+PRD historique ; son rapprochement V19 est reçu plus bas. Les documents et le fonctionnement
+réel des surfaces restent distingués. La vitrine garde ses contenus codés, le
+quiz son contrat de scoring et l’app ses règles/drapeaux ; aucun export public
+approuvé et versionné n’est encore reçu depuis La Fusée. La page `/b/[slug]` et
+l’export stratégique privé ne suffisent pas à établir ce raccord. Réutiliser
+vault/export/publication existants, limiter les champs publics, recevoir version,
+refus d’une version périmée et retour arrière avant mise à jour de site.
+
+Preuves privées : `preuves-systeme-produit-spawt/`, `preuves-sources-finales-spawt/`.
+Aucun des sept chantiers n’est clôturé par ces ajouts documentaires.
+
+
+## Relations produit lisibles — réception 420 du 8 octobre
+
+Le commit ADVE `81391cc33944359cca0599bb0c13804579a5b92b` corrige le lecteur
+existant du système produit et des paliers. Les relations gardent leurs identifiants
+stockés mais affichent le nom actuel du catalogue. Un identifiant dupliqué, un nom
+homonyme ou un lien absent reste « Offre à vérifier » ; aucune correspondance
+arbitraire. Les six dimensions héritent de l’origine de leur champ, sans promouvoir
+INFERRED en HUMAN. Les valeurs compactes legacy restent lisibles. Conditions longues :
+largeur régulière, texte lisible et fond discret ; contrôle local à 390 px sans
+débordement, sans réception visuelle mobile complète déduite.
+
+42 tests ciblés passés ; lint, gouvernance, cycles, typage et build locaux reçus.
+CI 37794497437, Chromatic 37794497371 et Mission Drift 37794497389 verts sur le
+commit exact. Image 37795181110 : démarrage, migrations et extraction PDF reçus ;
+index publié `sha256:4d9d4cd0c8a41b276a3edb9ad6ec6e0768d848fc5afb4d0298283659795b08bf`.
+Déploiement `ba88xxpy84yj9u4b77c0braj` terminé à 14:59:20 UTC. Runtime et version
+publique 6.27.420 concordent ; volume privé inscriptible et utilisateur nextjs.
+Après déploiement, 40 piliers, 12 sources, deux usages de source et les compteurs
+IA/processus/actifs/fragments restent identiques sur SPAWT et FrieslandCampina.
+
+Réception native SPAWT V18 : noms du catalogue à la place des identifiants, six
+origines INFERRED, aucune origine inconnue dans les dimensions. Aucune confirmation
+humaine soumise. Trace tronquée : 60 réponses observées, zéro HTTP ≥400 et zéro
+exception dans le fragment reçu, 21 annulations ; aucun zéro global ni parcours
+large reçu déduits de cette observation. La vitrine publique est relue sans décompte.
+
+Preuves privées : `preuves-lecture-systeme-produit/`,
+`preuves-spawt-vitrine/vitrine-reception-420.png`.
+Le raccord public versionné et les sept chantiers restent ouverts.
+
+
+## Palais rapproché des sources finales — V18→19
+
+Les deux sources finales désormais admises sont rapprochées du PRD, de la note
+MVP et de la consigne du 08/10, par l’outil Advertis existant, scope BRAND. Le job
+privé vérifie runtime 420, administrateur actuel du même opérateur, empreintes des
+cinq sources et version attendue ; simulation préalable sans écriture. Sept cas
+locaux reçus : simulation, écriture, reprise, source changée, conflit de version,
+source étrangère et forme invalide. Aucune route ni permission ajoutée.
+
+À 15:04:46 UTC, seul `productSystem` change en contenu, V18→19 : cinq axes,
+treize archétypes, cinq stades, quatre modes, deux artefacts et seize règles.
+Les huit noms finaux sont ajoutés sans inventer signatures/devise/progressions
+manquantes. Les cinq progressions historiques restent qualifiées documentaires.
+Rapide/Crew/Explore sont décrits avec leurs drapeaux OFF documentaires ; aucune
+activation réelle déduite. Les rôles quiz/app/portail/admin et paiement web sont
+rapprochés ; mue 30 jours/cinq lieux contre cinq recalculs et seuil 50 restent
+explicitement non arbitrés. Le catalogue et l’échelle d’offres citent
+encore le périmètre B2B V1.5 historique ; ils restent à rapprocher du périmètre final.
+
+Provenance INFERRED/AI_PROPOSED, une archive ajoutée (73→74 sur les deux dossiers
+SPAWT), huit sources conservées. Comparaison fédérée : douze sources, deux usages
+et 39 autres contenus/versions/statuts de piliers inchangés ; IA 2 431→2 431,
+processus 19, actifs 255, fragments 108. L’outil signale l’invalidation RTIS normale
+et neuf avertissements de formats legacy dans d’autres champs ; aucune correction
+ou validation humaine de ces champs inférée. Émission OK/PENDING_OBSERVATION,
+review humaine absente. Archive sans intentId : dette C5 toujours ouverte.
+
+Réception native 420 : treize archétypes, quatre modes, seize règles et six
+origines inférées lus ; noms d’offres résolus. Trace commencée après le retour de
+reload : 30 réponses, zéro HTTP ≥400 et zéro exception, quinze annulations,
+non tronquée ; aucune conclusion sur les événements précédents ni le cycle mobile.
+
+Preuves privées : `preuves-filiation-palais-spawt/`.
+Le contrat préparé dans `preuves-projection-marque-spawt/CONTRAT-PROJECTION.md`
+réemploie coffre/export/publication : projection limitée et versionnée, refus de
+version périmée, isolation et retour arrière à recevoir. Aucun raccord public
+implémenté par cette note. Aucun des sept chantiers clôturé.
