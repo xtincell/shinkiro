@@ -207,3 +207,52 @@ La propriété historique de la file analytique, ses acquittements, la reprise a
 création du profil et le rejeu durable du Palais restent ouverts. Ces limites
 ne sont pas reçues par la disparition du 401. Preuves opérateur privées :
 `preuves-spawt-app/analytics-auth-*`.
+
+## Six réponses vers le Palais — PR #11 livrée
+
+[PR #11](https://github.com/xtincell/spawt-ci-mobile-v1-mvp/pull/11), canon
+`f8cc80acf0a02cea8ae622ed8dacee9ea31bc814`. Le quiz utilise déjà la même base
+`postgres` que le produit, avec son rôle limité. Le trou était dans le contrat :
+les axes étaient conservés en base mais écartés au retour OTP. Un héritage complet
+rejoint désormais la révélation, avec « Revoir mes préférences » pour rouvrir la
+calibration existante. Un héritage absent ou incomplet conserve les questions.
+Carte, analytics et première sauvegarde partagent le même calcul ; conversion
+inverse exacte de l'échelle du moteur existant, sans nouvel axe.
+
+Trois critères applicatifs et deux contre-exemples SQL reproduits avant correction.
+CI app `37717741870` et PostgreSQL 15 `37717741738` vertes sur `a70218a` : 878 tests,
+quatre sauts, quatre snapshots, types/vocabulaire/i18n et export complet reçus.
+3 125 vecteurs vérifient la conversion sans perte. Preview sans création de profil,
+numéro non confirmé, droits, JSON invalide, idempotence et retour arrière/réapplication
+reçus sur base jetable. Aucun compte vivant, OTP, consentement, GPS ni magasin testé.
+
+Migration 0069 appliquée, 67 migrations enregistrées : la RPC propriétaire utilise
+le numéro confirmé dans Auth, plutôt que le téléphone public modifiable. Le chemin
+Edge trusted est conservé ; aucun droit élargi. La première tentative sous
+`postgres` a été refusée « must be owner of function claim_meute_heritage » et
+entièrement annulée. La livraison utilise le propriétaire existant `supabase_admin`,
+sans changement de rôle ni de permissions. Aucun Palais existant réécrit par la
+migration. Déploiement `fwyuioocsrvje6ob2oxf98n9` terminé à 02:35:17 UTC.
+Image `sha256:6b20036e946790308305ba2e7b0a3adf3db622a5e50805e670d82bcbc9d68e31`.
+Bundle public et réellement chargé rapprochés par SHA-256
+`0be524f6d423ee9f9543e88435b709254849e5ec32b5108a1627c34c0d100224`.
+Seize réponses sans erreur HTTP ni exception ; deux consentements décochés et
+Continuer désactivé. L'héritage authentifié n'est pas reçu par cette entrée.
+Le fichier Edge servi diffère globalement du canon ; son helper de claim et son
+appel post-OTP sont identiques après normalisation AST. Aucun Edge redémarré.
+Un premier contrôle cherchait le libellé UTF-8 brut dans un bundle qui l'encode
+en `\\xe9` : ce faux négatif du dispositif est corrigé et conservé dans les preuves.
+
+L'énumération théorique des 4 096 parcours du quiz montre que le sixième choix peut
+changer l'archétype sur 526 des 1 024 préfixes à cinq réponses. Les treize archétypes
+sont atteignables ; aucun écart quiz/Taste Reveal. Le clamp F existant fusionne deux
+choix pour 256 préfixes. Cela ne mesure ni une population ni la justesse empirique
+des recommandations, et ne reconstitue pas la sixième réponse d'anciens pionniers.
+
+La restauration d'un compte sur un appareil vide reste ouverte : le helper de
+développement lit déjà profil et Palais serveur, mais la connexion normale ne
+réutilise pas encore cette logique. Ce trou est distinct de la transmission initiale
+corrigée. Reprise durable, deux appareils et retour des apprentissages au dossier
+de marque restent à recevoir. Aucun parcours large ni chantier clos.
+Preuves opérateur privées : `preuves-spawt-app/heritage-*` et
+`preuves-spawt-vitrine/sixieme-contribution.json`.
