@@ -338,3 +338,69 @@ un brouillon, distinct du logiciel livré. Le raccord de l’amendement aux reç
 des sources et au journal d’auteur doit être reçu avant cette correction.
 Ni publication d’une version de marque sur le site/quiz/application, ni boucle
 de résultats, ni réception des sept chantiers ne sont établies par ce lot.
+
+## Amendements documentaires et offres SPAWT reçus — 419
+
+[Code e0253912](https://github.com/xtincell/ADVE-project/commit/e0253912ce29be18888b256b9630c52f37a623a1),
+ADR-0206 : l’amendement existant reçoit la version du pilier effectivement lue
+et les empreintes des documents consultés. Le writer vérifie leur actualité
+et leur accès dans sa transaction. L’agent reste MESTOR, sans revue humaine
+inventée ; une valeur humaine refusée ne s’annonce plus appliquée.
+Aucun nouveau modèle, écrivain métier, service public ou jeton de production.
+
+129 contrôles PostgreSQL passent ; 164 fichiers/1 604 contrôles de gouvernance
+et 38 contrats passent. Outil MCP exercé sur HTTP réel en base isolée : manifeste,
+lecture de version, amendement accepté, source corrigée refusée, ancienne version
+refusée ; cinq réponses HTTP 200 avec corps relus, un seul archivage, zéro IA.
+Une clé limitée à un serveur est refusée par le transport existant : ce résiduel
+de routage n’est pas masqué par la recette sous clé locale globale au serveur,
+limitée à la marque. Le stress global potentiellement payant n’est pas reçu.
+
+[CI 37784214624](https://github.com/xtincell/ADVE-project/actions/runs/37784214624)
+et [image 37784559900](https://github.com/xtincell/ADVE-project/actions/runs/37784559900)
+vertes. Source, index publié, registre et conteneur rapprochés ; runtime 6.27.419
+sous nextjs, volume privé conservé. Une demande de déploiement, terminée à
+13:42:17 UTC le 8 octobre. Dix sources, quarante piliers, deux usages et compteurs
+IA/processus/actifs/fragments identiques pendant cette livraison logicielle.
+Lecture native Offre : 61 réponses sans HTTP ≥400 ni exception, dix-sept
+ERR_ABORTED annulées, trace complète. DOM 558,9 ms ; titre observé sous 35 852 ms,
+borne incluant les appels d’outil après un premier wait sans correspondance.
+
+Après relecture des six sources et de V15, cinq offres et cinq paliers sont
+réconciliés avec le PRD §11 et les consignes du 8 octobre. Les parcours B2C et B2B
+restent distincts ; tarifs HT/TTC et périodes sont conservés, fonctions mobiles
+et paiement restent prévus, sans commercialisation déduite du web en ligne.
+Cartes physiques, réductions et marges inventées retirées de ces cinq offres.
+Les paliers référencent leurs ids canoniques : aucune référence produit rompue
+n’est observée dans la lecture native après correction.
+
+L’accès SSH existant invoque le schéma et le handler de l’outil Advertis BRAND,
+avec l’administrateur actuel de la même agence, puis le spine et le gateway.
+Le job privé reçoit avant application : lecture seule, version et sources
+inchangées ; sur fixtures, application, répétition sans doublon, source modifiée,
+interruption et conflit concurrent sont éprouvés, sans IA. Les dépendances
+élaguées de l’image ont d’abord refusé le CLI avant tout amendement ; elles sont
+empaquetées dans le job privé, sans installer ni modifier le runtime public.
+
+Application réelle V15→V16→V17 : seuls catalogue et gamme changent ; deux archives
+s’ajoutent, six sources et quinze autres piliers inchangés, compteurs IA/processus/
+actifs/fragments identiques. Deux recommandations APPLIED portent les deux reçus
+documentaires ; auteur MESTOR, revue humaine nulle, grounding non mesuré. Le
+confidence=1 legacy ne vaut pas mesure. L’état reste AI_PROPOSED/INFERRED.
+Deux émissions OK/PENDING_OBSERVATION : la boucle d’apprentissage n’est pas reçue.
+Natif après correction : cinq offres et cinq paliers lus, conditions annuelles TTC
+présentes ; 61 réponses sans HTTP ≥400 ni exception, quinze annulations réseau,
+trace complète. Aucune confirmation humaine soumise.
+
+Les deux archives portent l’auteur mais aucun intentId : restauration ciblée par
+émission non reçue. Reprise C5 avant délégation : propager l’identité du spine
+jusqu’à l’archive, éprouver deux amendements concurrents et rollback précis,
+sans inventer de filiation pour les archives historiques. Économie, ROI,
+segments legacy et plusieurs champs hors schéma restent à rapprocher des sources.
+Le système produit et la version consommée par site/quiz/application restent
+ouverts ; ces corrections ne reçoivent aucun des sept chantiers.
+
+Enfin, ADMIN en session et FOUNDER en base sont expliqués, pour le compte observé,
+par l’allowlist fondateur actuelle effectivement relue dans le runtime. Ce cas
+ne prouve pas une session périmée. Aucun droit n’a changé. La rétrogradation,
+suppression et réaffectation des comptes ordinaires restent à éprouver au C7.
