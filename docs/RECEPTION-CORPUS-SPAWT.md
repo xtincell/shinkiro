@@ -693,3 +693,85 @@ prolongement doit recevoir une version publique stable, son usage et son retour.
 Preuves privées : `preuves-projection-marque-spawt/`. Autres écrivains,
 réconciliation Ptah, fermeture durable du journal et projection publique restent
 ouverts. Les sept chantiers et les parcours larges conservent leurs états partiels.
+
+
+## Édition publique choisie — 423, raccord des textes et liens reçu
+
+[Source finale 5abee4ff](https://github.com/xtincell/ADVE-project/commit/5abee4ff56a98dcde2f0621b6216926975356700),
+ADR-0209 : Connexions, le coffre et l’export existants sont prolongés sans
+nouveau service, modèle, agent, page ou type d’intention. L’édition
+BRAND_GUIDELINES/public-brand-v1 contient seulement nom, titre, promesse,
+présentation, logo public admissible et liens. La page et le fichier public
+relisent cette copie persistée ; les modifications privées ne la remplacent
+plus. La publication relit droits, preuves, révision et édition attendues.
+Le retour crée un successeur sans effacer l’historique ni valider les piliers.
+Les commandes génériques du coffre refusent ce format ; l’export intégral
+conserve son authentification.
+
+[CI finale 37843378476](https://github.com/xtincell/ADVE-project/actions/runs/37843378476)
+verte : 4 144 unitaires et 195 PostgreSQL, dont 16 nouveaux scénarios publics ;
+1 610 tests de gouvernance locaux. Lecteur et alias portail confrontés au défaut
+réintroduit, rouges puis verts. Build local relu ; les seules différences entre
+ses entrées et la source finale sont les copies Docker de dépendances externes.
+Huit appels HTTP locaux authentifiés : six réussites, 403 et 409 attendus ;
+export public 200/ETag 304, privé 401. Recette native FOUNDER synthétique :
+publication 4, titre/lien publics relus, retour à la copie 3 en édition 5,
+rechargement et lien Assets → Connexions reçus. Reload HTTP 200, DOM 174 ms,
+titre 361 ms, zéro exception et réponse >=500 sur ce parcours borné.
+Stress sans finding ; sept tâches provider DEFERRED, aucun prestataire reçu ;
+fixtures et serveurs locaux nettoyés.
+
+[Image finale 37843924558](https://github.com/xtincell/ADVE-project/actions/runs/37843924558)
+verte : base neuve, 101 migrations, login HTTP 200 et PDF de deux pages relu.
+Index publié puis servi
+`sha256:f3df52afdc98c91d1422807201e23f42286fdf45961b2d5d334cc0860f020068`.
+Une seule demande ; déploiement `fmfssee6f9fhadz1zqdqrqj2` terminé à 21:10:56 UTC.
+Runtime/API 6.27.423, utilisateur nextjs et volume privé conservés. La première
+image a été annulée avant livraison ; la suivante a échoué au smoke avant
+publication, sur les dépendances externes élaguées par standalone. Reproduction
+hors checkout en rouge, puis démarrage, capture et retry verts après copie de
+postgres-array et zod complets. La candidate finale et la production ferment
+cette dette de packaging.
+
+Erratum du préflight : deux lignes anciennes possédaient un slug, mais aucune
+page historique n’était admissible. Les deux slugs sans préfixe LFA- étaient
+refusés par le lecteur précédent comme par le nouveau ; pages et exports HTTP
+404 reçus. Le démarrage capture donc zéro page, sans renommage ni publication
+automatique. La capture OBSERVED_PUBLICATION reste éprouvée sur fixture : une
+capture, retry zéro, émission hachée, aucune relecture humaine fabriquée.
+
+[SPAWT PR #4](https://github.com/xtincell/project_spawt_mobile_ci/pull/4),
+canon 346e466091b448659e3fb7f5b93500913f923284,
+[CI 37838306953](https://github.com/xtincell/project_spawt_mobile_ci/actions/runs/37838306953)
+verte, 30 tests. Vitrine déployée à 20:20:09 UTC. Trois domaines et JavaScript
+rapprochés du conteneur ; cinq WOFF2 Klinsman/Gotham reçus HTTP 200 avec type,
+signature et empreintes conformes, sans substitution. L’alerte initiale provenait
+du checkout local partiel. Le lecteur refuse autre marque, capture seulement
+observée, contenu hors contrat et digest altéré. Une erreur réseau conserve la
+dernière édition de la page ; la copie de secours demeure disponible.
+
+Production : dossier canonique SPAWT sélectionné, textes publics existants et
+lien Instagram relus puis publiés par le formulaire Connexions. Édition choisie
+v1 LFA-spawt reçue dans le coffre, avec acteur réel, portée et empreinte. Le site
+principal et portail lisent cette même édition par leur réseau natif : HTTP 200,
+six questions annoncées, aucun décompte expiré, zéro exception et réponse >=500.
+www redirige au principal. CORS autorise exactement les trois origines HTTPS ;
+HTTP et domaine ressemblant ne reçoivent aucun en-tête d’autorisation CORS.
+La ressource demeure publique. ETag 304, export privé 401 et page publique 200.
+La copie existante est volontairement conservée : réception du flux et du rendu,
+sans prétendre avoir éprouvé un changement visuel de communication en production.
+La page historique est aussi relue sans décompte, avec lien vers le site live.
+
+Après livraison et publication : 40 piliers, 12 sources, deux usages et actifs
+ordinaires SPAWT/FrieslandCampina identiques ; 2 431 coûts, 19 processus et 108
+fragments inchangés. Les actifs passent de 255 à 256 par la seule édition
+publique choisie. Aucun appel IA ni approbation globale des fondations.
+
+Le contrat v1 porte les textes et liens, pas les tokens, voix, variantes de logo,
+règles par destination, moteur du quiz ou droits de l’application. Brouillon
+après interruption, autres écrivains, admission Ptah, durabilité du journal et
+retour produit restent ouverts. Les 116 parcours gardent leur examen borné,
+les 80 lignées leur qualification ouverte ; aucun des sept chantiers ni aucune
+porte de release n’est accepté par cette réception.
+
+Preuves privées : preuves-publication-spawt-423/reception.json.
