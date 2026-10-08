@@ -654,3 +654,42 @@ Les 76 archives SPAWT historiques restent sans checkpoint inventé.
 Preuves privées : `preuves-restauration-piliers/`. Les autres compensateurs,
 familles d’écrivains, restauration du SI et projection publique versionnée
 restent ouverts. Cette livraison ne clôture aucun des sept chantiers.
+
+
+## Cycle commun du coffre livré — 422
+
+[Code 9f45fedd](https://github.com/xtincell/ADVE-project/commit/9f45fedd91605a793d7f685b18904908739643d8),
+ADR-0208 : les quatre commandes cataloguées de sélection, activation,
+remplacement et archivage utilisent les mêmes helpers que les actions manuelles.
+Le moteur relit droits, sources et portée sous verrou ; remplacement, filiation,
+version et slot de campagne restent atomiques. Un retry conserve la décision
+suivante ; force ne ressuscite ni archive ni preuve périmée. Les cinq émissions
+locales non chaînées disparaissent, sans créer un second coffre ou journal.
+
+[CI 37831435013](https://github.com/xtincell/ADVE-project/actions/runs/37831435013) :
+4 144 unitaires et 179 PostgreSQL verts, dont 29 pour le coffre ; 16 cas étaient
+rouges avant correction. Réception HTTP locale authentifiée : neuf appels,
+cinq 200, deux 403 et deux 412 attendus. Le stress ne relève aucune erreur :
+46 pages HTTP reçues, 235 non reçues, aucune recette UI globale. Ses sept tâches
+provider sont DEFERRED, sans credential ni résultat de forge reçu ; fixtures et
+serveurs locaux nettoyés.
+
+[Image 37831496431](https://github.com/xtincell/ADVE-project/actions/runs/37831496431) :
+construction, base neuve et extraction PDF reçues. Index publié puis servi
+`sha256:3801ef1fa8455dfb60675fa77a5c0a07f58a31a62de3f80bbeccb81292e14ecb`.
+Une seule demande ; déploiement `b13cwu3cbc12jac9mkz6sos7` terminé à 19:37:27 UTC.
+Runtime et API 6.27.422, utilisateur nextjs et volume privé conservés. Les
+40 piliers, 12 sources et deux usages SPAWT/FrieslandCampina restent identiques ;
+le contenu des 255 actifs et les compteurs IA/processus/fragments aussi.
+Aucune transition d'actif réel n'est soumise pour éprouver la livraison.
+
+Le lecteur public générique reste distinct : deux GET sur une marque synthétique
+montrent une accroche non validée, un logo périmé et une révision immédiatement
+publique sans nouvelle publication. Ce contre-exemple HTTP, nettoyé à zéro,
+reçoit le trou du raccord ; il ne constitue pas une recette de la vitrine SPAWT.
+La carte Page publique de Connexions, le coffre et l'export existent déjà : leur
+prolongement doit recevoir une version publique stable, son usage et son retour.
+
+Preuves privées : `preuves-projection-marque-spawt/`. Autres écrivains,
+réconciliation Ptah, fermeture durable du journal et projection publique restent
+ouverts. Les sept chantiers et les parcours larges conservent leurs états partiels.
