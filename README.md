@@ -123,6 +123,7 @@ réception complète du programme. Les sept chantiers restent ouverts :
 - [Corpus et identité SPAWT](docs/RECEPTION-CORPUS-SPAWT.md)
 - [Application SPAWT et continuité](docs/RECEPTION-SPAWT-APPLICATION.md)
 - [BanaHealth, coordonnées et maintenance client](docs/RECEPTION-BANAHEALTH.md)
+- [Décisions communes et assise des bilans dans La Barre](docs/RECEPTION-DECISIONS-BILANS.md)
 
 **Pour construire** — commence par là, dans cet ordre :
 

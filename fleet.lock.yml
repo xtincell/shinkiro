@@ -270,10 +270,10 @@ composants:
     branche: main
     prive: false
     langue: JavaScript
-    fichiers: 246
-    poids_ko: 7143
+    fichiers: 248
+    poids_ko: 7174
     licence: presente
-    commits_90j: 97
+    commits_90j: 100
     topics: ["layer-tools", shinkiro]
     racines: [., sources/02_dossier_MT0020, sources/04_outils, sources/99_archive]
     artefacts:
