@@ -33,7 +33,11 @@ ni réception mobile n'en découle.
   liste fixe du moteur. Les quatre axes techniques restent aussi nommés Ubuntu,
   Maât, Sankofa et Biso ; les libellés de livre ne rendent pas le noyau universel.
 
-Le modèle est obligatoire pour l'ouverture et les tours dans les routes actuelles.
+L'ouverture et les tours appellent un modèle métier à la demande. Cela ne constitue
+pas, à soi seul, une dépendance à un agent autonome : le contrat Shinkiro autorise
+une capacité IA pilotée depuis une interface humaine. Il n'exige pas un meneur
+manuel remplaçant le narrateur. Aucun agent autonome ni Dan n'est requis par les
+routes lues ; la recette native sans ces agents reste à effectuer.
 Le statut d'accès, la séparation de comptes, les erreurs réseau, la reprise et
 les fondations multijoueur ne sont pas reçus. Ne pas publier ce prototype comme
 service TPE mutualisé sur la seule foi du build.
@@ -62,3 +66,8 @@ Ce n'est pas un second runtime à déployer.
 Registre opérateur : 96 parcours examinés partiellement sur 116, vingt encore
 non audités, aucun parcours large reçu. Les cinq parcours 15B disposent d'une
 qualification partielle, pas d'une clôture. Aucun des sept chantiers n'est clos.
+
+Rectification de portée du 8 octobre : PR 15B #2, canon `de0a585`, CI verte
+sur `9346407`. Un modèle narratif à la demande est permis par le contrat §3 ;
+la recette native sans agents autonomes reste à effectuer. Aucun nouveau
+mode de jeu exigé, aucun écart fonctionnel fermé par cette correction.

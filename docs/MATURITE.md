@@ -30,8 +30,15 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 - La Fusée 407 : les cartes d'assets regroupent les références à une même URL
   complète en conservant les lecteurs et usages distincts. Grille, recherche,
   filtre et dialogues SPAWT reçus en bureau et viewport mobile ; groupe Noël
-  partagé et aperçus produits FrieslandCampina reçus. Les versions stratégiques,
-  la provenance des corpus et le contraste du logo sombre restent à corriger.
+  partagé et aperçus produits FrieslandCampina reçus. La réconciliation des
+  corpus restait ouverte à ce stade ; le contraste et la lecture des origines
+  sont reçus ensuite en 412 ci-dessous.
+- La Fusée 412 : contraste du logo et distinction état/version/origine livrés
+  puis reçus nativement sur le dossier SPAWT. CI : 4 077 unitaires et 89 PostgreSQL.
+  Une carte/deux usages, seize origines et non-régression Noël reçus ; huit images
+  produit chargées. Corpus SPAWT inchangé après livraison. Thème jour natif,
+  divergences documentaires, guidelines et irrigation vers les produits restent
+  ouverts. Voir [RECEPTION-CORPUS-SPAWT.md](RECEPTION-CORPUS-SPAWT.md).
 - La Fusée 408 : identité de tâche et de reprise, rejouement explicite, périmètre
   réel et reçus terminaux corrigés dans les services partagés. CI : 4 054 tests
   unitaires et 57 PostgreSQL ; HTTP authentifié et build reçus. Image, conteneur,
@@ -80,7 +87,7 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   trois tests de runtime isolé et CI `37701950166` verts. Neuf observations
   locales comprennent deux arcs mécaniques simulés et deux exports ZIP ;
   quatre ruptures sont reproduites dans la reprise, le tour, l'import et les
-  personnalités. Native, modèle facultatif, isolation, stockage durable et
+  personnalités. Native sans agent autonome, isolation, stockage durable et
   rapprochement Ngoma non reçus ; aucun déploiement de service. Voir
   [RECEPTION-15B-STORIES.md](RECEPTION-15B-STORIES.md).
 - DataCollector : collecteurs, CLI/API et interface confrontés à leur rôle.
