@@ -190,3 +190,65 @@ questions annoncées, accès au quiz et au site actif. Aucun changement de ces
 sites dans le lot 415. Leur mise à jour depuis une version de marque choisie,
 la réconciliation sémantique complète et le retour de résultats restent ouverts.
 Aucun chantier, gate ou parcours large supplémentaire déclaré reçu.
+
+
+## Origine des valeurs et corrections documentaires — 416
+
+[Code ce820c06](https://github.com/xtincell/ADVE-project/commit/ce820c0690dcf27ec3a264c691226709843f9af6) :
+les huit volets relisent la provenance déjà écrite par le gateway. L’origine
+absente reste inconnue ; une valeur inférée n’est plus déclarée par défaut.
+Une source et une saisie opérateur gardent leurs libellés distincts, sans valoir
+approbation du contenu. Aucun modèle, agent, score ni écrivain ajouté.
+
+Treize tests de lecture passent, dont douze contre-exemples rouges sur l’ancien
+lecteur ; huit volets couverts. Le navigateur local authentifié reçoit les
+quatre origines et le champ vide sur une marque fictive. Page 200, DOM à
+2 080 ms ; titre observé dans les 14 926 ms (borne d’outil). Trace non tronquée :
+53 réponses, aucun HTTP ≥400, aucune exception ni échec réseau.
+[CI 37762067822](https://github.com/xtincell/ADVE-project/actions/runs/37762067822) :
+4 110 tests unitaires et 99 contrôles PostgreSQL passent.
+
+Trois corrections factuelles SPAWT sont reçues via l’amendement manuel existant,
+avec motif, précondition de version et archivage. A passe de v7 à v9 ; V de v14
+à v15. Les deux états restent AI_PROPOSED, sans approbation globale. Les six
+sources sont identiques ; les contenus, versions et états des quatorze autres
+piliers, dont le dossier associé, restent identiques. Trois versions d’archive
+s’ajoutent ; compteurs IA, processus, actifs et fragments inchangés. Les trois
+émissions sont OK mais PENDING_OBSERVATION : l’exécution ne reçoit pas la boucle
+d’apprentissage. Le navigateur confirme les corrections ; 47 réponses sans
+HTTP ≥400 ni exception, 21 annulations réseau, trace non tronquée.
+
+Restent : catalogue et périodes/fiscalité, assertions de traction/ROI,
+identité par usage, version de marque alimentant site/quiz/application et
+retour des résultats. Cinq prix legacy en chaîne et trois segments trop longs
+échouent au schéma actuel ; pas de conversion silencieuse qui perdrait période
+ou fiscalité. Le décompte expiré reste retiré, la publication de marque demeure
+un parcours distinct. Aucun chantier, gate ni parcours large fermé.
+
+[Image 37762460308](https://github.com/xtincell/ADVE-project/actions/runs/37762460308) :
+construction, migrations sur base neuve, démarrage et publication reçus. Image
+testée, registre et conteneur rapprochés ; runtime 6.27.416 sous `nextjs`, volume
+privé conservé. Une demande de livraison, terminée ; aucun nouvel appel IA.
+
+Natif administrateur de production : Identité et Offre relus. Les trois valeurs
+amendées affichent « Saisi par l'humain », les hypothèses « Inféré IA » et les
+valeurs sans trace « Origine inconnue ». Cette origine n'approuve ni les autres
+assertions ni la marque entière. Dix sources, quarante piliers, deux usages et
+les compteurs IA/processus/actifs/fragments restent identiques pendant la
+livraison du lecteur, après les trois amendements documentés ci-dessus.
+
+Le premier rechargement n'a pas immédiatement rendu le titre ; la note de version
+est ensuite observée et fermée. Sa trace est tronquée : 55 réponses observées,
+aucun HTTP ≥400 ni exception, douze annulations réseau. La consultation ciblée
+Fondation → Offre reçoit une trace complète : 21 réponses, aucun HTTP ≥400 ni
+exception, huit `ERR_ABORTED` annulées. Cela ne reçoit pas un chargement entier
+sans échec. Le DOM à 390 × 844 garde les badges dans la largeur disponible ; les
+captures de ce contrôle sont déformées par l'outil. La réception visuelle mobile
+reste donc ouverte, et les overrides sont retirés.
+
+Les deux pages publiques SPAWT sont à nouveau relues nativement : décompte
+absent et six questions annoncées ; la page historique renvoie au site actif.
+Ce lot ne livre pas encore la publication d'une version de marque vers ces
+surfaces ni le retour de leurs résultats. Le panneau legacy de confirmation
+reste à harmoniser avec la provenance canonique et une précondition de version ;
+aucune confirmation automatique ni rafraîchissement stratégique déclenché.

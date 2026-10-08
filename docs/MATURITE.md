@@ -39,6 +39,16 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   produit chargées. Corpus SPAWT inchangé après livraison. Thème jour natif,
   divergences documentaires, guidelines et irrigation vers les produits restent
   ouverts. Voir [RECEPTION-CORPUS-SPAWT.md](RECEPTION-CORPUS-SPAWT.md).
+- La Fusée 416 : le lecteur commun aux huit volets respecte la provenance
+  canonique ; l'absence de trace reste inconnue. Treize tests, dont douze rouges
+  sur l'ancien lecteur, CI 4 110 unitaires / 99 PostgreSQL et image reçus.
+  Natif de production Identité/Offre : trois corrections factuelles SPAWT relues,
+  sans approbation globale ni appel IA. Quarante piliers et dix sources inchangés
+  pendant la livraison du lecteur. Première trace tronquée ; consultation ciblée
+  complète, 21 réponses sans HTTP ≥400 ni exception et huit annulations réseau.
+  DOM mobile vérifié, capture visuelle déformée donc réception mobile ouverte.
+  Catalogue, traction et publication de version vers les produits restent ouverts.
+  Voir [RECEPTION-CORPUS-SPAWT.md](RECEPTION-CORPUS-SPAWT.md).
 - La Fusée 408 : identité de tâche et de reprise, rejouement explicite, périmètre
   réel et reçus terminaux corrigés dans les services partagés. CI : 4 054 tests
   unitaires et 57 PostgreSQL ; HTTP authentifié et build reçus. Image, conteneur,
