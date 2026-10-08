@@ -6,6 +6,16 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
 ## Réceptions partielles des 7 et 8 octobre 2026
 
+- La Fusée 423 / SPAWT : édition publique choisie depuis Connexions, persistée
+  dans le coffre et lue par la vitrine principale et son alias portail. Textes
+  et lien existants conservés ; six questions annoncées, aucun décompte expiré.
+  Source, CI 4 144 unitaires/195 PostgreSQL, image et runtime exacts reçus.
+  Zéro page ancienne admissible à capturer : deux slugs historiques invalides
+  restent inchangés. Corpus privé inchangé ; un seul actif d’édition ajouté,
+  aucun appel IA. CORS exact, empreinte, ETag et export privé protégés reçus.
+  Tokens, voix, variantes, irrigation quiz/application et retour des résultats
+  restent ouverts. Cette réception des textes/liens ne reçoit aucun cycle large
+  ni chantier. Voir [RECEPTION-CORPUS-SPAWT.md](RECEPTION-CORPUS-SPAWT.md).
 - Couverture de l’audit : les 116 fiches de parcours ont reçu un examen borné,
   aucun parcours large n’est accepté intégralement. Les quatorze dernières
   concernent Folio, Radar, Galahad, Ngoma, les connecteurs Matanga, le cycle
