@@ -249,10 +249,42 @@ sont atteignables ; aucun écart quiz/Taste Reveal. Le clamp F existant fusionne
 choix pour 256 préfixes. Cela ne mesure ni une population ni la justesse empirique
 des recommandations, et ne reconstitue pas la sixième réponse d'anciens pionniers.
 
-La restauration d'un compte sur un appareil vide reste ouverte : le helper de
-développement lit déjà profil et Palais serveur, mais la connexion normale ne
-réutilise pas encore cette logique. Ce trou est distinct de la transmission initiale
-corrigée. Reprise durable, deux appareils et retour des apprentissages au dossier
-de marque restent à recevoir. Aucun parcours large ni chantier clos.
+La reprise du profil et du Palais après connexion est corrigée dans la
+[PR #12](https://github.com/xtincell/spawt-ci-mobile-v1-mvp/pull/12), canon
+`8aae5d846efad0c54a5e4912a45f2e3ba24f421a`. Le lecteur RLS utilisé auparavant par
+le helper de développement est partagé avec le parcours normal, sans déplacer
+son opt-in ni ses identifiants dans la voie de production. Un compte complet
+retrouve ses axes mûris, son stade, son rang et ses consentements sans upsert
+d'initialisation. L'absence confirmée du compte ouvre seule une inscription ;
+une panne reste distincte et se retente sans renvoyer l'OTP consommé.
+
+Un profil sans premier Palais et sans progression reprend les étapes existantes
+préremplies. La sauvegarde préserve date, rang et consentements d'origine ; sa
+relecture adopte un Palais apparu entre-temps sans compter une seconde activation.
+La publication locale pose le profil après le Palais et les consentements ;
+les changements de session et générations écartent les réponses tardives.
+Aucune migration, table, permission ni fonction serveur ajoutée.
+
+Cinq critères d'écran rouges avant correction. CI `37720454001` sur `c5eaebd` :
+921 tests, quatre sauts, quatre snapshots ; types, vocabulaire, i18n et export web
+complet avec médias reçus. Le checkout local avait seize modules en échec faute
+de médias ; le mapper statique de tests déjà existant reçoit la suite source,
+sans constituer un export local ni une réception native.
+
+Historique et collection complets, cache de démarrage confronté à Auth, reprise
+durable Palais, finalisations simultanées, compte avancé sans Palais, deux appareils
+et retour des apprentissages au dossier de marque restent à recevoir.
+Aucun parcours large ni chantier clos.
 Preuves opérateur privées : `preuves-spawt-app/heritage-*` et
 `preuves-spawt-vitrine/sixieme-contribution.json`.
+
+L’aperçu existant sert ce canon après déploiement terminé le 8 octobre à
+03:07:10 UTC. Image `sha256:c2fc06c0fa19d8c570bf7cc8c53e6cf1bdf26f4e840093f623e1f48f15d024d6` ;
+bundle public et chargé rapprochés par empreinte
+`ca38bb782c5e70ba7bc1453b5671d699de50979f99a656db8c32dd9b2bcb6f07`.
+Entrée navigateur : quinze réponses, zéro erreur HTTP et zéro exception ; quatre
+fetch d’accueil annulés, sans cause établie, conservés dans les preuves. Deux
+consentements décochés, Continuer désactivé, aucun débordement horizontal.
+Cette entrée ne reçoit ni la reprise authentifiée ni une app iOS/Android.
+
+Preuves opérateur privées complémentaires : `preuves-spawt-app/reprise-*`.
