@@ -135,8 +135,8 @@ approuvée et retour de résultats restent à recevoir.
 
 Rapport et preuves opérateur :
 `audit-shinkiro-2026-09-25/release/AUDIT-SPAWT-APPLICATION.md`,
-`preuves-spawt-app/`. Registre : 96 parcours examinés partiellement sur 116,
-20 non audités, aucun parcours large reçu ni chantier clos. Ce rapport ne clôture
+`preuves-spawt-app/`. Registre actualisé après BanaHealth : 100 parcours examinés
+partiellement sur 116, 16 non audités, aucun parcours large reçu ni chantier clos. Ce rapport ne clôture
 pas les lignées donneuses restantes.
 
 
@@ -183,3 +183,27 @@ historiques subsistent. Aucun consentement accepté ni OTP envoyé.
 Le rejet remonté ne prouve pas une file durable du Palais ni la fin du rejeu
 d’avis. Éditions/interruption/concurrence, isolation de la télémétrie et réception
 authentifiée restent ouvertes. Reçus : `preuves-spawt-app/erreurs-profil-*`.
+
+## Envois analytiques sans session — PR #10 livrée
+
+[PR #10](https://github.com/xtincell/spawt-ci-mobile-v1-mvp/pull/10), canon
+`df38e41f8bb84f59f71fe05b68555a2e072d8973`, CI `37713813404` verte sur `04df7df`.
+L'écriture `user_signals` est différée tant qu'aucune session n'existe. Lorsque
+la session existe, les lignes portent explicitement le propriétaire lu. La voie
+locale de conservation/reprise reste en place ; aucune modification de schéma,
+consentement ou questionnaire. Cinq contre-exemples rouges, sept contrôles ciblés
+verts, suite standard de 856 tests, quatre sauts, quatre snapshots, export web
+avec tous les assets et autres contrôles reçus.
+
+Déploiement `cc7ue8iy599mynoqwlygebxg` terminé à 01:47:11 UTC le 8 octobre.
+Image `sha256:a8b37f8e6f1a9e63ab9fc5c7d38acba4f8040d2fcb18d830ea7449911298d383` ;
+bundle servi et chargé nativement rapprochés par empreinte
+`224375530a2a412206c2d81b47b85830d86b47613262896d87c3bcdbde19fa96`.
+L'entrée consentement produit seize réponses sans erreur HTTP ni exception,
+sans requête `user_signals` ; cases décochées, aucune session authentifiée reçue.
+Le 401 constaté sous PR #9 est donc résolu sur cette entrée.
+
+La propriété historique de la file analytique, ses acquittements, la reprise après
+création du profil et le rejeu durable du Palais restent ouverts. Ces limites
+ne sont pas reçues par la disparition du 401. Preuves opérateur privées :
+`preuves-spawt-app/analytics-auth-*`.
