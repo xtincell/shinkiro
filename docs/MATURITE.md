@@ -6,6 +6,14 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
 ## Réceptions partielles des 7 et 8 octobre 2026
 
+- La Fusée 427, livraison commune avec 426 : campagne/brief/actif source conservés
+  et contrôlés avant fournisseur ; tâche historique vérifiée en régénération.
+  La demande manuelle différée rend HTTP 200 au lieu d’un faux 500 après création.
+  CI 4 151 unitaires/230 PostgreSQL, image bootée et runtime exact reçus ; corpus
+  privé et édition publique SPAWT inchangés. Preuves métier locales synthétiques,
+  aucun fournisseur, média ou facture reçu. Le bouton natif, ses gardes de rôle,
+  les reçus documentaires et le cycle réel restent ouverts ; aucun chantier clos.
+  Voir [RECEPTION-ADMISSION-FORGE.md](RECEPTION-ADMISSION-FORGE.md).
 - La Fusée 425 : résultat de production conservé avant admission transactionnelle
   des versions, du coffre et du coût déclaré. Reprise après véritable redémarrage
   local, ids stables et archive préservée reçus sur fixtures ; 24 cas d’admission

@@ -62,13 +62,63 @@ pièce client, valeur de secret ou donnée de marque privée n’est redistribu�
 actualisée séparément : diff applicatif vide avec la source de l’image,
 contrôles locaux verts et aucun redéploiement pour ce seul reçu documentaire.
 
+## Complément reçu — livraison commune 426 et 427
+
+La Fusée **6.27.427** conserve les références campagne, brief et actif source
+présentes à l’entrée jusqu’à la tâche de production. Leur portée est contrôlée
+avant fournisseur et admission. La régénération refuse aussi une tâche historique
+de portée différente avant tout appel fournisseur. Les entrées existantes MCP,
+tRPC, séquence et Oracle sont étendues, sans nouveau modèle, service ou Intent.
+
+La demande manuelle Oracle persistait une tâche différée puis rendait HTTP 500 :
+sa post-condition attendait une sortie racine et excluait DEFERRED. Le contrat
+reconnaît désormais la racine ou l’enveloppe Intent OK et admet DEFERRED, sans
+accepter les enveloppes refusées ou une tâche déjà terminée. Après redémarrage
+local, cette route rend HTTP 200/Intent OK/DEFERRED, avec les mêmes références
+métier et sa véritable émission enfant. Ce reçu n’est pas celui du bouton natif.
+
+- [Source 919cebb4](https://github.com/xtincell/ADVE-project/commit/919cebb49fcfc5f5599ccd3dab5101b7b9f62d0e),
+  [CI 37856242347](https://github.com/xtincell/ADVE-project/actions/runs/37856242347) :
+  4 151 unitaires et 230 PostgreSQL verts. Les 35 cas ciblés de filiation sont
+  inclus dans les 230 ; neuf contre-exemples initiaux étaient rouges. Le contrat
+  de résultat compte 11 cas verts, après deux rouges initiaux. Gouvernance locale :
+  1 610 verts, types/lint sans erreur, 24 warnings préexistants et zéro cycle.
+- MCP discovery/catalogue/appel et tRPC reçus sur fixtures locales ; refus de
+  source étrangère, réconciliation et rejeu stables. Zéro appel fournisseur.
+  Le descripteur distingue l’admission en base des octets durables encore absents.
+- [Image 37856486468](https://github.com/xtincell/ADVE-project/actions/runs/37856486468) :
+  base neuve, `/login` 200 et PDF relu avant publication ; configuration publiée
+  identique à celle démarrée. Index
+  `sha256:4a88ee5d9914ab389981dc24f0515178f7ae7ed2949362c036a365bd5686af14`.
+  Déploiement unique terminé le 8 octobre à 23:06:42 UTC ; version publique 427,
+  conteneur exact, utilisateur nextjs et volume privé RW conservés.
+- Lectures/refus de production 200/400/403 ; corpus rapproché inchangé et toujours
+  zéro tâche/version de forge. Édition SPAWT v1 et empreinte conservées, CORS exact
+  trois origines, ETag 304 et export privé 401. Connexions rechargée/hydratée
+  nativement : version 427 et édition v1, aucune saisie ou production déclenchée.
+
+426 n’a pas été déployée seule. Les preuves détaillées restent privées dans
+`preuves-filiation-forge-426/` et `preuves-sortie-forge-427/`. La présence des
+trois références ne reçoit pas une provenance documentaire complète.
+
 ## Ce qui reste à recevoir
 
-Les références métier et documentaires doivent encore circuler depuis le writer
-réel jusqu’au matériau ; une correction de source doit invalider ses dérivés.
-La régénération doit refuser une version reliée à une tâche d’une autre portée
-avant tout appel fournisseur. Le descripteur MCP doit décrire la frontière réelle
-et son exercice natif reste à recevoir.
+L’émission upstream réelle, les lots multi-sources, les reçus documentaires et
+l’invalidation après correction restent à recevoir jusqu’au matériau. Le gate
+activeBriefId doit contrôler sa relation, son type et son état ; la succession
+parentAssetId reste incomplète. Aucun de ces trous n’est comblé par une référence
+inventée ou une première source choisie arbitrairement.
+
+Le bouton Oracle affiche encore Intent OK comme un succès sans exposer l’état
+DEFERRED de production. Sa garde opérateur et celle de la route doivent être
+alignées sur les mécanismes existants, puis reçues avec les deux rôles avant
+acceptation du parcours manuel. La lecture native de Connexions ne reçoit pas
+ce bouton ni sa production.
+
+Une tâche DEFERRED n’a pas encore de chemin reçu pour reprendre la même tâche
+après configuration : la réconciliation attend un résultat fournisseur et ne
+lance pas la production. Le chemin réel de configuration et une reprise manuelle
+sans double appel doivent être reçus ; aucun redémarrage automatique n’est promis.
 
 Les octets doivent être conservés et relus après expiration de l’URL temporaire,
 avec propagation de leur référence durable au coffre. Les adaptateurs Canva/Figma,
