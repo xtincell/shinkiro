@@ -47,8 +47,8 @@ dont les 18 cas d’admission La Barre et les raccords front. CI du canon
 [37822722523](https://github.com/xtincell/Matanga-Creative-dashboard/actions/runs/37822722523)
 verte. Recette native sur base isolée : trois rôles, confidentialité, clôture
 persistée et journalisée avec compteur 3→2 sans rechargement, panne explicite sans
-exemples de kit. La coche personnelle de « Ma journée » reste distincte de cette
-clôture métier dans « Tâches » ; sa cohérence reste à traiter.
+exemples de kit. La coche personnelle de « Ma journée » était encore locale à
+cette étape ; le lot suivant corrige cette incohérence.
 
 L’autodéploiement Matanga est terminé à 18:15:12 UTC. Dix-sept fichiers du runtime
 correspondent au code reçu ; les trois colonnes nullable sont présentes, sans
@@ -59,6 +59,28 @@ et du stockage persistant : 474 tâches, 996 événements, 21 médias et trois
 commentaires. Aucun dossier réel modifié par la recette ; aucune demande de
 redéploiement manuel supplémentaire.
 
+La [PR #60](https://github.com/xtincell/Matanga-Creative-dashboard/pull/60), canon
+`db252cfcc421d6e54dd6715ffa493d33e9adf31c`, factorise la clôture et la réouverture
+entre « Ma journée » et « Tâches ». L’action attend un reçu serveur ; les tâches
+faites se calculent depuis les états persistés. Le tableau public utilise
+exclusivement `/jour.json`, sans dossier privé de session ni boutons factices.
+Une panne de base renvoie 503 et une erreur réessayable, sans faux vide.
+
+Quatre contre-exemples rouges, puis 73 tests sans saut et
+[CI main 37825670139](https://github.com/xtincell/Matanga-Creative-dashboard/actions/runs/37825670139)
+verts. Native isolée : clôture conservée après rechargement, réouverture,
+écriture commune depuis Tâches, refus visibles dans les deux vues et projection
+publique distincte depuis la direction. Journal proxy complet : 293 requêtes,
+trois PATCH reçus et quatre 503 injectés, aucune assertion de console propre.
+Bases, répertoires et six écouteurs de recette nettoyés.
+
+Autodéploiement terminé à 18:37:57 UTC, image non-root et dix-huit fichiers servis
+rapprochés du canon. Empreintes suivies des onze tables identiques, hors trois
+colonnes de qualification exclues du calcul ; stockage et montage identiques.
+Lectures réelles des rôles inchangées à 474 / 473 / 18 ; aucune écriture métier en
+production ni appel fournisseur. La préservation des filtres/brouillons au
+rafraîchissement et le fuseau métier de l’instance UTC restent à recevoir.
+
 Le CSV et les fiches wiki sont désormais des projections de la base autorisée ;
 les archives Markdown du dépôt ne sont pas une API parallèle. Un document
 projet exige un rattachement explicite au dossier accessible. L’ancien historique,
@@ -68,4 +90,5 @@ la direction et du portail ne prouve pas leur origine. Les gestes client réels,
 blocages, dépendances, circulation des décisions, seconde TPE, restauration et
 coût complet restent ouverts. Aucun des sept chantiers n’est clôturé.
 
-Preuves privées : `preuves-parcours-radar/` et `preuves-radar-matanga-roles/`.
+Preuves privées : `preuves-parcours-radar/`, `preuves-radar-matanga-roles/` et
+`preuves-radar-matanga-journee/`.
