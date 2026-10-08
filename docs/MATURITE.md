@@ -20,11 +20,13 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   Corpus SPAWT/FrieslandCampina inchangé après livraison. Autres écrivains,
   projection publique de marque et restauration du SI restent ouverts. Voir
   [RECEPTION-CORPUS-SPAWT.md](RECEPTION-CORPUS-SPAWT.md).
-- Radar : deux contre-exemples HTTP locaux prouvent qu’un membre peut lire et
-  se réattribuer la tâche ancienne d’un autre responsable, face aux dix-neuf
-  tests existants verts. Le contrat « ses tâches du mois » n’est pas reçu par
-  le filtre `private_to`. Aucune tâche réelle modifiée ; permissions métier,
-  journal/médias associés et réception par rôles restent ouverts.
+- Radar personnel : autorité serveur des tâches, commentaires, médias, CSV,
+  journal et contexte d’import corrigée ; 34 scénarios HTTP et CI verts.
+  Réattribution concurrente, refus atomique, reprise, trois rôles et gestes
+  manuels reçus sur fixtures. Code servi et migration rapprochés du canon,
+  corpus et stockage inchangés. Qualification historique, adaptation Matanga,
+  autres gestes métier et circulation des décisions restent ouverts. Voir
+  [RECEPTION-RADAR-ROLES.md](RECEPTION-RADAR-ROLES.md).
 - Galahad : consentement, procédures, décisions indisponibles, seuil de jetons
   et retour délégué confrontés au canon. Neuf contre-exemples rouges, puis quinze
   scénarios verts et CI reçue ; [PR #3](https://github.com/xtincell/galahad/pull/3)

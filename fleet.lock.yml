@@ -308,9 +308,9 @@ composants:
     prive: false
     langue: HTML
     fichiers: 73
-    poids_ko: 1798
+    poids_ko: 1825
     licence: presente
-    commits_90j: 4
+    commits_90j: 8
     topics: ["layer-execution", shinkiro]
     racines: [., briefs, briefs/rh]
     artefacts:
