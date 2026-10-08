@@ -40,13 +40,53 @@ de sources SPAWT sont rapprochés avant/après et restent identiques.
 La lecture d’un état VALIDATED issu d’un import ne suffit pas à recevoir une
 décision humaine. Le rapprochement sémantique entre dossiers reste ouvert,
 ainsi que les conflits documentaires d’identité et les filiations de données.
-Le lecteur guidelines attend encore un format différent de sa réponse serveur.
-La lecture native protégée confirme un écran vide malgré le profil existant,
-sans déclencher de génération, export ou partage. Le coffre, le composeur de
-livre et le résolveur de thème existants doivent être
-confrontés ensemble avant correction, sans nouveau moteur concurrent.
+La lecture native protégée en 412 confirmait un écran guidelines vide malgré
+le profil existant, sans génération, export ou partage. Ce défaut de lecteur
+est corrigé et reçu dans le lot 413 décrit ci-dessous.
 
 Une version choisie → ses usages quiz/vitrine/application → un effet mesuré
 reste à recevoir. Cette livraison ne ferme ni C2, ni C3, ni C4, ni un parcours
 large. Les 116 parcours restent 96 examinés partiellement et 20 non examinés ;
 aucun parcours large pleinement reçu.
+
+
+## Lecteur de guidelines reçu en production 413
+
+[Code 4e4b7005](https://github.com/xtincell/ADVE-project/commit/4e4b70053c7c47fb98fb5955b551fb6352c02ed1),
+ADR-0203 : écran et exports consomment le contrat réel, avec une sélection du
+coffre commune au cockpit et au thème. Les versions remplacées, archivées,
+rejetées ou périmées sont exclues ; un ACTIVE ancien reste visible face aux
+propositions récentes. Un état enregistré ne vaut toujours pas approbation.
+Le lecteur documentaire existant sert aussi les références des guidelines,
+à la demande, sans analyse, indexation ni écriture déclenchée par la lecture.
+
+[CI 37710903270](https://github.com/xtincell/ADVE-project/actions/runs/37710903270) :
+4 080 unitaires et 95 PostgreSQL ; trois contre-exemples PostgreSQL et deux rendus
+rouges avant correction. [Image 37711041268](https://github.com/xtincell/ADVE-project/actions/runs/37711041268)
+bootée sur base neuve ; registre et conteneur exacts rapprochés, runtime 6.27.413
+sous `nextjs`, volume privé conservé. Natif administrateur : identité et six
+sources consultables, nouvelle note opérateur exacte en lecture seule, deux
+exports HTML téléchargés et reparsés. L’imprimable reste du HTML, pas un PDF
+binaire. 60 réponses sans erreur HTTP, zéro exception ; viewport CSS 390 × 844
+sans débordement. Thème jour natif, appareil réel et partage public non reçus.
+
+La sixième source est une note opérateur enregistrée via Sources, sans préparation
+assistée. Les cinq documents historiques restent intacts. Les seize piliers,
+six sources et compteurs IA sont identiques après la recette 413. Le mapping
+historique du formulaire vers huit piliers ne vaut pas classification reçue.
+Noël relu dans les campagnes : un projet, trois marques, échéance au 20 octobre ;
+les dates de campagne sont explicitement inférées. Aucune écriture de campagne.
+
+Une confrontation privée de neuf objets sémantiques distingue décisions produit,
+hypothèses, données historiques et assertions sans mesure retrouvée. Un erratum
+existe dans le guide de l’application ; il faut respecter son rôle et ses usages,
+sans le transformer en approbation globale de tous les dossiers. Aucun contenu
+client, texte de source, média ou palette privée n’est redistribué ici.
+
+Le défaut de lecteur est reçu. La réconciliation champ par champ, la version de
+marque appliquée aux produits et son retour de résultats restent ouverts.
+Les sept chantiers, dix gates et 116 parcours conservent leurs états partiels.
+
+[Registres fa9187e9](https://github.com/xtincell/ADVE-project/commit/fa9187e9bfa4ebb831a5248a884e5a9319c64e3f) :
+reçus et dette actualisés, CI `37712772487` verte ; diff applicatif vide avec
+le code servi. Aucun redéploiement déclenché pour ce seul commit documentaire.

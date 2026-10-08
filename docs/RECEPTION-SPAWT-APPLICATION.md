@@ -154,3 +154,32 @@ CI `37699941903`, suite de 843 tests et quatre sauts, export web et autres gates
 verts. Le diff avec le runtime ne touche que documentation et dispositif de test ;
 la configuration Babel de production exclut ce plugin. Le runtime reste sur le
 lot produit qualifié `49db8c1`, sans nouveau déploiement pour ce correctif de test.
+
+
+## Refus d’écriture du profil et du Palais — PR #9 livrée
+
+[PR #9](https://github.com/xtincell/spawt-ci-mobile-v1-mvp/pull/9) fusionnée au canon
+`cb26f0424a6442bc1d0684e5c60abd27951d7bf1`, CI `37711836611` verte sur `a1e845b`.
+Deux refus Supabase rouges avant correction : les helpers profil/Palais résolvaient
+leur promesse malgré l’erreur retournée. Ils rejettent maintenant cette erreur,
+ce qui rend les mécanismes existants de signalement/reprise atteignables. Six
+contrôles passent ; suite standard CI 849 tests, quatre sauts, quatre snapshots,
+112 suites vertes et export web avec tous les assets. Localement, la première
+suite sparse ne chargeait pas seize fichiers faute de médias ; elle ne vaut pas
+gate verte. La suite de sources avec assets simulés passe ensuite les 849 tests.
+Aucun modèle, migration, axe de goût, build EAS, OTA ou magasin modifié.
+
+Déploiement `zsgue44girr4sji3wrf03kx1` terminé le 8 octobre à 01:26:07 UTC,
+image `sha256:ec82a0eb818f386bb1e857a6eeb51f629edd7d693f2ba9111d908f9002031fc2`.
+Conteneur unique, commit et configuration relus ; seul le commit cible change.
+Bundle public et bundle chargé nativement rapprochés par SHA-256
+`e813877985444bf33fa689c7a545788d1885f3d77cf0a0e3c868f23ca7a8c3c2`.
+L’entrée consentement est reçue, cases décochées, Continuer désactivé. Seize
+réponses observées, zéro exception ; un envoi analytics anonyme `user_signals`
+est refusé 401 avant consentement. Ce résidu est distinct du correctif livré,
+et n’est pas caché dans un bilan « zéro erreur ». Deux avertissements web
+historiques subsistent. Aucun consentement accepté ni OTP envoyé.
+
+Le rejet remonté ne prouve pas une file durable du Palais ni la fin du rejeu
+d’avis. Éditions/interruption/concurrence, isolation de la télémétrie et réception
+authentifiée restent ouvertes. Reçus : `preuves-spawt-app/erreurs-profil-*`.
