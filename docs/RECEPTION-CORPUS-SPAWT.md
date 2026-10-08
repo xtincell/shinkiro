@@ -144,3 +144,49 @@ Une version de marque choisie → ses usages effectivement publiés → leurs
 résultats reste à recevoir, ainsi que la reprise après interruption. Le
 raccord documentaire et le correctif d’éditeur ne ferment aucun des sept
 chantiers ou dix gates du programme.
+
+
+## Documents partagés consultables depuis le portefeuille — 415
+
+[Code fbc5db30](https://github.com/xtincell/ADVE-project/commit/fbc5db30b302e47a0431ba9f7ba8926f98f1da3b) :
+la projection du portefeuille omettait les usages documentaires existants d’une
+autre marque. Elle réutilise désormais le lecteur canonique de Sources, avec
+le dossier consommateur, le propriétaire et l’état d’analyse local. Le même
+dialogue de consultation sert les deux entrées ; aucun modèle, Intent, agent,
+copie documentaire ou mécanisme de publication supplémentaire.
+
+Le lecteur masque le texte en cache pendant une nouvelle vérification. Une
+pièce devenue inaccessible reçoit un refus 403 explicite, sans nouvelle
+tentative automatique. Les contre-exemples précèdent la correction. Natif
+local sur marque fictive : consultation propriétaire/consommateur, retrait,
+un seul 403 et aucun texte conservé à l’écran ; liste retirée actualisée sans
+masquer la pièce du propriétaire. Le refus est observé en 303 ms entre appels
+d’outil ; ce n’est pas une mesure instrumentée du premier affichage.
+
+[CI 37756140965](https://github.com/xtincell/ADVE-project/actions/runs/37756140965) :
+4 097 tests unitaires et 99 PostgreSQL passent.
+[Image 37756142311](https://github.com/xtincell/ADVE-project/actions/runs/37756142311) :
+construction, démarrage sur base neuve et publication reçus. Configuration de
+l’image testée et publiée identique, registre et conteneur rapprochés ; runtime
+6.27.415 sous `nextjs`, volume privé conservé et une seule demande de déploiement.
+
+Natif administrateur : le texte Noël se consulte depuis Bonnet Rouge, Peak et
+Belle Hollandaise avec la même empreinte que la source canonique. Les deux
+marques consommatrices affichent le propriétaire sans recopier le document.
+Les six sources SPAWT restent visibles, dont la consigne opérateur « site live /
+six questions », relue en lecture seule. Dix sources, quarante piliers, deux
+usages et compteurs IA/processus/assets/fragments identiques avant et après.
+Aucune analyse ni écriture de marque n’est déclenchée par cette recette.
+
+La première trace native est tronquée : 133 réponses observées sans HTTP ≥400
+ni exception, et 37 requêtes `ERR_ABORTED`. Elle ne reçoit pas un chargement
+intégral sans échec. Le premier clic Sources après rechargement reste sans
+effet ; sa cause n’est pas établie, le second ouvre la rubrique. Une nouvelle
+trace limitée à la consultation SPAWT reçoit un 200, sans erreur ni troncature.
+Le retrait est exercé sur fixture locale, pas sur les marques réelles.
+
+Les deux sites SPAWT sont rechargés le 8 octobre : aucun décompte expiré, six
+questions annoncées, accès au quiz et au site actif. Aucun changement de ces
+sites dans le lot 415. Leur mise à jour depuis une version de marque choisie,
+la réconciliation sémantique complète et le retour de résultats restent ouverts.
+Aucun chantier, gate ou parcours large supplémentaire déclaré reçu.
