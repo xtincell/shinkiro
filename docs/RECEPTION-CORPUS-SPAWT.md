@@ -252,3 +252,89 @@ Ce lot ne livre pas encore la publication d'une version de marque vers ces
 surfaces ni le retour de leurs résultats. Le panneau legacy de confirmation
 reste à harmoniser avec la provenance canonique et une précondition de version ;
 aucune confirmation automatique ni rafraîchissement stratégique déclenché.
+
+
+## Conditions commerciales propagées — 417
+
+[Code 3ac9374e](https://github.com/xtincell/ADVE-project/commit/3ac9374ee5e77d223ab774a1675821b82093a402),
+ADR-0204 : le catalogue conserve périodes, fiscalité, options et réserves dans
+les conditions de chaque offre. Les gammes relisent le produit référencé au
+lieu de maintenir un deuxième prix. Gratuit et anciennes chaînes restent
+lisibles ; une référence cassée est signalée. Sans prix comparables, le plan
+s'abstient de fabriquer un panier, un chiffre d'affaires ou un ROAS.
+
+La recette native locale reçoit deux éditions gouvernées et leur relecture,
+sans appel IA : conditions puis cinquième palier référencé, versions 1→2→3 et
+deux archives. HTML partagé et PDF réellement produit de cinq pages relus ; les
+conditions et la gratuité sont identiques. Cette preuve reçoit les tarifs de
+§04, pas les autres sections Oracle. Leurs projections et faux états de
+complétude sont inscrits à la dette avant tout livrable externe.
+
+[CI 37773766877](https://github.com/xtincell/ADVE-project/actions/runs/37773766877)
+et [image 37774194672](https://github.com/xtincell/ADVE-project/actions/runs/37774194672)
+vertes. Source, index de registre et conteneur rapprochés ; runtime 6.27.417
+sous nextjs, volume privé conservé. Une demande de déploiement, reçue terminée.
+Dix sources, quarante piliers, deux usages et les compteurs IA/processus/actifs/
+fragments restent identiques selon la comparaison calculée lors de la livraison.
+Note d’intégrité du journal local : une capture de lecture ultérieure a remplacé
+le fichier local « avant » ; sa date ne prouve donc pas l’antériorité au déploiement
+417. Le résultat de comparaison conservé et le relevé « après » restent présents ;
+la capture ultérieure retrouve exactement leurs contenus, versions et compteurs.
+
+Natif de production : dossiers FrieslandCampina et SPAWT, puis catalogue SPAWT
+consultés. Soixante réponses sans HTTP ≥400 ni exception ; trente-quatre
+ERR_ABORTED annulées, trace non tronquée. Titre Offre observé avant 9 241 ms,
+borne incluant les appels d'outil, sans mesure du premier affichage.
+La lecture montre encore les offres historiques inférées et des liens cassés :
+leur correction de fond est une étape distincte, pas un effet du déploiement.
+Un brouillon privé rapproche cinq offres et cinq paliers du PRD, sans soumission.
+
+Vitrine SPAWT et entrée du quiz relues le 8 octobre : compte à rebours absent,
+six questions annoncées ; première question affichée 1/6, sans réponse ni donnée
+personnelle soumise. Publication du web, publication mobile, fidélité commerciale
+et propagation depuis une version de marque choisie restent distinguées.
+Aucun des sept chantiers ni parcours large déclaré achevé.
+
+
+## Identité des produits et confirmation reçues — 418
+
+[Code ce7372a5](https://github.com/xtincell/ADVE-project/commit/ce7372a56cb3a24e1d2ab1939dc216ee686b99bb),
+ADR-0205 : toutes les opérations du writer commun attribuent les ids au catalogue
+accepté et modifié, conservent les ids acquis et refusent les doublons. Les liens
+par nom exact unique sont réancrés lors du changement. Aucune identité déduite
+d’une position, d’une ressemblance ou d’un produit retiré ; l’historique général
+des retraits/réintroductions demeure à recevoir.
+
+La confirmation relit l’origine canonique et la version attendue. Contenu,
+provenance et marqueurs de certitude changent dans la même transaction. Une source
+ne contourne plus une valeur humaine par une édition imbriquée ; l’état précédent
+reste intact. Le bouton valide tout le champ affiché, sans validation automatique.
+
+121 contrôles PostgreSQL et recette native isolée reçus : confirmation sans
+modification du catalogue, condition commerciale, puis renommage gardant son id
+et sa gamme. Versions 1→2→3→4, trois archives, deuxième produit inchangé, zéro IA.
+Trois réponses de mutation HTTP 200 relues. Soixante-dix réponses sans HTTP ≥400
+ni exception ; vingt-trois annulations réseau, trace complète. DOM 1 122,5 ms ;
+titre observé sous 11 147 ms, borne incluant les appels d’outil, sans premier
+affichage mesuré. La fixture de gamme unique reste partielle.
+
+[CI 37780715457](https://github.com/xtincell/ADVE-project/actions/runs/37780715457)
+et [image 37781115856](https://github.com/xtincell/ADVE-project/actions/runs/37781115856)
+vertes. Runtime 6.27.418 sous nextjs, source/index/registre/conteneur rapprochés,
+volume privé conservé. Une demande de déploiement, terminée à 13:16:47 UTC le
+8 octobre. Dix sources, quarante piliers, deux usages et les compteurs IA/processus/
+actifs/fragments identiques entre les captures propres à ce déploiement.
+
+Natif production : le catalogue SPAWT et ses trois champs proposés confirmables
+s’affichent. Aucun amendement ni confirmation soumis. Soixante réponses sans
+HTTP ≥400 ni exception, quatorze ERR_ABORTED annulées, trace complète. HTTP 200,
+DOM 2 101,8 ms ; titre observé sous 34 611 ms, borne incluant la fermeture de la
+note de livraison et les appels d’outil. Le premier délai d’attente de titre est
+échoué pendant cette note ; aucun chargement sans obstacle n’est revendiqué.
+
+Les offres physiques inférées et gammes historiques rompues sont toujours
+présentes en production. Leur proposition de rapprochement documentaire reste
+un brouillon, distinct du logiciel livré. Le raccord de l’amendement aux reçus
+des sources et au journal d’auteur doit être reçu avant cette correction.
+Ni publication d’une version de marque sur le site/quiz/application, ni boucle
+de résultats, ni réception des sept chantiers ne sont établies par ce lot.
