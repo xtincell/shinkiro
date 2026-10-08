@@ -24,8 +24,17 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   journal et contexte d’import corrigée ; 34 scénarios HTTP et CI verts.
   Réattribution concurrente, refus atomique, reprise, trois rôles et gestes
   manuels reçus sur fixtures. Code servi et migration rapprochés du canon,
-  corpus et stockage inchangés. Qualification historique, adaptation Matanga,
+  corpus et stockage inchangés. Qualification historique,
   autres gestes métier et circulation des décisions restent ouverts. Voir
+  [RECEPTION-RADAR-ROLES.md](RECEPTION-RADAR-ROLES.md).
+- Radar Matanga : adaptation de son contrat existant reçue, 69 tests et CI verts,
+  dont les 18 scénarios d’admission La Barre. Portail, accords de visuels,
+  favoris et RH/admin conservés. Trois rôles et clôture rafraîchie reçus sur
+  fixture ; lectures HTTP des trois rôles réels reçues en production. Le compte
+  membre contrôlé passe de 473 lignes à ses 18 tâches autorisées. Dix-sept
+  fichiers servis conformes, onze tables et stockage inchangés hors colonnes
+  ajoutées. Historique ancien, coche personnelle de Ma journée, cycle client
+  réel, circulation transverse et exploitation TPE restent ouverts. Voir
   [RECEPTION-RADAR-ROLES.md](RECEPTION-RADAR-ROLES.md).
 - Galahad : consentement, procédures, décisions indisponibles, seuil de jetons
   et retour délégué confrontés au canon. Neuf contre-exemples rouges, puis quinze

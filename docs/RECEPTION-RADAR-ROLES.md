@@ -34,12 +34,38 @@ colonnes de qualification présentes. Empreintes avant/après des 77 tâches,
 identiques. Aucune écriture métier de production. Cette instance ne possède
 qu’un rôle owner, en timezone UTC ; elle ne prouve pas les trois rôles réels.
 
-L’installation Matanga reste distincte et inchangée par ce lot. Son roster,
-portail, administration/RH, favoris, médias et sources La Barre interdisent une
-substitution globale par le backend générique. Qualification historique,
-propagation métier, autres gestes natifs, seconde TPE, restauration et coût
-complet restent ouverts. Les surfaces publiques ont leur contrat propre ; les
-règles d’édition du wiki et de configuration ne sont pas reçues ici. Aucun des
-sept chantiers n’est clôturé.
+L’installation Matanga a reçu une adaptation distincte dans la
+[PR #59](https://github.com/xtincell/Matanga-Creative-dashboard/pull/59), canon
+`97c8d309a281bf2cee916645f300a41c0dfa2648`. Le contrat est factorisé dans son
+`brief-access.js` existant ; roster, RH/admin, favoris, admission La Barre et
+transactions du portail sont conservés. Les rôles des visuels, créneaux,
+retrait d’accord après révision et refus des codes ambigus restent éprouvés.
+Les liens du portail sont réservés à la direction jusque dans REST.
 
-Preuves privées : `preuves-parcours-radar/`.
+Dix-neuf contre-exemples rouges deviennent verts ; réception finale de 69 tests,
+dont les 18 cas d’admission La Barre et les raccords front. CI du canon
+[37822722523](https://github.com/xtincell/Matanga-Creative-dashboard/actions/runs/37822722523)
+verte. Recette native sur base isolée : trois rôles, confidentialité, clôture
+persistée et journalisée avec compteur 3→2 sans rechargement, panne explicite sans
+exemples de kit. La coche personnelle de « Ma journée » reste distincte de cette
+clôture métier dans « Tâches » ; sa cohérence reste à traiter.
+
+L’autodéploiement Matanga est terminé à 18:15:12 UTC. Dix-sept fichiers du runtime
+correspondent au code reçu ; les trois colonnes nullable sont présentes, sans
+requalification historique. Les lectures HTTP des trois rôles réels sont reçues :
+le compte membre contrôlé reçoit 18 tâches autorisées, contre 473 auparavant.
+Empreintes identiques des onze tables suivies, hors seules colonnes ajoutées,
+et du stockage persistant : 474 tâches, 996 événements, 21 médias et trois
+commentaires. Aucun dossier réel modifié par la recette ; aucune demande de
+redéploiement manuel supplémentaire.
+
+Le CSV et les fiches wiki sont désormais des projections de la base autorisée ;
+les archives Markdown du dépôt ne sont pas une API parallèle. Un document
+projet exige un rattachement explicite au dossier accessible. L’ancien historique,
+dont 995 événements sans confidentialité qualifiée, et les anciens commentaires
+ou médias sans identifiant restent à qualifier ; la compatibilité historique de
+la direction et du portail ne prouve pas leur origine. Les gestes client réels,
+blocages, dépendances, circulation des décisions, seconde TPE, restauration et
+coût complet restent ouverts. Aucun des sept chantiers n’est clôturé.
+
+Preuves privées : `preuves-parcours-radar/` et `preuves-radar-matanga-roles/`.
