@@ -850,9 +850,65 @@ au plus tard à 2 674 ms, zéro réponse >=500/exception dans cette seule fenêt
 Elle ne couvre pas toute la publication et ne définit aucun SLO. La trace
 native locale 430 est tronquée ; aucun zéro exhaustif n’en est déduit.
 
-La cause d’origine inlinée est fermée. La conservation des octets par version,
+Au reçu 430, la cause d’origine inlinée est fermée. La conservation des octets par version,
 Moka, palette, polices, voix, règles par destination, irrigation quiz/application
 et retour de valeur restent à recevoir. Les 116 parcours gardent leur examen
 borné, les 80 lignées leur qualification ouverte ; les sept chantiers et les
 dix portes de release restent non acceptés. Preuves privées :
 `preuves-origine-marque-430/reception.json` et `spawt-live-final.png`.
+
+
+## Octets du logo conservés et édition v3 reçue — 431, 9 octobre
+
+[Source 431, 3f104072](https://github.com/xtincell/ADVE-project/commit/3f1040726620a21ba4d2afcd7fc5ab887d8c2e54)
+étend l’édition publique et son stockage existants : les octets du logo sont
+vérifiés, chiffrés, relus et conservés avant publication. Le chemin public de
+l’édition sert cette copie vérifiée ; son ETag ne dispense pas de vérifier les
+octets. Aucun deuxième coffre, modèle, service, agent ou permission. Le JSON
+public v1 et le lecteur de la vitrine gardent leur contrat.
+
+[CI 37876777265](https://github.com/xtincell/ADVE-project/actions/runs/37876777265) :
+4 167 unitaires et 248 PostgreSQL verts ; Chromatic et MissionDrift verts.
+Localement, 256 PostgreSQL dans 14 fichiers, 1 617 gouvernance et 33 cas ciblés
+reçus, types/deux lints sans erreur et zéro cycle ; 24 warnings préexistants.
+Trois contre-exemples initiaux et celui de révision sans resélection sont rouges
+avant correction. Fixture native isolée : nouvelle révision 200, archive corrompue
+refusée 412 avec message français et édition conservée, restauration 200 en
+successeur après remise des octets. Fixture nettoyée ; aucun tel essai en production.
+
+[Image 37876782159](https://github.com/xtincell/ADVE-project/actions/runs/37876782159)
+reçue après démarrage sur base PostgreSQL neuve, migrations, login 200 et lecture
+du PDF fixture de deux pages. Index servi
+`sha256:45fba7bd5026a1ee2eb90d95f64220988b43f1095580465412a9a3c4fdf44376` ;
+une seule demande de livraison, terminée à 03:07:30 UTC. Source, image, runtime/API
+6.27.431, utilisateur nextjs et volume privé RW rapprochés. L’édition v2 reste
+identique avant le choix réel ; aucun remplissage rétroactif silencieux.
+
+Connexions propose 17 variantes et « Sans logo ». La seule publication native
+réelle choisit le même contour horizontal SELECTED v1, sans promotion, avec les
+quatre textes publics et le lien identiques. SPAWT v3 conserve 224 112 octets
+vérifiés dans le volume privé ; acteur, sélection et pins id/version conservés.
+La [vitrine SPAWT](https://spawt.online/) charge les deux images depuis cette
+copie 4 123 × 1 714 ; la [page publique](https://powerupgraders.com/b/LFA-spawt)
+charge aussi le logo v3. Six questions et aucun décompte expiré. Réouvrir la
+révision permet de publier sans resélection ; image chargée puis dialogue annulé,
+sans seconde publication. L’application mobile reste annoncée à venir.
+
+HTTP image 200, 304 après vérification, paramètres 404, export privé 401 et CORS
+limité aux trois origines reçus. Le corpus hors éditions reste identique :
+12 sources, 40 piliers, 2 usages, 108 chunks, 2 431 coûts IA et 19 processus.
+Seule l’édition ajoute un actif, 257→258 ; aucun fournisseur appelé.
+
+Fenêtre fraîche de rechargement production complète : Document 200, DOM 721 ms,
+premier titre observé au plus tard à 2 655 ms, zéro >=500/exception observé dans
+cette seule fenêtre. Elle ne couvre pas toute la publication ni la disponibilité.
+La première trace sur l’ancien onglet est tronquée et reste sans conclusion
+exhaustive. Aucun SLO reçu par ces mesures.
+
+La conservation des logos des nouvelles éditions est reçue. Les éditions anciennes
+sans reçu demandent un choix et une nouvelle publication explicites ; disponibilité
+et récupération du stockage, nettoyage des orphelins HTTP_BLOB, Moka, palette,
+polices, voix, règles par destination, irrigation quiz/application et retour de
+valeur restent ouverts. Les 116 parcours gardent leur examen borné, les 80 lignées
+leur qualification ouverte ; aucun des sept chantiers ou dix portes n’est accepté.
+Preuves privées : `preuves-octets-publics-431/reception.json` et `spawt-live-final.png`.
