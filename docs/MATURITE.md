@@ -6,6 +6,18 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
 ## Réceptions partielles des 7 au 9 octobre 2026
 
+- SPAWT, admission documentaire après 431 : le CANON retrouvé est conservé et
+  lisible en Sources, DECLARED, analyse facultative laissée désactivée. Treize
+  fichiers texte exacts et 53 fichiers binaires seulement inventoriés ; un ajout
+  documentaire, sans nouvelle release logicielle ni publication. Corpus suivi :
+  12→13 sources et 40 piliers ; les enregistrements antérieurs, l'édition v3 et les
+  compteurs sont conservés. Six polices et 25 Moka du coffre correspondent aux
+  fichiers CANON/checkout/HTTP ; la vitrine garde ses copies/styles locaux.
+  Les rôles app/web et la contradiction typographique historique sont distingués.
+  Projection dynamique, dérivations, masters HD, reprise et valeur restent ouverts.
+  Aucun chantier ou porte reçu. Voir
+  [RECEPTION-CORPUS-SPAWT.md](RECEPTION-CORPUS-SPAWT.md).
+
 - La Fusée 431 / SPAWT : les nouveaux logos publiés sont copiés, vérifiés et
   conservés chiffrés dans le stockage existant. Une seule publication native v3,
   deux images chargées sur la vitrine et une sur la page publique ; mêmes textes,

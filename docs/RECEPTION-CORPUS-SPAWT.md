@@ -912,3 +912,47 @@ polices, voix, règles par destination, irrigation quiz/application et retour de
 valeur restent ouverts. Les 116 parcours gardent leur examen borné, les 80 lignées
 leur qualification ouverte ; aucun des sept chantiers ou dix portes n’est accepté.
 Preuves privées : `preuves-octets-publics-431/reception.json` et `spawt-live-final.png`.
+
+## Admission du CANON après 431 — 9 octobre 2026
+
+Le dossier CANON SPAWT est retrouvé et comparé aux usages existants. Il précise
+les rôles Klinsman display et Gotham corps/UI, les couleurs et les expressions de
+Moka. Le brandbook historique attribue corps/interface aux deux familles ; il
+reste conservé, sans correction rétroactive ni remplacement automatique d'actif.
+
+La commande native Sources de marque conserve une référence DECLARED, analyse
+assistée désactivée. Treize fichiers texte sont reproduits exactement avec leur
+manifeste ; 53 fichiers binaires sont seulement inventoriés, sans nouvel import
+de leurs octets. La source est réellement lisible après enregistrement. Une
+émission gouvernée existante est fermée OK et liée à la source créée.
+
+SPAWT principal passe de huit à neuf sources ; le corpus des cinq marques suivi
+passe de 12 à 13 sources, avec 40 piliers inchangés. Le contrôle global compare
+26→27 sources et 504 piliers. Toutes les sources antérieures, piliers, actifs,
+usages et éditions sont identiques ; les compteurs restent 258 actifs, 2 431 coûts
+IA, 19 processus et 108 fragments. L'édition publique v3 reste en ligne. Aucun
+appel fournisseur, publication ou déploiement logiciel effectué par ce dépôt ;
+le runtime reste 6.27.431.
+
+Six polices et 25 illustrations Moka déjà présentes dans le coffre ont des octets
+identiques au CANON, au checkout et aux fichiers HTTP 200. Les dix fichiers de
+polices et trois WebP de la vitrine correspondent à son checkout ; les cinq
+originaux OTF/TTF de repli correspondent au CANON. Trois Moka chargés nativement
+et familles CSS Klinsman/Gotham observées. Le style calculé ne prouve pas à lui
+seul le fichier ayant rendu chaque glyphe ; la comparaison des tables WOFF2 reste
+non reçue. Les trois poses PNG/WebP sont reconnues visuellement, sans égalité
+pixel affirmée ni réception HD. Des masters existent dans uploads ; leur
+filiation pose par pose et leur détourage restent à recevoir.
+
+La vitrine conserve ses rôles et son échelle web. Les tailles et fonctions app
+du CANON ne sont pas transplantées. Toutes les chartes de voix observées restent
+DRAFT ; le dépôt documentaire n'en promeut aucune. Le raccord doit factoriser
+référence -> choix par id/version/rôle -> projection publique bornée -> copies
+vérifiées -> consommation/refus/retour dans les primitives déjà présentes.
+
+Ce reçu ferme l'absence de cette référence en Sources. Palette, typographie,
+Moka et voix dynamiques, quiz/application, reprise du stockage et effet de valeur
+restent ouverts. Les 116 examens bornés et les 80 lignées ouvertes sont conservés ;
+aucun parcours large, chantier ou porte de release accepté. Preuves privées :
+`preuves-identite-multisurface-432/reception.json`, `RACCORD-IDENTITE.md` et
+`native-source-received.png`. Ce nom de lot ne désigne pas une release 432.
