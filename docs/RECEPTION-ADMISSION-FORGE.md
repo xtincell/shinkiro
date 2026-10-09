@@ -176,13 +176,67 @@ séparée de l’horloge logique du scellement. Aucun fournisseur réel n’est 
 
 Preuves privées : `preuves-reprise-ptah-434/` et `preuves-lecture-ptah-435/`.
 Le coût estimé reste distinct du coût déclaré ; un coût inconnu n’est pas zéro.
-La synthèse absente affichée comme 0 % et la validation qui forçait sa confiance
-restent à corriger. Aucun parcours large, chantier ou critère de release accepté.
+Au reçu 435, la synthèse absente affichée comme 0 % et la validation qui forçait
+sa confiance restaient à corriger. Le complément 436 reçoit la correction de
+ces deux routes ; aucun parcours large, chantier ou critère de release accepté.
 
 [Reçu documentaire 6d1044f8](https://github.com/xtincell/ADVE-project/commit/6d1044f84d958bcaf6667382878850a6bc45351a)
 livré séparément : quatorze Markdown, cinq contrôles locaux verts et diff
 applicatif vide. [CI 37918024677](https://github.com/xtincell/ADVE-project/actions/runs/37918024677)
 verte ; l’image reste celle du code d554276e, sans redéploiement documentaire.
+
+## Décision de synthèse reçue partiellement — 9 octobre, version 436
+
+[Source 80e2122f](https://github.com/xtincell/ADVE-project/commit/80e2122ffebfce42f8edd37e3430c746a200076d)
+et [CI 37979818869](https://github.com/xtincell/ADVE-project/actions/runs/37979818869)
+reçues : 4 190 unitaires/400 fichiers et 288 PostgreSQL/15 fichiers, dont 14 cas
+de décision S. Les deux routes existantes partagent composition, version relue,
+sources et droits actuels, avec décision S/Strategy atomique. Approuver conserve
+le contenu et sa confiance ; aucun fournisseur implicite. Trois cas rouges en
+réintroduisant la confiance 1.0, puis trois verts après restauration exacte ;
+cinq contrôles locaux verts et 1 620 cas de gouvernance. Les fixtures natives
+locales reçoivent absence/partiel, .22/null et conflit de version ; elles sont
+nettoyées, sans approbation réelle de marque ni projet produit.
+
+[Image 37980217686](https://github.com/xtincell/ADVE-project/actions/runs/37980217686)
+reçue au même source, configuration candidate/publiée et registre concordants :
+`sha256:19e64c96481cd2255e3af21348f7660d427655375fbbae5f7bc43a93ee99c8ec`.
+Déploiement unique terminé à 19:39:09 UTC ; version 436, utilisateur nextjs,
+conteneur et volume privé RW exacts reçus, `/api/version` HTTP 200.
+
+Natif réel SPAWT **en lecture seule** : confiance enregistrée .912, affichée
+91 %, S version 3 AI_PROPOSED ; composition refusée et bouton désactivé.
+L'indicateur de maturité canonique annonce COMPLETE/100 mais marque les sources
+périmées ; le schéma strict refuse 80 chemins de structure/type/référence.
+Ce ne sont pas 80 faits métier manquants. Ce désaccord entre contrats historiques
+reste à factoriser avec le S calculé, ses écrivains et ses consommateurs avant
+acceptation C3/C4/C6 ; aucune approbation ni promotion n'en est déduite.
+
+Fenêtre complète : 62 réponses, zéro >=500 ou exception ; 17 Fetch annulés
+`net::ERR_ABORTED`, canceled=true, conservés dans le journal. DOM 811,2 ms,
+réponse 656,7 ms, load 1 573,9 ms ; titre observé à une borne haute de 14 285 ms,
+aucune latence exacte d'apparition ou SLO déduite. Capture de la page inspectée.
+
+Les dossiers réels sont également relus avant le remplacement 435→436 : Noël
+EVAP 2026 apparaît une seule fois sous le groupe, avec Bonnet Rouge, Peak et
+Belle Hollandaise, brief/livrables/échéances et liens Radar/La Barre. Budget non
+renseigné. SPAWT distingue cinq produits/services et les sites actifs de
+l'application à achever. Ces gestes n'ont pas de fenêtre métrique isolée et ne
+reçoivent aucune livraison de campagne. Deux vitrines SPAWT relues : six
+questions, aucun décompte expiré ; raccord complet quiz/app/retours encore ouvert.
+
+Stress global non reçu : 32 HTTP reçus/230 non reçus/19 pages et trois queries
+FETCH_FAILED, 22 findings après redémarrage mémoire du serveur de développement.
+Reprendre C4/C5 sur une instance et un artifact construits isolément ; diagnostiquer
+la mémoire si récidive. La comparaison CI schéma/migrations n'est pas mesurée,
+faute de base temporaire shadow : aucune migration déduite du faux avertissement.
+Reprendre cette mesure avant C7. Sept chantiers et dix portes restent non acceptés.
+Preuves privées : `preuves-validation-s-436/`.
+
+[Reçu documentaire 2b6caffd](https://github.com/xtincell/ADVE-project/commit/2b6caffd385c3977a42cad02bcded63facf25ffd)
+et [CI 37983592435](https://github.com/xtincell/ADVE-project/actions/runs/37983592435)
+verts ; diff applicatif vide avec la source 80e2122f. Cette mise à jour
+documentaire ne remplace pas l’image reçue et ne déclenche aucun redéploiement.
 
 ## Ce qui reste à recevoir
 
