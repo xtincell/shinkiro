@@ -6,6 +6,18 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
 ## Réceptions partielles des 7 au 9 octobre 2026
 
+- La Fusée 430 / SPAWT : choix explicite d’une variante dans Connexions,
+  publication réelle de l’édition v2 et deux logos chargés sur la vitrine reçus.
+  Textes/liens conservés, six questions et aucun décompte expiré ; page publique,
+  CORS exact, ETag et export privé reçus. L’origine serveur à l’exécution corrige
+  le sélecteur bloqué livré en 429. CI 4 167 unitaires/237 PostgreSQL, image et
+  runtime exacts reçus ; 245 PostgreSQL reçus localement sous deux configurations.
+  Seule l’édition ajoute un actif, sans changement du corpus privé ni appel IA.
+  Pins d’enregistrement sans garantie d’octets immuables ; Moka, palette, polices,
+  voix, quiz/application et retour de valeur restent ouverts. Aucun cycle large,
+  chantier ou porte de release accepté. Voir
+  [RECEPTION-CORPUS-SPAWT.md](RECEPTION-CORPUS-SPAWT.md).
+
 - La Fusée 428 : demande et production distinctes dans Oracle, attente de
   configuration explicite ; garde opérateur et rattachement courant factorisés.
   Bouton/rôles reçus sur fixtures natives locales : opérateur 200/OK/DEFERRED,

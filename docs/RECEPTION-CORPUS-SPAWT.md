@@ -776,7 +776,10 @@ porte de release n’est accepté par cette réception.
 
 Preuves privées : preuves-publication-spawt-423/reception.json.
 
-## Site live et raccord d’identité — 9 octobre
+## Site live — constat du 9 octobre avant les correctifs 429/430
+
+Ce constat est historique. Le reçu 430 ci-dessous ferme le choix et le rendu
+du logo, sans fermer l’univers de marque complet.
 
 Les deux vitrines sont relues nativement sans décompte, avec six questions et
 accès au quiz live. La [PR vitrine #5](https://github.com/xtincell/project_spawt_mobile_ci/pull/5)
@@ -798,3 +801,58 @@ privée ou validation supplémentaire n’est publié par cette passe. Preuves/p
 privés : `preuves-ux-forge-428/spawt-public-verification.json` et
 `preuves-ux-forge-428/prochain-raccord-spawt.md`. Univers complet et sept chantiers
 restent ouverts.
+
+## Logo choisi et reçu sur le site live — 430, 9 octobre
+
+La [PR vitrine #6](https://github.com/xtincell/project_spawt_mobile_ci/pull/6)
+est fusionnée et livrée : ses 33 tests reçoivent le logo publié dans les deux
+emplacements du Layout, le repli local et une CSP limitée au chemin public
+de marque. La lecture de l’édition continue à l’ouverture, au retour de focus
+et toutes les cinq minutes où la page est visible.
+
+429 a livré le choix explicite de variante, mais sa recette native réelle a
+échoué : Connexions ne proposait que « Sans logo ». L’origine localhost de build
+était figée malgré la configuration serveur HTTPS correcte. Aucune publication
+n’a été faite en 429 ; sa trace native tronquée ne prouve pas l’absence d’erreur
+sur tout le parcours.
+
+[Source 430, 2b9b2fa4](https://github.com/xtincell/ADVE-project/commit/2b9b2fa4520247b06e32a3c18d825a1af8d141fc)
+factorise l’origine serveur à l’exécution dans brand-theme, réutilisée par la
+publication et l’export de charte. Deux contre-exemples PostgreSQL échouent avant
+correction, puis les 29 cas ciblés passent. Gauntlet local : types/deux lints
+sans erreur, 24 warnings préexistants, zéro cycle, 1 617 gouvernance,
+4 167 unitaires et 245 PostgreSQL sous deux configurations.
+[CI 37871315767](https://github.com/xtincell/ADVE-project/actions/runs/37871315767)
+reçoit 4 167 unitaires et 237 PostgreSQL, Chromatic et MissionDrift sont verts.
+[Image 37871326006](https://github.com/xtincell/ADVE-project/actions/runs/37871326006)
+reçue après démarrage sur base neuve, login 200 et lecture du PDF fixture de
+deux pages. Index servi
+`sha256:78cad84df9b217503e089444c47dc624d2b7b223d7e12b3c08c0aef996138aa7` ;
+une demande de livraison, terminée à 02:02:23 UTC. Runtime/API 6.27.430, source,
+image, utilisateur nextjs et volume privé RW rapprochés. Neuf helpers compilés
+conservent les origines serveur avant le repli de build.
+
+Recette native réelle : Connexions propose 17 variantes ; le contour horizontal
+existant, SELECTED v1, est choisi sans promotion d’actif. Les quatre champs
+publics sont relus égaux à l’édition précédente avant une seule publication v2.
+Acteur et pins id/version sont présents en privé. La [vitrine SPAWT](https://spawt.online/)
+charge ce logo dans son en-tête et son pied de page ; la
+[page publique](https://powerupgraders.com/b/LFA-spawt) le charge aussi.
+Six questions, lien vers le quiz live et aucun décompte expiré reçus.
+HTTP 200, CORS limité aux trois origines, ETag 304, export privé 401, page/image
+200 et CSP bornée reçus. Les octets du logo correspondent au checkout à cet
+instant ; cela ne garantit pas leur immutabilité future.
+
+Le corpus hors éditions et ses compteurs restent identiques. Seule l’édition
+ajoute un actif ; aucun fournisseur ni validation globale des fondations.
+Fenêtre initiale de rechargement production complète : DOM 702 ms, titre observé
+au plus tard à 2 674 ms, zéro réponse >=500/exception dans cette seule fenêtre.
+Elle ne couvre pas toute la publication et ne définit aucun SLO. La trace
+native locale 430 est tronquée ; aucun zéro exhaustif n’en est déduit.
+
+La cause d’origine inlinée est fermée. La conservation des octets par version,
+Moka, palette, polices, voix, règles par destination, irrigation quiz/application
+et retour de valeur restent à recevoir. Les 116 parcours gardent leur examen
+borné, les 80 lignées leur qualification ouverte ; les sept chantiers et les
+dix portes de release restent non acceptés. Preuves privées :
+`preuves-origine-marque-430/reception.json` et `spawt-live-final.png`.
