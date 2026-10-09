@@ -4,7 +4,16 @@ Les réceptions datées complètent le relevé historique ; ni une arborescence 
 un déploiement ne constituent une release reçue. Les statuts historiques ci-dessous
 ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
-## Réceptions partielles des 7 et 8 octobre 2026
+## Réceptions partielles des 7 au 9 octobre 2026
+
+- La Fusée 428 : demande et production distinctes dans Oracle, attente de
+  configuration explicite ; garde opérateur et rattachement courant factorisés.
+  Bouton/rôles reçus sur fixtures natives locales : opérateur 200/OK/DEFERRED,
+  founder sans commande et 403 sans effet ; aucun fournisseur appelé. CI 4 167
+  unitaires/230 PostgreSQL, image bootée et runtime exact reçus ; corpus privé
+  et édition SPAWT v1 inchangés. Configuration, reprise de la même demande,
+  octets/facture et cycles réels restent ouverts. Aucun chantier clos. Voir
+  [RECEPTION-ADMISSION-FORGE.md](RECEPTION-ADMISSION-FORGE.md).
 
 - La Fusée 427, livraison commune avec 426 : campagne/brief/actif source conservés
   et contrôlés avant fournisseur ; tâche historique vérifiée en régénération.

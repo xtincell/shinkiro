@@ -775,3 +775,26 @@ les 80 lignées leur qualification ouverte ; aucun des sept chantiers ni aucune
 porte de release n’est accepté par cette réception.
 
 Preuves privées : preuves-publication-spawt-423/reception.json.
+
+## Site live et raccord d’identité — 9 octobre
+
+Les deux vitrines sont relues nativement sans décompte, avec six questions et
+accès au quiz live. La [PR vitrine #5](https://github.com/xtincell/project_spawt_mobile_ci/pull/5)
+conserve la page historique corrigée dans la branche de publication de la vitrine.
+L’app mobile n’est pas déclarée publiée par ce constat.
+
+La vitrine reprend les textes/liens de l’édition choisie dans La Fusée à son
+ouverture, au retour de focus et toutes les cinq minutes visibles. Le logo reçu
+dans le contrat reste inutilisé par le Layout ; palette, polices et Moka restent
+dans le bundle CANON. La publication propose le premier logo public sûr selon
+l’ordre des ids, malgré le résolveur d’identité/ambiguïtés existant. La CSP du
+site autorise ses seules images et polices locales : un simple remplacement par
+une URL externe ne suffit pas à recevoir ce raccord.
+
+La suite doit factoriser sélection de variante/version, provenance et distribution
+durable par destination dans le coffre existant, puis éprouver rendu, échec,
+retour d’édition, quiz/application et apprentissages. Aucun choix de logo, charte
+privée ou validation supplémentaire n’est publié par cette passe. Preuves/plan
+privés : `preuves-ux-forge-428/spawt-public-verification.json` et
+`preuves-ux-forge-428/prochain-raccord-spawt.md`. Univers complet et sept chantiers
+restent ouverts.

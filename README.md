@@ -117,17 +117,18 @@ Outils légers, chacun dans son dépôt et monté en submodule sous `tools/`.
 
 ## Navigation
 
-**Réceptions du 8 octobre 2026** — les capacités décrites ci-dessus ne valent pas
+**Réceptions des 8 et 9 octobre 2026** — les capacités décrites ci-dessus ne valent pas
 réception complète du programme. Les sept chantiers restent ouverts :
 
 - [Corpus et identité SPAWT](docs/RECEPTION-CORPUS-SPAWT.md)
 - [Application SPAWT et continuité](docs/RECEPTION-SPAWT-APPLICATION.md)
+- [Demandes et admission des productions dans La Fusée](docs/RECEPTION-ADMISSION-FORGE.md)
 - [BanaHealth, coordonnées et maintenance client](docs/RECEPTION-BANAHEALTH.md)
 - [Décisions communes et assise des bilans dans La Barre](docs/RECEPTION-DECISIONS-BILANS.md)
 
 **Pour construire** — commence par là, dans cet ordre :
 
-- [`fleet.yml`](fleet.yml) — le manifeste des dix-sept composants : **le jugement**, écrit à la main. `make clone-all` matérialise la flotte.
+- [`fleet.yml`](fleet.yml) — le manifeste des composants : **le jugement**, écrit à la main. `make clone-all` matérialise la flotte.
 - [`fleet.lock.yml`](fleet.lock.yml) — **les faits**, régénérés par `make releve`. Ne pas éditer.
 - [`AGENTS.md`](AGENTS.md) — ordre de construction, tests de vie, règles de contribution
 - [`docs/TOPOLOGIE.md`](docs/TOPOLOGIE.md) — les cinq modes de déploiement, les points d'entrée en sous-dossier, les chevauchements structurels

@@ -6,7 +6,7 @@ quel ordre bâtir, comment les pièces se parlent, ni ce qui est déjà fait.
 
 ## Avant de commencer
 
-0. **Lis `fleet.yml`, puis lance `make clone-all`.** Le manifeste décrit les dix-sept
+0. **Lis `fleet.yml`, puis lance `make clone-all`.** Le manifeste décrit les
    composants — couche, maturité, licence, ordre de construction, vitalité réelle — et la
    commande les matérialise tous à côté de cet index. C'est ton point d'entrée.
    `make build-order` rappelle la séquence, `make status` donne l'état de chacun.

@@ -101,6 +101,39 @@ métier et sa véritable émission enfant. Ce reçu n’est pas celui du bouton 
 `preuves-filiation-forge-426/` et `preuves-sortie-forge-427/`. La présence des
 trois références ne reçoit pas une provenance documentaire complète.
 
+## Demande manuelle et garde reçues — 9 octobre, version 428
+
+L’Oracle distingue la demande acceptée de sa production. DEFERRED affiche
+« En attente de configuration », aucune production démarrée et demande conservée.
+Le contrôle partage OperatorSurface et la garde de route existants. La recette
+a révélé qu’un membre de la même équipe était refusé : la session ne porte pas
+operatorId. Le chokepoint relit désormais le rattachement courant avant l’accès
+à la marque et l’émission ; un rattachement JWT périmé est refusé.
+
+- [Source cdd9f6c0](https://github.com/xtincell/ADVE-project/commit/cdd9f6c01423bdfb8b9da37240c5f9fcb8bef5e4),
+  [CI 37862693091](https://github.com/xtincell/ADVE-project/actions/runs/37862693091) :
+  4 167 unitaires et 230 PostgreSQL verts ; gouvernance locale 1 617, zéro erreur,
+  24 warnings préexistants et zéro cycle. UI : huit rouges puis neuf verts ;
+  garde de contexte : deux rouges puis sept verts, plus cinq contrôles ownership.
+- Bouton natif sur fixtures locales : opérateur refusé sans effet avant patch,
+  puis HTTP 200/Intent OK/DEFERRED, une tâche et deux émissions, zéro version/coût/
+  appel fournisseur. Founder sans commande et HTTP 403 direct, sans nouvel effet.
+  Fenêtres de recette sans réponse >=500 ni exception ; fixtures nettoyées.
+  Ces préconditions synthétiques ne valident aucun noyau de marque réel.
+- [Image 37862922982](https://github.com/xtincell/ADVE-project/actions/runs/37862922982) :
+  démarrage sur base neuve, connexion 200 et PDF de deux pages relu. Configuration
+  candidate/publiée identique ; index
+  `sha256:dd0b929865341017fb3a64ead096b5953f672bbd385051c1998e9b1e2b13f973`.
+  Déploiement unique terminé le 9 octobre à 00:19:53 UTC ; version 428, conteneur
+  exact, utilisateur nextjs et volume privé RW reçus.
+- En production : lectures/refus 200/400/403, corpus inchangé, zéro tâche/version
+  de forge ; édition SPAWT v1/empreinte, CORS trois origines, ETag 304 et export
+  privé 401 conservés. Connexions rechargée et hydratée nativement : version 428
+  et édition v1, aucune saisie ou production métier déclenchée.
+
+Preuves privées : `preuves-ux-forge-428/`. La garde et la distinction d’états
+sont reçues ; aucune forge réelle SPAWT/Noël, facture ou média n’en découle.
+
 ## Ce qui reste à recevoir
 
 L’émission upstream réelle, les lots multi-sources, les reçus documentaires et
@@ -108,12 +141,6 @@ l’invalidation après correction restent à recevoir jusqu’au matériau. Le 
 activeBriefId doit contrôler sa relation, son type et son état ; la succession
 parentAssetId reste incomplète. Aucun de ces trous n’est comblé par une référence
 inventée ou une première source choisie arbitrairement.
-
-Le bouton Oracle affiche encore Intent OK comme un succès sans exposer l’état
-DEFERRED de production. Sa garde opérateur et celle de la route doivent être
-alignées sur les mécanismes existants, puis reçues avec les deux rôles avant
-acceptation du parcours manuel. La lecture native de Connexions ne reçoit pas
-ce bouton ni sa production.
 
 Une tâche DEFERRED n’a pas encore de chemin reçu pour reprendre la même tâche
 après configuration : la réconciliation attend un résultat fournisseur et ne
