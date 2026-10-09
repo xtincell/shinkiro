@@ -134,6 +134,56 @@ operatorId. Le chokepoint relit désormais le rattachement courant avant l’acc
 Preuves privées : `preuves-ux-forge-428/`. La garde et la distinction d’états
 sont reçues ; aucune forge réelle SPAWT/Noël, facture ou média n’en découle.
 
+## Suivi et reprise reçus partiellement — 9 octobre, versions 434/435
+
+La reprise DEFERRED retrouve la tâche et son émission conservées, contrôle leur
+portée, le brief scellé et les préconditions courantes, puis réserve atomiquement
+le départ avant tout appel. Une sortie incertaine sans identifiant fournisseur
+ne provoque pas de second envoi. COMPLETED exige des versions existantes dans
+la même portée. Le scellement v2 canonise récursivement les données ; les anciens
+scellements restent explicitement non vérifiables. L’horloge du début réel est
+séparée de l’horloge logique du scellement. Aucun fournisseur réel n’est reçu.
+
+- [Source 434, 24ddb3c8](https://github.com/xtincell/ADVE-project/commit/24ddb3c85e094a2b211e644d70849512699a4438),
+  [CI 37907427545](https://github.com/xtincell/ADVE-project/actions/runs/37907427545) :
+  4 180 unitaires/270 PostgreSQL ; 1 620 contrôles locaux de gouvernance.
+  Fixtures natives opérateur : 22 lignes paginées sans doublon, même tâche
+  DEFERRED relue, scellement altéré refusé, compte utilisateur sans commande.
+  Un premier test PostgreSQL concurrent dépasse le délai d’un nouveau processus ;
+  son échec est conservé, les 270 cas passent seuls sans assouplir le contrôle.
+  Le stress ne reçoit que 46 surfaces HTTP ; 235 restent non reçues. Les fixtures
+  sont nettoyées. Le rendu réel de production 434 refuse la lecture avec 403.
+- [Source 435, d554276e](https://github.com/xtincell/ADVE-project/commit/d554276e1258d7251fbdd8319dc8123679abfdcc),
+  [CI 37913766133](https://github.com/xtincell/ADVE-project/actions/runs/37913766133) :
+  4 180 unitaires/274 PostgreSQL. La lecture administrateur résout exclusivement
+  l’équipe de la stratégie choisie via le contexte canonique ; les commandes et
+  les lectures privées de production gardent l’affectation courante obligatoire.
+  Quatre cas PostgreSQL ajoutés, deux rouges initiaux conservés puis 51 ciblés
+  verts ; suite PostgreSQL complète seule et cinq contrôles locaux verts.
+- [Image 37913788756](https://github.com/xtincell/ADVE-project/actions/runs/37913788756) :
+  configuration candidate/publiée concordante, index
+  `sha256:b96030f310ca535532526460f4bd9e16ee45f1a7b8a84b0db902f795612972f3`.
+  Déploiement unique terminé à 10:03:21 UTC ; version 435, utilisateur nextjs,
+  conteneur et volume privé RW exacts reçus. Aucune nouvelle production déclenchée.
+- Natif réel SPAWT : suivi vide, HTTP 200 et refus 403 disparu. Fenêtre complète
+  de 63 réponses, aucune réponse >=500, exception ou entrée de journal navigateur.
+  DOM 1 884,5 ms ; titre seulement observé à une borne haute de 11 399 ms, suivi
+  relu tardivement à une borne haute de 66 548 ms. Aucun SLO n’en est déduit.
+  Le sélecteur passe du zéro transitoire au rendu de 47 marques/19 pilotables.
+  Le lien FrieslandCampina ouvre son dossier et conserve l’équipe dans ses liens ;
+  cette navigation n’a pas de fenêtre de métriques isolée. Ces rendus ne reçoivent
+  ni une reprise réelle, ni une campagne Noël livrée, ni une stratégie approuvée.
+
+Preuves privées : `preuves-reprise-ptah-434/` et `preuves-lecture-ptah-435/`.
+Le coût estimé reste distinct du coût déclaré ; un coût inconnu n’est pas zéro.
+La synthèse absente affichée comme 0 % et la validation qui forçait sa confiance
+restent à corriger. Aucun parcours large, chantier ou critère de release accepté.
+
+[Reçu documentaire 6d1044f8](https://github.com/xtincell/ADVE-project/commit/6d1044f84d958bcaf6667382878850a6bc45351a)
+livré séparément : quatorze Markdown, cinq contrôles locaux verts et diff
+applicatif vide. [CI 37918024677](https://github.com/xtincell/ADVE-project/actions/runs/37918024677)
+verte ; l’image reste celle du code d554276e, sans redéploiement documentaire.
+
 ## Ce qui reste à recevoir
 
 L’émission upstream réelle, les lots multi-sources, les reçus documentaires et
@@ -142,18 +192,18 @@ activeBriefId doit contrôler sa relation, son type et son état ; la succession
 parentAssetId reste incomplète. Aucun de ces trous n’est comblé par une référence
 inventée ou une première source choisie arbitrairement.
 
-Une tâche DEFERRED n’a pas encore de chemin reçu pour reprendre la même tâche
-après configuration : la réconciliation attend un résultat fournisseur et ne
-lance pas la production. Le chemin réel de configuration et une reprise manuelle
-sans double appel doivent être reçus ; aucun redémarrage automatique n’est promis.
+Le chemin de reprise de la même tâche est reçu sur fixtures en 434 ; le chemin
+réel de configuration et une reprise de production sans double appel restent
+à recevoir. Aucun redémarrage automatique n’est promis.
 
 Les octets doivent être conservés et relus après expiration de l’URL temporaire,
 avec propagation de leur référence durable au coffre. Les adaptateurs Canva/Figma,
 la facture fournisseur et la fermeture durable du journal après le commit métier
 restent ouverts. Un coût déclaré nul ne démontre pas la gratuité.
 
-Le stress isolé n’a reçu ni pages ni tRPC, et a différé les forges. Ce lot ne reçoit
-pas un stress E2E complet, une délégation native complète ou le cycle réel Noël.
+Le stress historique 425 n’a reçu ni pages ni tRPC et a différé les forges ;
+celui de 434 reçoit 46 surfaces HTTP, 235 restent non reçues. Aucun de ces lots
+ne reçoit un stress E2E complet, une délégation native complète ou le cycle Noël.
 Les sept chantiers et dix critères de release restent ouverts. Les 116 fiches
 de parcours ont reçu un examen borné ; aucun parcours large n’est pleinement
 accepté et aucun pourcentage global n’est déduit de cette livraison.

@@ -52,7 +52,7 @@ build-order:
 	@echo "2 · radar         le journal task_events, base de toute mesure"
 	@echo "3 · talos/hulysse/danmem   modules du moteur, pas avant que galahad tourne"
 	@echo "4 · la-barre      poste de travail — ouvrir index.html, rien à installer"
-	@echo "5 · ADVE-project  ~100 Mo, 17 workflows, 192 ADR — EN DERNIER"
+	@echo "5 · ADVE-project  méthode Next.js + Prisma — EN DERNIER ; relevé et ADR courantes"
 	@echo "6 · Argos-studio / charadesign-generator   autonomes"
 	@echo ""
 	@echo "Détail et tests de vie : AGENTS.md"

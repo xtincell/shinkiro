@@ -30,7 +30,7 @@ L'ordre n'est pas arbitraire : chaque étape rend la suivante vérifiable.
 | 2 | Le tracker | `radar` | Postgres + Node stdlib. Fournit le **journal d'événements** dont dépend toute mesure avant/après. |
 | 3 | Les modules d'agents | `talos`, `hulysse`, `danmem` | Guardian, Traveler, mémoire. Ne les construis pas avant que `galahad` tourne : ce sont des rôles du même moteur. |
 | 4 | Le poste de travail | `la-barre` | Aucun serveur, aucun compte. Se teste en ouvrant `index.html`. |
-| 5 | La méthode | `ADVE-project` | ~100 Mo d'arbre, 17 workflows, Next.js + Prisma. **Le plus lourd — en dernier.** Lis ses 192 ADR avant de toucher quoi que ce soit. |
+| 5 | La méthode | `ADVE-project` | Next.js + Prisma. **Le plus lourd — en dernier.** Consulte le relevé `fleet.lock.yml` et les ADR courantes du dépôt avant de le modifier. |
 | 6 | Les outils spécialisés | `Argos-studio`, `charadesign-generator` | Autonomes, sans dépendance sur le reste. |
 
 **Ne commence jamais par `ADVE-project`.** C'est le dépôt le plus impressionnant et le plus
@@ -70,8 +70,8 @@ cd ADVE-project && npm ci && npx prisma generate && npm test
 
 ## Règles de contribution
 
-- **Une ADR pour toute décision structurante** dans `ADVE-project` — la numérotation continue
-  après 0192.
+- **Une ADR pour toute décision structurante** dans `ADVE-project` — relever le dernier
+  numéro dans `docs/governance/adr/` de ce dépôt avant de réserver le suivant.
 - **Le français est la langue des documents de gouvernance.** Le code et les commentaires
   techniques peuvent rester en anglais.
 - **Ne remonte jamais la technologie au catalogue commercial.** Voir `docs/PORTFOLIO.md` :
