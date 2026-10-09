@@ -83,6 +83,24 @@ La vitrine SPAWT actuelle est relue : six questions et aucun décompte expiré.
 Le raccord public des couleurs, polices, mascottes et voix est reçu en 432 ;
 quiz/application, retour de valeur et univers de marque complet restent ouverts.
 
+## Complément du 9 octobre — approbation de la synthèse, 436
+
+Les deux routes d'approbation existantes partagent désormais composition, version
+relue, sources et droits courants, décision atomique et confiance conservée.
+CI 4 190 unitaires/288 PostgreSQL ; image et runtime exacts reçus. Sur le SPAWT
+réel, confiance .912 et S version 3 conservés en lecture seule, approbation
+désactivée. Maturité COMPLETE/100, sources périmées et schéma strict ne concordent
+pas : la factorisation des contrats et des écrivains/consommateurs reste ouverte.
+Aucune approbation réelle ou production reçue. Stress global en échec et mesure
+CI schéma/migrations absente sont tracés avec leurs reprises C4/C5/C7.
+Voir [la réception et ses limites](RECEPTION-ADMISSION-FORGE.md).
+
+Noël EVAP 2026 est relu comme dossier partagé des trois marques, lié à Radar et
+La Barre ; brief/livrables/échéances lisibles, budget non renseigné. La vitrine
+SPAWT et l'ancienne entrée restent actives sans décompte expiré et annoncent six
+questions. Consultation et raccord public ne reçoivent pas les cycles complets.
+Sept chantiers et dix portes restent non acceptés.
+
 ## SPAWT
 
 | Surface | Branche servie | Source livrée | Réception |

@@ -6,6 +6,17 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
 ## Réceptions partielles des 7 au 9 octobre 2026
 
+- La Fusée 436 : décision S factorisée entre les deux routes existantes, confiance
+  conservée et version relue, sans production implicite ; CI 4 190 unitaires/288
+  PostgreSQL, image et runtime exacts reçus. Natif réel SPAWT : confiance .912,
+  synthèse non approuvable ; indicateur COMPLETE/100, sources périmées et schéma
+  strict divergent. Ce conflit de contrats reste à factoriser ; aucune maturité
+  de marque reçue. Stress global en échec (22 findings après restart mémoire dev),
+  comparaison CI schéma/migrations non mesurée, cycles et coûts réels ouverts.
+  Deux vitrines actives relues, six questions et aucun compteur expiré. Sept
+  chantiers/dix portes restent ouverts. Voir
+  [le reçu borné et ses reprises](RECEPTION-ADMISSION-FORGE.md).
+
 - La Fusée 434/435 : le suivi et la reprise réutilisent la tâche et son brief
   conservé ; scellement v2, refus de portée et concurrence reçus sur fixtures.
   Le lot 434 était livré mais la lecture réelle administrateur sans affectation
