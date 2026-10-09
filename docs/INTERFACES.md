@@ -222,6 +222,15 @@ servie, modification publiée et retour de mesure. Doctrine, fonctionnalité
 déclarée et résultat utilisateur reçu restent distincts. Aucun agent n'est requis
 pour publier ou corriger ; l'assistance emprunte les mêmes décisions.
 
+La Fusée 432 reçoit un raccord borné de l’identité choisie vers la seule vitrine :
+référence CANON → choix id/version/usage → édition public-brand-v2 → huit copies
+vérifiées → décodage client et retour v4→v6 reçu. Six couleurs, cinq polices,
+trois usages Moka et une citation sont concernés. Le contrat v1 reste lisible ;
+références privées et chartes DRAFT restent privées. Chargement, retour au premier
+plan et contrôle visible toutes les cinq minutes relisent l’édition choisie.
+Cela ne reçoit pas le contrat métier du quiz, l’application ou le retour de mesure.
+Voir [la réception partielle](RECEPTION-CORPUS-SPAWT.md).
+
 La page historique ne porte plus de décompte expiré ni de promesse de remplacement
 futur de la vitrine déjà en ligne. Elle conserve le quiz et mène au site actuel.
 Les magasins mobiles restent annoncés à venir : aucune publication d'app n'est

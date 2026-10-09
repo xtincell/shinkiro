@@ -6,6 +6,15 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
 ## Réceptions partielles des 7 au 9 octobre 2026
 
+- La Fusée 432 / SPAWT : choix explicite CANON et projection bornée de six couleurs,
+  cinq polices OTF/TTF, trois usages de Moka et citation ; huit copies conservées,
+  v1 compatible, réception native du retour v4→v6 dans le producteur et la vitrine.
+  CI 4 170 unitaires/253 PostgreSQL ; canon vitrine adc4738 reçu sur trois domaines,
+  38 tests, note sous badges 0→16 px, mobile sans overflow. Corpus suivi 13/40 et
+  global 27/504 inchangé, trois éditions ajoutées sans coût/processus nouveau.
+  Autres destinations/quiz/app, HD/WOFF2, stockage/clé et retour de valeur ouverts.
+  Aucun chantier/gate accepté. Voir [le reçu borné](RECEPTION-CORPUS-SPAWT.md).
+
 - SPAWT, admission documentaire après 431 : le CANON retrouvé est conservé et
   lisible en Sources, DECLARED, analyse facultative laissée désactivée. Treize
   fichiers texte exacts et 53 fichiers binaires seulement inventoriés ; un ajout
