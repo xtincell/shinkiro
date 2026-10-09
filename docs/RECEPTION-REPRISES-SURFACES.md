@@ -64,6 +64,25 @@ Les réceptions précédentes restent bornées : mobile des missions en 406 ; ca
 d'assets et usages distincts en 407, avec corpus/versions et contraste encore ouverts.
 Le brief Noël n'est ni remplacé, ni validé, ni livré par ces corrections.
 
+## Complément du 9 octobre — suivi du dossier choisi, 435
+
+Le lot 434 conserve le brief et la tâche lors d’une reprise manuelle et reçoit
+ses refus sur fixtures ; sa lecture réelle administrateur sans affectation
+rend encore 403. Le lot 435 corrige cette lecture via le contexte canonique
+et la stratégie explicitement choisie. Il conserve l’affectation obligatoire
+pour reprendre, émettre ou lire le détail privé ; aucun droit nouveau.
+
+CI 435 : 4 180 unitaires/274 PostgreSQL ; source d554276e, image et runtime exacts
+reçus. Natif réel SPAWT : le suivi vide rend 200 sans refus ; fenêtre complète
+de 63 réponses, zéro erreur serveur ou exception. Après chargement, le sélecteur
+affiche 47 marques/19 pilotables et son lien FrieslandCampina ouvre le dossier
+avec les liens de son équipe. Aucune mutation ni reprise réelle n’est reçue.
+Voir [la réception de production](RECEPTION-ADMISSION-FORGE.md).
+
+La vitrine SPAWT actuelle est relue : six questions et aucun décompte expiré.
+Le raccord public des couleurs, polices, mascottes et voix est reçu en 432 ;
+quiz/application, retour de valeur et univers de marque complet restent ouverts.
+
 ## SPAWT
 
 | Surface | Branche servie | Source livrée | Réception |

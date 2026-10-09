@@ -6,6 +6,18 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
 ## Réceptions partielles des 7 au 9 octobre 2026
 
+- La Fusée 434/435 : le suivi et la reprise réutilisent la tâche et son brief
+  conservé ; scellement v2, refus de portée et concurrence reçus sur fixtures.
+  Le lot 434 était livré mais la lecture réelle administrateur sans affectation
+  rendait 403. Le lot 435 reçoit la lecture du dossier choisi via le contexte
+  canonique, sans donner de commande de production hors affectation. CI :
+  4 180 unitaires/274 PostgreSQL ; image et runtime exacts reçus. En production,
+  le suivi SPAWT vide rend 200, le sélecteur chargé affiche les marques et ouvre
+  le dossier FrieslandCampina avec les liens de son équipe. Aucune production,
+  reprise réelle, validation de stratégie ou facture n’est reçue. Six questions
+  et absence de décompte expiré SPAWT relues. Les sept chantiers et dix portes
+  restent ouverts. Voir [le reçu borné](RECEPTION-ADMISSION-FORGE.md).
+
 - La Fusée 432 / SPAWT : choix explicite CANON et projection bornée de six couleurs,
   cinq polices OTF/TTF, trois usages de Moka et citation ; huit copies conservées,
   v1 compatible, réception native du retour v4→v6 dans le producteur et la vitrine.
