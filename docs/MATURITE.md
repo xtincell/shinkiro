@@ -6,6 +6,18 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
 
 ## Réceptions partielles des 7 au 9 octobre 2026
 
+- La Fusée 431 / SPAWT : les nouveaux logos publiés sont copiés, vérifiés et
+  conservés chiffrés dans le stockage existant. Une seule publication native v3,
+  deux images chargées sur la vitrine et une sur la page publique ; mêmes textes,
+  liens et variante SELECTED sans promotion. Révision possible sans resélection.
+  CI 4 167 unitaires/248 PostgreSQL, image et runtime exacts reçus ; 256 PostgreSQL
+  locaux dans 14 fichiers. Corpus hors édition inchangé, un actif ajouté, aucun
+  fournisseur. Six questions et aucun décompte expiré reçus. Anciennes éditions
+  sans archive, disponibilité/récupération du stockage, nettoyage des orphelins
+  HTTP_BLOB et univers de marque complet restent ouverts. Aucun parcours large,
+  chantier ou porte de release accepté. Voir
+  [RECEPTION-CORPUS-SPAWT.md](RECEPTION-CORPUS-SPAWT.md).
+
 - La Fusée 430 / SPAWT : choix explicite d’une variante dans Connexions,
   publication réelle de l’édition v2 et deux logos chargés sur la vitrine reçus.
   Textes/liens conservés, six questions et aucun décompte expiré ; page publique,
@@ -13,7 +25,8 @@ ne permettent pas de déclarer toutes les IP ou tous leurs parcours achevés.
   le sélecteur bloqué livré en 429. CI 4 167 unitaires/237 PostgreSQL, image et
   runtime exacts reçus ; 245 PostgreSQL reçus localement sous deux configurations.
   Seule l’édition ajoute un actif, sans changement du corpus privé ni appel IA.
-  Pins d’enregistrement sans garantie d’octets immuables ; Moka, palette, polices,
+  Au reçu 430, pins d’enregistrement sans garantie d’octets immuables ; le lot
+  431 reçoit cette conservation pour les nouvelles éditions. Moka, palette, polices,
   voix, quiz/application et retour de valeur restent ouverts. Aucun cycle large,
   chantier ou porte de release accepté. Voir
   [RECEPTION-CORPUS-SPAWT.md](RECEPTION-CORPUS-SPAWT.md).
