@@ -956,3 +956,54 @@ restent ouverts. Les 116 examens bornés et les 80 lignées ouvertes sont conser
 aucun parcours large, chantier ou porte de release accepté. Preuves privées :
 `preuves-identite-multisurface-432/reception.json`, `RACCORD-IDENTITE.md` et
 `native-source-received.png`. Ce nom de lot ne désigne pas une release 432.
+
+## Identité publique choisie reçue — La Fusée 432, 9 octobre 2026
+
+La référence CANON admise précédemment devient le repère d’un choix explicite
+dans Connexions : six couleurs par usage, Klinsman pour les titres (400/700),
+Gotham pour corps/interface (400/500/700), Moka accueil/découverte/guidage et
+une citation exacte du document. Les contradictions historiques restent dans
+leurs sources ; aucune charte DRAFT ni pilier n’est promu.
+
+Le même BrandAsset, strategy.update, resolver, coffre chiffré et transport
+conservent ce choix et huit fichiers vérifiés. L’export public-brand-v2 expose
+seulement les champs et fichiers choisis ; la lecture v1 reste compatible.
+Le client SPAWT reçoit contrat, empreintes et décodage complet avant application.
+Les tailles et la composition restent propres à la vitrine. Aucun nouveau
+modèle, service, router, Intent, agent, fournisseur ou droit n’est ajouté.
+
+La Fusée 6.27.432 est livrée sur 3968c0a1, avec trois CI vertes, image
+37886082203 et digest 851faeecf7c3885799d15b8b5d10287ebf1516c63a3ce09be07fed696734b73a.
+CI : 4 170 tests/398 fichiers et 253 PostgreSQL/13 fichiers ; gouvernance locale
+1 617/166, types/lints/cycles sans erreur et 24 warnings préexistants. Vitrine :
+38 tests/5 fichiers et CI verte ; PR #7 livre le lecteur, PR #8 corrige la note
+sous les badges (écart natif 0→16 px). Le canon vitrine adc4738 est servi sur
+les trois domaines, octets reçus identiques au build et au conteneur.
+
+Publication réelle v4, republication à contenu inchangé v5 sans resélection,
+puis retour à v4 créant l’édition v6 cmv0icxy8000201rypskqf5l0. Trois émissions
+LEGACY_STRATEGY_UPDATE fermées OK ; mêmes huit hashes/objectKeys et choix sur
+les trois versions. Le retour est reçu côté producteur et vitrine. Cinq FontFace
+loaded, trois PNG décodés, six couleurs et citation appliquées. Les fenêtres
+bornées de publication et de lecture sont non tronquées, sans exception observée ;
+Log activé sur la lecture finale, aucun log/500 observé. Le premier reload
+producteur est tronqué ; aucun zéro-error global n’en est déduit. Reload suivant
+DOM 546 ms ; titre seulement constaté sur une lecture différée, sans latence
+exacte ni SLO déduits. Mobile 390 px : pas de débordement horizontal, écart 16 px.
+Six questions et absence de décompte expiré conservées. CSP et trois origines
+CORS sont inchangées ; huit fichiers HTTP200/type/longueur/SHA reçus, privés exclus.
+
+Le corpus suivi garde 13 sources/40 piliers ; contrôle global 27 sources/504
+piliers inchangés. Sources, usages et actifs d’identité inchangés, seuls trois
+actifs d’édition ajoutés (258→261). Coûts IA 2 431, processus 19, fragments 108
+inchangés. La fixture native locale est nettoyée. Son retour consumer interrompu
+reste un échec historique local ; la réception du retour en production est distincte.
+
+Ce reçu ferme la projection et le retour des familles choisies sur cette vitrine.
+Autres destinations, quiz/application, filiation HD, équivalence WOFF2,
+persistance du dernier reçu après fermeture de page, reprise complète du
+stockage/clé et retour de valeur restent ouverts. Réception partielle rattachée
+à C2/C3/C4 : aucun des sept chantiers ou dix gates accepté, 116 parcours examinés
+de façon bornée et 80 lignées ouvertes conservés. Preuves privées :
+preuves-identite-projetee-433/reception.json ; ADR-0212 gouverne le choix interne.
+Le numéro 433 désigne le lot de preuve, pas une version logicielle.
