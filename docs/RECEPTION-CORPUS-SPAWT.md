@@ -1007,3 +1007,29 @@ stockage/clé et retour de valeur restent ouverts. Réception partielle rattach�
 de façon bornée et 80 lignées ouvertes conservés. Preuves privées :
 preuves-identite-projetee-433/reception.json ; ADR-0212 gouverne le choix interne.
 Le numéro 433 désigne le lot de preuve, pas une version logicielle.
+
+## Site live et état du dossier — réception 439, 9 octobre 2026
+
+La vitrine SPAWT est live ; le décompte expiré est déjà retiré et les six
+questions sont reçues. Cela ne vaut pas réception de l'application complète.
+Le lecteur public reçoit les éditions choisies et publiées du noyau de marque,
+au chargement, au retour de la page et toutes les cinq minutes quand elle est
+visible. Les changements de brouillon ne deviennent pas des publications.
+Le choix d'identité et le retour d'édition v6 reçus ci-dessus restent le repère.
+
+La Fusée 6.27.439, source b0399f4fccbc4637f5222ec05468b98048b33240, est
+reçue sur son image exacte. CI 37997965596 : 4 197 tests unitaires/401 fichiers
+et 309 PostgreSQL/16 fichiers verts ; image 37998236655 et déploiement unique
+la3ylsl6n7mb0ta0ycr9fl1k terminés. Le dossier réel SPAWT, ouvert en lecture
+seule sous USER, affiche désormais « Périmé » malgré deux progressions à 100 %.
+L'état canonique, la présence des champs et l'approbation sont distincts.
+Fenêtre de lecture non tronquée : 116 réponses 200, zéro ≥500/exception et
+32 ERR_ABORTED conservés ; aucune réception globale de transport ou SLO.
+
+Les descriptions actuelles du corpus passent à six questions pour cinq axes.
+Aucun réimport, recalcul, approbation, appel fournisseur ou production du
+dossier réel. Les anciens budgets et choix de la synthèse restent à réconcilier.
+Le site live et le retrait du décompte précèdent cette version. Le raccord
+quiz/application/retour de valeur reste ouvert, ainsi que les sept chantiers
+et dix gates. Preuves privées : preuves-coherence-439/runtime.json,
+native-runtime-receipt.json et native-runtime.png.
