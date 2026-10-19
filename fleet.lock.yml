@@ -9,7 +9,7 @@
 #   make releve                régénère ce fichier
 #   git diff fleet.lock.yml    ce qui a bougé dans la flotte depuis le dernier relevé
 #
-releve_le: "2026-10-09"
+releve_le: "2026-10-19"
 owner: xtincell
 topic: shinkiro
 fenetre_vitalite_jours: 90
@@ -21,8 +21,8 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 3490
-    poids_ko: 103669
+    fichiers: 3557
+    poids_ko: 104996
     licence: presente
     commits_90j: 100
     topics: ["layer-method", shinkiro]
@@ -100,16 +100,17 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 185
-    poids_ko: 38378
+    fichiers: 198
+    poids_ko: 38440
     licence: presente
-    commits_90j: 1
+    commits_90j: 7
     topics: ["layer-tools", shinkiro]
     racines: [app, workers]
     artefacts:
       next: [app/next.config.ts]
       package: [app/package.json, workers/package.json]
-      prisma: [app/prisma/migrations/20260512171730_init/migration.sql, app/prisma/migrations/migration_lock.toml, app/prisma/schema.prisma, app/prisma/seed.ts]
+      prisma: [app/prisma/migrations/20260512171730_init/migration.sql, app/prisma/migrations/20261019112000_native_dossier_flow/migration.sql, app/prisma/migrations/migration_lock.toml, app/prisma/schema.prisma]
+      workflows: [.github/workflows/ci.yml]
       env_example: [app/.env.example, workers/.env.example]
   - nom: LaFusee_ADVE
     branche: main
@@ -167,11 +168,11 @@ composants:
   - nom: datacollector
     branche: main
     prive: true
-    langue: HTML
+    langue: Python
     fichiers: 21
-    poids_ko: 127
+    poids_ko: 140
     licence: presente
-    commits_90j: 5
+    commits_90j: 7
     topics: ["layer-tools", shinkiro]
     racines: [.]
     artefacts:
@@ -183,19 +184,19 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 78
-    poids_ko: 277
+    fichiers: 98
+    poids_ko: 444
     licence: presente
-    commits_90j: 26
+    commits_90j: 28
     topics: ["layer-execution", shinkiro]
     racines: [., bridge, cockpit, engine, setup]
     artefacts:
       compose: ["deploy/dan-hermes/docker-compose.yml", "deploy/sas-admin/docker-compose.yml", "docker-compose.yml"]
       dockerfile: [Dockerfile, bridge/Dockerfile, "deploy/sas-admin/gateway/Dockerfile"]
-      systemd: ["deploy/systemd/galahad-docker-firewall.service"]
+      systemd: ["deploy/dan-oauth/dan-oauth.service", "deploy/systemd/galahad-docker-firewall.service"]
       index_html: [cockpit/index.html, setup/index.html]
       package: [bridge/package.json, engine/package.json]
-      python: ["deploy/sas-admin/gateway/requirements.txt"]
+      python: ["deploy/dan-oauth/server.py", "deploy/sas-admin/gateway/requirements.txt"]
       workflows: [".github/workflows/engine-reception.yml"]
       env_example: [.env.example, "deploy/dan-hermes/.env.example", "deploy/sas-admin/.env.example"]
   - nom: galahad-landing
@@ -205,7 +206,7 @@ composants:
     fichiers: 4
     poids_ko: 24
     licence: presente
-    commits_90j: 1
+    commits_90j: 3
     topics: ["layer-company", shinkiro]
     racines: [.]
     artefacts:
@@ -215,10 +216,10 @@ composants:
     branche: main
     prive: true
     langue: HTML
-    fichiers: 5
-    poids_ko: 46
+    fichiers: 7
+    poids_ko: 52
     licence: presente
-    commits_90j: 3
+    commits_90j: 5
     topics: ["layer-tools", shinkiro]
     racines: [.]
     artefacts:
@@ -270,14 +271,15 @@ composants:
     branche: main
     prive: false
     langue: JavaScript
-    fichiers: 248
-    poids_ko: 7174
+    fichiers: 270
+    poids_ko: 7864
     licence: presente
     commits_90j: 100
     topics: ["layer-tools", shinkiro]
     racines: [., sources/02_dossier_MT0020, sources/04_outils, sources/99_archive]
     artefacts:
-      index_html: [index.html]
+      dockerfile: [Dockerfile]
+      index_html: [app/ateliers/approches/index.html, index.html]
       package: [package.json]
       workflows: [.github/workflows/verification.yml]
   - nom: la-fusee-blueprint

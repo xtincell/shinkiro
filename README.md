@@ -5,6 +5,11 @@
 Construit par [UPgraders](https://github.com/xtincell). Anciennement désigné « Galahad 360 »,
 renommé pour lever une ambiguïté coûteuse.
 
+Pour préparer une entreprise sur une base vide :
+[installation du socle manuel](installation/README.md). Ce profil fournit une
+première installation isolée de La Fusée, avec contrôle des migrations,
+sauvegarde et restauration ; la réception du paquet complet reste distincte.
+
 ---
 
 ## À ne pas confondre

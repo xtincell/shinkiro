@@ -1,0 +1,22 @@
+name: Réception du socle d’entreprise
+on:
+  pull_request:
+    paths: ['installation/**', 'Makefile', '.github/workflows/installation.yml']
+  push:
+    branches: [main]
+    paths: ['installation/**', 'Makefile', '.github/workflows/installation.yml']
+permissions:
+  contents: read
+jobs:
+  boundaries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: make test-installation
+      - name: Composition sans secrets de déploiement
+        run: |
+          python3 installation/entreprise.py preparer installation/entreprise.exemple.json "$RUNNER_TEMP/entreprise-receipt"
+          docker compose --env-file "$RUNNER_TEMP/entreprise-receipt/.env" -f "$RUNNER_TEMP/entreprise-receipt/compose.yml" config -q

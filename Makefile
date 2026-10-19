@@ -10,6 +10,7 @@
 #   make tools       initialise les outils versés (submodules)
 #   make releve      régénère fleet.lock.yml depuis GitHub
 #   make derive      relève et échoue si le .lock committé ne reflète plus la réalité
+#   make instance ARGS='--help'   préparer et recevoir une installation isolée
 
 OWNER  := xtincell
 ROOT   := ..
@@ -20,10 +21,16 @@ ROOT   := ..
 REFS   := $(shell awk '/^  - nom: /{n=$$3} /^    etage: reference/{print n}' fleet.yml)
 VERSES := $(shell awk '/^  - nom: /{n=$$3} /^    etage: verse/{print n}' fleet.yml)
 
-.PHONY: clone-all pull-all status build-order tools releve derive help
+.PHONY: clone-all pull-all status build-order tools releve derive help instance test-installation
 
 help:
 	@sed -n 's/^#   //p' Makefile
+
+instance:
+	@python3 installation/entreprise.py $(ARGS)
+
+test-installation:
+	@python3 -m unittest discover -s installation -p 'test_*.py'
 
 clone-all:
 	@for r in $(REFS); do \
