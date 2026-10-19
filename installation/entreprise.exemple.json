@@ -1,0 +1,8 @@
+{
+  "instance": "entreprise-demo",
+  "name": "Entreprise de démonstration",
+  "origin": "http://localhost:3392",
+  "port": 3392,
+  "database": "entreprise_demo",
+  "databaseUser": "entreprise_demo"
+}

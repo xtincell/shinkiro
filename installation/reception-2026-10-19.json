@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "at": "2026-10-19T14:33:54.197986+00:00",
+  "profile": "socle-manuel-fusee-v1",
+  "environment": "isolated-owned-runtime",
+  "fixtureOnly": true,
+  "version": {
+    "fusee": "6.27.492",
+    "imageDigest": "sha256:47618a47c7d997551b63fbe61a6b902d4907892b15dfac1ef14958aba8a3edea",
+    "recipeFiles": {
+      "entreprise.py": "07856ea4255c5926e4f16a64e2f2b0d13498fb1286c251cdafa9e30acd6ec861",
+      "compose.yml": "d7108ab3671d49107e2024cc8e280924c2c05b62e933476744de6db39df531f1"
+    }
+  },
+  "received": {
+    "emptyDatabaseMigrations": 101,
+    "migrationChecksumsMatch": true,
+    "nativeManualBrands": 2,
+    "registeredOwnerProvisioning": true,
+    "wrongAndRepeatedOwnerProvisionRefused": true,
+    "fullDatabaseTablesRestored": 233,
+    "databaseContentMatchesBeforeBoot": true,
+    "nativeOriginalDownloadedByteExact": true,
+    "nativeNewOriginalUploadedAfterRestore": true,
+    "assistedAnalysisSelected": false,
+    "baselineRunningContainersPreserved": 58,
+    "baselineNamesAndImagesPreserved": true,
+    "recipeSourceExact": true,
+    "unitBoundaryTests": 8
+  },
+  "accessChecks": [
+    {
+      "case": "own_original",
+      "status": 200,
+      "expected": 200,
+      "received": true,
+      "bytesMatch": true
+    },
+    {
+      "case": "anonymous_original",
+      "status": 401,
+      "expected": 401,
+      "received": true
+    },
+    {
+      "case": "foreign_session_on_A",
+      "status": 401,
+      "expected": 401,
+      "received": true
+    },
+    {
+      "case": "foreign_session_on_B",
+      "status": 401,
+      "expected": 401,
+      "received": true
+    },
+    {
+      "case": "foreign_id_in_B",
+      "status": 404,
+      "expected": 404,
+      "received": true
+    },
+    {
+      "case": "foreign_writer_on_A",
+      "status": 401,
+      "expected": 401,
+      "received": true,
+      "errorCode": "UNAUTHORIZED"
+    },
+    {
+      "case": "foreign_id_writer_in_B",
+      "status": 500,
+      "expected": 404,
+      "received": false,
+      "errorCode": "INTERNAL_SERVER_ERROR"
+    },
+    {
+      "case": "anonymous_writer",
+      "status": 401,
+      "expected": 401,
+      "received": true,
+      "errorCode": "UNAUTHORIZED"
+    }
+  ],
+  "openFinding": {
+    "result": "Unknown source in the other isolated company is refused before writing, but returns Prisma INTERNAL_SERVER_ERROR / HTTP 500 instead of a typed 404.",
+    "classification": "finition",
+    "strictHttpContractReceived": false
+  },
+  "sourceAndOwnership": "Only fictional companies and documents; no real customer data, provider key or OAuth configuration copied. Existing registration, native encrypted store, migrations and session system reused.",
+  "wholeFleetReceived": false,
+  "releaseComplete": false,
+  "remaining": [
+    "Neutral La Barre distribution, then its isolated profile and restore",
+    "Radar, Argos, agent roles, queues, memories and remaining fleet storage/access families",
+    "Public HTTPS proxy and off-host backup retention",
+    "Whole service RPO/RTO, load/support and actual monthly cost"
+  ]
+}
