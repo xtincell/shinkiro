@@ -20,3 +20,14 @@ jobs:
         run: |
           python3 installation/entreprise.py preparer installation/entreprise.exemple.json "$RUNNER_TEMP/entreprise-receipt"
           docker compose --env-file "$RUNNER_TEMP/entreprise-receipt/.env" -f "$RUNNER_TEMP/entreprise-receipt/compose.yml" config -q
+      - name: Composition du poste neutre sur réseau privé
+        run: |
+          python3 - <<'PYCONFIG'
+          import json, os
+          from pathlib import Path
+          config = json.loads(Path('installation/entreprise.exemple.json').read_text())
+          config.update(barre=True, barreImage='sha256:e4160d97d0ec3c3e94c14027cbd37f13447c2a29c6b38a5e6d1aef4dd610a819')
+          Path(os.environ['RUNNER_TEMP'], 'poste.json').write_text(json.dumps(config))
+          PYCONFIG
+          python3 installation/entreprise.py preparer "$RUNNER_TEMP/poste.json" "$RUNNER_TEMP/poste-receipt"
+          docker compose --env-file "$RUNNER_TEMP/poste-receipt/.env" -f "$RUNNER_TEMP/poste-receipt/compose.yml" config -q

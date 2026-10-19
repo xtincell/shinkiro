@@ -37,6 +37,10 @@ services:
       NEXTAUTH_URL: ${SHINKIRO_ORIGIN:?Independent origin required}
       NEXT_PUBLIC_BASE_URL: ${SHINKIRO_ORIGIN:?Independent origin required}
       CANONICAL_HOST: ${SHINKIRO_CANONICAL_HOST:?Independent canonical host required}
+      PORTFOLIO_BARRE_UPSTREAM: ${SHINKIRO_BARRE_UPSTREAM:-}
+      PORTFOLIO_BARRE_OPERATOR_IDS: ${SHINKIRO_BARRE_OPERATOR_IDS:-}
+      PORTFOLIO_BARRE_INSTANCE: ${SHINKIRO_BARRE_INSTANCE:-barre-matanga}
+      PORTFOLIO_BARRE_DEPOT: ${SHINKIRO_BARRE_DEPOT:-beignet-paradise.json}
       GOD_MODE_EMAILS: ''
       CREATIVE_MEDIA_ARCHIVE_DIR: /app/private-media
       CREATIVE_MEDIA_ENCRYPTION_KEY: ${SHINKIRO_MEDIA_KEY:?Independent media encryption key required}
@@ -56,7 +60,33 @@ services:
     labels:
       shinkiro.profile: socle-manuel-fusee-v1
       shinkiro.installation: ${SHINKIRO_INSTALLATION_ID:?Installation identity required}
+  barre:
+    profiles: [workbench]
+    image: ${SHINKIRO_BARRE_IMAGE:-sha256:e4160d97d0ec3c3e94c14027cbd37f13447c2a29c6b38a5e6d1aef4dd610a819}
+    pull_policy: if_not_present
+    volumes:
+      - barre-depots:/app/depots
+      - barre-review:/app/assets/review
+      - ./barre-maison.js:/app/app/maison.js:ro
+    healthcheck:
+      test: [CMD, node, --input-type=module, -e, "fetch('http://127.0.0.1:3000/depots/manifeste.json').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 3s
+      timeout: 3s
+      start_period: 5s
+      retries: 20
+    mem_limit: 96m
+    cpus: 0.25
+    networks: [private]
+    labels:
+      shinkiro.profile: socle-manuel-fusee-barre-v2
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID:?Installation identity required}
 volumes:
+  barre-depots:
+    labels:
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID}
+  barre-review:
+    labels:
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID}
   database:
     labels:
       shinkiro.installation: ${SHINKIRO_INSTALLATION_ID}

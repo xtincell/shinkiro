@@ -67,6 +67,41 @@ class Installation(unittest.TestCase):
             p=Path(root);self.backup_fixture(p)
             self.assertEqual(e.validate_backup(p)['profile'],'socle-manuel-fusee-v1')
 
+    def test_workbench_binding_is_separate_and_stays_stable_after_recovery(self):
+        with tempfile.TemporaryDirectory() as root:
+            config={**CONFIG,'barre':True,'barreImage':'sha256:'+'a'*64}
+            a=e.prepare(config,Path(root)/'a')
+            b=e.prepare({**config,'instance':'recette-b'},Path(root)/'b')
+            old=e.environment(a)
+            self.assertNotEqual(old['SHINKIRO_BARRE_INSTANCE'],e.environment(b)['SHINKIRO_BARRE_INSTANCE'])
+            restored=e.prepare({**config,'instance':'recette-restore'},Path(root)/'restore',old)
+            new=e.environment(restored)
+            self.assertEqual(new['SHINKIRO_BARRE_INSTANCE'],old['SHINKIRO_BARRE_INSTANCE'])
+            self.assertEqual(new['SHINKIRO_BARRE_OPERATOR_IDS'],old['SHINKIRO_BARRE_OPERATOR_IDS'])
+            self.assertNotEqual(new['SHINKIRO_INSTALLATION_ID'],old['SHINKIRO_INSTALLATION_ID'])
+            self.assertEqual((restored/'barre-maison.js').read_bytes(),(a/'barre-maison.js').read_bytes())
+            self.assertEqual(new['COMPOSE_PROFILES'],'workbench')
+
+    def test_workbench_requires_an_immutable_image_before_creation(self):
+        with tempfile.TemporaryDirectory() as root:
+            p=Path(root)/'target'
+            with self.assertRaises(ValueError):e.prepare({**CONFIG,'barre':True,'barreImage':'latest'},p)
+            self.assertFalse(p.exists())
+
+    def test_integrated_backup_validates_the_workbench_files_and_profile(self):
+        with tempfile.TemporaryDirectory() as root:
+            p=Path(root);self.backup_fixture(p)
+            for name in ['barre-depots.tar','barre-review.tar']:(p/name).write_bytes((p/'media.tar').read_bytes())
+            (p/'barre-maison.js').write_text('window.MAISON = {};')
+            (p/'instance.json').write_text(json.dumps({**CONFIG,'barre':True,'barreImage':'sha256:'+'b'*64}))
+            m=json.loads((p/'backup.json').read_text());m.update(schema=2,profile='socle-manuel-fusee-barre-v2')
+            for name in ['instance.json','barre-maison.js','barre-depots.tar','barre-review.tar']:m['files'][name]=e.digest(p/name)
+            m['barreFingerprint']={name:e.archive_fingerprint(p/name) for name in ['barre-depots.tar','barre-review.tar']}
+            e.write_json(p/'backup.json',m)
+            self.assertEqual(e.validate_backup(p)['schema'],2)
+            (p/'barre-review.tar').write_bytes(b'tampered')
+            with self.assertRaises(ValueError):e.validate_backup(p)
+
     def test_foreign_docker_resources_block_the_first_mutation(self):
         with tempfile.TemporaryDirectory() as root:
             p=e.prepare(CONFIG,Path(root)/'a')

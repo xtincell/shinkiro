@@ -271,14 +271,14 @@ composants:
     branche: main
     prive: false
     langue: JavaScript
-    fichiers: 270
-    poids_ko: 7864
+    fichiers: 279
+    poids_ko: 7895
     licence: presente
     commits_90j: 100
     topics: ["layer-tools", shinkiro]
-    racines: [., sources/02_dossier_MT0020, sources/04_outils, sources/99_archive]
+    racines: [., profils/entreprise, sources/02_dossier_MT0020, sources/04_outils, sources/99_archive]
     artefacts:
-      dockerfile: [Dockerfile]
+      dockerfile: [Dockerfile, profils/entreprise/Dockerfile]
       index_html: [app/ateliers/approches/index.html, index.html]
       package: [package.json]
       workflows: [.github/workflows/verification.yml]
