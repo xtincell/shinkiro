@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-19",
+  "scope": "Reprise commune des stockages manuels Fusée et La Barre sur deux déploiements de la même entreprise fictive",
+  "profile": "socle-manuel-fusee-barre-v2",
+  "images": {
+    "fusee": "ghcr.io/xtincell/adve-project@sha256:47618a47c7d997551b63fbe61a6b902d4907892b15dfac1ef14958aba8a3edea",
+    "barre": "sha256:e4160d97d0ec3c3e94c14027cbd37f13447c2a29c6b38a5e6d1aef4dd610a819",
+    "barreSource": "464503f87124e5e95ded48db7f2db10225a69b97",
+    "barreCanonical": "e911153195c819c77b8a8f0256f3982d5a6a5954"
+  },
+  "received": {
+    "nativeProjectCreated": true,
+    "nativeAssetRecordCreated": true,
+    "reviewFileBytes": 71356,
+    "reviewFileSha256": "32d01dcae67cc64b695f7afb1a22dd8f52b52aa753c51f241923901f2b6a49d8",
+    "backupWritersStoppedTogether": ["fusee", "barre"],
+    "backupFiles": 8,
+    "databaseTablesExactBeforeBoot": 233,
+    "barreFilesAndModesExactBeforeBoot": true,
+    "sourceInstancePreserved": true,
+    "operatorBindingPreserved": true,
+    "newDockerInstallationIdentity": true,
+    "nativeProjectOpenedAfterRecovery": true,
+    "newNativeNotePersistedInRecovery": true,
+    "newNoteAbsentFromOriginal": true,
+    "anonymousDepotStatus": 401,
+    "anonymousReviewFileStatus": 401
+  },
+  "observedSeconds": {"backup": 20.066, "restore": 47.737},
+  "timeScope": "One synthetic fixture on the existing VPS; not a service RPO/RTO or latency commitment",
+  "sourceAndOwnership": "Only owned fictional company, existing encrypted files and session; no production corpus, provider credential or active agent changed",
+  "remaining": [
+    "Fusée 493 brand choice, native project pointer and portfolio return on the qualified image",
+    "Distribution and image access from a new host",
+    "Radar, Argos, queues, memories and remaining fleet storage/access families",
+    "HTTPS ingress, off-host backups and retention, service RPO/RTO and measured total monthly cost"
+  ],
+  "wholeFleetReceived": false,
+  "releaseComplete": false
+}

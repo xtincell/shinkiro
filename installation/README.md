@@ -90,9 +90,52 @@ Le chantier C7 reste ouvert tant que le paquet complet n’a pas reçu les droit
 fichiers, bases, sessions, files et mémoires de tous ses composants, sa continuité
 et son coût mensuel. Le reverse proxy HTTPS, les sauvegardes hors de l’hôte et
 leur rétention demandent aussi leur réception. La distribution actuelle de La
-Barre contient encore des matériaux de Matanga : elle n’entre pas dans ce profil
-tant qu’une distribution neutre n’a pas été reçue. Les agents facultatifs seront
+Barre historique contient des matériaux de Matanga : seule sa distribution neutre
+entre dans le profil optionnel décrit ci-dessous. Les agents facultatifs seront
 raccordés aux mécanismes existants, sans partager leurs identités ou mémoires.
 
 La [réception du socle du 19 octobre](reception-2026-10-19.json) précise les
 preuves natives, les 233 tables restaurées, les refus HTTP et les limites ouvertes.
+
+## Poste de projet La Barre — extension en réception
+
+Le profil optionnel `barre: true` ajoute le même moteur La Barre, distribué sans
+corpus d’entreprise, sur le réseau privé. `barreImage` exige un digest immuable
+qualifié ; une étiquette `latest` n’est pas admise. Le fichier de profil ne
+contient que les choix de la maison ; les projets, décisions et personnes restent
+dans deux volumes propres à l’installation. Le processus n’a aucun port public.
+La Fusée expose déjà `/la-barre/` avec sa session et ses contrôles d’origine.
+
+L’identité de source et l’opérateur du raccord sont distincts du nom Docker. Une
+reprise les conserve avec les données et les clés : renommer le déploiement ne
+transforme pas les références historiques en références d’une autre entreprise.
+Le raccord de portefeuille/configuration requiert la version Fusée 6.27.493 ; le
+socle 492 déjà reçu reste un profil distinct et ne prouve pas cette intégration.
+
+La sauvegarde v2 fige les deux writers de l’entreprise, puis conserve PostgreSQL,
+les originaux chiffrés, le dépôt La Barre, les médias et éditions de revue, le
+profil et la configuration privée. La restauration compare les contenus des
+233 tables et les fichiers La Barre avant de démarrer les applications ; elle
+refuse une destination existante, un fichier altéré, un lien ou un chemin sortant
+de l’archive. Les sauvegardes du profil v1 restent lisibles et conservent leur
+périmètre plus étroit. Les autres stockages, mémoires et services de la flotte ne
+sont pas implicitement sauvegardés par cette extension.
+
+État courant : 11 contrôles de frontière locaux ; distribution neutre canonique
+La Barre `e911153`, image de recette construite depuis `464503f`. Sur entreprise
+fictive possédée, projet et fiche d’asset créés par les écrans natifs, fichier de
+revue relu à l’identique. La reprise commune conserve les 233 tables, le dépôt,
+les fichiers et leurs permissions, les clés et l’identité du raccord avant boot.
+Une nouvelle note native persiste dans la reprise et reste absente de l’original.
+Les lectures anonymes du dépôt et du fichier sont refusées (401).
+
+Cette réception utilise Fusée 492 : le stockage commun est reçu, le parcours
+automatique marque–projet de 493 reste ouvert. La tentative Next dev local/base
+distante a rencontré un tunnel interrompu (« Broken pipe »), pas une saturation
+démontrée. Recevoir l’image CI dans le réseau privé avant de déclarer ce parcours
+reçu ; ne pas supprimer les vérifications d’accès pour passer le test. Le digest
+La Barre ci-dessus est qualifié dans le cache du VPS de recette ; son accès depuis
+un hôte neuf n’a pas encore été reçu.
+
+La [réception de reprise commune](reception-poste-2026-10-19.json) conserve ce
+périmètre, distinct de l’intégration complète et des autres composants.

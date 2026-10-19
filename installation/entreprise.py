@@ -6,6 +6,7 @@ dans La Fusée. Les autres stockages de la flotte ont leur propre réception.
 """
 import argparse
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
@@ -35,6 +36,9 @@ def validate(config):
         raise ValueError('Origine ou port invalide')
     if not config['name'].strip() or '\n' in config['name']:
         raise ValueError('Nom d’entreprise requis')
+    if config.get('barre'):
+        if not re.fullmatch(r'(?:[a-zA-Z0-9./_-]+@)?sha256:[a-f0-9]{64}',config.get('barreImage','')):
+            raise ValueError('Une image La Barre qualifiée par son digest est requise')
     return config
 
 def prepare(config, destination, inherited_env=None):
@@ -53,6 +57,13 @@ def prepare(config, destination, inherited_env=None):
          'SHINKIRO_INSTALLATION_ID':config['installationId'],
          'POSTGRES_USER':config['databaseUser'],'SHINKIRO_ORIGIN':config['origin'],
          'SHINKIRO_CANONICAL_HOST':urlsplit(config['origin']).netloc,'SHINKIRO_HTTP_PORT':str(config['port'])}
+    if config.get('barre'):
+        env={**env,'COMPOSE_PROFILES':'workbench','SHINKIRO_BARRE_IMAGE':config['barreImage'],
+             'SHINKIRO_BARRE_UPSTREAM':'http://barre:3000','SHINKIRO_BARRE_DEPOT':'entreprise.json',
+             'SHINKIRO_BARRE_OPERATOR_IDS':env.get('SHINKIRO_BARRE_OPERATOR_IDS',config['instance']),
+             'SHINKIRO_BARRE_INSTANCE':env.get('SHINKIRO_BARRE_INSTANCE','barre-'+secrets.token_hex(16))}
+        profile='window.MAISON = MAISON_BASE.creer('+json.dumps({'nom':config['name']},ensure_ascii=False)+');\n'
+        (p/'barre-maison.js').write_text(profile);(p/'barre-maison.js').chmod(0o644)
     if any('\n' in str(v) or '\r' in str(v) for v in env.values()): raise ValueError('Valeur multiligne refusée')
     with (p/'.env').open('x') as f:
         os.chmod(f.name,0o600)
@@ -110,7 +121,10 @@ console.log(JSON.stringify({migrations:dirs.length,checksumsMatch:true}));
 }finally{await c.end();}})().catch(e=>{console.error(e.message);process.exitCode=1});'''
 
 def verify(p):
-    return query(p,MIGRATIONS)
+    result=query(p,MIGRATIONS)
+    if load(p).get('barre'):
+        result['barre']=query(p,"""(async()=>{const r=await fetch(process.env.PORTFOLIO_BARRE_UPSTREAM+'/depots/manifeste.json');if(!r.ok)throw Error('Dépôt La Barre indisponible');const m=await r.json();if(m.reference!==process.env.PORTFOLIO_BARRE_DEPOT)throw Error('Dépôt La Barre différent du raccord');console.log(JSON.stringify({depot:m.reference,received:true}));})().catch(e=>{console.error(e.message);process.exitCode=1});""")
+    return result
 
 def up(p):
     guard_ownership(p)
@@ -159,8 +173,9 @@ def backup(p,destination):
     if dest.exists(): raise ValueError('Destination de sauvegarde déjà présente')
     dest.mkdir(mode=0o700,parents=True)
     c=load(p); app=container(p,'fusee'); db=container(p,'db')
-    # Pause only this company's writer. PostgreSQL remains available for dump.
-    compose(p,'stop','fusee')
+    # Freeze both owned writers. PostgreSQL remains available for dump.
+    writers=['fusee','barre'] if c.get('barre') else ['fusee']
+    compose(p,'stop',*writers)
     try:
         fingerprint=database_fingerprint(p)
         with (dest/'database.dump').open('xb') as f:
@@ -169,27 +184,54 @@ def backup(p,destination):
         with (dest/'media.tar').open('xb') as f:
             os.chmod(f.name,0o600)
             run(['docker','cp',app+':/app/private-media/.','-'],stdout=f)
+        barre_files=[]
+        if c.get('barre'):
+            for name,folder in [('barre-depots.tar','/app/depots'),('barre-review.tar','/app/assets/review')]:
+                with (dest/name).open('xb') as f:
+                    os.chmod(f.name,0o600)
+                    run(['docker','cp',container(p,'barre')+':'+folder+'/.','-'],stdout=f)
+                barre_files.append(name)
+            barre_files.append('barre-maison.js')
+            (dest/'barre-maison.js').write_bytes((p/'barre-maison.js').read_bytes());(dest/'barre-maison.js').chmod(0o600)
         for name in ['.env','instance.json','compose.yml']:
             (dest/name).write_bytes((p/name).read_bytes());(dest/name).chmod(0o600)
-        manifest={'schema':1,'profile':'socle-manuel-fusee-v1','instance':c['instance'],
-                  'files':{name:digest(dest/name) for name in ['database.dump','media.tar','.env','instance.json','compose.yml']},
+        manifest={'schema':2 if c.get('barre') else 1,'profile':'socle-manuel-fusee-barre-v2' if c.get('barre') else 'socle-manuel-fusee-v1','instance':c['instance'],
+                  'files':{name:digest(dest/name) for name in ['database.dump','media.tar','.env','instance.json','compose.yml',*barre_files]},
                   'databaseFingerprint':fingerprint,
                   'scope':['PostgreSQL complet','originaux et médias privés','configuration de cette instance'],
-                  'excluded':['La Barre','Radar','Argos','Galahad','Talos','Hulysse','Danmem','connecteurs externes']}
+                  'excluded':([] if c.get('barre') else ['La Barre'])+['Radar','Argos','Galahad','Talos','Hulysse','Danmem','connecteurs externes']}
+        if c.get('barre'):
+            manifest['scope'].extend(['dépôt natif La Barre','médias et éditions de revue La Barre','profil et identité de raccord'])
+            manifest['barreFingerprint']={name:archive_fingerprint(dest/name) for name in ['barre-depots.tar','barre-review.tar']}
         write_json(dest/'backup.json',manifest)
         return {'backup':str(dest),'profile':manifest['profile'],'files':len(manifest['files'])}
-    finally:compose(p,'start','fusee')
+    finally:compose(p,'start',*writers)
+
+def archive_fingerprint(path):
+    files={}
+    with tarfile.open(path) as tar:
+        for item in tar:
+            if item.name.startswith('/') or '..' in Path(item.name).parts or not (item.isfile() or item.isdir()):raise ValueError('Chemin ou lien de média refusé')
+            if item.isfile():
+                name=str(Path(item.name))
+                if name in files:raise ValueError('Fichier dupliqué dans la sauvegarde')
+                files[name]={'sha256':hashlib.sha256(tar.extractfile(item).read()).hexdigest(),'mode':item.mode}
+    return files
 
 def validate_backup(source):
     m=json.loads((source/'backup.json').read_text())
     names=['database.dump','media.tar','.env','instance.json','compose.yml']
-    if m['schema']!=1 or m['profile']!='socle-manuel-fusee-v1' or set(m['files'])!=set(names):raise ValueError('Sauvegarde non reconnue')
+    integrated=m.get('schema')==2 and m.get('profile')=='socle-manuel-fusee-barre-v2'
+    if integrated:names+=['barre-depots.tar','barre-review.tar','barre-maison.js']
+    if not (integrated or (m.get('schema')==1 and m.get('profile')=='socle-manuel-fusee-v1')) or set(m['files'])!=set(names):raise ValueError('Sauvegarde non reconnue')
     if not isinstance(m.get('databaseFingerprint'),dict) or not m['databaseFingerprint']:raise ValueError('Empreintes de tables absentes')
     for name in names:
         if (source/name).is_symlink() or digest(source/name)!=m['files'][name]:raise ValueError('Sauvegarde altérée : '+name)
-    with tarfile.open(source/'media.tar') as tar:
-        for item in tar:
-            if item.name.startswith('/') or '..' in Path(item.name).parts or not (item.isfile() or item.isdir()):raise ValueError('Chemin ou lien de média refusé')
+    archive_fingerprint(source/'media.tar')
+    if integrated:
+        if {name:archive_fingerprint(source/name) for name in ['barre-depots.tar','barre-review.tar']}!=m.get('barreFingerprint'):
+            raise ValueError('Empreintes La Barre absentes ou différentes')
+        if not json.loads((source/'instance.json').read_text()).get('barre'):raise ValueError('Profil La Barre absent de l’installation')
     return m
 
 def restore(source,p,instance,origin,port):
@@ -197,15 +239,24 @@ def restore(source,p,instance,origin,port):
     config=json.loads((source/'instance.json').read_text())
     config.update(instance=instance,origin=origin,port=port)
     p=prepare(config,p,environment(source))
+    if config.get('barre'):
+        (p/'barre-maison.js').write_bytes((source/'barre-maison.js').read_bytes());(p/'barre-maison.js').chmod(0o644)
     guard_ownership(p)
     # Restore through the qualified current recipe. The archived composition
     # remains evidence; image digests, auth/media keys and data come from backup.
     compose(p,'up','-d','--wait','db')
-    compose(p,'create','--no-recreate','fusee')
+    compose(p,'create','--no-recreate',*(['fusee','barre'] if config.get('barre') else ['fusee']))
     with (source/'database.dump').open('rb') as f:
         run(['docker','exec','-i',container(p,'db'),'pg_restore','-U',config['databaseUser'],'-d',config['database'],'--no-owner','--no-privileges','--exit-on-error'],stdin=f)
     with (source/'media.tar').open('rb') as f:
             run(['docker','cp','-a','-',container(p,'fusee')+':/app/private-media'],stdin=f)
+    if config.get('barre'):
+        for name,folder in [('barre-depots.tar','/app/depots'),('barre-review.tar','/app/assets/review')]:
+            with (source/name).open('rb') as f:run(['docker','cp','-a','-',container(p,'barre')+':'+folder],stdin=f)
+            received=run(['docker','cp',container(p,'barre')+':'+folder+'/.','-'],capture_output=True).stdout
+            with tarfile.open(fileobj=io.BytesIO(received)) as tar:
+                content={str(Path(item.name)):{'sha256':hashlib.sha256(tar.extractfile(item).read()).hexdigest(),'mode':item.mode} for item in tar if item.isfile()}
+            if content!=archive_fingerprint(source/name):raise ValueError('Contenu La Barre restauré différent ; applications non démarrées')
     manifest=json.loads((source/'backup.json').read_text())
     fingerprint=database_fingerprint(p)
     if fingerprint!=manifest['databaseFingerprint']:
