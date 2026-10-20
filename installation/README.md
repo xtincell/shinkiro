@@ -12,7 +12,8 @@ n’est utilisé pour préparer une nouvelle installation.
 
 ## Préparer et démarrer
 
-Prérequis : Python 3.10 ou supérieur, Docker avec Compose v2, accès en lecture aux
+Prérequis : Python 3.10 ou supérieur, Docker Engine 25 ou supérieur avec Compose
+2.20.2 ou supérieur (sondes de démarrage distinctes), accès en lecture aux
 deux images désignées dans `entreprise.py`. La réception du 19 octobre utilise un
 hôte Linux amd64. Le script ne déploie pas de serveur Docker et n’achète rien.
 
@@ -34,6 +35,25 @@ variables d’un autre déploiement ou fournisseur ne sont pas héritées. Le
 démarrage refuse les ressources Docker portant le même nom mais une autre
 identité d’installation. Les images sont tirées si elles ne sont pas présentes,
 avec leurs digests immuables.
+
+Les sondes HTTP tournent toutes les 60 secondes en régime stable et la sonde
+PostgreSQL toutes les 30 secondes. Le démarrage conserve des contrôles rapides
+pendant sa période initiale ; un échec HTTP, une absence de réponse ou un délai
+dépassé ne reçoit pas la santé. La lecture des migrations reste obligatoire.
+
+Après une réception, arrêter les installations de recette inutilisées : leur
+accumulation sur un petit VPS consomme la capacité des services réels.
+
+```sh
+make instance ARGS='arreter installation/instances/demo'
+```
+
+Cette commande vérifie l’identité de l’installation avant son arrêt gracieux.
+Elle conserve conteneurs, volumes, réseaux, images, clés et sauvegardes ;
+`demarrer` reprend la même installation. Ne pas laisser plusieurs reprises de
+recette tourner pour conserver une preuve : le reçu et les données arrêtées
+assurent cette conservation. Cette commande vise uniquement l’installation
+désignée, jamais un arrêt global du serveur.
 
 Le serveur natif démarre même si une migration a échoué. La commande
 `demarrer` ne considère donc pas un simple HTTP 200 comme une réception : elle
