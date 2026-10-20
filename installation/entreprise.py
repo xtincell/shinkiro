@@ -133,6 +133,12 @@ def up(p):
     # The native entrypoint is best effort; this acceptance check is not.
     return verify(p)
 
+def stop(p):
+    guard_ownership(p)
+    # Preserve containers, named volumes, networks, images and configuration.
+    compose(p,'stop','--timeout','60')
+    return {'stopped':load(p)['instance'],'resourcesDeleted':False}
+
 PROVISION = r'''const {Client}=require('pg');let text='';process.stdin.on('data',c=>text+=c);process.stdin.on('end',async()=>{
 const f=JSON.parse(text),c=new Client({connectionString:process.env.DATABASE_URL});await c.connect();try{
 await c.query('BEGIN');await c.query('LOCK TABLE "Operator", "User" IN EXCLUSIVE MODE');
@@ -267,7 +273,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     sub=parser.add_subparsers(dest='action',required=True)
     p=sub.add_parser('preparer');p.add_argument('configuration',type=Path);p.add_argument('destination',type=Path)
-    for action in ['demarrer','verifier','provisionner','sauvegarder']:
+    for action in ['demarrer','arreter','verifier','provisionner','sauvegarder']:
         p=sub.add_parser(action);p.add_argument('installation',type=Path)
         if action=='provisionner':p.add_argument('--compte-inscrit',required=True)
         if action=='sauvegarder':p.add_argument('--destination',required=True,type=Path)
@@ -279,6 +285,7 @@ def main():
     else:
         p=a.installation.resolve()
         if a.action=='demarrer':result=up(p)
+        elif a.action=='arreter':result=stop(p)
         elif a.action=='verifier':result=verify(p)
         elif a.action=='provisionner':result=query(p,PROVISION,{**load(p),'email':a.compte_inscrit})
         else:result=backup(p,a.destination)

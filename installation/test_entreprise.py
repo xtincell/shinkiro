@@ -111,4 +111,21 @@ class Installation(unittest.TestCase):
                 compose.assert_not_called()
                 self.assertEqual(run.call_count,2)
 
+    def test_foreign_installation_cannot_be_stopped(self):
+        with tempfile.TemporaryDirectory() as root:
+            p=e.prepare(CONFIG,Path(root)/'a')
+            from types import SimpleNamespace
+            with patch.object(e,'run',side_effect=[SimpleNamespace(stdout='foreign-container\n'),SimpleNamespace(stdout='{"shinkiro.installation":"other-installation"}')]),patch.object(e,'compose') as compose:
+                with self.assertRaises(ValueError):e.stop(p)
+                compose.assert_not_called()
+
+    def test_stop_preserves_resources_and_guards_before_docker(self):
+        with tempfile.TemporaryDirectory() as root:
+            p=e.prepare(CONFIG,Path(root)/'a')
+            calls=[]
+            with patch.object(e,'guard_ownership',side_effect=lambda _:calls.append('owner')),patch.object(e,'compose',side_effect=lambda _,*args:calls.append(args)):
+                result=e.stop(p)
+            self.assertEqual(calls,['owner',('stop','--timeout','60')])
+            self.assertEqual(result,{'stopped':'recette-a','resourcesDeleted':False})
+
 if __name__=='__main__':unittest.main()
