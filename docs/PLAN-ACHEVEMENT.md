@@ -333,6 +333,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.29 | ADR proposées sur la jointure des taxonomies (3.4) et le câblage La Barre → Radar (3.5) | [SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md), [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md) ; 213 références relues |
 | 0.30 | `galahad` : la flotte commerciale attend le relais ; `deliver.sh` paramétré ; une erreur HTTP de Telegram n'est plus archivée comme livrée ; le jeton ne passe plus en argument (part de 4.1) | [galahad#25](https://github.com/xtincell/galahad/pull/25), 167 tests |
 | 0.31 | `la-barre` : README au niveau du code (4.8) ; production relevée : servie sous `powerupgraders.com/la-barre`, derrière la session, et les outils du poste dédié n'y écrivent plus | [la-barre#16](https://github.com/xtincell/la-barre/pull/16) ; `fleet.yml`, `AGENTS.md`, `docs/TOPOLOGIE.md` |
+| 0.32 | `charadesign-generator` : retours tardifs annulés, écritures liées à leur dossier, import validé et versionné (4.14) | [charadesign-generator#5](https://github.com/xtincell/charadesign-generator/pull/5), 14 rouges puis 32/32 |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -405,7 +406,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.11 | `ADVE-project` | Voir [section 4 bis](#4-bis-la-fusée) | — |
 | 4.12 | `Argos-studio` | Artefact de déploiement pour le VPS ; `If-Match` côté Fusée (F14) ; isolation des consultations ; bouchons | Arbitrage 5.8 pour l'hébergement |
 | 4.13 | `character-engine` | **Fait** : F8 (character-engine#2), export et contradictions (character-engine#3). Reste un test versionné du parcours | — |
-| 4.14 | `charadesign-generator` | Annulation des retours tardifs ; import validé | Agent ; 5.9 pour le service |
+| 4.14 | `charadesign-generator` | **Fait** (charadesign-generator#5). Restent le statut partiel des étapes déjà affichées, les retours tardifs de `ImageGen.jsx`, une recette navigateur avec fournisseur | Agent ; 5.9 pour le service |
 | 4.15 | `datacollector` | **Fait** (datacollector#4) ; l'entrée réelle était déjà au manifeste. Reste : servir Tailwind localement pour lui donner une empreinte | 5.9 pour le service |
 | 4.16 | `galahad-landing` | Réécriture pour le bon acheteur | Arbitrage 5.12 |
 | 4.17 | `la-fusee-blueprint` | Régénérer la vue ou l'archiver | Arbitrage 5.11 |
