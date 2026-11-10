@@ -189,9 +189,46 @@ for (const d of releve) {
  * c'est ainsi que cinq outils ont vécu hors de tout manifeste. Le relevé donne
  * la liste brute ; la soustraction est un jugement, elle appartient à l'audit. */
 /* /user/repos, pas /users/{owner}/repos : le second ne renvoie que les dépôts
- * publics, or la flotte est majoritairement privée — il en cachait dix-neuf. */
-const tous = gh(`user/repos?per_page=100&affiliation=owner`, ".[].name")
-  .split("\n").filter(Boolean);
+ * publics, or la flotte est majoritairement privée — il en cachait dix-neuf.
+ *
+ * Un jeton lié à une liste de dépôts — installation d'une GitHub App, session
+ * d'agent en conteneur — se voit refuser /user/repos, qui n'a pas de sens pour
+ * lui. AGENTS.md exige pourtant `make releve` avant tout commit : sans repli,
+ * la règle était inapplicable par ceux à qui elle s'adresse.
+ *
+ * Le repli est la recherche, celle-là même qui fournit la liste de la flotte en
+ * tête de ce script. Elle porte la même limite — elle ne voit que ce que le
+ * jeton voit — donc le modèle de confiance ne change pas. `fork:true` parce que
+ * la recherche écarte les forks par défaut, quand affiliation=owner les inclut.
+ * La source employée n'est PAS inscrite dans le lock : deux environnements
+ * produiraient deux fichiers pour une même réalité, soit une fausse dérive. */
+const tente = (args) => {
+  try { return execFileSync("gh", args, { encoding: "utf8", maxBuffer: 64 * 1024 * 1024, stdio: ["ignore", "pipe", "pipe"] }).trim(); }
+  catch (e) { return { erreur: String(e.stderr || e.message).trim().split("\n")[0].slice(0, 160) }; }
+};
+let compte = tente(["api", "user/repos?per_page=100&affiliation=owner", "--jq", ".[].name"]);
+let sourceCompte = "user/repos";
+if (typeof compte !== "string") {
+  const refus = compte.erreur;
+  compte = tente(["api", "--paginate", `search/repositories?q=user:${OWNER}+fork:true&per_page=100`, "--jq", ".items[].name"]);
+  sourceCompte = "search/repositories (repli — /user/repos refusé à ce jeton)";
+  if (typeof compte !== "string") {
+    echecs.push(`user/repos — ${refus}`);
+    echecs.push(`search/repositories?q=user:${OWNER}+fork:true — ${compte.erreur}`);
+    compte = "";
+  }
+}
+const tous = compte.split("\n").filter(Boolean);
+
+/* La flotte est une partie du compte. Une liste du compte où manque un dépôt de
+ * la flotte est amputée, quelle qu'en soit la source — et une liste amputée
+ * ferait disparaître des lignes de sans_topic, ce qui se lirait comme un
+ * classement accompli. On refuse d'écrire plutôt que d'affirmer cela. */
+const absents = depots.filter((n) => !tous.includes(n));
+if (tous.length && absents.length)
+  echecs.push(`liste du compte amputée (${sourceCompte}) — ${absents.length} dépôt(s) de la flotte n'y figurent pas : ${absents.slice(0, 5).join(", ")}`);
+process.stderr.write(`  compte : ${tous.length} dépôts via ${sourceCompte}\n`);
+
 const sansTopic = tous.filter((n) => !depots.includes(n)).sort();
 
 out += `
