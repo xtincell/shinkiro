@@ -395,7 +395,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 
 | # | Dépôt | Gestes | Prérequis |
 |---|---|---|---|
-| 4.1 | `galahad` | **Faits** : rôles (galahad#23), `dan-oauth` en CI et reçus refusés (galahad#24). Unité commerciale et `deliver.sh` **faits** (galahad#25). Restent le `CHANGELOG` à 0.1.16 (après fusion des quatre PR), les valeurs en dur de `deliver-watchdog.sh` et `purge.sh`, la version de Hermes servie, et l'appel de `release` vers Danmem (danmem#4) | Agent ; B2 pour la version servie |
+| 4.1 | `galahad` | **Faits** : rôles (galahad#23), `dan-oauth` en CI et reçus refusés (galahad#24). Unité commerciale et `deliver.sh` **faits** (galahad#25). Les trois scripts de patrouille sont alignés (galahad#25). Restent le `CHANGELOG` à 0.1.16 (après fusion des PR), la version de Hermes servie, et l'appel de `release` vers Danmem (danmem#4), utile seulement si un consommateur rend un travail sans le finir | Agent ; B2 pour la version servie |
 | 4.2 | `galahad` | Recevoir les capacités donneuses : garde d'isolation, contrôles de patrouille, alerte de repli | Arbitrage 5.3 |
 | 4.3 | `radar` | README des migrations (F13) ; `npm ci` dans le Dockerfile ; format `RADAR_INSTANCES` | **Fait** — radar#6 |
 | 4.4 | `radar` | Unicité de `ndeg` : aujourd'hui un POST rejoué crée un doublon, et `update` frappe tous les homonymes | Arbitrage 5.7 |
