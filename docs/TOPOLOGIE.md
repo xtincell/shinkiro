@@ -261,6 +261,8 @@ attendent un arbitrage.
    cadrées ; elles attendent les arbitrages 5.4 du plan.
 5. **Le câblage `la-barre` → `radar`.** La Barre produit les décisions, Radar
    tient le journal. La mesure avant/après du Transformation Pilot en dépend.
-   Aujourd'hui aucune décision ne circule, dans aucun sens, et le dépôt `radar`
-   ne contient aucune admission La Barre. Le cadrage attend les arbitrages 5.5
+   Aujourd'hui, dans la flotte, aucune décision ne circule, dans aucun sens, et
+   le dépôt `radar` ne contient aucune admission La Barre. L'admission décrite
+   dans [`INTERFACES.md`](INTERFACES.md) vit dans l'installation de l'employeur,
+   hors flotte. Le cadrage attend les arbitrages 5.5
    et 5.6 du plan.

@@ -69,7 +69,7 @@ couches en dessous disent comment.
 
 | Dépôt | Rôle |
 |---|---|
-| [`ADVE-project`](https://github.com/xtincell/ADVE-project) | **Canonique.** La Fusée — Industry OS du marché créatif africain. Un brief entre en PDF, le diagnostic tombe en 15 min, la stratégie est écrite sous 48 h. Modules Neteru (7/7 actifs), Oracle, APOGEE, gouvernance Thot. |
+| [`ADVE-project`](https://github.com/xtincell/ADVE-project) | **Canonique.** La Fusée — Industry OS du marché créatif africain. Un brief entre en PDF ; la promesse affichée est un diagnostic en 15 min et une stratégie sous 48 h, qu'aucune mesure ne vérifie encore. Modules Neteru (7/7 actifs), Oracle, APOGEE, gouvernance Thot. |
 | [`la-fusee-blueprint`](https://github.com/xtincell/la-fusee-blueprint) | Atlas doctrinal — la doctrine, pas le code. |
 
 ### 02 · Entreprise — la couche qui parle au marché
@@ -122,14 +122,27 @@ Outils légers, chacun dans son dépôt et monté en submodule sous `tools/`.
 
 ## Navigation
 
-**Réceptions des 8 et 9 octobre 2026** — les capacités décrites ci-dessus ne valent pas
-réception complète du programme. Les sept chantiers restent ouverts :
+**Réceptions partielles d'octobre 2026** — les capacités décrites ci-dessus ne valent pas
+réception complète du programme. Les sept chantiers restent ouverts. Les quinze réceptions :
 
-- [Corpus et identité SPAWT](docs/RECEPTION-CORPUS-SPAWT.md)
-- [Application SPAWT et continuité](docs/RECEPTION-SPAWT-APPLICATION.md)
-- [Demandes et admission des productions dans La Fusée](docs/RECEPTION-ADMISSION-FORGE.md)
-- [BanaHealth, coordonnées et maintenance client](docs/RECEPTION-BANAHEALTH.md)
-- [Décisions communes et assise des bilans dans La Barre](docs/RECEPTION-DECISIONS-BILANS.md)
+- Programme et méthode : [méthode et élaboration de marque](docs/RECEPTION-METHODE-MARQUE.md),
+  [15B](docs/RECEPTION-15B-STORIES.md)
+- La Fusée : [admission des productions](docs/RECEPTION-ADMISSION-FORGE.md),
+  [reprises de campagne et surfaces](docs/RECEPTION-REPRISES-SURFACES.md)
+- Moteur et agents : [Galahad et Danmem](docs/RECEPTION-GALAHAD-DANMEM.md),
+  [Talos et Hulysse](docs/RECEPTION-TALOS-HULYSSE.md),
+  [cockpit d'exploitation](docs/RECEPTION-COCKPIT.md)
+- Tracker et poste de travail : [autorité des tâches dans Radar](docs/RECEPTION-RADAR-ROLES.md),
+  [décisions et bilans dans La Barre](docs/RECEPTION-DECISIONS-BILANS.md)
+- Outils : [Argos](docs/RECEPTION-ARGOS.md), [ateliers spécialisés](docs/RECEPTION-ATELIERS-SPECIALISES.md),
+  [DataCollector](docs/RECEPTION-DATACOLLECTOR.md)
+- Projets clients, hors flotte : [corpus SPAWT](docs/RECEPTION-CORPUS-SPAWT.md),
+  [application SPAWT](docs/RECEPTION-SPAWT-APPLICATION.md),
+  [BanaHealth](docs/RECEPTION-BANAHEALTH.md)
+
+Ces reçus sont des journaux datés : une limite ouverte plus haut peut être fermée
+plus bas dans le même fichier, et les compteurs de parcours y varient d'une
+réception à l'autre. Le décompte qui fait foi est celui du plan.
 
 **Pour terminer** — [`docs/PLAN-ACHEVEMENT.md`](docs/PLAN-ACHEVEMENT.md) dit ce qui
 reste, ce qui bloque chaque point et dans quel ordre intervenir. Son

@@ -69,6 +69,11 @@ preuve** — relève de l'outillage, et c'est celui qui tue la plupart des offre
 **Radar** — chaque tâche génère un événement horodaté versé dans un flux. Le rapport
 avant/après se lit dans les données, il ne se rédige pas.
 
+> **Condition, au 10 novembre 2026.** Cette mesure suppose que La Barre verse ses
+> décisions dans Radar. Ce câblage n'existe pas encore dans la flotte
+> ([`TOPOLOGIE.md`](TOPOLOGIE.md), point 5 de « Ce qui reste à écrire »). Tant
+> qu'il manque, le before/after se rédige.
+
 **La Barre** — du brief au bon à tirer, chaque arbitrage est situé.
 
 **La Fusée** — chaque décision tracée à vie et auditable, chaque livrable scoré. L'IA

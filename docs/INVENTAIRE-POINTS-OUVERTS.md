@@ -247,6 +247,12 @@ Le code montre que trois des quatre parties d'AR3 sont livrées : voir la sectio
 Dix-huit endroits où deux documents se contredisent, ou où un document affirme
 ce qu'un autre, plus récent, corrige.
 
+> **Mise à jour du 10 novembre.** Les points 1 à 13 et 16 à 18 sont corrigés : à
+> la source, ou, pour le tableau historique de `MATURITE.md`, par une table de
+> corrections qui le suit. Les points 14 et 15 sont des journaux de réception
+> datés ; le README avertit qu'ils se lisent comme tels. Les numéros de ligne
+> ci-dessous sont ceux du relevé initial.
+
 1. **Version de La Fusée.** « v6.19, 192 ADR » (README.md:72 ; MAT:335 ; SHK2:93) contre les lots 6.27.404 à 439 (R-CS:1020) et le socle 492/493 (INST:132). Le dépôt est en 6.27.552.
 2. **Déploiement.** Vercel pour `ADVE-project` et Argos (TOPO:49) contre Coolify (TOPO:22-23 ; FLEET:74). Corrigé le 10 novembre.
 3. **La Barre.** « Aucun serveur, aucun compte » (README.md:100 ; AGENTS.md:32 ; MAT:341) contre un conteneur servi (R-DB:34, 72) et une image d'entreprise (INST:122-127).

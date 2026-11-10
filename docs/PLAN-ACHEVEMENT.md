@@ -362,8 +362,10 @@ Sans ce lot, rien de ce qui suit ne peut être déclaré fini.
 Tout se passe dans ce dépôt. Les faits sont déjà relevés ; il reste à les poser.
 
 **État au 10 novembre.** 3.1 et 3.3 sont écrits. 3.2 est écrit et attend sa
-confirmation. 3.6 est fait pour `fleet.yml` et pour le README ; il reste les
-contradictions de `docs/MATURITE.md`, dont le tableau historique.
+confirmation. 3.6 est fait : `fleet.yml`, README, `AGENTS.md`, une table de
+corrections sous le tableau historique de `docs/MATURITE.md`, et les seize
+contradictions corrigibles de l'inventaire. Les deux autres (14 et 15) sont des
+journaux datés : le README le dit, sans les réécrire.
 
 | # | Geste | Matière disponible | Prérequis |
 |---|---|---|---|

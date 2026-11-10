@@ -250,8 +250,8 @@ et [la réception bornée](RECEPTION-REPRISES-SURFACES.md).
 
 ### SPAWT — marque, produit et surfaces publiées
 
-Les dépôts SPAWT sont des projets clients de la flotte, et restent inclus dans
-l'audit intégral. La vitrine `spawt.online`, le quiz `quiz.spawt.online` et la page
+Les dépôts SPAWT sont des projets clients. Ils ne rejoignent pas la flotte
+(voir [`CLOISON.md`](CLOISON.md)), mais restent inclus dans l'audit intégral. La vitrine `spawt.online`, le quiz `quiz.spawt.online` et la page
 historique `bientot.spawt.online` ont des branches et déploiements distincts.
 Une annonce exacte dans un dépôt peut rester périmée dans un autre.
 
