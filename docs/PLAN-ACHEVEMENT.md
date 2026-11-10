@@ -331,6 +331,8 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.27 | `la-barre` : le délai de verdict se lit sur la version jugée, les verdicts sans date sont comptés à part (F3) ; tests de `ecarts.js` et `registre-radar.js` en CI (4.8) | [la-barre#15](https://github.com/xtincell/la-barre/pull/15), 0/7 puis 7/7 |
 | 0.28 | `danmem` : bail et remise en file d'un travail réclamé, plafond de tentatives (F7) | [danmem#4](https://github.com/xtincell/danmem/pull/4), 5 échecs puis 25/25 ; fusionner après #3 |
 | 0.29 | ADR proposées sur la jointure des taxonomies (3.4) et le câblage La Barre → Radar (3.5) | [SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md), [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md) ; 213 références relues |
+| 0.30 | `galahad` : la flotte commerciale attend le relais ; `deliver.sh` paramétré ; une erreur HTTP de Telegram n'est plus archivée comme livrée ; le jeton ne passe plus en argument (part de 4.1) | [galahad#25](https://github.com/xtincell/galahad/pull/25), 167 tests |
+| 0.31 | `la-barre` : README au niveau du code (4.8) ; production relevée : servie sous `powerupgraders.com/la-barre`, derrière la session, et les outils du poste dédié n'y écrivent plus | [la-barre#16](https://github.com/xtincell/la-barre/pull/16) ; `fleet.yml`, `AGENTS.md`, `docs/TOPOLOGIE.md` |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -390,14 +392,14 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 
 | # | Dépôt | Gestes | Prérequis |
 |---|---|---|---|
-| 4.1 | `galahad` | **Faits** : rôles (galahad#23), `dan-oauth` en CI et reçus refusés (galahad#24). Restent le `CHANGELOG` à 0.1.16, la dépendance de l'unité commerciale sur `dan-oauth`, les valeurs en dur de `deliver.sh`, et la version de Hermes servie | Agent ; B2 pour la version servie |
+| 4.1 | `galahad` | **Faits** : rôles (galahad#23), `dan-oauth` en CI et reçus refusés (galahad#24). Unité commerciale et `deliver.sh` **faits** (galahad#25). Restent le `CHANGELOG` à 0.1.16 (après fusion des quatre PR), les valeurs en dur de `deliver-watchdog.sh` et `purge.sh`, la version de Hermes servie, et l'appel de `release` vers Danmem (danmem#4) | Agent ; B2 pour la version servie |
 | 4.2 | `galahad` | Recevoir les capacités donneuses : garde d'isolation, contrôles de patrouille, alerte de repli | Arbitrage 5.3 |
 | 4.3 | `radar` | README des migrations (F13) ; `npm ci` dans le Dockerfile ; format `RADAR_INSTANCES` | **Fait** — radar#6 |
 | 4.4 | `radar` | Unicité de `ndeg` : aujourd'hui un POST rejoué crée un doublon, et `update` frappe tous les homonymes | Arbitrage 5.7 |
 | 4.5 | `danmem` | F6 (danmem#2), unité, environnement et défauts morts (danmem#3) **faits** ; restent le bail et la remise en file (F7), et relire l'unité réellement servie | Agent ; B2 pour l'unité servie |
 | 4.6 | `danmem`, `galahad` | Script de sauvegarde et de restauration : base, volume, ordre, gel des écrivains | Agent, puis recette B2 |
 | 4.7 | `hermes-cockpit` | F10, titre et README **faits** (hermes-cockpit#3, #4) ; reste la configuration morte du compose | Arbitrage : retirer des montages de production |
-| 4.8 | `la-barre` | F1, F2 (la-barre#14), F3 et les tests (la-barre#15) **faits**. Restent le README, et quatre constats sur `ecarts.js` : écarter un écart est impossible depuis l'interface, `facturable` n'est jamais lu | Agent ; arbitrage pour `facturable` |
+| 4.8 | `la-barre` | F1, F2 (la-barre#14), F3 et les tests (la-barre#15), README (la-barre#16) **faits**. Restent les constats sur `ecarts.js` (écarter un écart est impossible depuis l'interface, `facturable` n'est jamais lu) et les outils du poste dédié coupés par la session | Arbitrage pour `facturable` et pour les outils |
 | 4.9 | `la-barre` | Une fabrique unique pour les huit écrivains de décision | Agent ; prérequis de 3.5 |
 | 4.10 | `market-expansion-system` | Gabarits cohérents avec la méthode ; promesse d'import tenue ou retirée (F9) | Arbitrage 5.4 |
 | 4.11 | `ADVE-project` | Voir [section 4 bis](#4-bis-la-fusée) | — |
