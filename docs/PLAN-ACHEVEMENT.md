@@ -324,6 +324,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.20 | `datacollector` : adresses internes et redirections vers elles refusées (2.6) | [datacollector#3](https://github.com/xtincell/datacollector/pull/3), 25 tests ; la course DNS reste ouverte |
 | 0.21 | `character-engine` : les interdits du prompt ne sont plus coupés en silence (F8) | [character-engine#2](https://github.com/xtincell/character-engine/pull/2), sortie identique sous la limite |
 | 0.22 | Contrat du changement de modèle d'un agent écrit (3.8) ; README du cockpit d'exploitation (4.7) | `docs/INTERFACES.md` ; [hermes-cockpit#4](https://github.com/xtincell/hermes-cockpit/pull/4) |
+| 0.23 | `datacollector` : CDN figés (empreinte sauf Tailwind, dont le CDN refuse le contrôle), fichiers générés retirés du suivi, `flask-cors` mort retiré (4.15) | [datacollector#4](https://github.com/xtincell/datacollector/pull/4), 18 + 4 tests, page chargée sans erreur |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -395,7 +396,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.12 | `Argos-studio` | Artefact de déploiement pour le VPS ; `If-Match` côté Fusée (F14) ; isolation des consultations ; bouchons | Arbitrage 5.8 pour l'hébergement |
 | 4.13 | `character-engine` | F8 **fait** (character-engine#2) ; restent l'export du vecteur et l'affichage des contradictions | Agent |
 | 4.14 | `charadesign-generator` | Annulation des retours tardifs ; import validé | Agent ; 5.9 pour le service |
-| 4.15 | `datacollector` | CDN figés ; fichiers suivis par erreur ; entrée réelle au manifeste | Agent ; 5.9 pour le service |
+| 4.15 | `datacollector` | **Fait** (datacollector#4) ; l'entrée réelle était déjà au manifeste. Reste : servir Tailwind localement pour lui donner une empreinte | 5.9 pour le service |
 | 4.16 | `galahad-landing` | Réécriture pour le bon acheteur | Arbitrage 5.12 |
 | 4.17 | `la-fusee-blueprint` | Régénérer la vue ou l'archiver | Arbitrage 5.11 |
 | 4.18 | `installation` | Étendre le profil : Radar, Argos, mémoires ; comptes ordinaires | Agent, puis recette B2 |
