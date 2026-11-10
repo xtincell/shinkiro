@@ -104,7 +104,7 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 - ME1 `[décision]` `market-expansion-system` : en faire une offre packagée — MAT:348
 - ME2 `[commit]` `market-expansion-system` : jointure avec la taxonomie d'écarts de La Barre — TOPO:153-166, 206-207
 - GL1 `[commit]` `galahad-landing` : réécrire pour le patron d'agence — PORT:84-88
-- GL2 `[prod]` `galahad-landing` : aucune page publiée — MAT:345 ; FLEET:158
+- GL2 `[prod]` `galahad-landing` : aucune page publiée — MAT:345 ; FLEET:158. **Faux au 10 novembre** : la page est servie sur `galahad.powerupgraders.com`, au commit de `main`. Reste GL1, le contenu.
 
 ### galahad
 

@@ -57,7 +57,7 @@ presentation:
   generateur: portail/construire.mjs
   sortie: portail/site
   entree: index.html
-  deploiement: {mode: coolify, compose: portail/docker-compose.yml, image: "nginx:1.27-alpine"}
+  deploiement: {mode: coolify, compose: portail/docker-compose.yml, image: "nginx:1.27-alpine", url: "https://shinkiro.powerupgraders.com"}
   donnees: {livrables: portail/donnees/livrables.json, extracteur: portail/extraire-livrables.mjs}
   lit: [fleet.yml, fleet.lock.yml, "docs/*.md", "docs/adr/SHK-*.md", scripts/signaux-flotte.mjs, docs/PORTFOLIO.md]
 
@@ -144,7 +144,7 @@ composants:
     maturite: partiel
     licence: proprietaire
     vitalite: actif
-    deploiement: {mode: docker, entree: index.html}
+    deploiement: {mode: docker, entree: index.html, url: "https://galahad.powerupgraders.com"}
     description: Page produit de galahad. Dockerfile plus un index.html.
     attention: >-
       Le « à trancher » est tranché, et par le fichier lui-même : zéro occurrence
@@ -156,7 +156,8 @@ composants:
       mot « agence » n'y figure pas. Le produit s'adresse à un patron d'agence qui veut que
       sa boîte tourne sans lui. Elle vend la technologie au lieu du résultat,
       ce que la règle de nommage du portefeuille interdit précisément.
-      Aucune page publiée à ce jour.
+      Publiée sur galahad.powerupgraders.com, au commit de main (relevé Coolify
+      du 10 novembre) : c'est donc ce discours qui est servi aujourd'hui.
 
   # ── couche 03 · exécution ──────────────────────────────────────────────
   - nom: galahad
@@ -503,7 +504,7 @@ derives_non_canon:
 # toute décision de récupération ou d'archivage. ADVE-project est le canon actif.
 lignees_mortes:
   - {nom: LaFusee_ADVE,    note: "Lignée historique : doctrine et capacités à confronter au canon actif avant toute décision d'archivage."}
-  - {nom: ADVE_v8,         note: "branche par défaut claude/la-fusee-v2-rebuild-9omp5v, pas main. Dockerfile, CI, 7 migrations."}
+  - {nom: ADVE_v8,         note: "branche par défaut claude/la-fusee-v2-rebuild-9omp5v, pas main. Dockerfile, CI, 7 migrations. Toujours servie sur le VPS (lafuseev8), avec sa base, au 10 novembre."}
   - {nom: AVERTIS_web_v01, note: "application complète sous advertis-app/ — next, prisma, seeds ARTEMIS. Coquille dans le nom du dépôt."}
   - {nom: ADVERTIS_v01,    note: "8-Pillar Brand Strategy System. Lignée antérieure."}
   - {nom: ADVERT_01,       note: "première tentative de produit. 111 modifications non commitées dans le clone local."}

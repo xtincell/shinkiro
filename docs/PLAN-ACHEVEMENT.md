@@ -105,15 +105,25 @@ Le geste :
 3. Fusionner d'abord la PR qui porte ce plan : elle corrige la comparaison qui
    aurait rendu le contrôle rouge chaque semaine une fois le jeton réparé.
 
-**B2 — Aucun agent n'a de voie d'accès au VPS.**
-Tout est servi par le VPS, et une session d'agent n'y entre pas : ni SSH, ni API
-Coolify, ni dossier partagé depuis un poste. Les 27 points `[prod]` en dépendent.
+**Ce geste ne peut pas être fait par une session d'agent cloud.** Constaté le
+10 novembre : le proxy de la session remplace tout jeton GitHub fourni par le
+sien, et refuse l'écriture des secrets Actions. Un jeton transmis dans une
+conversation n'y sert donc à rien ; il est exposé, et doit être révoqué.
 
-Trois voies possibles, de la plus simple à la plus complète :
+**B2 — L'accès au VPS est partiel.**
+Depuis le 10 novembre, une session d'agent lit et déclenche Coolify par son API.
+Elle n'entre toujours pas sur l'hôte : ni SSH, ni systemd. Les points `[prod]` qui
+touchent `talos`, `hulysse`, `danmem` et la flotte commerciale de `galahad`, tous
+sous systemd, en dépendent encore. Le relevé obtenu est en [section 2.4](#23-relevé-de-production-du-10-novembre).
+
+Le jeton Coolify transmis donne un accès large : il lit jusqu'à la liste des clés
+privées du serveur. Un jeton limité à la lecture et au déploiement suffirait.
+
+Trois voies possibles pour le reste, de la plus simple à la plus complète :
 
 | Voie | Ce qu'elle ouvre | Ce qu'elle demande |
 |---|---|---|
-| Clé API Coolify en lecture | État des déploiements, journaux, images servies | Une clé et l'hôte Coolify autorisé dans l'environnement de la session |
+| Clé API Coolify | État des déploiements, journaux, images servies, redéploiement | **Obtenue le 10 novembre** |
 | Session d'agent sur un poste qui a déjà SSH | Tout ce que le poste peut faire | Lancer la session sur ce poste plutôt que dans le cloud |
 | Recettes jouées par `galahad` lui-même | Les réceptions, sans ouvrir le VPS | Écrire les recettes comme procédures `galahad`, et un canal pour en lire les reçus |
 
@@ -171,7 +181,33 @@ Vercel n'est pas utilisé ; ce n'est donc pas un blocage. Trois projets Supabase
 existent, tous inactifs (`ADVE-project`, `NEFER RADAR`, `Spawt Mobile CI`) : ils
 ne servent rien, et leur sort est un arbitrage mineur.
 
-### 2.3 Une erreur de diagnostic à ne pas répéter
+### 2.3 Relevé de production du 10 novembre
+
+Lu par l'API Coolify, en lecture seule, puis confronté aux dépôts. Seuls les
+composants de la flotte figurent ici.
+
+| Composant | Domaine | Servi | `main` | Constat |
+|---|---|---|---|---|
+| Portail Shinkiro | `shinkiro.powerupgraders.com` | 14 septembre (`43724f7`) | 10 novembre | **Deux mois de retard.** Le déploiement automatique est activé mais ne s'est plus déclenché : la GitHub App de Coolify ne transmet plus les poussées. Redéployé depuis `main` (`f852443`) le 10 novembre, vérifié servi. |
+| `la-barre` | `labarre.powerupgraders.com` | `9735c56`, 19 octobre | `2586992` | **Quatre commits de retard**, dont la distribution neutre et le raccord aux identités de marque. Voulu ou non : à confirmer. |
+| `galahad-landing` | `galahad.powerupgraders.com` | `57fbc17` | `57fbc17` | **Publiée**, contrairement à ce que disait le manifeste. Le titre servi parle toujours au développeur. |
+| `hermes-cockpit` | `cockpit.powerupgraders.com` | `1ea757b` | `1ea757b` | À jour. |
+| `radar` (instance personnelle) | `radar-perso.…sslip.io` | `2e8d92f` | `2e8d92f` | À jour, derrière son mur (401). |
+| `indice-maturite` | GitHub Pages | identique au dépôt | — | `app.js` servi et `app.js` du dépôt ont la même empreinte. |
+| `ADVE-project` | `powerupgraders.com` | image `ghcr`, 6 novembre | 6.27.552 | Livrée par image : fusionner ne déploie rien. |
+
+Trois constats de plus :
+
+- **Deux instances de La Fusée hors canon tournent** : `lafuseev8.powerupgraders.com`
+  sert la lignée archivée `ADVE_v8`, et une seconde instance sert une branche
+  d'`ADVE-project`, chacune avec sa base. Elles consomment le VPS. Leur arrêt est un
+  arbitrage (5.18).
+- **Le service d'embeddings local `ollama-embed` est arrêté.** C'est cohérent avec
+  le repli mort que le code de `danmem` signale lui-même.
+- **Aucun domaine n'est exposé pour `galahad`, `danmem`, `talos` ni `hulysse`** :
+  ils tournent hors Coolify, sous systemd ou en composition hôte.
+
+### 2.4 Une erreur de diagnostic à ne pas répéter
 
 Au début de cette session, `gh auth status` déclarait le jeton invalide, et le
 relevé a été jugé impossible sans avoir été lancé. C'était faux : l'API
@@ -273,6 +309,9 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.6 | Tests de vie d'AGENTS.md corrigés et rejoués | `galahad` 156/156, `talos` et `hulysse` `check` verts |
 | 0.7 | Contrat MCP, partage des cockpits et couches mémoire écrits (3.1 à 3.3) | `docs/INTERFACES.md`, `docs/TOPOLOGIE.md` ; chaque fait relu dans le code |
 | 0.8 | Jugements périmés de `fleet.yml` repris ; version et numéros de produits du README alignés | `--strict` : `COHÉRENT — aucune dérive` |
+| 0.9 | Garde de `galahad` étendu aux formes hôte, pannes d'intégration rendues à l'opérateur (2.1, 2.2) | [galahad#22](https://github.com/xtincell/galahad/pull/22), 164 tests verts, CI verte |
+| 0.10 | Grille de La Barre réparée, écoute locale par défaut, parcours navigateur réparé (2.3, et F1 et F2 de 4.8) | [la-barre#14](https://github.com/xtincell/la-barre/pull/14), parcours `PASS` |
+| 0.11 | Relevé de production par Coolify ; portail public redéployé | Section 2.3 ; `shinkiro.powerupgraders.com` sert le 20 octobre au lieu du 14 septembre |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -295,9 +334,9 @@ Sans ce lot, rien de ce qui suit ne peut être déclaré fini.
 
 | # | Dépôt | Geste | Preuve attendue | Prérequis |
 |---|---|---|---|---|
-| 2.1 | `galahad` | Porter dans le garde les motifs que `talos` bloque (S1) | Les 16 commandes sondées deviennent un test, toutes refusées | Agent |
-| 2.2 | `galahad` | Rattraper l'erreur d'intégration et la rendre à l'opérateur (F5) | Un test : Radar en 404, le tour répond | Agent |
-| 2.3 | `la-barre` | Écouter sur `127.0.0.1` par défaut (S4) | Test de démarrage ; l'image d'entreprise garde son réglage explicite | Agent |
+| 2.1 | `galahad` | Porter dans le garde les motifs que `talos` bloque (S1) | Les 16 commandes sondées deviennent un test, toutes refusées | **Fait** — galahad#22 |
+| 2.2 | `galahad` | Rattraper l'erreur d'intégration et la rendre à l'opérateur (F5) | Un test : Radar en 404, le tour répond | **Fait** — galahad#22 |
+| 2.3 | `la-barre` | Écouter sur `127.0.0.1` par défaut (S4) | Test de démarrage ; l'image d'entreprise garde son réglage explicite | **Fait** — la-barre#14 |
 | 2.4 | `Argos-studio` | Monter `next` et les dépendances en alerte (S6) | `npm audit` sans alerte critique, CI verte | Agent |
 | 2.5 | `charadesign-generator` | Écoute locale, `.env.example`, `vite` à jour (S7) | CI verte | Agent |
 | 2.6 | `datacollector` | Refuser adresses privées et redirections (S8) | Tests des cas refusés | Agent |
@@ -337,7 +376,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.5 | `danmem` | Version de schéma vérifiée au démarrage (F6) ; bail et remise en file (F7) ; unité et exemple d'environnement dans le dépôt ; défauts morts | Agent |
 | 4.6 | `danmem`, `galahad` | Script de sauvegarde et de restauration : base, volume, ordre, gel des écrivains | Agent, puis recette B2 |
 | 4.7 | `hermes-cockpit` | README ; configuration morte ; faux positif (F10) ; titre distinct de celui de `galahad` | Agent |
-| 4.8 | `la-barre` | F1, F2, F3 ; tests pour `ecarts.js`, `vue-matrice.js`, `registre-radar.js` ; README | Agent |
+| 4.8 | `la-barre` | F1 et F2 **faits** (la-barre#14) ; restent F3, les tests de `ecarts.js` et `registre-radar.js`, le README | Agent |
 | 4.9 | `la-barre` | Une fabrique unique pour les huit écrivains de décision | Agent ; prérequis de 3.5 |
 | 4.10 | `market-expansion-system` | Gabarits cohérents avec la méthode ; promesse d'import tenue ou retirée (F9) | Arbitrage 5.4 |
 | 4.11 | `ADVE-project` | Voir [section 4 bis](#4-bis-la-fusée) | — |
@@ -447,12 +486,14 @@ Chacun est posé comme une question. Une réponse courte suffit.
 | 5.15 | L'admission La Barre écrite pour l'employeur peut-elle entrer dans le canon `radar`, ou doit-elle être réécrite ? | 3.5 ; voir `docs/CLOISON.md` |
 | 5.16 | `galahad` suit un profil personnel (`deploy/dan-hermes/wiki-Alexandre_Profil.md`). Doit-il rester dans ce dépôt ? | `docs/CLOISON.md` |
 | 5.17 | `wiki-prive` est-il bien `adjacent` ? | Le classement posé le 10 novembre |
+| 5.18 | Deux instances de La Fusée hors canon tournent sur le VPS, chacune avec sa base : la lignée archivée `ADVE_v8`, et une branche d'`ADVE-project`. Les arrêter ? | La capacité du VPS ; le classement des lignées |
+| 5.19 | La Barre en production a quatre commits de retard sur `main`. Est-ce voulu ? | Le déploiement de la-barre#14, puisque le déploiement automatique est activé |
 
 ## 6. Ce qui se fait selon ce qui est débloqué
 
 | Si le propriétaire… | Alors un agent peut… |
 |---|---|
-| ne fait rien de plus | Lots 1.5 à 1.7, 2.1 à 2.6, 3.1 à 3.3, 3.6, et tous les gestes « Agent » du lot 4 |
+| ne fait rien de plus | Lots 1.5 à 1.7, 2.4 à 2.6, et les gestes « Agent » restants du lot 4 |
 | régénère `FLEET_TOKEN` | Fermer P1 côté flotte |
 | donne son accord sur #873 | Fermer 1.2 et 1.3 |
 | ouvre une voie vers le VPS | Commencer le lot 5 |
