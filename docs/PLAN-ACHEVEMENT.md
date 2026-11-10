@@ -232,6 +232,7 @@ dépôt nommé.
 | S7 | `charadesign-generator` | Le serveur de développement écoute sur le réseau local avec les clés des fournisseurs derrière son proxy. | `lsi-cd-app/vite.config.js:25-26,153` |
 | S8 | `datacollector` | Aucune politique sur les URL sortantes : adresses privées et redirections sont suivies. | `server.py:73`, `collectors/threat.py:214-218` |
 | S9 | `BrandForge` | Une clé de fournisseur est en dur dans un dépôt archivé. À révoquer. | `docs/RECEPTION-METHODE-MARQUE.md:17-35` |
+| S10 | `talos` | `npm audit` : 9 alertes dont 1 critique, via `@modelcontextprotocol/sdk` ≤ 1.31.0 utilisé par le pont MCP. Relevé le 10 novembre. | `package-lock.json` racine |
 
 ### 3.2 Défauts fonctionnels
 
@@ -317,6 +318,9 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.14 | `hermes-cockpit` : Hulysse n'est plus compté comme Guardian, titre distinct (F10 et titre de 4.7) | [hermes-cockpit#3](https://github.com/xtincell/hermes-cockpit/pull/3), 15/15 |
 | 0.15 | `charadesign-generator` : écoute locale du serveur de dev, clés documentées, vite au dernier correctif (2.5) | [charadesign-generator#4](https://github.com/xtincell/charadesign-generator/pull/4), 20/20, `npm audit` 0 |
 | 0.16 | `danmem` : « schéma absent » au lieu d'une erreur 500 brute (F6) | [danmem#2](https://github.com/xtincell/danmem/pull/2), 21/21 avec pgvector et le test croisé `galahad` |
+| 0.17 | `Argos-studio` : alerte critique de `next` fermée ; alertes de 13 à 3 (app) et de 5 à 1 (workers), sans majeure (2.4) | [Argos-studio#4](https://github.com/xtincell/Argos-studio/pull/4), CI rejouée verte |
+| 0.18 | `galahad` : quatre rôles documentés, et l'enregistrement obligatoire d'un rôle (part de 4.1) | [galahad#23](https://github.com/xtincell/galahad/pull/23) |
+| 0.19 | Une CI réelle sur les cinq dépôts qui n'en avaient pas (1.5) ; chacune a prouvé qu'elle échoue quand c'est cassé | [talos#1](https://github.com/xtincell/talos/pull/1), [hulysse#1](https://github.com/xtincell/hulysse/pull/1), [character-engine#1](https://github.com/xtincell/character-engine/pull/1), [galahad-landing#2](https://github.com/xtincell/galahad-landing/pull/2), [market-expansion-system#1](https://github.com/xtincell/market-expansion-system/pull/1) |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -328,7 +332,7 @@ Sans ce lot, rien de ce qui suit ne peut être déclaré fini.
 | 1.2 | `ADVE-project` | Fusionner la PR #873 | Une seule issue SLO, à titre stable | **Accord du propriétaire.** Sans effet sur la production : fusionner sur `main` ne déploie rien (`.github/workflows/build-image.yml:19-25`). Mais le job sera rouge toutes les six heures tant que 1.4 n'est pas fait |
 | 1.3 | `ADVE-project` | Fermer les 211 issues « SLO breach » | Zéro issue de ce titre | Après 1.2. Agent, sur accord : 211 notifications |
 | 1.4 | `ADVE-project`, `galahad` | Mesurer le SLO depuis le VPS, où la base est joignable, plutôt que depuis GitHub | Un relevé SLO daté, lu par le workflow | Arbitrage : procédure `galahad` ou tâche planifiée. Puis B2 |
-| 1.5 | `talos`, `hulysse`, `character-engine`, `galahad-landing`, `market-expansion-system` | Une CI minimale par dépôt : syntaxe, liens, gabarits | Cinq workflows verts | Agent |
+| 1.5 | `talos`, `hulysse`, `character-engine`, `galahad-landing`, `market-expansion-system` | Une CI minimale par dépôt : syntaxe, liens, gabarits | Cinq workflows verts | **Fait** — cinq PR, lot 0.19 |
 | 1.6 | `shinkiro` | Signal `mode-dementi` : un mode déclaré sans son artefact est une dérive | Il a relevé `danmem` ; Argos l'assume par son état déclaré | **Fait** |
 | 1.7 | `shinkiro` | Étendre `vitalite-dementie` aux composants « gelés » qui bougent | — | **Écarté** : un compte de commits ne distingue pas l'hygiène du programme d'un vrai travail ; le signal crierait au loup |
 | 1.8 | `shinkiro` | Faire ouvrir par le workflow une PR du lock rafraîchi | Le geste hebdomadaire devient une fusion | Arbitrage |
@@ -342,7 +346,7 @@ Sans ce lot, rien de ce qui suit ne peut être déclaré fini.
 | 2.1 | `galahad` | Porter dans le garde les motifs que `talos` bloque (S1) | Les 16 commandes sondées deviennent un test, toutes refusées | **Fait** — galahad#22 |
 | 2.2 | `galahad` | Rattraper l'erreur d'intégration et la rendre à l'opérateur (F5) | Un test : Radar en 404, le tour répond | **Fait** — galahad#22 |
 | 2.3 | `la-barre` | Écouter sur `127.0.0.1` par défaut (S4) | Test de démarrage ; l'image d'entreprise garde son réglage explicite | **Fait** — la-barre#14 |
-| 2.4 | `Argos-studio` | Monter `next` et les dépendances en alerte (S6) | `npm audit` sans alerte critique, CI verte | Agent |
+| 2.4 | `Argos-studio` | Monter `next` et les dépendances en alerte (S6) | `npm audit` sans alerte critique, CI verte | **Fait** — Argos-studio#4 ; restent 4 alertes hautes qui exigent une majeure (`prisma` 7, `zod` 4) |
 | 2.5 | `charadesign-generator` | Écoute locale, `.env.example`, `vite` à jour (S7) | CI verte | **Fait** — charadesign-generator#4 |
 | 2.6 | `datacollector` | Refuser adresses privées et redirections (S8) | Tests des cas refusés | Agent |
 | 2.7 | `talos` | Soumettre `radar_delete` à la confirmation (S2), ou archiver le dépôt | Test, ou dépôt archivé | Arbitrage 5.3 |
@@ -374,7 +378,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 
 | # | Dépôt | Gestes | Prérequis |
 |---|---|---|---|
-| 4.1 | `galahad` | Documentation des quatre rôles ; `dan-oauth` en CI avec ses dépendances ; `CHANGELOG` à 0.1.16 ; dépendance de l'unité commerciale sur `dan-oauth` ; file morte pour les reçus refusés ; valeurs d'instance en dur dans `deliver.sh` | Agent |
+| 4.1 | `galahad` | Rôles documentés **faits** (galahad#23) ; restent `dan-oauth` en CI avec ses dépendances, le `CHANGELOG` à 0.1.16, la dépendance de l'unité commerciale sur `dan-oauth`, la file morte des reçus refusés, les valeurs en dur de `deliver.sh` | Agent |
 | 4.2 | `galahad` | Recevoir les capacités donneuses : garde d'isolation, contrôles de patrouille, alerte de repli | Arbitrage 5.3 |
 | 4.3 | `radar` | README des migrations (F13) ; `npm ci` dans le Dockerfile ; format `RADAR_INSTANCES` | **Fait** — radar#6 |
 | 4.4 | `radar` | Unicité de `ndeg` : aujourd'hui un POST rejoué crée un doublon, et `update` frappe tous les homonymes | Arbitrage 5.7 |
@@ -498,7 +502,7 @@ Chacun est posé comme une question. Une réponse courte suffit.
 
 | Si le propriétaire… | Alors un agent peut… |
 |---|---|
-| ne fait rien de plus | Lot 1.5, 2.4 à 2.6, et les gestes « Agent » restants du lot 4 |
+| ne fait rien de plus | 2.6, et les gestes « Agent » restants du lot 4 |
 | régénère `FLEET_TOKEN` | Fermer P1 côté flotte |
 | donne son accord sur #873 | Fermer 1.2 et 1.3 |
 | ouvre une voie vers le VPS | Commencer le lot 5 |
