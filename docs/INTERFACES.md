@@ -72,6 +72,18 @@ manques, dans l'ordre où ils bloquent :
 Les points 1 à 5, 7 et 8 se ferment par un commit. Les autres demandent un
 arbitrage ou une recette sur le VPS.
 
+**État au 10 novembre, PR ouvertes, non fusionnées.**
+
+| # | Fermé par | Reste |
+|---|---|---|
+| 1 | [danmem#5](https://github.com/xtincell/danmem/pull/5), [galahad#26](https://github.com/xtincell/galahad/pull/26) : sauvegarde, gel par arrêt des processus, ordre Galahad puis Danmem, restauration vérifiée avant démarrage | Recette sur le VPS : noms réels, version de `pg_dump`, volume réel |
+| 2 | [danmem#2](https://github.com/xtincell/danmem/pull/2) pour `/health` ; la restauration compare la signature du schéma | Vérification au démarrage |
+| 3 | La restauration refuse une extension absente ou d'une autre version | Épingler l'image hors de la CI |
+| 4 | [danmem#4](https://github.com/xtincell/danmem/pull/4) : bail, remise en file, plafond | `release` côté Galahad |
+| 5 | [galahad#24](https://github.com/xtincell/galahad/pull/24) : reçus refusés mis de côté ; `--danmem-url` à la restauration | — |
+| 7, 8 | [danmem#3](https://github.com/xtincell/danmem/pull/3) | Relire l'unité servie |
+| 6, 9, 10 | — | Arbitrage |
+
 ## radar — API de données
 
 Interface façon PostgREST sur `/rest/v1/<table>`. Tables et colonnes en **liste blanche** :

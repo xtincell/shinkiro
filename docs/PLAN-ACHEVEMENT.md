@@ -335,6 +335,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.31 | `la-barre` : README au niveau du code (4.8) ; production relevée : servie sous `powerupgraders.com/la-barre`, derrière la session, et les outils du poste dédié n'y écrivent plus | [la-barre#16](https://github.com/xtincell/la-barre/pull/16) ; `fleet.yml`, `AGENTS.md`, `docs/TOPOLOGIE.md` |
 | 0.32 | `charadesign-generator` : retours tardifs annulés, écritures liées à leur dossier, import validé et versionné (4.14) | [charadesign-generator#5](https://github.com/xtincell/charadesign-generator/pull/5), 14 rouges puis 32/32 |
 | 0.33 | `la-barre` : une fabrique unique pour les huit écrivains de décision, forme stockée identique à l'octet (4.9) | [la-barre#17](https://github.com/xtincell/la-barre/pull/17), 33 tests, cinq régressions volontaires détectées |
+| 0.34 | Sauvegarde et restauration de la mémoire : gel par arrêt, paquet vérifié, ordre Galahad puis Danmem, restauration confrontée entre les deux (4.6) | [danmem#5](https://github.com/xtincell/danmem/pull/5), [galahad#26](https://github.com/xtincell/galahad/pull/26) ; recette croisée locale, contre-épreuves refusées |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -399,7 +400,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.3 | `radar` | README des migrations (F13) ; `npm ci` dans le Dockerfile ; format `RADAR_INSTANCES` | **Fait** — radar#6 |
 | 4.4 | `radar` | Unicité de `ndeg` : aujourd'hui un POST rejoué crée un doublon, et `update` frappe tous les homonymes | Arbitrage 5.7 |
 | 4.5 | `danmem` | **Faits** : F6 (danmem#2), unité, environnement et défauts morts (danmem#3), bail et remise en file F7 (danmem#4, à fusionner après #3). Restent l'appel de `release` côté Galahad et la relecture de l'unité servie | B2 pour l'unité servie |
-| 4.6 | `danmem`, `galahad` | Script de sauvegarde et de restauration : base, volume, ordre, gel des écrivains | Agent, puis recette B2 |
+| 4.6 | `danmem`, `galahad` | **Écrit et éprouvé localement** (danmem#5, galahad#26). Reste la recette sur le VPS : noms réels, version de `pg_dump`, volume, stockage hors hôte | Recette B2 |
 | 4.7 | `hermes-cockpit` | F10, titre et README **faits** (hermes-cockpit#3, #4) ; reste la configuration morte du compose | Arbitrage : retirer des montages de production |
 | 4.8 | `la-barre` | F1, F2 (la-barre#14), F3 et les tests (la-barre#15), README (la-barre#16) **faits**. Restent les constats sur `ecarts.js` (écarter un écart est impossible depuis l'interface, `facturable` n'est jamais lu) et les outils du poste dédié coupés par la session | Arbitrage pour `facturable` et pour les outils |
 | 4.9 | `la-barre` | **Fait** (la-barre#17). Restent l'unicité entre postes et le passage de l'import par la fabrique | Arbitrage 5.5 |
