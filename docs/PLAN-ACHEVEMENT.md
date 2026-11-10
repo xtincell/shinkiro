@@ -326,6 +326,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.22 | Contrat du changement de modèle d'un agent écrit (3.8) ; README du cockpit d'exploitation (4.7) | `docs/INTERFACES.md` ; [hermes-cockpit#4](https://github.com/xtincell/hermes-cockpit/pull/4) |
 | 0.23 | `datacollector` : CDN figés (empreinte sauf Tailwind, dont le CDN refuse le contrôle), fichiers générés retirés du suivi, `flask-cors` mort retiré (4.15) | [datacollector#4](https://github.com/xtincell/datacollector/pull/4), 18 + 4 tests, page chargée sans erreur |
 | 0.24 | `character-engine` : le vecteur survit au rechargement, s'exporte et s'importe ; les contradictions s'affichent sans bloquer (4.13) | [character-engine#3](https://github.com/xtincell/character-engine/pull/3), prompt identique à l'octet sur 32 vecteurs |
+| 0.25 | `danmem` : unité systemd et environnement d'exemple versionnés, contrôlés par un test ; le chat ne tente plus un port Ollama mort (4.5) | [danmem#3](https://github.com/xtincell/danmem/pull/3), 27 + 1 sauté avec pgvector. À la fusion, l'état déclaré dans `fleet.yml` change |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -389,7 +390,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.2 | `galahad` | Recevoir les capacités donneuses : garde d'isolation, contrôles de patrouille, alerte de repli | Arbitrage 5.3 |
 | 4.3 | `radar` | README des migrations (F13) ; `npm ci` dans le Dockerfile ; format `RADAR_INSTANCES` | **Fait** — radar#6 |
 | 4.4 | `radar` | Unicité de `ndeg` : aujourd'hui un POST rejoué crée un doublon, et `update` frappe tous les homonymes | Arbitrage 5.7 |
-| 4.5 | `danmem` | F6 **fait** (danmem#2) ; restent le bail et la remise en file (F7), l'unité et l'exemple d'environnement dans le dépôt, les défauts morts | Agent |
+| 4.5 | `danmem` | F6 (danmem#2), unité, environnement et défauts morts (danmem#3) **faits** ; restent le bail et la remise en file (F7), et relire l'unité réellement servie | Agent ; B2 pour l'unité servie |
 | 4.6 | `danmem`, `galahad` | Script de sauvegarde et de restauration : base, volume, ordre, gel des écrivains | Agent, puis recette B2 |
 | 4.7 | `hermes-cockpit` | F10, titre et README **faits** (hermes-cockpit#3, #4) ; reste la configuration morte du compose | Arbitrage : retirer des montages de production |
 | 4.8 | `la-barre` | F1 et F2 **faits** (la-barre#14) ; restent F3, les tests de `ecarts.js` et `registre-radar.js`, le README | Agent |
