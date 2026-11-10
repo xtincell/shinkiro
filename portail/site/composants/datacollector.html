@@ -31,7 +31,7 @@ Outils métier</p>
 
 
 
-<div class="encart encart-attention"><div class="encart-titre">Point de vigilance</div><p>Front HTML et backend Flask distincts ; aucun Dockerfile dans le dépôt. Les sources réseau et leurs accès restent nécessaires. Raccord métier vers Seshat/Argos, navigateur, fournisseurs et exploitation TPE à recevoir.</p></div>
+<div class="encart encart-attention"><div class="encart-titre">Point de vigilance</div><p>Le serveur Flask sert aussi l'interface ; aucun Dockerfile dans le dépôt. Les sources réseau et leurs accès restent nécessaires. Raccord métier vers Seshat/Argos, navigateur, fournisseurs et exploitation TPE à recevoir.</p></div>
 
 
 
@@ -39,7 +39,7 @@ Outils métier</p>
 
 
 <h2 id="deploiement">Déploiement</h2>
-<div class="table-enveloppe"><table><tbody><tr><td><code>mode</code></td><td><code>statique</code></td></tr><tr><td><code>entree</code></td><td><code>index.html</code></td></tr><tr><td><code>serveur</code></td><td><code>server.py</code></td></tr><tr><td><code>requiert</code></td><td><code>requirements.txt</code></td></tr></tbody></table></div>
+<div class="table-enveloppe"><table><tbody><tr><td><code>mode</code></td><td><code>statique</code></td></tr><tr><td><code>entree</code></td><td><code>index.html</code></td></tr><tr><td><code>serveur</code></td><td><code>server.py</code></td></tr><tr><td><code>requiert</code></td><td><code>requirements.txt</code></td></tr><tr><td><code>etat</code></td><td><code>le front seul ne collecte rien — l'entrée réelle est python server.py</code></td></tr></tbody></table></div>
 <p><span class="source">fleet.yml</span> — mode constaté dans le dépôt, jamais supposé.</p>
 
 <h2 id="releve">Ce que le relevé constate</h2>

@@ -160,12 +160,44 @@ côte : un chiffre déclaré à plus de dix points du réel est une dérive.
 
 ### 2 · Deux cockpits
 
-`galahad/cockpit/index.html` et le dépôt `hermes-cockpit`. Le second est déployé
-sur Coolify, voit les process de l'hôte (`pid: host`, `SYS_PTRACE`), lit la santé
-de `radar` et `danmem`, et sert un portail client.
+`galahad/cockpit/index.html` et le dépôt `hermes-cockpit`. Le relevé du
+10 novembre 2026 les a lus tous les deux : ils se recouvrent très peu.
 
-Le premier n'est pas documenté. **Le partage de responsabilité n'est écrit nulle
-part** — à trancher avant qu'un agent ne construise sur le mauvais.
+| Capacité | `galahad/cockpit` | `hermes-cockpit` |
+|---|---|---|
+| Charge, mémoire, disque et modèle d'un rôle | oui | non |
+| Présence des agents | partiel : les services compose de l'installation | oui : tout l'hôte, par le socket Docker et `/proc` |
+| Procédures : catalogue, lancement, reprise, abandon, verdict humain, reçus | **lui seul** | non |
+| Construction de l'image, écriture du `.env`, déploiement compose | **lui seul** | non |
+| Modèle d'un agent | lecture | lecture, et demande de changement pour `talos` et `hulysse` |
+| Projets et domaines Coolify, registre des projets | non | **lui seul** |
+| Tâches, notes, calendrier, coffre, alerte de repli | non | **lui seul** |
+| Mémoire Danmem | non | **lui seul**, par fichier |
+| Espace de travail partagé | non | **lui seul** |
+| Portail client de l'employeur | non | **lui seul** |
+| Santé de Radar | non | non |
+| Exposition | boucle locale, sans compte, une installation | Traefik et TLS, authentification Basic, l'hôte entier |
+
+Deux recouvrements seulement : la présence des agents, par deux mécanismes, et la
+lecture du modèle.
+
+**Le partage que montre le code** : `galahad/cockpit` est le poste d'exécution
+d'une installation ; `hermes-cockpit` est le poste d'observation et
+d'exploitation de l'hôte. Il reste à confirmer par le propriétaire : c'est
+l'arbitrage 5.2 du [plan d'achèvement](PLAN-ACHEVEMENT.md).
+
+Trois défauts entretiennent la confusion en attendant :
+
+- les deux pages portent presque le même titre, « Galahad · Cockpit » et
+  « Galahad — Cockpit » ;
+- le second affiche le Guardian en ligne dès qu'un processus de l'hôte exécute
+  `src/index.js`, ce que fait aussi `hulysse` (`hermes-cockpit` `portal.mjs:90`) ;
+- les exemples de routage de `galahad` décrivent un cockpit statique, alors qu'il
+  dépend de `/status` et `/operate`, et que son serveur refuse tout hôte non local.
+
+Le relevé initial disait que `hermes-cockpit` « lit la santé de `radar` et
+`danmem` ». C'était inexact : il ne lit rien de Radar, et lit Danmem par un
+fichier. Voir [`INTERFACES.md`](INTERFACES.md).
 
 ### 3 · Deux taxonomies d'écart, complémentaires et non reliées
 
@@ -214,13 +246,21 @@ promesse d'installation ne peut les réduire à une seule dépendance commune.
 
 ## Ce qui reste à écrire
 
-1. **Le contrat MCP `talos ↔ radar`.** `talos/radar-mcp/index.js` existe, le
-   protocole n'est décrit nulle part.
-2. **Le partage cockpit.** Qui affiche quoi, entre `galahad/cockpit` et
-   `hermes-cockpit`.
-3. **La réception des couches mémoire.** Leurs responsabilités sont décrites
-   ci-dessus ; restauration, droits et reprise de tous les effets restent ouverts.
+État au 10 novembre 2026. Trois des cinq points sont écrits ; les deux derniers
+attendent un arbitrage.
+
+1. **Le contrat MCP `talos ↔ radar`.** Écrit dans [`INTERFACES.md`](INTERFACES.md).
+   Neuf écarts de sens avec Radar restent à fermer.
+2. **Le partage cockpit.** Qui affiche quoi est écrit plus haut. Le partage
+   lui-même attend sa confirmation.
+3. **Les couches mémoire.** Qui écrit quoi, et les dix manques avant une
+   restauration recevable, sont dans [`INTERFACES.md`](INTERFACES.md). La
+   restauration elle-même reste à recevoir.
 4. **La jointure des deux taxonomies d'écart**, et le branchement de
-   `la-barre/vue-matrice` sur le Market Expansion System.
+   `la-barre/vue-matrice` sur le Market Expansion System. Deux options sont
+   cadrées ; elles attendent les arbitrages 5.4 du plan.
 5. **Le câblage `la-barre` → `radar`.** La Barre produit les décisions, Radar
    tient le journal. La mesure avant/après du Transformation Pilot en dépend.
+   Aujourd'hui aucune décision ne circule, dans aucun sens, et le dépôt `radar`
+   ne contient aucune admission La Barre. Le cadrage attend les arbitrages 5.5
+   et 5.6 du plan.

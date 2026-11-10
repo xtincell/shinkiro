@@ -148,11 +148,12 @@ composants:
     description: Page produit de galahad. Dockerfile plus un index.html.
     attention: >-
       Le « à trancher » est tranché, et par le fichier lui-même : zéro occurrence
-      de Shinkiro, d'ADVE, de La Fusée, de Radar ou de La Barre ; 26 de « agent »,
-      10 de « VPS », 8 de « Telegram ». C'est bien la page de galahad.
+      de Shinkiro, d'ADVE, de La Fusée, de Radar ou de La Barre. C'est bien la
+      page de galahad.
       Mais elle s'adresse au MAUVAIS ACHETEUR — « self-hosted team of autonomous
-      AI agents », « self-host in 60 seconds », écrit pour un développeur qui
-      veut auto-héberger. Le produit s'adresse à un patron d'agence qui veut que
+      AI agents » en titre, un bloc `git clone` puis `./install.sh`, un bouton
+      « Accès au code » : écrit pour un développeur qui veut auto-héberger. Le
+      mot « agence » n'y figure pas. Le produit s'adresse à un patron d'agence qui veut que
       sa boîte tourne sans lui. Elle vend la technologie au lieu du résultat,
       ce que la règle de nommage du portefeuille interdit précisément.
       Aucune page publiée à ce jour.
@@ -171,7 +172,10 @@ composants:
       compose: docker-compose.yml
       roles: [chef, guardian, traveler, claude-bridge]
       routage: [routing/Caddyfile.example, routing/traefik-dynamic.example.yml]
-      systemd: deploy/systemd/galahad-docker-firewall.service
+      systemd:
+        - deploy/systemd/galahad-docker-firewall.service
+        - deploy/systemd/galahad-sales-fleet.service
+        - deploy/dan-oauth/dan-oauth.service
     produits_portefeuille: ["05 · Content Operations", "04 · Content Velocity System"]
     description: >-
       Moteur de procédures, décisions IA et coordination d'infrastructure sur
@@ -186,9 +190,18 @@ composants:
       Voir docs/RECEPTION-GALAHAD-DANMEM.md.
     contient:
       engine: >-
-        Modules — agent-loop, brain, config, goals, heartbeat, hooks,
-        integrations, jobs, journal, memory, roles, skill-runner, telegram,
-        tools. Zéro dépendance npm, zéro build.
+        Modules — agent-loop, brain, config, cron, goals, heartbeat,
+        hooks, index, integrations, jobs, journal, manual, memory, roles,
+        skill-runner, state, telegram, tools, et les modules commerciaux
+        (sales-entry, sales-fleet-entry, sales-fleet, sales-tool-context,
+        sales-worker). Zéro dépendance npm, zéro build.
+      roles: >-
+        Sous engine/roles/ — chef, guardian, traveler, commercial. Le rôle
+        commercial ne tourne pas dans la composition : il est lancé par
+        l'unité galahad-sales-fleet, hors Docker, depuis un second checkout.
+      dan-oauth: >-
+        Relais OAuth vers le modèle (server.py, worker.py), sous systemd.
+        L'unité commerciale en dépend sans le déclarer.
       skills: [audit-coherence.json, audit-fleet.json, diagnostic-coolify.json]
       bridge: Passerelle Claude — server.js et son Dockerfile.
       cockpit: cockpit/index.html
@@ -230,9 +243,10 @@ composants:
       Reste autonome. Une instance = une équipe = une base. L’installation
       Matanga garde son portail client, ses accords par visuel et ses créneaux ;
       elle est distincte de l’installation personnelle. Le journal partage son
-      contrat, pas ses données. L'admission La Barre est configurée par instance
-      et client, avec reçu atomique ; filtres multimarques, autres créateurs,
-      réception native et retour des résultats restent à recevoir.
+      contrat, pas ses données. L'admission La Barre n'existe que dans
+      l'installation de l'employeur, hors flotte : ce dépôt n'en porte ni route
+      ni test, et aucune décision ne circule entre La Barre et lui. La porter
+      au canon ou la réécrire est un arbitrage ; voir docs/PLAN-ACHEVEMENT.md.
 
   - nom: talos
     couche: execution
@@ -253,8 +267,10 @@ composants:
     attention: >-
       La divergence déclarée mesure les dépôts historiques, pas le code servi.
       Les services Talos et Hulysse utilisent une variante commune de Galahad.
-      Missions et Agora sont réintégrées au canon ; cron, briefing, sessions
-      persistées et MCP restent des capacités donneuses à recevoir.
+      Missions, Agora, cron, briefing et sessions nommées sont réintégrés au
+      canon Galahad (moteur 0.1.6). Restent donneuses : le pont MCP, le mur S7
+      et la mémoire stratifiée, plusieurs contrôles de patrouille, l'alerte de
+      repli, et un garde de commandes plus couvrant que celui de Galahad.
       Aucun service actif migré. Voir docs/RECEPTION-TALOS-HULYSSE.md.
 
   - nom: hulysse
@@ -276,6 +292,9 @@ composants:
       Dépôt historique et moteur servi diffèrent. Les objectifs clos de l’ancien
       schéma restent clos dans le moteur corrigé. Veille réactive et fenêtre
       nocturne ne sont pas assimilées sans réception de configuration.
+      Son garde d'isolation, qui refuse d'agir sur le périmètre d'un autre
+      agent, n'a pas d'équivalent dans Galahad. La veille annoncée n'est
+      jamais appelée par le code.
       Convergence de déploiement et reprise des conversations ouvertes.
       Voir docs/RECEPTION-TALOS-HULYSSE.md.
 
@@ -375,12 +394,14 @@ composants:
       avec recherche et admission manuelle. Le corpus bootstrap et la veille sur
       fixtures ne prouvent pas une couverture vivante. La Fusée gouverne l'usage
       de références par une marque ; sa projection existante consomme le contrat
-      du studio. Le MCP et la boucle de résultats restent à recevoir.
+      du studio. Aucun MCP n'est écrit ; la boucle de résultats reste à recevoir.
     manque: >-
-      Authentification de l'admission, isolation des consultations privées,
-      provenance/licence par actif, amendements concurrents, réception native
-      et lecture canonique depuis la Fusée. La revue des corrections et la
-      boucle de résultats restent ouvertes ; voir docs/RECEPTION-ARGOS.md.
+      Isolation des consultations privées, réception native et lecture
+      canonique depuis la Fusée. La Fusée poste sans version attendue : un
+      second envoi d'un dossier modifié serait refusé et lu comme une panne.
+      La boucle de résultats reste ouverte ; voir docs/RECEPTION-ARGOS.md.
+      Livrés en 0.2.0 : authentification de l'admission, licence par actif,
+      amendements concurrents.
       Vercel n'est pas utilisé : la cible est le VPS, et le dépôt ne porte
       encore aucun artefact pour s'y déployer.
 
@@ -391,7 +412,7 @@ composants:
     licence: proprietaire
     vitalite: gele
     ordre_construction: 6
-    deploiement: {mode: statique, racine: lsi-cd-app, stack: vite, entree: index.html}
+    deploiement: {mode: statique, racine: lsi-cd-app, stack: vite, entree: index.html, etat: "le build seul ne fonctionne pas — chaque étape appelle un proxy qui n'existe que dans le serveur de développement"}
     description: >-
       Atelier LSI-CD : progression de jugement sémantique, de l'archétype au
       master et aux vues. Bibliothèque, brouillon et checkpoints existants.
@@ -409,6 +430,11 @@ composants:
     vitalite: actif
     deploiement: {mode: statique, entree: index.html}
     description: Générateur d'approches publicitaires. Sans API ni dépendance externe.
+    voir_aussi: >-
+      Raccord La Barre depuis le 19 octobre (raccord.js) : l'outil s'ouvre
+      depuis les pistes d'un projet avec les champs du brief, et La Barre
+      reçoit une approche comme proposition à arbitrer. Rien n'est envoyé à un
+      serveur. La recette native du couple reste à recevoir.
 
   - nom: character-engine
     couche: tools
@@ -432,13 +458,13 @@ composants:
     maturite: partiel
     licence: proprietaire
     vitalite: actif
-    deploiement: {mode: statique, entree: index.html, serveur: server.py, requiert: requirements.txt}
+    deploiement: {mode: statique, entree: index.html, serveur: server.py, requiert: requirements.txt, etat: "le front seul ne collecte rien — l'entrée réelle est python server.py"}
     description: >-
       Acquérir des observations publiques hétérogènes, avec leur périmètre,
       leur date et leurs erreurs. CLI et serveur Python partagent le même reçu ;
       l'interface remet ce reçu, sans en déduire une santé ou une décision de marque.
     attention: >-
-      Front HTML et backend Flask distincts ; aucun Dockerfile dans le dépôt.
+      Le serveur Flask sert aussi l'interface ; aucun Dockerfile dans le dépôt.
       Les sources réseau et leurs accès restent nécessaires. Raccord métier
       vers Seshat/Argos, navigateur, fournisseurs et exploitation TPE à recevoir.
 

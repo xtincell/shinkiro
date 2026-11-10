@@ -69,14 +69,14 @@ couches en dessous disent comment.
 
 | Dépôt | Rôle |
 |---|---|
-| [`ADVE-project`](https://github.com/xtincell/ADVE-project) | **Canonique.** La Fusée v6.19 — Industry OS du marché créatif africain. Un brief entre en PDF, le diagnostic tombe en 15 min, la stratégie est écrite sous 48 h. Modules Neteru (7/7 actifs), Oracle, APOGEE, gouvernance Thot. |
+| [`ADVE-project`](https://github.com/xtincell/ADVE-project) | **Canonique.** La Fusée — Industry OS du marché créatif africain. Un brief entre en PDF, le diagnostic tombe en 15 min, la stratégie est écrite sous 48 h. Modules Neteru (7/7 actifs), Oracle, APOGEE, gouvernance Thot. |
 | [`la-fusee-blueprint`](https://github.com/xtincell/la-fusee-blueprint) | Atlas doctrinal — la doctrine, pas le code. |
 
 ### 02 · Entreprise — la couche qui parle au marché
 
 | Dépôt | Rôle |
 |---|---|
-| [`galahad-landing`](https://github.com/xtincell/galahad-landing) | Page publique. |
+| [`galahad-landing`](https://github.com/xtincell/galahad-landing) | Page produit de `galahad`. Pas encore publiée. |
 
 > UPgraders utilise ADVE pour identifier les transformations créatives à plus forte valeur,
 > puis construit les systèmes qui permettent de les exécuter à grande échelle.
@@ -112,8 +112,8 @@ Outils légers, chacun dans son dépôt et monté en submodule sous `tools/`.
 
 | Dépôt | Rôle |
 |---|---|
-| [`indice-maturite`](https://github.com/xtincell/indice-maturite) | **Produit 00 du portefeuille** — le diagnostic d'entrée gratuit. Seize questions, quatre axes, score 0-5, prescription. [En ligne](https://xtincell.github.io/indice-maturite/). |
-| [`market-expansion-system`](https://github.com/xtincell/market-expansion-system) | **Produit 04** — décliner une campagne d'un marché à N marchés sans perdre la marque. Preuve terrain sur **neuf pays**, bascule de marque et de langue au Ghana. Inclut la matrice de déploiement et les gabarits de cadrage. |
+| [`indice-maturite`](https://github.com/xtincell/indice-maturite) | **Produit 01 du portefeuille** — le diagnostic d'entrée gratuit. Seize questions, quatre axes, score 0-5, prescription. [En ligne](https://xtincell.github.io/indice-maturite/). |
+| [`market-expansion-system`](https://github.com/xtincell/market-expansion-system) | **Produit 06** — décliner une campagne d'un marché à N marchés sans perdre la marque. Preuve terrain sur **neuf pays**, bascule de marque et de langue au Ghana. Inclut la matrice de déploiement et les gabarits de cadrage. |
 | [`generateur-approches`](https://github.com/xtincell/generateur-approches) | Générateur d'approches publicitaires, sans API ni dépendance. |
 | [`character-engine`](https://github.com/xtincell/character-engine) | Moteur à 48 paramètres et règles de direction artistique. |
 | [`datacollector`](https://github.com/xtincell/datacollector) | Collecte multi-sources pour l'intelligence marketing. |

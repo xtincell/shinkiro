@@ -27,6 +27,51 @@ bus des agents vivants ni le retour vers une campagne. Les contrats corrigés
 sont dans Git ; les services actifs ne sont pas modifiés par cette réception.
 Voir [RECEPTION-GALAHAD-DANMEM.md](RECEPTION-GALAHAD-DANMEM.md).
 
+### Qui écrit quoi
+
+Relevé dans `galahad` et `danmem` le 10 novembre 2026.
+
+| Couche | Où | Ce qui s'y écrit | Écrivain |
+|---|---|---|---|
+| Cartes du rôle | volume `galahad-memory`, sous `/memory/<rôle>/memory/` | Une carte par sujet, et l'index `MEMORY.md`, seul injecté au réveil | L'outil `remember` (`engine/src/memory.js`) |
+| État du monde | même volume, `memory/ETAT_DU_MONDE.md` | Réécrit à chaque patrouille | `engine/src/heartbeat.js` |
+| États du rôle | même volume, `data/` | `sessions.json`, `goals.json`, `jobs.json`, `consent.json`, `cerveau.txt`, `manual-runs.json`, budgets commerciaux | Chacun par son module |
+| Reçus non acquittés | même volume, `data/job-receipts.json` | Le résultat d'un travail, écrit avant son acquittement | `engine/src/jobs.js` |
+| Observations partagées | PostgreSQL de Danmem, tables `peers` et `observations` | Observations attribuées, cartes de pair, dérivations | Le service `danmem` |
+| File de travaux | PostgreSQL de Danmem, table `jobs` | Les travaux entre mandataires et leur statut | Le service `danmem` |
+
+Les écritures de `galahad` sont atomiques par renommage, sans verrou entre
+processus. Les données de `hermes-cockpit` ne sont couvertes par aucune de ces
+couches.
+
+### Ce qui manque avant une restauration recevable
+
+Aucun des deux dépôts ne porte de script de sauvegarde ou de restauration. Dix
+manques, dans l'ordre où ils bloquent :
+
+1. **Un script de sauvegarde et de restauration** : base Danmem, volume
+   `galahad-memory`, ordre des opérations et gel des écrivains.
+2. **Une version de schéma.** Danmem ne vérifie rien au démarrage : sur une base
+   non migrée, `/health` répond 500 pendant que `/jobs` fonctionne, car la table
+   `jobs` se crée seule (`danmem` `src/index.mjs:233-249`).
+3. **La dépendance à pgvector.** La migration échoue sur un PostgreSQL nu.
+   L'image qui le porte n'est épinglée que dans la CI.
+4. **Un bail sur les travaux réclamés.** Un travail `claimed` au moment de la
+   sauvegarde le reste à jamais après restauration (`danmem` `src/index.mjs:323`).
+5. **La cohérence entre reçus et base.** Un reçu dont le travail n'existe plus
+   est retenté sans fin, sans file morte (`galahad` `engine/src/jobs.js:23-27`).
+6. **Les identités.** Un jeton global et un émetteur auto-déclaré : restaurer
+   impose de reprovisionner ce jeton chez tous les consommateurs.
+7. **L'unité `danmem.service` et un exemple d'environnement**, absents du dépôt.
+8. **Un repli mort.** Le dernier recours local pointe sur un service retiré ; le
+   code le dit lui-même (`danmem` `src/index.mjs:53-56`).
+9. **La rectification et la suppression d'une observation**, qui n'ont pas de
+   route.
+10. **Les données du cockpit**, hors de toute sauvegarde.
+
+Les points 1 à 5, 7 et 8 se ferment par un commit. Les autres demandent un
+arbitrage ou une recette sur le VPS.
+
 ## radar — API de données
 
 Interface façon PostgREST sur `/rest/v1/<table>`. Tables et colonnes en **liste blanche** :
@@ -279,8 +324,8 @@ La destination est le dépôt de sources existant du bon dossier Fusée. Exporte
 le bilan ne reçoit ni son admission, ni son analyse, ni l'arbitrage. Aucun second
 registre de marques ou de scores n'est créé. Questionnaire, reprise, bilans
 partiel/complet et téléchargements sont reçus nativement en ligne le 7 octobre ;
-admission dans le dossier, ouverture hors ligne et repli sans stockage restent
-à recevoir. Voir [le contrat de l'outil](https://github.com/xtincell/indice-maturite/blob/main/README.md).
+admission dans le dossier et ouverture hors ligne restent à recevoir. Le repli
+sans stockage est livré (`indice-maturite` `app.js:46-54`, relevé du 10 novembre). Voir [le contrat de l'outil](https://github.com/xtincell/indice-maturite/blob/main/README.md).
 
 ## talos ↔ radar — MCP
 
@@ -290,9 +335,81 @@ modules actuellement servis n’appellent pas ce client ; ils possèdent une
 intégration HTTP distincte. Le contrat MCP reste une capacité donneuse à recevoir,
 pas une connexion active prouvée. Voir [la réception des rôles](RECEPTION-TALOS-HULYSSE.md).
 
-**Le protocole n'est décrit nulle part.** Il existe un client de test — c'est le point de
-départ pour le reconstituer, puis le figer ici. Tant que ce n'est pas fait, toute
-modification de l'API Radar peut casser Talos sans que rien ne le signale.
+### Le contrat
+
+Reconstitué le 10 novembre 2026 depuis `talos/radar-mcp/index.js` et
+`talos/src/mcp.js`, puis rejoué de bout en bout sur un Radar local.
+
+**Transport.** stdio, JSON-RPC 2.0, aucun port. SDK `@modelcontextprotocol/sdk`
+1.29.0. Le serveur se nomme `radar`, version 1.0.0, et ne déclare que des outils.
+
+**Lancement.** Talos lance `node --env-file=<dir>/.env <dir>/index.js`, où `<dir>`
+vaut `RADAR_MCP_DIR`, par défaut `/opt/talos/radar-mcp`. Ce `.env` est ignoré de
+git et l'installeur ne le crée pas. Sans lui, le pont expose zéro outil, sans
+erreur visible.
+
+**Configuration.** `RADAR_MATANGA_URL`, `RADAR_MATANGA_KEY`, `RADAR_PERSO_URL`,
+`RADAR_PERSO_KEY`. Les deux instances, `matanga` et `perso`, sont figées dans le
+schéma des outils.
+
+**Authentification.** `Authorization: Bearer <clé>`. La clé doit égaler le
+`RADAR_API_KEY` de l'instance. Radar la traite comme l'identité `service@radar`,
+avec accès complet : le mur et le périmètre de confidentialité sont levés.
+
+**Outils.** Chaque appel vise `<URL>/rest/v1/<chemin>`. `radar` est requis partout.
+
+| Outil | Entrée | Appel Radar | Retour |
+|---|---|---|---|
+| `radar_list` | `query` facultatif | `GET briefs`, neuf colonnes, 5 000 lignes au plus ; filtre côté pont, plafond 200 | `{count, tasks[]}` |
+| `radar_get` | `ndeg` | `GET briefs?select=*&ndeg=eq.<ndeg>` | La première ligne |
+| `radar_create` | `fields` (objet) | `POST briefs`, corps `[fields]` | `{created}` |
+| `radar_update` | `ndeg`, `patch` | `PATCH briefs?ndeg=eq.<ndeg>` | `{updated[]}` |
+| `radar_delete` | `ndeg` | `DELETE briefs?ndeg=eq.<ndeg>` | Un texte |
+| `radar_comment` | `ndeg`, `text`, `author` facultatif | `POST comments`, auteur « Claude » par défaut | `{comment}` |
+| `radar_activity` | `limit` de 1 à 200, 30 par défaut | `GET task_events`, dix colonnes, du plus récent | `{count, events[]}` |
+
+**Erreurs.** Jamais d'erreur de protocole. Tout échec revient en
+`{isError: true}` avec le texte `Erreur : <radar> <MÉTHODE> <chemin> → HTTP <code>`.
+Le schéma d'entrée n'est pas validé côté serveur, et aucun délai ne borne l'appel.
+
+### Les écarts avec Radar
+
+La forme tient : les sept appels existent encore côté Radar, avec les mêmes
+tables et colonnes. Les écarts sont de sens.
+
+1. **`ndeg` n'est pas unique.** `radar_get` rend une ligne sans ordre ;
+   `radar_update` et `radar_delete` frappent tous les homonymes ; `radar_comment`
+   répond 409. Le pont ignore `briefs.id`.
+2. **La confidentialité est sautée.** La clé machine lève le filtre de
+   `task_events`. Le pont ne lit ni `private_to` ni l'en-tête
+   `X-Radar-Unqualified-Events` : un mouvement privé arrive au modèle sans marque.
+3. **`radar_delete` échappe à la confirmation.** Dans Talos, les outils du pont
+   contournent le garde (`talos` `src/agent-loop.js:80-82`).
+4. **Une création sans `ndeg` réussit**, et devient inatteignable par les autres
+   outils. Les champs inconnus sont ignorés en silence.
+5. **Les branches « Aucune tâche » sont mortes.** Sur un `ndeg` inconnu, Radar
+   répond 404 (`radar` `server/pgrest.js:393`) ; le pont le rend comme une erreur.
+6. **La liste des événements est périmée.** Radar émet aussi `deleted`,
+   `reopened`, `unfrozen`, `deadline`, `visibility`, `updated`, `asset` et
+   `asset_deleted`.
+7. **Toute écriture est anonyme.** Elle porte l'identité `service@radar` ;
+   l'auteur d'un commentaire est un texte libre.
+8. **Le client de test n'affirme rien.** Il écrit dans le Radar visé et y laisse
+   trois événements définitifs.
+9. **Aucun test ne lie les deux côtés.**
+
+L'instance `matanga` tourne sur un autre code, hors flotte : sa parité n'est pas
+vérifiée, et ne peut pas l'être d'ici.
+
+### Qui s'en sert
+
+Le moteur Talos de git l'utilise. `galahad` n'a ni client ni serveur MCP : il
+porte les sept mêmes outils en HTTP direct (`galahad` `engine/src/integrations.js`),
+donc les écarts 1, 2, 4, 7 et 9 s'y appliquent aussi. Il y ajoute un défaut
+propre : une erreur HTTP y lève une exception non rattrapée, et le tour meurt sans
+réponse à l'opérateur.
+
+Savoir lequel des deux le service du VPS appelle reste à relever sur place.
 
 ## galahad — sas-admin, le sas de sécurité
 
@@ -346,14 +463,16 @@ compte.
 
 ## Ce qui n'a pas de contrat, et devrait
 
-Trois liaisons existent dans les faits mais ne sont spécifiées nulle part. Elles sont
-listées ici pour qu'un agent sache qu'il improvise s'il y touche.
+État au 10 novembre 2026. Deux des trois liaisons listées ici ont désormais leur
+contrat ; la troisième n'était pas ce qu'on en disait.
 
 | Liaison | État |
 |---|---|
-| `talos/radar-mcp` → `radar` | Code présent, client de test présent, **protocole non écrit** |
-| `hermes-cockpit` → `radar` et `danmem` | Le cockpit lit leur santé — **format des sondes non écrit** |
-| `danmem` ↔ `galahad/engine/src/memory.js` | Responsabilités décrites ci-dessus ; **restauration, droits et parcours vivant non reçus** |
+| `talos/radar-mcp` → `radar` | **Contrat écrit ci-dessus.** Neuf écarts de sens restent ouverts. |
+| `hermes-cockpit` → `radar` | **Cette liaison n'existe pas.** Le cockpit ne lit aucune santé de Radar. Il relaie le portail client de l'installation de l'employeur, par `PORTAL_API_URL`. |
+| `hermes-cockpit` → `danmem` | Le cockpit lit un fichier, `danmem-status.json`, et non le service. **Le producteur de ce fichier est sur le VPS, dans aucun dépôt.** |
+| `danmem` ↔ `galahad/engine/src/memory.js` | **Responsabilités et manques écrits ci-dessus.** Restauration, droits et parcours vivant non reçus. |
+| `hermes-cockpit` → `galahad` (modèle d'un agent) | Le cockpit écrit `agent-brains.json` ; une tâche de l'hôte, hors git, en tire `data/cerveau.txt`, que le moteur lit. **Contrat de fichier non écrit.** |
 
 L'admission La Barre → Radar Matanga a désormais un contrat ci-dessus. Elle
 ne reçoit pas encore le cycle de mesure avant/après du Transformation Pilot.

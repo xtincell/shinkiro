@@ -234,9 +234,10 @@ dépôt nommé.
 ### 3.4 Jugements périmés du manifeste
 
 `fleet.yml` est écrit à la main et ne dérive pas par accident : il dérive parce
-que les dépôts avancent. Les jugements de dix composants sont à reprendre.
+que les dépôts avancent. Les jugements de dix composants étaient périmés. Ils ont
+été repris le 10 novembre ; ce tableau garde la trace de ce qui était écrit.
 
-| Composant | Ce que dit `fleet.yml` | Ce que montre le code |
+| Composant | Ce que disait `fleet.yml` | Ce que montre le code |
 |---|---|---|
 | `radar` | « L'admission La Barre est configurée par instance » (`fleet.yml:233`) | Le dépôt `radar` n'en contient aucune. Elle vit dans le dépôt employeur, hors flotte. |
 | `galahad` | Trois rôles, quatorze modules, une unité systemd | Quatre rôles (`commercial`), 23 modules, trois unités, un relais `dan-oauth` |
@@ -270,6 +271,8 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.4 | `wiki-prive` écarté sous `adjacent` | Signal `non-classe` éteint |
 | 0.5 | Vercel retiré de la topologie, Argos déclaré non déployé | `docs/TOPOLOGIE.md`, `fleet.yml` |
 | 0.6 | Tests de vie d'AGENTS.md corrigés et rejoués | `galahad` 156/156, `talos` et `hulysse` `check` verts |
+| 0.7 | Contrat MCP, partage des cockpits et couches mémoire écrits (3.1 à 3.3) | `docs/INTERFACES.md`, `docs/TOPOLOGIE.md` ; chaque fait relu dans le code |
+| 0.8 | Jugements périmés de `fleet.yml` repris ; version et numéros de produits du README alignés | `--strict` : `COHÉRENT — aucune dérive` |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -305,6 +308,10 @@ Sans ce lot, rien de ce qui suit ne peut être déclaré fini.
 ### Lot 3 — Écrire ce qui n'est écrit nulle part
 
 Tout se passe dans ce dépôt. Les faits sont déjà relevés ; il reste à les poser.
+
+**État au 10 novembre.** 3.1 et 3.3 sont écrits. 3.2 est écrit et attend sa
+confirmation. 3.6 est fait pour `fleet.yml` et pour le README ; il reste les
+contradictions de `docs/MATURITE.md`, dont le tableau historique.
 
 | # | Geste | Matière disponible | Prérequis |
 |---|---|---|---|
