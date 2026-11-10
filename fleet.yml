@@ -13,7 +13,7 @@
 #
 #   vitalite: actif        contredit par  commits_90j: 0
 #   licence: mit           contredit par  licence: ABSENTE
-#   deploiement.mode       contredit par  artefacts (mode vercel sans next.config)
+#   deploiement.mode       contredit par  artefacts (mode coolify sans compose ni Dockerfile)
 #
 # etage
 #   reference  composant autonome : son dépôt, son cycle, son déploiement.
@@ -26,7 +26,7 @@
 #   coolify   compose piloté par Coolify sur le VPS (Traefik + TLS par FQDN)
 #   systemd   unité .service installée sur l'hôte
 #   docker    Dockerfile autonome, orchestration libre
-#   vercel    application Next en PaaS
+#   vercel    application Next en PaaS — plus utilisé : tout est servi par le VPS
 #   pages     statique servi par GitHub Pages
 #   statique  HTML ouvrable sans serveur
 #   document  ni service ni page : méthode, gabarits, doctrine
@@ -366,7 +366,7 @@ composants:
     licence: proprietaire
     vitalite: relance-prioritaire
     ordre_construction: 6
-    deploiement: {mode: vercel, racine: app, aussi: workers}
+    deploiement: {mode: coolify, racine: app, aussi: workers, etat: "non déployé — ni Dockerfile ni compose dans le dépôt"}
     stack: [next, prisma, tailwind, biome]
     produits_portefeuille: ["02 · Creative Operations Audit"]
     source_partagee: {produit: argos, role: canonique}   # SHK-0002
@@ -381,6 +381,8 @@ composants:
       provenance/licence par actif, amendements concurrents, réception native
       et lecture canonique depuis la Fusée. La revue des corrections et la
       boucle de résultats restent ouvertes ; voir docs/RECEPTION-ARGOS.md.
+      Vercel n'est pas utilisé : la cible est le VPS, et le dépôt ne porte
+      encore aucun artefact pour s'y déployer.
 
   - nom: charadesign-generator
     couche: tools

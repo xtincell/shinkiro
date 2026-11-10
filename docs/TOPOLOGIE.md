@@ -4,6 +4,23 @@ Le relevé initial du 14 septembre 2026 est complété par les réceptions daté
 Une arborescence, une installation réellement servie et un parcours reçu sont
 trois preuves distinctes.
 
+## Correction du 10 novembre — pas de Vercel
+
+Le propriétaire le confirme : **Vercel n'est pas utilisé, tout est servi par le
+VPS.** Le mode « Vercel » du relevé initial est donc une supposition tirée des
+fichiers, pas un déploiement.
+
+- `ADVE-project` est livré par Coolify. Le `vercel.json` de son arbre est un
+  reliquat.
+- `Argos-studio` n'est déployé nulle part. Son dépôt ne porte ni Dockerfile ni
+  compose : il lui manque l'artefact qui permettrait de le servir depuis le VPS.
+  `fleet.yml` le déclare désormais `coolify`, avec son état : non déployé.
+- [`SHK-0002`](adr/SHK-0002-argos-unifie-et-autonome.md) écrit qu'Argos « se
+  déploie seul sur Vercel ». La décision d'autonomie tient ; la plateforme
+  nommée ne tient plus, et l'ADR reste à amender.
+
+Il reste quatre modes en service, et non cinq.
+
 ## Correction du 7 octobre — Galahad et Danmem
 
 Danmem est un service HTTP Node sous systemd avec PostgreSQL/pgvector. Il ne
@@ -46,7 +63,7 @@ par un compose racine.
 |---|---|---|
 | **Coolify** *(le VPS)* | `galahad`, `hermes-cockpit` | compose piloté par Coolify, labels Traefik, TLS par FQDN, réseau `coolify` externe |
 | **systemd** *(l'hôte)* | `talos`, `hulysse`, `danmem`, `galahad` (pare-feu docker) | unités des rôles ; `danmem.service` observé sur l'hôte ; `deploy/systemd/galahad-docker-firewall.service` |
-| **Vercel** | `ADVE-project`, `Argos-studio` | `next.config.ts`, `vercel.json`, Prisma |
+| ~~Vercel~~ *(non utilisé — voir la correction du 10 novembre)* | `ADVE-project`, `Argos-studio` | `next.config.ts`, `vercel.json`, Prisma |
 | **Docker autonome** | `radar`, `galahad-landing` | Dockerfile sans orchestration imposée |
 | **Statique / Pages** | `indice-maturite`, `la-barre`, `charadesign-generator`, `generateur-approches`, `character-engine`, `la-fusee-blueprint`, front `datacollector` | `index.html` ouvrable, ou Pages |
 
