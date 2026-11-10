@@ -42,21 +42,44 @@ coûte cher.
 Chaque étape a un test de vie. Si celui d'une étape échoue, ne passe pas à la suivante.
 
 ```bash
-# 1 · galahad — le moteur répond
-docker compose -f galahad/docker-compose.yml config
-docker compose -f galahad/docker-compose.yml up -d && docker compose logs chef | tail
+# 1 · galahad — la composition se résout, le moteur passe ses tests
+cp galahad/.env.example galahad/.env          # puis renseigner GALAHAD_INSTANCE
+docker compose -f galahad/docker-compose.yml config -q
+(cd galahad/engine && npm test)               # aucune dépendance, aucun Docker
+# avec un démon Docker et un .env réel :
+docker compose -f galahad/docker-compose.yml up -d
+docker compose -f galahad/docker-compose.yml logs chef | tail
 
 # 2 · radar — l'API sert et le journal s'écrit
-cd radar && npm ci && npm start
-curl -s localhost:3000/rest/v1/briefs?limit=1
+cd radar && npm ci
+DATABASE_URL=postgres://user:motdepasse@localhost:5432/radar npm start
+curl -s 'localhost:3000/rest/v1/briefs?limit=1'
 curl -s localhost:3000/activity.json | head
 
+# 3 · talos, hulysse, danmem — la syntaxe tient, la mémoire passe ses contrats
+(cd talos && npm run check)
+(cd hulysse && npm run check)
+(cd danmem && npm run check)
+# danmem exige une base jetable dédiée, jamais la base de service :
+(cd danmem && DANMEM_TEST_DATABASE_URL=postgresql://user:motdepasse@127.0.0.1:5432/shinkiro_danmem_reception_local npm test)
+
 # 4 · la-barre — rien à installer
-open la-barre/index.html    # ou : node servir.mjs 5173
+open la-barre/index.html    # ou : (cd la-barre && node servir.mjs 5173)
 
 # 5 · ADVE-project — le plus long
 cd ADVE-project && npm ci && npx prisma generate && npm test
 ```
+
+Quatre pièges, relevés en rejouant ces tests le 10 novembre 2026 :
+
+- **`galahad` sans `.env` échoue dès `config`** : `GALAHAD_INSTANCE` est requis. Ce
+  n'est pas une panne, c'est l'isolation par installation.
+- **`radar` sans `DATABASE_URL` démarre quand même** et sert ses pages, mais l'API
+  répond 503. Un `curl` qui échoue ne dit donc pas que le serveur est en panne.
+- **`talos` et `hulysse` n'ont ni test ni CI.** `npm run check` ne vérifie que la
+  syntaxe. Leur vrai test de vie exige un jeton Telegram et un modèle.
+- **`npm ci` dans `ADVE-project` installe husky**, qui pose `core.hooksPath` sur le
+  clone. Chaque commit y passe ensuite par le lint de gouvernance.
 
 ## Ce qui n'est pas écrit ailleurs
 
