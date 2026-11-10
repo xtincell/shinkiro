@@ -370,7 +370,7 @@ contradictions de `docs/MATURITE.md`, dont le tableau historique.
 | 3.5 | Une ADR sur le câblage La Barre → Radar | Trois sens de flux possibles, fichiers à créer de chaque côté | Arbitrages 5.5 et 5.6 |
 | 3.6 | Reprendre les jugements périmés de `fleet.yml` et les dix-huit contradictions | Section 3.4 | Agent |
 | 3.7 | La définition d'« achevé » | — | **B3** |
-| 3.8 | Le contrat de fichier `agent-brains.json` → `cerveau.txt` | Chaîne relevée ; le producteur est sur le VPS | Agent, puis B2 |
+| 3.8 | Le contrat de fichier `agent-brains.json` → `cerveau.txt` | **Écrit** dans `docs/INTERFACES.md` ; le maillon central reste hors git | Verser le script de l'hôte dans un dépôt : B2 |
 
 ### Lot 4 — Réparer, dépôt par dépôt
 

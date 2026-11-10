@@ -461,6 +461,26 @@ Inventaire par dépôt. **Aucun n'est dans ce dépôt** — il faut les demander
 Chacun a son `.env.example` — sauf `la-barre`, qui n'en a pas besoin : aucun serveur, aucun
 compte.
 
+## hermes-cockpit → galahad — changer le modèle d'un agent
+
+Relevé dans le code le 10 novembre 2026. Trois maillons, dont un seul hors git.
+
+| Maillon | Où | Ce qu'il fait |
+|---|---|---|
+| 1. Demande | `hermes-cockpit` `portal.mjs`, `requestBrain()` | `POST /api/brain` écrit `{ <agent>: <modèle> }` dans `agent-brains.json`, sous le dossier de données du cockpit. Le modèle doit figurer dans `options` de `agent-brains-status.json`, sinon la demande est refusée. Seuls `talos` et `hulysse` sont proposés. |
+| 2. Application | sur l'hôte, **dans aucun dépôt** | Une tâche planifiée (`brain-apply.sh`, puis `dan-brain set`) lit `agent-brains.json` et écrit `data/cerveau.txt` dans le dossier de l'agent. Elle produit aussi `agent-brains-status.json`, que le cockpit relit. |
+| 3. Prise en compte | `galahad` `engine/src/brain.js`, `getModel()` | Le moteur relit `data/cerveau.txt` dès que sa date de modification change, sans redémarrage. `GALAHAD_MODEL` ne sert qu'au premier démarrage. |
+
+Trois conséquences :
+
+- **Une demande n'est pas un changement.** Le cockpit enregistre une demande ;
+  rien ne confirme qu'elle a été appliquée, sauf le statut que produit le maillon 2.
+- **Le maillon 2 ne se restaure pas depuis git.** Une réinstallation de l'hôte le
+  perd. `galahad` `LESSONS.md` (§ 3.5) décrit un incident de juillet où la chaîne
+  semblait cassée alors que c'est le moteur qui ne relisait plus le fichier.
+- **Le fichier est le contrat.** Un modèle mal écrit dans `cerveau.txt` est pris
+  tel quel au prochain appel ; aucune validation n'a lieu côté moteur.
+
 ## Ce qui n'a pas de contrat, et devrait
 
 État au 10 novembre 2026. Deux des trois liaisons listées ici ont désormais leur
@@ -472,7 +492,7 @@ contrat ; la troisième n'était pas ce qu'on en disait.
 | `hermes-cockpit` → `radar` | **Cette liaison n'existe pas.** Le cockpit ne lit aucune santé de Radar. Il relaie le portail client de l'installation de l'employeur, par `PORTAL_API_URL`. |
 | `hermes-cockpit` → `danmem` | Le cockpit lit un fichier, `danmem-status.json`, et non le service. **Le producteur de ce fichier est sur le VPS, dans aucun dépôt.** |
 | `danmem` ↔ `galahad/engine/src/memory.js` | **Responsabilités et manques écrits ci-dessus.** Restauration, droits et parcours vivant non reçus. |
-| `hermes-cockpit` → `galahad` (modèle d'un agent) | Le cockpit écrit `agent-brains.json` ; une tâche de l'hôte, hors git, en tire `data/cerveau.txt`, que le moteur lit. **Contrat de fichier non écrit.** |
+| `hermes-cockpit` → `galahad` (modèle d'un agent) | **Contrat écrit ci-dessous.** Le maillon central, sur l'hôte, n'est dans aucun dépôt. |
 
 L'admission La Barre → Radar Matanga a désormais un contrat ci-dessus. Elle
 ne reçoit pas encore le cycle de mesure avant/après du Transformation Pilot.
