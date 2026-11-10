@@ -334,6 +334,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.30 | `galahad` : la flotte commerciale attend le relais ; `deliver.sh` paramétré ; une erreur HTTP de Telegram n'est plus archivée comme livrée ; le jeton ne passe plus en argument (part de 4.1) | [galahad#25](https://github.com/xtincell/galahad/pull/25), 167 tests |
 | 0.31 | `la-barre` : README au niveau du code (4.8) ; production relevée : servie sous `powerupgraders.com/la-barre`, derrière la session, et les outils du poste dédié n'y écrivent plus | [la-barre#16](https://github.com/xtincell/la-barre/pull/16) ; `fleet.yml`, `AGENTS.md`, `docs/TOPOLOGIE.md` |
 | 0.32 | `charadesign-generator` : retours tardifs annulés, écritures liées à leur dossier, import validé et versionné (4.14) | [charadesign-generator#5](https://github.com/xtincell/charadesign-generator/pull/5), 14 rouges puis 32/32 |
+| 0.33 | `la-barre` : une fabrique unique pour les huit écrivains de décision, forme stockée identique à l'octet (4.9) | [la-barre#17](https://github.com/xtincell/la-barre/pull/17), 33 tests, cinq régressions volontaires détectées |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -401,7 +402,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.6 | `danmem`, `galahad` | Script de sauvegarde et de restauration : base, volume, ordre, gel des écrivains | Agent, puis recette B2 |
 | 4.7 | `hermes-cockpit` | F10, titre et README **faits** (hermes-cockpit#3, #4) ; reste la configuration morte du compose | Arbitrage : retirer des montages de production |
 | 4.8 | `la-barre` | F1, F2 (la-barre#14), F3 et les tests (la-barre#15), README (la-barre#16) **faits**. Restent les constats sur `ecarts.js` (écarter un écart est impossible depuis l'interface, `facturable` n'est jamais lu) et les outils du poste dédié coupés par la session | Arbitrage pour `facturable` et pour les outils |
-| 4.9 | `la-barre` | Une fabrique unique pour les huit écrivains de décision | Agent ; prérequis de 3.5 |
+| 4.9 | `la-barre` | **Fait** (la-barre#17). Restent l'unicité entre postes et le passage de l'import par la fabrique | Arbitrage 5.5 |
 | 4.10 | `market-expansion-system` | Gabarits cohérents avec la méthode ; promesse d'import tenue ou retirée (F9) | Arbitrage 5.4 |
 | 4.11 | `ADVE-project` | Voir [section 4 bis](#4-bis-la-fusée) | — |
 | 4.12 | `Argos-studio` | Artefact de déploiement pour le VPS ; `If-Match` côté Fusée (F14) ; isolation des consultations ; bouchons | Arbitrage 5.8 pour l'hébergement |
