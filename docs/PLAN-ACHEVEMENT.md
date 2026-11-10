@@ -321,6 +321,9 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.17 | `Argos-studio` : alerte critique de `next` fermée ; alertes de 13 à 3 (app) et de 5 à 1 (workers), sans majeure (2.4) | [Argos-studio#4](https://github.com/xtincell/Argos-studio/pull/4), CI rejouée verte |
 | 0.18 | `galahad` : quatre rôles documentés, et l'enregistrement obligatoire d'un rôle (part de 4.1) | [galahad#23](https://github.com/xtincell/galahad/pull/23) |
 | 0.19 | Une CI réelle sur les cinq dépôts qui n'en avaient pas (1.5) ; chacune a prouvé qu'elle échoue quand c'est cassé | [talos#1](https://github.com/xtincell/talos/pull/1), [hulysse#1](https://github.com/xtincell/hulysse/pull/1), [character-engine#1](https://github.com/xtincell/character-engine/pull/1), [galahad-landing#2](https://github.com/xtincell/galahad-landing/pull/2), [market-expansion-system#1](https://github.com/xtincell/market-expansion-system/pull/1) |
+| 0.20 | `datacollector` : adresses internes et redirections vers elles refusées (2.6) | [datacollector#3](https://github.com/xtincell/datacollector/pull/3), 25 tests ; la course DNS reste ouverte |
+| 0.21 | `character-engine` : les interdits du prompt ne sont plus coupés en silence (F8) | [character-engine#2](https://github.com/xtincell/character-engine/pull/2), sortie identique sous la limite |
+| 0.22 | Contrat du changement de modèle d'un agent écrit (3.8) ; README du cockpit d'exploitation (4.7) | `docs/INTERFACES.md` ; [hermes-cockpit#4](https://github.com/xtincell/hermes-cockpit/pull/4) |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -348,9 +351,9 @@ Sans ce lot, rien de ce qui suit ne peut être déclaré fini.
 | 2.3 | `la-barre` | Écouter sur `127.0.0.1` par défaut (S4) | Test de démarrage ; l'image d'entreprise garde son réglage explicite | **Fait** — la-barre#14 |
 | 2.4 | `Argos-studio` | Monter `next` et les dépendances en alerte (S6) | `npm audit` sans alerte critique, CI verte | **Fait** — Argos-studio#4 ; restent 4 alertes hautes qui exigent une majeure (`prisma` 7, `zod` 4) |
 | 2.5 | `charadesign-generator` | Écoute locale, `.env.example`, `vite` à jour (S7) | CI verte | **Fait** — charadesign-generator#4 |
-| 2.6 | `datacollector` | Refuser adresses privées et redirections (S8) | Tests des cas refusés | Agent |
+| 2.6 | `datacollector` | Refuser adresses privées et redirections (S8) | Tests des cas refusés | **Fait** — datacollector#3 ; la course DNS reste ouverte |
 | 2.7 | `talos` | Soumettre `radar_delete` à la confirmation (S2), ou archiver le dépôt | Test, ou dépôt archivé | Arbitrage 5.3 |
-| 2.8 | VPS | Vérifier le filtrage du terminal `:7681` (S5) | Un reçu : port fermé depuis l'extérieur | B2 |
+| 2.8 | VPS | Vérifier le filtrage du terminal `:7681` (S5) | Un reçu : port fermé depuis l'extérieur | B2. Tenté le 10 novembre : la session ne joint aucun port non standard, même chez un témoin. À vérifier depuis un poste. |
 | 2.9 | Fournisseur | Révoquer la clé en dur de `BrandForge` (S9) | Clé révoquée | **Propriétaire** |
 
 ### Lot 3 — Écrire ce qui n'est écrit nulle part
@@ -384,13 +387,13 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.4 | `radar` | Unicité de `ndeg` : aujourd'hui un POST rejoué crée un doublon, et `update` frappe tous les homonymes | Arbitrage 5.7 |
 | 4.5 | `danmem` | F6 **fait** (danmem#2) ; restent le bail et la remise en file (F7), l'unité et l'exemple d'environnement dans le dépôt, les défauts morts | Agent |
 | 4.6 | `danmem`, `galahad` | Script de sauvegarde et de restauration : base, volume, ordre, gel des écrivains | Agent, puis recette B2 |
-| 4.7 | `hermes-cockpit` | F10 et titre **faits** (hermes-cockpit#3) ; restent le README et la configuration morte | Agent |
+| 4.7 | `hermes-cockpit` | F10, titre et README **faits** (hermes-cockpit#3, #4) ; reste la configuration morte du compose | Arbitrage : retirer des montages de production |
 | 4.8 | `la-barre` | F1 et F2 **faits** (la-barre#14) ; restent F3, les tests de `ecarts.js` et `registre-radar.js`, le README | Agent |
 | 4.9 | `la-barre` | Une fabrique unique pour les huit écrivains de décision | Agent ; prérequis de 3.5 |
 | 4.10 | `market-expansion-system` | Gabarits cohérents avec la méthode ; promesse d'import tenue ou retirée (F9) | Arbitrage 5.4 |
 | 4.11 | `ADVE-project` | Voir [section 4 bis](#4-bis-la-fusée) | — |
 | 4.12 | `Argos-studio` | Artefact de déploiement pour le VPS ; `If-Match` côté Fusée (F14) ; isolation des consultations ; bouchons | Arbitrage 5.8 pour l'hébergement |
-| 4.13 | `character-engine` | F8 ; export du vecteur ; contradiction affichée ; tests | Agent |
+| 4.13 | `character-engine` | F8 **fait** (character-engine#2) ; restent l'export du vecteur et l'affichage des contradictions | Agent |
 | 4.14 | `charadesign-generator` | Annulation des retours tardifs ; import validé | Agent ; 5.9 pour le service |
 | 4.15 | `datacollector` | CDN figés ; fichiers suivis par erreur ; entrée réelle au manifeste | Agent ; 5.9 pour le service |
 | 4.16 | `galahad-landing` | Réécriture pour le bon acheteur | Arbitrage 5.12 |
@@ -502,7 +505,7 @@ Chacun est posé comme une question. Une réponse courte suffit.
 
 | Si le propriétaire… | Alors un agent peut… |
 |---|---|
-| ne fait rien de plus | 2.6, et les gestes « Agent » restants du lot 4 |
+| ne fait rien de plus | Les gestes « Agent » restants du lot 4 |
 | régénère `FLEET_TOKEN` | Fermer P1 côté flotte |
 | donne son accord sur #873 | Fermer 1.2 et 1.3 |
 | ouvre une voie vers le VPS | Commencer le lot 5 |
