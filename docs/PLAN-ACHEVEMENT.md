@@ -328,6 +328,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.24 | `character-engine` : le vecteur survit au rechargement, s'exporte et s'importe ; les contradictions s'affichent sans bloquer (4.13) | [character-engine#3](https://github.com/xtincell/character-engine/pull/3), prompt identique à l'octet sur 32 vecteurs |
 | 0.25 | `danmem` : unité systemd et environnement d'exemple versionnés, contrôlés par un test ; le chat ne tente plus un port Ollama mort (4.5) | [danmem#3](https://github.com/xtincell/danmem/pull/3), 27 + 1 sauté avec pgvector. À la fusion, l'état déclaré dans `fleet.yml` change |
 | 0.26 | `galahad` : relais `dan-oauth` testé en CI avec ses dépendances ; reçus refusés par Danmem (404, 409) mis de côté au lieu d'être retentés sans fin (part de 4.1) | [galahad#24](https://github.com/xtincell/galahad/pull/24), 163 tests moteur, 22 relais |
+| 0.27 | `la-barre` : le délai de verdict se lit sur la version jugée, les verdicts sans date sont comptés à part (F3) ; tests de `ecarts.js` et `registre-radar.js` en CI (4.8) | [la-barre#15](https://github.com/xtincell/la-barre/pull/15), 0/7 puis 7/7 |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -394,7 +395,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.5 | `danmem` | F6 (danmem#2), unité, environnement et défauts morts (danmem#3) **faits** ; restent le bail et la remise en file (F7), et relire l'unité réellement servie | Agent ; B2 pour l'unité servie |
 | 4.6 | `danmem`, `galahad` | Script de sauvegarde et de restauration : base, volume, ordre, gel des écrivains | Agent, puis recette B2 |
 | 4.7 | `hermes-cockpit` | F10, titre et README **faits** (hermes-cockpit#3, #4) ; reste la configuration morte du compose | Arbitrage : retirer des montages de production |
-| 4.8 | `la-barre` | F1 et F2 **faits** (la-barre#14) ; restent F3, les tests de `ecarts.js` et `registre-radar.js`, le README | Agent |
+| 4.8 | `la-barre` | F1, F2 (la-barre#14), F3 et les tests (la-barre#15) **faits**. Restent le README, et quatre constats sur `ecarts.js` : écarter un écart est impossible depuis l'interface, `facturable` n'est jamais lu | Agent ; arbitrage pour `facturable` |
 | 4.9 | `la-barre` | Une fabrique unique pour les huit écrivains de décision | Agent ; prérequis de 3.5 |
 | 4.10 | `market-expansion-system` | Gabarits cohérents avec la méthode ; promesse d'import tenue ou retirée (F9) | Arbitrage 5.4 |
 | 4.11 | `ADVE-project` | Voir [section 4 bis](#4-bis-la-fusée) | — |
