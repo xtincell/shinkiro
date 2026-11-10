@@ -96,6 +96,9 @@ précisément leur contradiction par le second qui constitue un signal.
   trois champs de jugement démentis par le relevé, plus le point d'entrée.
 - `releve-perime` — un `fleet.lock.yml` de plus de quinze jours redevient ce qu'il
   remplaçait : un instantané qui affirme.
+- `mode-dementi` — un mode `coolify`, `docker` ou `systemd` sans l'artefact qu'il
+  exige, et sans état déclaré qui l'assume. Ajouté le 10 novembre 2026 : ce champ
+  était annoncé comme surveillé depuis l'origine, sans qu'aucun contrôle le lise.
 
 Le signal qui aurait épargné l'ADR-0100 — *deux composants, un seul produit* — n'est
 pas dans cette liste. Il demande une recherche de code à travers les dépôts, donc un

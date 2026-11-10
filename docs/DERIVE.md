@@ -80,7 +80,7 @@ qui constitue un signal :
 | `licence: proprietaire` | `licence: ABSENTE` |
 | `deploiement: {racine: views}` | `racines: [.]` |
 
-## 2 · 15 contrôles, deux points d'exécution
+## 2 · 16 contrôles, deux points d'exécution
 
 `scripts/signaux-flotte.mjs` porte les contrôles. Chacun n'écrit **rien** quand tout
 va bien, et une ligne par anomalie sinon.
@@ -99,6 +99,7 @@ node scripts/signaux-flotte.mjs --strict     # sort en 1 s'il trouve (pour la CI
 | `vitalite-dementie` | un composant dit actif qui ne l'est plus |
 | `racine-fantome` | une racine de déploiement que le dépôt ne porte pas |
 | `entree-fantome` | un point d'entrée statique annoncé sous une racine vide |
+| `mode-dementi` | un mode de déploiement sans l'artefact qu'il exige, et non assumé |
 | `faits-dans-le-jugement` | la scission défaite par commodité |
 | `etage-invalide` | un outil versé sur le papier seulement |
 | `source-partagee` | une source que personne ne possède, ou que deux composants revendiquent |

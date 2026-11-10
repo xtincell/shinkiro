@@ -305,7 +305,7 @@ composants:
     maturite: partiel
     licence: proprietaire
     vitalite: actif
-    deploiement: {mode: systemd, entree: src/index.mjs, requiert: postgres}
+    deploiement: {mode: systemd, entree: src/index.mjs, requiert: postgres, etat: "unité systemd et environnement sur l'hôte seulement, dans aucun dépôt"}
     description: >-
       Mémoire contextuelle partagée : observations attribuées, rappel hybride,
       cartes, dérivation et historique de consolidation. File de travaux entre
@@ -479,7 +479,7 @@ composants:
 #
 # Elles sont listées ici pour une seule raison : sans cela elles sont invisibles
 # à tout. L'audit n'inspecte que des dépôts GitHub, et une skill vivant dans un
-# compte Claude n'est vue par aucun des quinze signaux. C'est l'angle mort connu
+# compte Claude n'est vue par aucun des seize signaux. C'est l'angle mort connu
 # du dispositif, et le déclarer est la seule chose qu'on puisse en faire.
 derives_non_canon:
   - {nom: adve-cult-marketing,             ou: compte-claude, canon: ADVE-project}

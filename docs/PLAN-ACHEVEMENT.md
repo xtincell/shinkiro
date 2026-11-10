@@ -260,8 +260,8 @@ dépôt nommé.
 | M2 | `shinkiro` | Voir B1. |
 | M3 | `talos`, `hulysse`, `character-engine`, `galahad-landing`, `market-expansion-system` | Aucune CI. |
 | M4 | `galahad`, `danmem`, `hermes-cockpit`, `talos`, `hulysse` | Aucun script de sauvegarde ou de restauration, dans aucun des cinq. |
-| M5 | `shinkiro` | Aucun signal ne confronte `deploiement.mode` aux artefacts. L'en-tête de `fleet.yml` l'annonce comme une tension surveillée ; elle ne l'est pas. |
-| M6 | `shinkiro` | `vitalite: gele` n'est jamais démenti : trois dépôts « gelés » ont des commits récents. |
+| M5 | `shinkiro` | Aucun signal ne confrontait `deploiement.mode` aux artefacts, alors que l'en-tête de `fleet.yml` l'annonçait surveillé. **Fermé le 10 novembre** par `mode-dementi`. |
+| M6 | `shinkiro` | `vitalite: gele` n'est jamais démenti. Examen fait : les commits récents de `talos`, `hulysse` et `character-engine` sont des commits d'hygiène du programme ; seuls `la-fusee-blueprint` et `charadesign-generator` ont reçu de vraies corrections, le 7 octobre. |
 | M7 | `ADVE-project` | Huit fichiers de tests PostgreSQL ne tournent dans aucun workflow. Les reçus « PostgreSQL isolés » du lot 549 sont donc seulement locaux. |
 | M8 | `ADVE-project` | Le job PostgreSQL de la CI ne fixe pas la mémoire de Node. Rejoué ici, il échoue par manque de mémoire sur `tests/integration/asset-original.postgres.test.ts` ; il passe avec 6 Gio. Son vert dépend de la machine. |
 | M9 | `ADVE-project` | `scheduled-ops` est vert sans rien appeler quand `PROD_BASE_URL` manque. `lighthouse` a un préréglage invalide. `preflight` mesure l'absence d'un fichier. |
@@ -312,6 +312,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.9 | Garde de `galahad` étendu aux formes hôte, pannes d'intégration rendues à l'opérateur (2.1, 2.2) | [galahad#22](https://github.com/xtincell/galahad/pull/22), 164 tests verts, CI verte |
 | 0.10 | Grille de La Barre réparée, écoute locale par défaut, parcours navigateur réparé (2.3, et F1 et F2 de 4.8) | [la-barre#14](https://github.com/xtincell/la-barre/pull/14), parcours `PASS` |
 | 0.11 | Relevé de production par Coolify ; portail public redéployé | Section 2.3 ; `shinkiro.powerupgraders.com` sert le 20 octobre au lieu du 14 septembre |
+| 0.12 | Signal `mode-dementi` (1.6) ; l'unité systemd de `danmem`, absente de tout dépôt, est désormais déclarée | S'allume quand l'état n'est pas déclaré, se tait sinon ; `--strict` vert |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -324,8 +325,8 @@ Sans ce lot, rien de ce qui suit ne peut être déclaré fini.
 | 1.3 | `ADVE-project` | Fermer les 211 issues « SLO breach » | Zéro issue de ce titre | Après 1.2. Agent, sur accord : 211 notifications |
 | 1.4 | `ADVE-project`, `galahad` | Mesurer le SLO depuis le VPS, où la base est joignable, plutôt que depuis GitHub | Un relevé SLO daté, lu par le workflow | Arbitrage : procédure `galahad` ou tâche planifiée. Puis B2 |
 | 1.5 | `talos`, `hulysse`, `character-engine`, `galahad-landing`, `market-expansion-system` | Une CI minimale par dépôt : syntaxe, liens, gabarits | Cinq workflows verts | Agent |
-| 1.6 | `shinkiro` | Signal `mode-dementi` : un mode déclaré sans son artefact est une dérive | Le signal s'allume sur Argos, qui n'a ni Dockerfile ni compose | Agent |
-| 1.7 | `shinkiro` | Étendre `vitalite-dementie` aux composants « gelés » qui bougent | Le signal nomme les trois dépôts concernés | Agent |
+| 1.6 | `shinkiro` | Signal `mode-dementi` : un mode déclaré sans son artefact est une dérive | Il a relevé `danmem` ; Argos l'assume par son état déclaré | **Fait** |
+| 1.7 | `shinkiro` | Étendre `vitalite-dementie` aux composants « gelés » qui bougent | — | **Écarté** : un compte de commits ne distingue pas l'hygiène du programme d'un vrai travail ; le signal crierait au loup |
 | 1.8 | `shinkiro` | Faire ouvrir par le workflow une PR du lock rafraîchi | Le geste hebdomadaire devient une fusion | Arbitrage |
 
 ### Lot 2 — Fermer les failles
@@ -493,7 +494,7 @@ Chacun est posé comme une question. Une réponse courte suffit.
 
 | Si le propriétaire… | Alors un agent peut… |
 |---|---|
-| ne fait rien de plus | Lots 1.5 à 1.7, 2.4 à 2.6, et les gestes « Agent » restants du lot 4 |
+| ne fait rien de plus | Lot 1.5, 2.4 à 2.6, et les gestes « Agent » restants du lot 4 |
 | régénère `FLEET_TOKEN` | Fermer P1 côté flotte |
 | donne son accord sur #873 | Fermer 1.2 et 1.3 |
 | ouvre une voie vers le VPS | Commencer le lot 5 |
