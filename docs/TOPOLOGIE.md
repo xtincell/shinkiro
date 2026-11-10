@@ -61,11 +61,11 @@ par un compose racine.
 
 | Mode | Composants | Artefact constaté |
 |---|---|---|
-| **Coolify** *(le VPS)* | `galahad`, `hermes-cockpit` | compose piloté par Coolify, labels Traefik, TLS par FQDN, réseau `coolify` externe |
+| **Coolify** *(le VPS)* | `galahad`, `hermes-cockpit`, `la-barre` | compose piloté par Coolify, labels Traefik, TLS par FQDN, réseau `coolify` externe ; `la-barre` depuis son Dockerfile, sous `powerupgraders.com/la-barre`, derrière la session de La Fusée |
 | **systemd** *(l'hôte)* | `talos`, `hulysse`, `danmem`, `galahad` (pare-feu docker) | unités des rôles ; `danmem.service` observé sur l'hôte ; `deploy/systemd/galahad-docker-firewall.service` |
 | ~~Vercel~~ *(non utilisé — voir la correction du 10 novembre)* | `ADVE-project`, `Argos-studio` | `next.config.ts`, `vercel.json`, Prisma |
 | **Docker autonome** | `radar`, `galahad-landing` | Dockerfile sans orchestration imposée |
-| **Statique / Pages** | `indice-maturite`, `la-barre`, `charadesign-generator`, `generateur-approches`, `character-engine`, `la-fusee-blueprint`, front `datacollector` | `index.html` ouvrable, ou Pages |
+| **Statique / Pages** | `indice-maturite`, `la-barre` (hors production), `charadesign-generator`, `generateur-approches`, `character-engine`, `la-fusee-blueprint`, front `datacollector` | `index.html` ouvrable, ou Pages |
 
 DataCollector ne possède pas de Dockerfile. Son front HTML appelle un serveur
 Flask distinct (`server.py`, dépendances Python) ; ouvrir le HTML ne reçoit pas

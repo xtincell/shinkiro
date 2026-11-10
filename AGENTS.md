@@ -29,7 +29,7 @@ L'ordre n'est pas arbitraire : chaque étape rend la suivante vérifiable.
 | 1 | Le moteur d'agents | `galahad` | Zéro dépendance npm, zéro build. Se lance seul, se vérifie seul. Tout le reste s'y branche. |
 | 2 | Le tracker | `radar` | Postgres + Node stdlib. Fournit le **journal d'événements** dont dépend toute mesure avant/après. |
 | 3 | Les modules d'agents | `talos`, `hulysse`, `danmem` | Guardian, Traveler, mémoire. Ne les construis pas avant que `galahad` tourne. `talos` et `hulysse` sont des dépôts historiques : les services servent une variante de `galahad`. `danmem` est un service distinct, avec sa base. |
-| 4 | Le poste de travail | `la-barre` | S'ouvre sans serveur ni compte : se teste en ouvrant `index.html`. En production, `servir.mjs` la sert derrière la session de La Fusée. |
+| 4 | Le poste de travail | `la-barre` | S'ouvre sans serveur ni compte : `index.html` ouvert seul montre un jeu d'exemple. Ses tests passent par `node --test` et Playwright. En production, Coolify la sert depuis son Dockerfile, sous `powerupgraders.com/la-barre`, derrière la session de La Fusée ; `servir.mjs` n'a pas d'authentification propre. |
 | 5 | La méthode | `ADVE-project` | Next.js + Prisma. **Le plus lourd — en dernier.** Consulte le relevé `fleet.lock.yml` et les ADR courantes du dépôt avant de le modifier. |
 | 6 | Les outils spécialisés | `Argos-studio`, `charadesign-generator` | Autonomes, sans dépendance sur le reste. |
 
