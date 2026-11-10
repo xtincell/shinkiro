@@ -86,18 +86,18 @@ couches en dessous disent comment.
 | Dépôt | Rôle |
 |---|---|
 | [`galahad`](https://github.com/xtincell/galahad) | **Canonique, et produit du portefeuille.** Une équipe d'IA organisée en agents qui fait tourner l'agence en autonomie depuis un serveur dédié. Pilotée depuis Telegram, agnostique au fournisseur. Zéro build, zéro port entrant. |
-| [`talos`](https://github.com/xtincell/talos) | Rôle **Guardian** — patrouille santé et QA code. |
-| [`hulysse`](https://github.com/xtincell/hulysse) | Rôle **Traveler** — explorateur autonome, bâtisseur de nuit. |
-| [`danmem`](https://github.com/xtincell/danmem) | Couche mémoire — peers, deriver, dialectique. |
+| [`talos`](https://github.com/xtincell/talos) | Rôle **Guardian** — patrouille santé et QA code. Dépôt historique : le service sert une variante de `galahad`. |
+| [`hulysse`](https://github.com/xtincell/hulysse) | Rôle **Traveler** — explorateur autonome, bâtisseur de nuit. Dépôt historique, comme `talos`. |
+| [`danmem`](https://github.com/xtincell/danmem) | Mémoire partagée — service HTTP et PostgreSQL distinct de `galahad`, file de travaux entre agents. |
 | [`radar`](https://github.com/xtincell/radar) | Tracker de tâches auto-hébergeable. **Reste autonome** : c'est sa valeur. |
 
-Les trois rôles sont décrits dans `galahad/engine/roles/{chef,guardian,traveler}.md`.
+Les quatre rôles sont décrits dans `galahad/engine/roles/{chef,guardian,traveler,commercial}.md`.
 
 ### 04 · Outils métier — ce qui démontre le positionnement
 
 | Dépôt | Rôle |
 |---|---|
-| [`la-barre`](https://github.com/xtincell/la-barre) | **Pièce maîtresse.** Le poste de travail du directeur de la création : du brief au livrable, et les talents qui les font. Aucun serveur, aucun compte. |
+| [`la-barre`](https://github.com/xtincell/la-barre) | **Pièce maîtresse.** Le poste de travail du directeur de la création : du brief au livrable, et les talents qui les font. S'ouvre sans serveur ni compte ; servie en production par un petit serveur, derrière la session de La Fusée. |
 | [`Argos-studio`](https://github.com/xtincell/Argos-studio) | La plus grande bibliothèque qualifiée de campagnes. Socle du Content Performance Loop. |
 | [`charadesign-generator`](https://github.com/xtincell/charadesign-generator) | Pipeline LSI-CD v3.4 — de l'archétype triangulé à la sortie multi-vues. |
 

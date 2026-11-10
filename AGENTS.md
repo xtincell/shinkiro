@@ -28,8 +28,8 @@ L'ordre n'est pas arbitraire : chaque étape rend la suivante vérifiable.
 |---|---|---|---|
 | 1 | Le moteur d'agents | `galahad` | Zéro dépendance npm, zéro build. Se lance seul, se vérifie seul. Tout le reste s'y branche. |
 | 2 | Le tracker | `radar` | Postgres + Node stdlib. Fournit le **journal d'événements** dont dépend toute mesure avant/après. |
-| 3 | Les modules d'agents | `talos`, `hulysse`, `danmem` | Guardian, Traveler, mémoire. Ne les construis pas avant que `galahad` tourne : ce sont des rôles du même moteur. |
-| 4 | Le poste de travail | `la-barre` | Aucun serveur, aucun compte. Se teste en ouvrant `index.html`. |
+| 3 | Les modules d'agents | `talos`, `hulysse`, `danmem` | Guardian, Traveler, mémoire. Ne les construis pas avant que `galahad` tourne. `talos` et `hulysse` sont des dépôts historiques : les services servent une variante de `galahad`. `danmem` est un service distinct, avec sa base. |
+| 4 | Le poste de travail | `la-barre` | S'ouvre sans serveur ni compte : se teste en ouvrant `index.html`. En production, `servir.mjs` la sert derrière la session de La Fusée. |
 | 5 | La méthode | `ADVE-project` | Next.js + Prisma. **Le plus lourd — en dernier.** Consulte le relevé `fleet.lock.yml` et les ADR courantes du dépôt avant de le modifier. |
 | 6 | Les outils spécialisés | `Argos-studio`, `charadesign-generator` | Autonomes, sans dépendance sur le reste. |
 
@@ -87,9 +87,10 @@ Quatre pièges, relevés en rejouant ces tests le 10 novembre 2026 :
   une instance = une équipe = une base.
 - **`galahad` n'a aucune dépendance npm** dans son moteur. Si tu en ajoutes une, tu casses la
   promesse « zéro build » du README. Justifie-le dans une ADR.
-- **Le cerveau agentique est délégué**, pas réécrit. Talos ne réimplémente ni la boucle, ni
-  les outils, ni les sessions : il écrit la mémoire stratifiée, la patrouille, le canal, le
-  journal, et câble les garde-fous en dur.
+- **Le cerveau agentique se délègue, il ne se réécrit pas.** C'est la règle de la
+  convergence, pas encore l'état des dépôts : le dépôt historique `talos` porte sa propre
+  boucle, ses outils et ses sessions. Ce que `galahad` doit en recevoir, c'est le reste :
+  la mémoire stratifiée, des contrôles de patrouille, et ses garde-fous câblés en dur.
 
 ## Règles de contribution
 
