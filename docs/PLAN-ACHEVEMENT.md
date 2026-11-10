@@ -327,6 +327,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.23 | `datacollector` : CDN figés (empreinte sauf Tailwind, dont le CDN refuse le contrôle), fichiers générés retirés du suivi, `flask-cors` mort retiré (4.15) | [datacollector#4](https://github.com/xtincell/datacollector/pull/4), 18 + 4 tests, page chargée sans erreur |
 | 0.24 | `character-engine` : le vecteur survit au rechargement, s'exporte et s'importe ; les contradictions s'affichent sans bloquer (4.13) | [character-engine#3](https://github.com/xtincell/character-engine/pull/3), prompt identique à l'octet sur 32 vecteurs |
 | 0.25 | `danmem` : unité systemd et environnement d'exemple versionnés, contrôlés par un test ; le chat ne tente plus un port Ollama mort (4.5) | [danmem#3](https://github.com/xtincell/danmem/pull/3), 27 + 1 sauté avec pgvector. À la fusion, l'état déclaré dans `fleet.yml` change |
+| 0.26 | `galahad` : relais `dan-oauth` testé en CI avec ses dépendances ; reçus refusés par Danmem (404, 409) mis de côté au lieu d'être retentés sans fin (part de 4.1) | [galahad#24](https://github.com/xtincell/galahad/pull/24), 163 tests moteur, 22 relais |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -386,7 +387,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 
 | # | Dépôt | Gestes | Prérequis |
 |---|---|---|---|
-| 4.1 | `galahad` | Rôles documentés **faits** (galahad#23) ; restent `dan-oauth` en CI avec ses dépendances, le `CHANGELOG` à 0.1.16, la dépendance de l'unité commerciale sur `dan-oauth`, la file morte des reçus refusés, les valeurs en dur de `deliver.sh` | Agent |
+| 4.1 | `galahad` | **Faits** : rôles (galahad#23), `dan-oauth` en CI et reçus refusés (galahad#24). Restent le `CHANGELOG` à 0.1.16, la dépendance de l'unité commerciale sur `dan-oauth`, les valeurs en dur de `deliver.sh`, et la version de Hermes servie | Agent ; B2 pour la version servie |
 | 4.2 | `galahad` | Recevoir les capacités donneuses : garde d'isolation, contrôles de patrouille, alerte de repli | Arbitrage 5.3 |
 | 4.3 | `radar` | README des migrations (F13) ; `npm ci` dans le Dockerfile ; format `RADAR_INSTANCES` | **Fait** — radar#6 |
 | 4.4 | `radar` | Unicité de `ndeg` : aujourd'hui un POST rejoué crée un doublon, et `update` frappe tous les homonymes | Arbitrage 5.7 |
