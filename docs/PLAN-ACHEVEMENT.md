@@ -397,7 +397,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.2 | `galahad` | Recevoir les capacités donneuses : garde d'isolation, contrôles de patrouille, alerte de repli | Arbitrage 5.3 |
 | 4.3 | `radar` | README des migrations (F13) ; `npm ci` dans le Dockerfile ; format `RADAR_INSTANCES` | **Fait** — radar#6 |
 | 4.4 | `radar` | Unicité de `ndeg` : aujourd'hui un POST rejoué crée un doublon, et `update` frappe tous les homonymes | Arbitrage 5.7 |
-| 4.5 | `danmem` | F6 (danmem#2), unité, environnement et défauts morts (danmem#3) **faits** ; restent le bail et la remise en file (F7), et relire l'unité réellement servie | Agent ; B2 pour l'unité servie |
+| 4.5 | `danmem` | **Faits** : F6 (danmem#2), unité, environnement et défauts morts (danmem#3), bail et remise en file F7 (danmem#4, à fusionner après #3). Restent l'appel de `release` côté Galahad et la relecture de l'unité servie | B2 pour l'unité servie |
 | 4.6 | `danmem`, `galahad` | Script de sauvegarde et de restauration : base, volume, ordre, gel des écrivains | Agent, puis recette B2 |
 | 4.7 | `hermes-cockpit` | F10, titre et README **faits** (hermes-cockpit#3, #4) ; reste la configuration morte du compose | Arbitrage : retirer des montages de production |
 | 4.8 | `la-barre` | F1, F2 (la-barre#14), F3 et les tests (la-barre#15), README (la-barre#16) **faits**. Restent les constats sur `ecarts.js` (écarter un écart est impossible depuis l'interface, `facturable` n'est jamais lu) et les outils du poste dédié coupés par la session | Arbitrage pour `facturable` et pour les outils |
