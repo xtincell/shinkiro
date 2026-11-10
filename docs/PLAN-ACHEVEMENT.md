@@ -336,6 +336,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.32 | `charadesign-generator` : retours tardifs annulés, écritures liées à leur dossier, import validé et versionné (4.14) | [charadesign-generator#5](https://github.com/xtincell/charadesign-generator/pull/5), 14 rouges puis 32/32 |
 | 0.33 | `la-barre` : une fabrique unique pour les huit écrivains de décision, forme stockée identique à l'octet (4.9) | [la-barre#17](https://github.com/xtincell/la-barre/pull/17), 33 tests, cinq régressions volontaires détectées |
 | 0.34 | Sauvegarde et restauration de la mémoire : gel par arrêt, paquet vérifié, ordre Galahad puis Danmem, restauration confrontée entre les deux (4.6) | [danmem#5](https://github.com/xtincell/danmem/pull/5), [galahad#26](https://github.com/xtincell/galahad/pull/26) ; recette croisée locale, contre-épreuves refusées |
+| 0.35 | `ADVE-project` : un compte supprimé ne retrouve plus sa session ; seuil CODB, préflight du relais, Oracle vide et Lighthouse corrigés (4.11.b, c, e, f, g), lot 6.27.554 | [ADVE-project#1165](https://github.com/xtincell/ADVE-project/pull/1165), 16 échecs puis 25/25, 5 696 tests unitaires |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -464,12 +465,12 @@ Ce lot ne se planifie pas, il se prépare. Trois préparations sont à portée :
 | # | Geste | Référence |
 |---|---|---|
 | 4.11.a | Le compositeur de production appelle l'outil cible avec une entrée vide | `docs/governance/RESIDUAL-DEBT.md:109-131` |
-| 4.11.b | Seuil faux du calculateur CODB | `src/server/services/glory-tools/calculators.ts:95` |
-| 4.11.c | `generateAiFollowUps` teste les clés et ignore le relais OAuth | `src/server/services/quick-intake/question-bank.ts:302-304` |
+| 4.11.b | **Fait** (#1165) — Seuil faux du calculateur CODB | `src/server/services/glory-tools/calculators.ts:95` |
+| 4.11.c | **Fait** (#1165) — `generateAiFollowUps` teste les clés et ignore le relais OAuth | `src/server/services/quick-intake/question-bank.ts:302-304` |
 | 4.11.d | Chiffres non sourcés dans la restitution | `docs/governance/RESIDUAL-DEBT.md:1750-1759` |
-| 4.11.e | Oracle annonce « 6 sections complètes » pour zéro section rédigée | `docs/governance/RESIDUAL-DEBT.md:3768-3782` |
-| 4.11.f | Un utilisateur supprimé peut être recréé depuis un jeton encore signé | `docs/governance/RESIDUAL-DEBT.md:3501-3509` |
-| 4.11.g | Préréglage Lighthouse invalide | `.lighthouserc.json:5` |
+| 4.11.e | **Fait** (#1165) — Oracle annonce « 6 sections complètes » pour zéro section rédigée | `docs/governance/RESIDUAL-DEBT.md:3768-3782` |
+| 4.11.f | **Fait** (#1165) — Un utilisateur supprimé peut être recréé depuis un jeton encore signé | `docs/governance/RESIDUAL-DEBT.md:3501-3509` |
+| 4.11.g | **Fait** (#1165) — Préréglage Lighthouse invalide | `.lighthouserc.json:5` |
 | 4.11.h | Brancher en CI les huit fichiers de tests PostgreSQL orphelins, et fixer la mémoire du job (M7, M8) | `.github/workflows/ci.yml:73-125` |
 | 4.11.i | Réparer ou retirer `deploy.yml` et `release.yml` (M10) | `.github/workflows/` |
 | 4.11.j | 63 alertes de dépendances, dont 9 critiques | relevé à l'installation |
