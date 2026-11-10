@@ -329,6 +329,8 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.25 | `danmem` : unité systemd et environnement d'exemple versionnés, contrôlés par un test ; le chat ne tente plus un port Ollama mort (4.5) | [danmem#3](https://github.com/xtincell/danmem/pull/3), 27 + 1 sauté avec pgvector. À la fusion, l'état déclaré dans `fleet.yml` change |
 | 0.26 | `galahad` : relais `dan-oauth` testé en CI avec ses dépendances ; reçus refusés par Danmem (404, 409) mis de côté au lieu d'être retentés sans fin (part de 4.1) | [galahad#24](https://github.com/xtincell/galahad/pull/24), 163 tests moteur, 22 relais |
 | 0.27 | `la-barre` : le délai de verdict se lit sur la version jugée, les verdicts sans date sont comptés à part (F3) ; tests de `ecarts.js` et `registre-radar.js` en CI (4.8) | [la-barre#15](https://github.com/xtincell/la-barre/pull/15), 0/7 puis 7/7 |
+| 0.28 | `danmem` : bail et remise en file d'un travail réclamé, plafond de tentatives (F7) | [danmem#4](https://github.com/xtincell/danmem/pull/4), 5 échecs puis 25/25 ; fusionner après #3 |
+| 0.29 | ADR proposées sur la jointure des taxonomies (3.4) et le câblage La Barre → Radar (3.5) | [SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md), [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md) ; 213 références relues |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -376,8 +378,8 @@ journaux datés : le README le dit, sans les réécrire.
 | 3.1 | Le contrat MCP `talos` ↔ `radar` dans `docs/INTERFACES.md` | Transport stdio, sept outils avec leurs appels, douze écarts avec Radar | Agent |
 | 3.2 | Le partage des cockpits dans `docs/TOPOLOGIE.md` | Tableau de onze capacités ; deux recouvrements seulement | Agent, puis arbitrage 5.2 |
 | 3.3 | Les couches mémoire : qui écrit quoi, et les dix manques avant une restauration recevable | Relevé complet des deux dépôts | Agent |
-| 3.4 | Une ADR sur la jointure des taxonomies d'écart | Deux options chiffrées en fichiers touchés | Arbitrage 5.4 |
-| 3.5 | Une ADR sur le câblage La Barre → Radar | Trois sens de flux possibles, fichiers à créer de chaque côté | Arbitrages 5.5 et 5.6 |
+| 3.4 | Une ADR sur la jointure des taxonomies d'écart | **Proposée** : [SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md), trois options chiffrées en fichiers touchés | Arbitrage 5.4, puis passage en Accepted |
+| 3.5 | Une ADR sur le câblage La Barre → Radar | **Proposée** : [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md), trois sens, fichiers de chaque côté, neuf points pour 5.6 | Arbitrages 5.5 et 5.6, puis passage en Accepted |
 | 3.6 | Reprendre les jugements périmés de `fleet.yml` et les dix-huit contradictions | Section 3.4 | Agent |
 | 3.7 | La définition d'« achevé » | — | **B3** |
 | 3.8 | Le contrat de fichier `agent-brains.json` → `cerveau.txt` | **Écrit** dans `docs/INTERFACES.md` ; le maillon central reste hors git | Verser le script de l'hôte dans un dépôt : B2 |

@@ -257,12 +257,14 @@ attendent un arbitrage.
    restauration recevable, sont dans [`INTERFACES.md`](INTERFACES.md). La
    restauration elle-même reste à recevoir.
 4. **La jointure des deux taxonomies d'écart**, et le branchement de
-   `la-barre/vue-matrice` sur le Market Expansion System. Deux options sont
-   cadrées ; elles attendent les arbitrages 5.4 du plan.
+   `la-barre/vue-matrice` sur le Market Expansion System. Trois options sont
+   posées dans [SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md) ; elles
+   attendent l'arbitrage 5.4 du plan.
 5. **Le câblage `la-barre` → `radar`.** La Barre produit les décisions, Radar
    tient le journal. La mesure avant/après du Transformation Pilot en dépend.
    Aujourd'hui, dans la flotte, aucune décision ne circule, dans aucun sens, et
    le dépôt `radar` ne contient aucune admission La Barre. L'admission décrite
    dans [`INTERFACES.md`](INTERFACES.md) vit dans l'installation de l'employeur,
-   hors flotte. Le cadrage attend les arbitrages 5.5
-   et 5.6 du plan.
+   hors flotte. Les trois sens de flux sont posés dans
+   [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md) ; ils attendent les
+   arbitrages 5.5 et 5.6 du plan.
