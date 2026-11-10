@@ -452,7 +452,7 @@ composants:
 #
 # Elles sont listées ici pour une seule raison : sans cela elles sont invisibles
 # à tout. L'audit n'inspecte que des dépôts GitHub, et une skill vivant dans un
-# compte Claude n'est vue par aucun des douze signaux. C'est l'angle mort connu
+# compte Claude n'est vue par aucun des quinze signaux. C'est l'angle mort connu
 # du dispositif, et le déclarer est la seule chose qu'on puisse en faire.
 derives_non_canon:
   - {nom: adve-cult-marketing,             ou: compte-claude, canon: ADVE-project}

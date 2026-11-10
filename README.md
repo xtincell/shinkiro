@@ -131,6 +131,10 @@ réception complète du programme. Les sept chantiers restent ouverts :
 - [BanaHealth, coordonnées et maintenance client](docs/RECEPTION-BANAHEALTH.md)
 - [Décisions communes et assise des bilans dans La Barre](docs/RECEPTION-DECISIONS-BILANS.md)
 
+**Pour terminer** — [`docs/PLAN-ACHEVEMENT.md`](docs/PLAN-ACHEVEMENT.md) dit ce qui
+reste, ce qui bloque chaque point et dans quel ordre intervenir. Son
+[inventaire](docs/INVENTAIRE-POINTS-OUVERTS.md) liste les 111 points ouverts, un par un.
+
 **Pour construire** — commence par là, dans cet ordre :
 
 - [`fleet.yml`](fleet.yml) — le manifeste des composants : **le jugement**, écrit à la main. `make clone-all` matérialise la flotte.
