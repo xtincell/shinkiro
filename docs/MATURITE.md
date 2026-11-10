@@ -326,6 +326,24 @@ sont comptées, pas estimées. Voir [`fleet.yml`](../fleet.yml) pour le détail 
 le code recensé, pas une réception des services.** Les réceptions ultérieures
 ci-dessus et les rapports liés priment sur ces états initiaux.
 
+### Ce que ce tableau affirme, et qui est faux au 10 novembre 2026
+
+Relevé dans les dépôts et par l'API Coolify le 10 novembre. Le tableau reste tel
+quel, comme trace ; ces lignes disent ce qui ne tient plus.
+
+| Composant | Le tableau dit | Constaté le 10 novembre |
+|---|---|---|
+| `ADVE-project` | v6.19, 192 ADR | 6.27.552, ADR jusqu'à 0243 |
+| `galahad` | 15 modules, trois rôles | 23 modules, quatre rôles (`commercial` en plus), trois unités systemd |
+| `radar` | Pas de `docs/`, une seule instance | `docs/` existe ; l'instance personnelle tourne ; celle de l'agence tourne sur le code de l'employeur, hors flotte |
+| `danmem` | 5 fichiers, aucun README, rapport avec `memory.js` non établi | 12 fichiers, un README ; les responsabilités sont écrites dans [INTERFACES.md](INTERFACES.md) |
+| `la-barre` | Pas de Dockerfile ; non câblée à `radar` | Servie par Coolify depuis son Dockerfile ; l'admission vers Radar n'existe que dans l'installation de l'employeur |
+| `galahad-landing` | Aucune page publiée | Publiée sur `galahad.powerupgraders.com` |
+| `hermes-cockpit` | Lit la santé de `radar` et `danmem` | Ne lit rien de Radar ; lit Danmem par un fichier |
+| `indice-maturite` | Produit 00, aucun manque | Produit 01 ; l'admission du bilan dans La Fusée reste à recevoir |
+| `charadesign-generator` | Sans reprise prévue | Reprises reçues le 7 octobre |
+| `generateur-approches`, `datacollector` | Gelés, sans dépendance externe | Actifs : raccord La Barre le 19 octobre ; `datacollector` appelle des fournisseurs (Serper, PageSpeed, Reddit) |
+
 Légende : **produit** = tourne en conditions réelles · **utilisable** = fonctionne, non
 éprouvé à l'échelle · **partiel** = des pans manquent · **à qualifier** = documentation
 insuffisante pour trancher.
@@ -367,12 +385,18 @@ insuffisante pour trancher.
    ne doivent pas être assimilées à ces réceptions.
 4. **Le clone local d'`ADVERT_01` porte 111 modifications non commitées.** À trancher avant
    d'archiver le dépôt : récupérer ou jeter.
-5. **Deux cockpits coexistent** — `galahad/cockpit/index.html` et le dépôt `hermes-cockpit` —
-   sans partage de responsabilité écrit.
+5. **Deux cockpits coexistent** — `galahad/cockpit/index.html` et le dépôt `hermes-cockpit`.
+   Depuis le 10 novembre, le partage que montre le code est écrit dans
+   [`TOPOLOGIE.md`](TOPOLOGIE.md) : exécution d'une installation d'un côté,
+   exploitation de l'hôte de l'autre. Il attend sa confirmation (arbitrage 5.2 du
+   [plan d'achèvement](PLAN-ACHEVEMENT.md)).
 6. **Deux taxonomies d'écart, non reliées.** Le Market Expansion System classe *ce qui change*
    selon le marché (langue, marque, SKU, réglementaire) ; `la-barre/app/ecarts.js` classe *qui
    doit la reprise et si elle se facture* (brief, plateforme, bigidea, agence, donneur). La
-   seconde est la plus avancée. Voir [`TOPOLOGIE.md`](TOPOLOGIE.md).
+   seconde est la plus avancée. Deux options de jonction sont cadrées ; elles attendent
+   l'arbitrage 5.4. Voir [`TOPOLOGIE.md`](TOPOLOGIE.md).
 7. **Admission reçue, boucle de résultat ouverte.** La Barre produit le cadrage,
    Radar Matanga admet le projet avec reçu ; les états restent dans Radar.
    Cette liaison ne reçoit pas encore la mesure avant/après du cycle complet.
+   Elle n'existe que dans l'installation de l'employeur : le dépôt `radar` ne
+   contient aucune admission La Barre (relevé du 10 novembre).
