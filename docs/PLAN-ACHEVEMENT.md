@@ -313,6 +313,8 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.10 | Grille de La Barre réparée, écoute locale par défaut, parcours navigateur réparé (2.3, et F1 et F2 de 4.8) | [la-barre#14](https://github.com/xtincell/la-barre/pull/14), parcours `PASS` |
 | 0.11 | Relevé de production par Coolify ; portail public redéployé | Section 2.3 ; `shinkiro.powerupgraders.com` sert le 20 octobre au lieu du 14 septembre |
 | 0.12 | Signal `mode-dementi` (1.6) ; l'unité systemd de `danmem`, absente de tout dépôt, est désormais déclarée | S'allume quand l'état n'est pas déclaré, se tait sinon ; `--strict` vert |
+| 0.13 | `radar` : schéma réellement appliqué documenté, `pg` figé dans l'image, `RADAR_INSTANCES` décrit comme `galahad` le lit (4.3) | [radar#6](https://github.com/xtincell/radar/pull/6) |
+| 0.14 | `hermes-cockpit` : Hulysse n'est plus compté comme Guardian, titre distinct (F10 et titre de 4.7) | [hermes-cockpit#3](https://github.com/xtincell/hermes-cockpit/pull/3), 15/15 |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -372,11 +374,11 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 |---|---|---|---|
 | 4.1 | `galahad` | Documentation des quatre rôles ; `dan-oauth` en CI avec ses dépendances ; `CHANGELOG` à 0.1.16 ; dépendance de l'unité commerciale sur `dan-oauth` ; file morte pour les reçus refusés ; valeurs d'instance en dur dans `deliver.sh` | Agent |
 | 4.2 | `galahad` | Recevoir les capacités donneuses : garde d'isolation, contrôles de patrouille, alerte de repli | Arbitrage 5.3 |
-| 4.3 | `radar` | README des migrations (F13) ; `npm ci` dans le Dockerfile ; format `RADAR_INSTANCES` | Agent |
+| 4.3 | `radar` | README des migrations (F13) ; `npm ci` dans le Dockerfile ; format `RADAR_INSTANCES` | **Fait** — radar#6 |
 | 4.4 | `radar` | Unicité de `ndeg` : aujourd'hui un POST rejoué crée un doublon, et `update` frappe tous les homonymes | Arbitrage 5.7 |
 | 4.5 | `danmem` | Version de schéma vérifiée au démarrage (F6) ; bail et remise en file (F7) ; unité et exemple d'environnement dans le dépôt ; défauts morts | Agent |
 | 4.6 | `danmem`, `galahad` | Script de sauvegarde et de restauration : base, volume, ordre, gel des écrivains | Agent, puis recette B2 |
-| 4.7 | `hermes-cockpit` | README ; configuration morte ; faux positif (F10) ; titre distinct de celui de `galahad` | Agent |
+| 4.7 | `hermes-cockpit` | F10 et titre **faits** (hermes-cockpit#3) ; restent le README et la configuration morte | Agent |
 | 4.8 | `la-barre` | F1 et F2 **faits** (la-barre#14) ; restent F3, les tests de `ecarts.js` et `registre-radar.js`, le README | Agent |
 | 4.9 | `la-barre` | Une fabrique unique pour les huit écrivains de décision | Agent ; prérequis de 3.5 |
 | 4.10 | `market-expansion-system` | Gabarits cohérents avec la méthode ; promesse d'import tenue ou retirée (F9) | Arbitrage 5.4 |
