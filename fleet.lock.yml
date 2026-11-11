@@ -21,8 +21,8 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 3939
-    poids_ko: 109708
+    fichiers: 3948
+    poids_ko: 109829
     licence: presente
     commits_90j: 100
     topics: ["layer-method", shinkiro]
@@ -234,10 +234,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 16
-    poids_ko: 132
+    fichiers: 17
+    poids_ko: 175
     licence: presente
-    commits_90j: 10
+    commits_90j: 13
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
@@ -277,8 +277,8 @@ composants:
     branche: main
     prive: false
     langue: JavaScript
-    fichiers: 289
-    poids_ko: 8086
+    fichiers: 291
+    poids_ko: 8118
     licence: presente
     commits_90j: 100
     topics: ["layer-tools", shinkiro]

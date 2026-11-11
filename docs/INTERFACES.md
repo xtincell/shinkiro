@@ -361,12 +361,15 @@ proposition dans les sources de la marque, par l'Intent
 - une chaîne d'empreintes rompue ;
 - une marque absente ou ambiguë.
 
-Livré le 11 novembre (la-barre#19, ADVE-project#1180, ADR-0244). Ne sont pas
-encore faits :
+Livré le 11 novembre (la-barre#19, ADVE-project#1180, ADR-0244). Depuis
+la-barre#20 et ADVE-project#1183 (ADR-0245), La Fusée déclare dans `contexte.json`
+la personne connectée (`actorAttestation: "SESSION_V1"`) et scelle chaque nouvelle
+décision, ligne de journal et version de bilan à l'enregistrement de la base ; elle
+vérifie ce sceau à la réception d'un bilan. Cette attestation suppose que seul La
+Fusée joint le port de La Barre. Ne sont pas encore faites :
 
 - la relecture du bilan dans le brief de la campagne suivante ;
-- la transmission automatique ;
-- un acteur authentifié.
+- la transmission automatique.
 
 ## talos ↔ radar — MCP
 
