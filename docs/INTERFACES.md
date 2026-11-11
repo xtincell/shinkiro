@@ -19,7 +19,10 @@ une échéance. Le consommateur lit ses pending, réclame atomiquement puis renv
 `done` ou `failed`. Le résultat est conservé localement avant acquittement ; un
 retour perdu est retenté sans rejouer la procédure. Danmem protège le premier
 résultat final et accepte son rejeu identique. Un travail n'est pas une validation
-client. Les clés sont globales à l'instance ; les identités et mandats restent ouverts.
+client. Depuis danmem#7, chaque clé porte une identité et un mandat (strates, pairs,
+travaux) et chaque écriture enregistre l'identité réelle de la clé ; la clé historique
+`MEMORY_API_TOKEN` garde un mandat total sous l'identité `danmem:instance`. Un souvenir
+se rectifie ou se retire avec une trace (qui, quand, pourquoi).
 
 La réception croisée utilise PostgreSQL jetable et deux processus Galahad avec
 panne de retour 503. Elle ne reçoit pas une interruption pendant l'effet, le
