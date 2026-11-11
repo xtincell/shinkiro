@@ -48,13 +48,18 @@ dépôt par dépôt, puis recevoir en production.
 
 **Au 11 novembre, 5 h UTC** : les 37 premiers gestes du [lot 0](#lot-0--fait-le-10-novembre)
 sont fusionnés, toutes CI vertes, dans l'ordre de la [section 4 ter](#4-ter-fusionner-les-pr-ouvertes).
-Cinq ressources Coolify sont redéployées depuis `main` et répondent :
+Cinq ressources Coolify servent désormais `main` :
 
-- La Barre ;
-- `hermes-cockpit` ;
+- La Barre, au commit `e771494` ;
+- `hermes-cockpit`, au commit `2ec9fe1` ;
 - Radar ;
 - `galahad-landing` ;
 - La Fusée en 6.27.556.
+
+Au premier redéploiement, La Barre et `hermes-cockpit` sont revenues sur d'anciens
+commits, parce que Coolify les épinglait (`9735c56` du 19 octobre et `1ea757b` du
+7 octobre). Les épingles ont ensuite été déplacées vers `main`, ce qui tranche
+l'arbitrage 5.19 dans le sens de la consigne « tout déployer ».
 
 Restent à redéployer sur l'hôte, où aucun agent n'a d'accès : les services systemd
 (`danmem`, `talos`, `hulysse`) et le moteur `galahad`, qui tourne en compose et en
@@ -357,6 +362,8 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.38 | `indice-maturite` : la page se rouvre sans réseau après une première visite ; un stockage indisponible ne promet plus de conserver la progression (IM2) | [indice-maturite#2](https://github.com/xtincell/indice-maturite/pull/2), **fusionnée** le 11 novembre ; 16 tests, dont 9 neufs rouges sur l'ancien code ; score identique sur 50 101 jeux de réponses |
 | 0.39 | `danmem` : la CI de réception exécute 41 tests sur 41, consommateur Galahad compris (DM4) | [danmem#6](https://github.com/xtincell/danmem/pull/6), 41/41 en local ; **bloquée** : la CI attend le secret `GALAHAD_DEPLOY_KEY`, à créer par le propriétaire (commandes dans la PR) |
 | 0.40 | `galahad` : un effet interrompu n'est ni perdu ni rejoué ; objectifs isolés par installation et par marque (G4) | [galahad#27](https://github.com/xtincell/galahad/pull/27), **fusionnée** le 11 novembre ; 206 tests, dont 10 neufs (8 rouges sur `main`) |
+| 0.41 | `datacollector` : règles d'URL vérifiées sur l'adresse effectivement connectée, redirections revalidées, codes de refus ; états de source dans le rapport et son PDF (DC2) | [datacollector#5](https://github.com/xtincell/datacollector/pull/5), **fusionnée** ; 36 tests Python et 9 tests Node, 19 rouges avant correction |
+| 0.42 | `la-barre` : les autres gestes de choix passent par la fabrique de décision ; une déviation déclare sa portée (LB3, partiel) | [la-barre#18](https://github.com/xtincell/la-barre/pull/18), **fusionnée** et déployée ; `test:decisions` 50/50. L'acteur authentifié reste ouvert : aucune identité ne parvient de La Fusée à La Barre |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -521,6 +528,10 @@ ont été déclenchés par l'API Coolify, sans attendre l'App GitHub.
   publiée. La ressource de production est passée de `sha-b9bfbfb…` (6.27.552) à
   `sha-d52ffad…` (6.27.556), sans migration nouvelle : 107 migrations sur 107 étaient
   déjà en base. Revenir en arrière, c'est remettre l'ancien tag et redéployer.
+- La Barre et `hermes-cockpit` étaient épinglées dans Coolify sur des commits
+  d'octobre. Les épingles sont passées respectivement de `9735c56` à `e771494` et
+  de `1ea757b` à `2ec9fe1`. Revenir en arrière, c'est remettre l'ancien SHA dans
+  `git_commit_sha` et redéployer. Radar, `galahad-landing` et le portail suivent `HEAD`.
 - La migration `sql/002` de `danmem` reste à passer **avant** de redémarrer le service
   de l'hôte. Aucun accès à l'hôte n'est ouvert à un agent.
 
@@ -561,7 +572,7 @@ Chacun est posé comme une question. Une réponse courte suffit.
 | 5.16 | `galahad` suit un profil personnel (`deploy/dan-hermes/wiki-Alexandre_Profil.md`). Doit-il rester dans ce dépôt ? | `docs/CLOISON.md` |
 | 5.17 | `wiki-prive` est-il bien `adjacent` ? | Le classement posé le 10 novembre |
 | 5.18 | Deux instances de La Fusée hors canon tournent sur le VPS, chacune avec sa base : la lignée archivée `ADVE_v8`, et une branche d'`ADVE-project`. Les arrêter ? | La capacité du VPS ; le classement des lignées |
-| 5.19 | La Barre en production a quatre commits de retard sur `main`. Est-ce voulu ? | Le déploiement de la-barre#14, puisque le déploiement automatique est activé |
+| 5.19 | ~~La Barre en production a quatre commits de retard sur `main`. Est-ce voulu ?~~ *Tranché le 11 novembre* : l'épingle Coolify est passée de `9735c56` à `e771494` | — |
 
 ## 6. Ce qui se fait selon ce qui est débloqué
 
