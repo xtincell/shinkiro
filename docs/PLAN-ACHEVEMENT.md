@@ -54,7 +54,7 @@ Cinq ressources Coolify servent désormais `main` :
 - `hermes-cockpit`, au commit `f8ed2c5` ;
 - Radar ;
 - `galahad-landing` ;
-- La Fusée en 6.27.556.
+- La Fusée en 6.27.557.
 
 Au premier redéploiement, La Barre et `hermes-cockpit` sont revenues sur d'anciens
 commits, parce que Coolify les épinglait (`9735c56` du 19 octobre et `1ea757b` du
@@ -365,7 +365,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.41 | `datacollector` : règles d'URL vérifiées sur l'adresse effectivement connectée, redirections revalidées, codes de refus ; états de source dans le rapport et son PDF (DC2) | [datacollector#5](https://github.com/xtincell/datacollector/pull/5), **fusionnée** ; 36 tests Python et 9 tests Node, 19 rouges avant correction |
 | 0.42 | `la-barre` : les autres gestes de choix passent par la fabrique de décision ; une déviation déclare sa portée (LB3, partiel) | [la-barre#18](https://github.com/xtincell/la-barre/pull/18), **fusionnée** et déployée ; `test:decisions` 50/50. L'acteur authentifié reste ouvert : aucune identité ne parvient de La Fusée à La Barre |
 | 0.43 | `hermes-cockpit` : format des sondes écrit ; une sonde tronquée ou de forme inconnue n'est plus affichée comme un état valide ; écritures concurrentes relues avant renommage (CK4, TR2) | [hermes-cockpit#5](https://github.com/xtincell/hermes-cockpit/pull/5), **fusionnée** et déployée (`f8ed2c5`, `/healthz` 200) ; 27/27, dont 12 rouges sur l'ancien code |
-| 0.44 | `ADVE-project` : un écrivain de source répond 404 typé à un id inconnu ou étranger, au lieu d'un 500 Prisma (IN1), lot 6.27.557 | [ADVE-project#1170](https://github.com/xtincell/ADVE-project/pull/1170), **fusionnée** ; 17 unitaires et 12 PostgreSQL neufs, rouges sur l'ancien code ; 14 contrôles CI verts |
+| 0.44 | `ADVE-project` : un écrivain de source répond 404 typé à un id inconnu ou étranger, au lieu d'un 500 Prisma (IN1), lot 6.27.557 | [ADVE-project#1170](https://github.com/xtincell/ADVE-project/pull/1170), **fusionnée** et livrée en production ; 17 unitaires et 12 PostgreSQL neufs, rouges sur l'ancien code ; 14 contrôles CI verts |
 | 0.45 | `Argos-studio` : erreurs lisibles avec reprise, focus et clavier, 390 px sans débordement, dates enregistrées sans date inventée (AR4) | [Argos-studio#5](https://github.com/xtincell/Argos-studio/pull/5), **fusionnée** ; 23 scénarios Playwright (22 rouges sur `main`) et 26 tests unitaires ; pas de ressource Coolify pour Argos (arbitrage 5.8) |
 
 ### Lot 1 — Rendre les contrôles mesurables
@@ -531,6 +531,8 @@ ont été déclenchés par l'API Coolify, sans attendre l'App GitHub.
   publiée. La ressource de production est passée de `sha-b9bfbfb…` (6.27.552) à
   `sha-d52ffad…` (6.27.556), sans migration nouvelle : 107 migrations sur 107 étaient
   déjà en base. Revenir en arrière, c'est remettre l'ancien tag et redéployer.
+  Même geste ensuite pour #1170 : `sha-564bcc2…`, 6.27.557, toujours 107 migrations
+  sur 107 déjà en base, `/api/version` et `/login` à 200.
 - La Barre et `hermes-cockpit` étaient épinglées dans Coolify sur des commits
   d'octobre. Les épingles sont passées respectivement de `9735c56` à `e771494` et
   de `1ea757b` à `2ec9fe1`, puis à `f8ed2c5` après hermes-cockpit#5. Revenir en arrière, c'est remettre l'ancien SHA dans
