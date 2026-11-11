@@ -318,10 +318,10 @@ composants:
     branche: main
     prive: false
     langue: HTML
-    fichiers: 73
-    poids_ko: 1826
+    fichiers: 76
+    poids_ko: 1852
     licence: presente
-    commits_90j: 10
+    commits_90j: 15
     topics: ["layer-execution", shinkiro]
     racines: [., briefs, briefs/rh]
     artefacts:
