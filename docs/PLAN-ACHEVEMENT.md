@@ -46,6 +46,12 @@ plusieurs touchent la sécurité. Ils sont en [section 3](#3-constats-que-les-do
 mesurables, fermer les failles, écrire ce qui n'est écrit nulle part, réparer
 dépôt par dépôt, puis recevoir en production.
 
+**Au 11 novembre** : 37 gestes faits ([lot 0](#lot-0--fait-le-10-novembre)), portés
+par **32 PR ouvertes, toutes vertes et sans conflit**. Aucune n'est fusionnée : la
+fusion revient au propriétaire, dans l'ordre de la [section 4 ter](#4-ter-fusionner-les-pr-ouvertes).
+Ce qu'un agent peut encore faire seul est désormais petit ; le reste attend les
+six blocages ci-dessus.
+
 ## 1. Ce qu'« achevé » peut vouloir dire
 
 Faute de définition, ce plan en propose une, en quatre paliers. Chacun a un
@@ -492,6 +498,27 @@ Chacun passe par une ADR quand il est structurant, selon la règle de ce dépôt
 - **Les PR en attente** : 14 ouvertes, dont neuf mises à jour automatiques, #873
   et #875 prêtes depuis le 14 septembre, #696 en conflit depuis le 31 juillet.
 
+## 4 ter. Fusionner les PR ouvertes
+
+Toutes sont en brouillon, vertes au 11 novembre, sans conflit avec `main`. Les
+fusions d'essai deux à deux ont été faites dans chaque dépôt où plusieurs PR
+coexistent. **Fusionner ne déploie rien** tant que l'App GitHub de Coolify ne
+redéclenche pas les builds (blocage B2) ; chaque mise en production reste un
+geste du lot 5.
+
+| Dépôt | Ordre | Ce qu'il faut savoir |
+|---|---|---|
+| `shinkiro` | #56 | Ce plan. Après fusion, redéployer le portail par Coolify. |
+| `galahad` | #22, #23, #24, #25, #26 | Aucun conflit deux à deux. Le `CHANGELOG` à 0.1.16 se fait après les cinq. |
+| `danmem` | #2, #3, #4, #5 | #4 après #3 : conflit `CHANGELOG` à résoudre en gardant les deux listes, et le bloc `JOB_LEASE_S` à ajouter à `deploy/danmem.env.example` (texte dans #4). #5 : conflit `CHANGELOG` seul. En production, la migration `sql/002` passe **avant** le redémarrage. |
+| `la-barre` | #14, #15, #17, puis #16 | #16 (README) en dernier : reprendre la ligne `HOST`, la liste des étapes de CI et la ligne `test:decisions`. |
+| `character-engine` | #1, puis #2 et #3 | #1 apporte la CI ; #2 et #3 n'en ont pas tant qu'elle n'est pas sur `main`. |
+| `charadesign-generator` | #4, puis #5 | Aucun conflit. |
+| `datacollector` | #3, puis #4 | Aucun conflit. |
+| `hermes-cockpit` | #3, #4 | Aucun conflit. |
+| `ADVE-project` | #1165, #1167, #1168 | Versions 6.27.554, 555, 556 : réconcilier la version et la tête du `CHANGELOG` à chaque fusion. Livrer exige ensuite de construire l'image puis de redémarrer la ressource Coolify. |
+| `radar`, `Argos-studio`, `talos`, `hulysse`, `galahad-landing`, `market-expansion-system` | une PR chacun | Indépendantes. |
+
 ## 5. Les arbitrages attendus
 
 Chacun est posé comme une question. Une réponse courte suffit.
@@ -522,12 +549,13 @@ Chacun est posé comme une question. Une réponse courte suffit.
 
 | Si le propriétaire… | Alors un agent peut… |
 |---|---|
-| ne fait rien de plus | Les gestes « Agent » restants du lot 4 |
+| ne fait rien de plus | Les gestes « Agent » restants : 4.11.a, d, k, l ; la garde de couches ESLint inerte (constat de #1168) ; 4.18, qui demande un démon Docker |
+| fusionne les 32 PR | Régénérer le relevé, puis recevoir chaque correctif en production dès qu'une voie vers le VPS existe |
 | régénère `FLEET_TOKEN` | Fermer P1 côté flotte |
 | donne son accord sur #873 | Fermer 1.2 et 1.3 |
 | ouvre une voie vers le VPS | Commencer le lot 5 |
 | exporte la définition des chantiers | Écrire 3.7, et rattacher chaque intervention à son chantier |
-| tranche les arbitrages 5.2 à 5.5 | Écrire les deux ADR et lancer le câblage |
+| tranche les arbitrages 5.2 à 5.5 | Passer SHK-0004 et SHK-0005 en Accepted, écrire leurs signaux d'audit, lancer le câblage |
 
 ## Méthode et limites
 
