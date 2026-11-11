@@ -54,7 +54,7 @@ Cinq ressources Coolify servent désormais `main` :
 - `hermes-cockpit`, au commit `f8ed2c5` ;
 - Radar ;
 - `galahad-landing` ;
-- La Fusée en 6.27.564.
+- La Fusée en 6.27.565.
 
 Au premier redéploiement, La Barre et `hermes-cockpit` sont revenues sur d'anciens
 commits, parce que Coolify les épinglait (`9735c56` du 19 octobre et `1ea757b` du
@@ -375,6 +375,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.51 | `ADVE-project` : un seul restaurateur de piliers ; l'historique et le retrait Notoria compensent comme le journal (ADR-0207), avec des refus typés au lieu de 500 (F8), lot 6.27.562 | [ADVE-project#1175](https://github.com/xtincell/ADVE-project/pull/1175), **fusionnée** et livrée, migration comprise ; 14 tests PostgreSQL (10 rouges avant) et un test HARD contre tout second restaurateur. Les 76 archives historiques restent sans filiation inventée ; deux cas de retrait attendent une décision métier |
 | 0.52 | `ADVE-project` : santé de campagne calculée sans modèle, « non calculable » plutôt qu'un vert fabriqué ; le brouillon de reprise survit au remontage ; les éditions concurrentes de tâches et de reprises sont refusées en 409 au lieu de s'écraser (F9), lot 6.27.563 | [ADVE-project#1176](https://github.com/xtincell/ADVE-project/pull/1176), **fusionnée** et livrée ; 11 unitaires, 8 de composant et 15 PostgreSQL, rouges avant. Décision au propriétaire : le défaut historique `GREEN` des campagnes jamais calculées |
 | 0.53 | `ADVE-project` : un seul contrat pour S. La maturité est bornée par le schéma strict, et le gateway, l'auto-filler, la composition et `sequence-vault` lisent le même verdict (F2, ADR-0214 amendé), lot 6.27.564 | [ADVE-project#1177](https://github.com/xtincell/ADVE-project/pull/1177), **fusionnée** et livrée ; 20 unitaires et 2 PostgreSQL neufs, rouges avant. Effet en production : les S réels de forme historique passent « Brouillon » jusqu'à leur recalcul gouverné |
+| 0.54 | `datacollector` et `ADVE-project` : le reçu exporté porte une enveloppe versionnée et vérifiable (schéma, identité, empreinte SHA-256, provenance par mesure, absences jamais à 0). La Fusée l'admet par `INGEST_EXTERNAL_METRIC` (ADR-0146 amendé), avec rejeu idempotent et conflit d'empreinte refusé (DC3), lot 6.27.565 | [datacollector#6](https://github.com/xtincell/datacollector/pull/6) et [ADVE-project#1178](https://github.com/xtincell/ADVE-project/pull/1178), **fusionnées**, La Fusée livrée ; 49 tests Python et 12 Node, 59 unitaires et 5 PostgreSQL côté La Fusée, rouges avant ; vrai reçu admis en local. Pas encore de dépôt depuis une page de console |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -544,7 +545,7 @@ ont été déclenchés par l'API Coolify, sans attendre l'App GitHub.
   6.27.558, même résultat. Puis #1172 : `sha-9ec5661…`, 6.27.559, et #1173 : `sha-ccbd083…`, 6.27.560, même résultat ;
   `/status`, `/pricing` et `/lafusee` à 200. Puis #1174 : `sha-4bb5ebb…`, 6.27.561 ;
   `/argos`, `/sitemap.xml` et `/leaderboard` à 200. Puis #1175 : `sha-567f28a…`, 6.27.562,
-  la migration additive `20261111120000_recommendation_applied_intent` appliquée au démarrage (108 sur 108). Puis #1176 : `sha-0f2f336…`, 6.27.563, et #1177 : `sha-394856f…`, 6.27.564.
+  la migration additive `20261111120000_recommendation_applied_intent` appliquée au démarrage (108 sur 108). Puis #1176 : `sha-0f2f336…`, 6.27.563, et #1177 : `sha-394856f…`, 6.27.564, puis #1178 : `sha-0e0dd69…`, 6.27.565.
 - La Barre et `hermes-cockpit` étaient épinglées dans Coolify sur des commits
   d'octobre. Les épingles sont passées respectivement de `9735c56` à `e771494` et
   de `1ea757b` à `2ec9fe1`, puis à `f8ed2c5` après hermes-cockpit#5. Revenir en arrière, c'est remettre l'ancien SHA dans
