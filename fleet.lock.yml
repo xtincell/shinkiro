@@ -100,13 +100,14 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 205
-    poids_ko: 38504
+    fichiers: 218
+    poids_ko: 38579
     licence: presente
-    commits_90j: 13
+    commits_90j: 19
     topics: ["layer-tools", shinkiro]
-    racines: [app, workers]
+    racines: [., app, workers]
     artefacts:
+      dockerfile: [Dockerfile]
       next: [app/next.config.ts]
       package: [app/package.json, workers/package.json]
       prisma: [app/prisma/migrations/20260512171730_init/migration.sql, app/prisma/migrations/20261019112000_native_dossier_flow/migration.sql, app/prisma/migrations/migration_lock.toml, app/prisma/schema.prisma]
