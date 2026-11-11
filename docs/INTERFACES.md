@@ -19,7 +19,10 @@ une échéance. Le consommateur lit ses pending, réclame atomiquement puis renv
 `done` ou `failed`. Le résultat est conservé localement avant acquittement ; un
 retour perdu est retenté sans rejouer la procédure. Danmem protège le premier
 résultat final et accepte son rejeu identique. Un travail n'est pas une validation
-client. Les clés sont globales à l'instance ; les identités et mandats restent ouverts.
+client. Depuis danmem#7, chaque clé porte une identité et un mandat (strates, pairs,
+travaux) et chaque écriture enregistre l'identité réelle de la clé ; la clé historique
+`MEMORY_API_TOKEN` garde un mandat total sous l'identité `danmem:instance`. Un souvenir
+se rectifie ou se retire avec une trace (qui, quand, pourquoi).
 
 La réception croisée utilise PostgreSQL jetable et deux processus Galahad avec
 panne de retour 503. Elle ne reçoit pas une interruption pendant l'effet, le
@@ -338,6 +341,35 @@ registre de marques ou de scores n'est créé. Questionnaire, reprise, bilans
 partiel/complet et téléchargements sont reçus nativement en ligne le 7 octobre ;
 admission dans le dossier et ouverture hors ligne restent à recevoir. Le repli
 sans stockage est livré (`indice-maturite` `app.js:46-54`, relevé du 10 novembre). Voir [le contrat de l'outil](https://github.com/xtincell/indice-maturite/blob/main/README.md).
+
+## la-barre → la-fusee — bilan de campagne
+
+« Clore le bilan de campagne » passe par la fabrique de décision de La Barre et
+fige une version dans `campagne.bilanVersions`. Chaque version porte une identité
+stable `BIL-<campagne>`, un numéro, son empreinte SHA-256 et celle de la version
+précédente. Une version n'est jamais réécrite.
+
+La Barre ne propose la transmission que si `contexte.json` déclare
+`CAMPAIGN_REVIEW_V1`. Elle n'envoie que l'identité, le numéro et l'empreinte à
+`POST /la-barre/bilan`, avec la même garde que la publication. La Fusée relit la
+version dans la base de La Barre, recalcule l'empreinte, puis la range comme
+proposition dans les sources de la marque, par l'Intent
+`INGEST_BARRE_CAMPAIGN_REVIEW`. Un rejeu est sans effet. Sont refusés :
+
+- une autre empreinte sous un numéro déjà reçu ;
+- une version plus ancienne ;
+- une chaîne d'empreintes rompue ;
+- une marque absente ou ambiguë.
+
+Livré le 11 novembre (la-barre#19, ADVE-project#1180, ADR-0244). Depuis
+la-barre#20 et ADVE-project#1183 (ADR-0245), La Fusée déclare dans `contexte.json`
+la personne connectée (`actorAttestation: "SESSION_V1"`) et scelle chaque nouvelle
+décision, ligne de journal et version de bilan à l'enregistrement de la base ; elle
+vérifie ce sceau à la réception d'un bilan. Cette attestation suppose que seul La
+Fusée joint le port de La Barre. Ne sont pas encore faites :
+
+- la relecture du bilan dans le brief de la campagne suivante ;
+- la transmission automatique.
 
 ## talos ↔ radar — MCP
 

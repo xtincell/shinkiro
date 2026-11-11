@@ -48,13 +48,18 @@ dépôt par dépôt, puis recevoir en production.
 
 **Au 11 novembre, 5 h UTC** : les 37 premiers gestes du [lot 0](#lot-0--fait-le-10-novembre)
 sont fusionnés, toutes CI vertes, dans l'ordre de la [section 4 ter](#4-ter-fusionner-les-pr-ouvertes).
-Cinq ressources Coolify sont redéployées depuis `main` et répondent :
+Cinq ressources Coolify servent désormais `main` :
 
-- La Barre ;
-- `hermes-cockpit` ;
+- La Barre, au commit `49e5744` ;
+- `hermes-cockpit`, au commit `ef95e0c` ;
 - Radar ;
 - `galahad-landing` ;
-- La Fusée en 6.27.556.
+- La Fusée en 6.27.571.
+
+Au premier redéploiement, La Barre et `hermes-cockpit` sont revenues sur d'anciens
+commits, parce que Coolify les épinglait (`9735c56` du 19 octobre et `1ea757b` du
+7 octobre). Les épingles ont ensuite été déplacées vers `main`, ce qui tranche
+l'arbitrage 5.19 dans le sens de la consigne « tout déployer ».
 
 Restent à redéployer sur l'hôte, où aucun agent n'a d'accès : les services systemd
 (`danmem`, `talos`, `hulysse`) et le moteur `galahad`, qui tourne en compose et en
@@ -356,7 +361,30 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.37 | `ADVE-project` : 9 alertes critiques et 21 hautes fermées, arbre de production sans alerte ; `next` 16.4.6 ferme des failles d'exécution de code à distance (4.11.j), lot 6.27.556 | [ADVE-project#1168](https://github.com/xtincell/ADVE-project/pull/1168), build et smoke compilé, 5 672 unitaires, 726 PostgreSQL ; constat : la garde de couches ESLint ne signale rien |
 | 0.38 | `indice-maturite` : la page se rouvre sans réseau après une première visite ; un stockage indisponible ne promet plus de conserver la progression (IM2) | [indice-maturite#2](https://github.com/xtincell/indice-maturite/pull/2), **fusionnée** le 11 novembre ; 16 tests, dont 9 neufs rouges sur l'ancien code ; score identique sur 50 101 jeux de réponses |
 | 0.39 | `danmem` : la CI de réception exécute 41 tests sur 41, consommateur Galahad compris (DM4) | [danmem#6](https://github.com/xtincell/danmem/pull/6), 41/41 en local ; **bloquée** : la CI attend le secret `GALAHAD_DEPLOY_KEY`, à créer par le propriétaire (commandes dans la PR) |
-| 0.40 | `galahad` : un effet interrompu n'est ni perdu ni rejoué ; objectifs isolés par installation et par marque (G4) | [galahad#27](https://github.com/xtincell/galahad/pull/27), 206 tests, dont 10 neufs (8 rouges sur `main`) |
+| 0.40 | `galahad` : un effet interrompu n'est ni perdu ni rejoué ; objectifs isolés par installation et par marque (G4) | [galahad#27](https://github.com/xtincell/galahad/pull/27), **fusionnée** le 11 novembre ; 206 tests, dont 10 neufs (8 rouges sur `main`) |
+| 0.41 | `datacollector` : règles d'URL vérifiées sur l'adresse effectivement connectée, redirections revalidées, codes de refus ; états de source dans le rapport et son PDF (DC2) | [datacollector#5](https://github.com/xtincell/datacollector/pull/5), **fusionnée** ; 36 tests Python et 9 tests Node, 19 rouges avant correction |
+| 0.42 | `la-barre` : les autres gestes de choix passent par la fabrique de décision ; une déviation déclare sa portée (LB3, partiel) | [la-barre#18](https://github.com/xtincell/la-barre/pull/18), **fusionnée** et déployée ; `test:decisions` 50/50. L'acteur authentifié reste ouvert : aucune identité ne parvient de La Fusée à La Barre |
+| 0.43 | `hermes-cockpit` : format des sondes écrit ; une sonde tronquée ou de forme inconnue n'est plus affichée comme un état valide ; écritures concurrentes relues avant renommage (CK4, TR2) | [hermes-cockpit#5](https://github.com/xtincell/hermes-cockpit/pull/5), **fusionnée** et déployée (`f8ed2c5`, `/healthz` 200) ; 27/27, dont 12 rouges sur l'ancien code |
+| 0.44 | `ADVE-project` : un écrivain de source répond 404 typé à un id inconnu ou étranger, au lieu d'un 500 Prisma (IN1), lot 6.27.557 | [ADVE-project#1170](https://github.com/xtincell/ADVE-project/pull/1170), **fusionnée** et livrée en production ; 17 unitaires et 12 PostgreSQL neufs, rouges sur l'ancien code ; 14 contrôles CI verts |
+| 0.45 | `Argos-studio` : erreurs lisibles avec reprise, focus et clavier, 390 px sans débordement, dates enregistrées sans date inventée (AR4) | [Argos-studio#5](https://github.com/xtincell/Argos-studio/pull/5), **fusionnée** ; 23 scénarios Playwright (22 rouges sur `main`) et 26 tests unitaires ; pas de ressource Coolify pour Argos (arbitrage 5.8) |
+| 0.46 | `ADVE-project` : la note de version ouverte d'elle-même ne vole plus le premier clic ; les clés MCP limitées à un serveur sont reçues sur PostgreSQL réel, et la console émet toutes les portées (F13, partiel : l'historique des identifiants produit reste), lot 6.27.558 | [ADVE-project#1171](https://github.com/xtincell/ADVE-project/pull/1171), **fusionnée** et livrée en production ; 7 tests PostgreSQL, 5 unitaires et un e2e, rouges sur l'ancien code ; 15 contrôles CI verts |
+| 0.47 | `ADVE-project` : un compte rétrogradé perd ses droits sur sa session déjà ouverte ; refus typés au lieu de 500 ; suppression refusée proprement quand un lien la retient (IN7), lot 6.27.559 | [ADVE-project#1172](https://github.com/xtincell/ADVE-project/pull/1172), **fusionnée** et livrée en production ; 9 tests PostgreSQL par la vraie connexion Auth.js (4 rouges avant), 10 unitaires ; 14 contrôles CI verts |
+| 0.48 | `danmem` : chaque clé porte une identité et un mandat ; écritures attribuées à la clé réelle ; rectification tracée des souvenirs ; une erreur du traitement de fond n'arrête plus le service (DM3) | [danmem#7](https://github.com/xtincell/danmem/pull/7), **fusionnée** ; 55/55 sur PostgreSQL et pgvector, consommateur Galahad compris ; migration additive `sql/003` à passer sur l'hôte avant redémarrage, avec `sql/002` |
+| 0.49 | `ADVE-project` : recette des promesses publiques. Sur 53 pages, 129 promesses : 39 reçues, 69 corrigées, 21 laissées au propriétaire. `/status` n'affiche plus « Opérationnel » sans mesure (F16), lot 6.27.560 | [ADVE-project#1173](https://github.com/xtincell/ADVE-project/pull/1173), **fusionnée** et livrée en production ; verrou de 80 fichiers publics (72 formules relevées avant correction) ; 16 contrôles CI verts. Recette : `docs/governance/RECEPTION-PROMESSES-PUBLIQUES.md` du dépôt |
+| 0.50 | `ADVE-project` : les lectures publiques d'Argos passent par l'API v1 du studio quand `ARGOS_STUDIO_URL` est posée, sinon par le journal avec la source affichée ; jamais de 500 (AR6, SHK-0002 point 5), lot 6.27.561 | [ADVE-project#1174](https://github.com/xtincell/ADVE-project/pull/1174), **fusionnée** et livrée ; 14 tests de service et 11 de rendu, rouges sur l'ancien code ; studio réel lu en local, 8/8 références. Variable non posée en production tant que le studio n'est pas déployé (5.8) et que les anciens liens `/argos/…` ne sont pas redirigés |
+| 0.51 | `ADVE-project` : un seul restaurateur de piliers ; l'historique et le retrait Notoria compensent comme le journal (ADR-0207), avec des refus typés au lieu de 500 (F8), lot 6.27.562 | [ADVE-project#1175](https://github.com/xtincell/ADVE-project/pull/1175), **fusionnée** et livrée, migration comprise ; 14 tests PostgreSQL (10 rouges avant) et un test HARD contre tout second restaurateur. Les 76 archives historiques restent sans filiation inventée ; deux cas de retrait attendent une décision métier |
+| 0.52 | `ADVE-project` : santé de campagne calculée sans modèle, « non calculable » plutôt qu'un vert fabriqué ; le brouillon de reprise survit au remontage ; les éditions concurrentes de tâches et de reprises sont refusées en 409 au lieu de s'écraser (F9), lot 6.27.563 | [ADVE-project#1176](https://github.com/xtincell/ADVE-project/pull/1176), **fusionnée** et livrée ; 11 unitaires, 8 de composant et 15 PostgreSQL, rouges avant. Décision au propriétaire : le défaut historique `GREEN` des campagnes jamais calculées |
+| 0.53 | `ADVE-project` : un seul contrat pour S. La maturité est bornée par le schéma strict, et le gateway, l'auto-filler, la composition et `sequence-vault` lisent le même verdict (F2, ADR-0214 amendé), lot 6.27.564 | [ADVE-project#1177](https://github.com/xtincell/ADVE-project/pull/1177), **fusionnée** et livrée ; 20 unitaires et 2 PostgreSQL neufs, rouges avant. Effet en production : les S réels de forme historique passent « Brouillon » jusqu'à leur recalcul gouverné |
+| 0.54 | `datacollector` et `ADVE-project` : le reçu exporté porte une enveloppe versionnée et vérifiable (schéma, identité, empreinte SHA-256, provenance par mesure, absences jamais à 0). La Fusée l'admet par `INGEST_EXTERNAL_METRIC` (ADR-0146 amendé), avec rejeu idempotent et conflit d'empreinte refusé (DC3), lot 6.27.565 | [datacollector#6](https://github.com/xtincell/datacollector/pull/6) et [ADVE-project#1178](https://github.com/xtincell/ADVE-project/pull/1178), **fusionnées**, La Fusée livrée ; 49 tests Python et 12 Node, 59 unitaires et 5 PostgreSQL côté La Fusée, rouges avant ; vrai reçu admis en local. Pas encore de dépôt depuis une page de console |
+| 0.55 | `la-barre` et `ADVE-project` : « Clore le bilan de campagne » fige une version par la fabrique de décision (identité stable, numéro, empreinte chaînée, jamais réécrite) ; La Fusée la relit dans la base de La Barre, recalcule son empreinte et la range comme proposition dans les sources de la marque (Intent `INGEST_BARRE_CAMPAIGN_REVIEW`, ADR-0244) (LB4), lot 6.27.566 | [la-barre#19](https://github.com/xtincell/la-barre/pull/19) et [ADVE-project#1180](https://github.com/xtincell/ADVE-project/pull/1180), **fusionnées**, La Barre et La Fusée redéployées ; 11 tests La Barre, 7 de route et 8 PostgreSQL côté La Fusée, rouges avant ; recette croisée locale (versions 1 et 2 reçues, rejeu sans seconde source). Restent : relecture du bilan dans le brief suivant, transmission manuelle version par version, acteur déclaré et non authentifié |
+| 0.56 | `ADVE-project` : la route d'admission des observations authentifie avant de lire le corps ; un appel anonyme reçoit 401 sans détail de contrat (défaut constaté en production 6.27.565), lot 6.27.567 | [ADVE-project#1181](https://github.com/xtincell/ADVE-project/pull/1181), **fusionnée** et livrée ; un test rouge sur 6.27.566 puis vert, 5 PostgreSQL sur base neuve ; 401 relu en production |
+| 0.57 | `ADVE-project` : un produit retiré du catalogue garde son identifiant ; un nouvel homonyme en reçoit un autre, ses liens ne basculent plus, et seule la restauration de la version qui le contenait le réintroduit. Panneau « Historique du catalogue » sur la page Offre & Pricing (F13, ADR-0205 amendé), lot 6.27.568 | [ADVE-project#1182](https://github.com/xtincell/ADVE-project/pull/1182), **fusionnée** et livrée avec 6.27.569 ; 8 unitaires et 3 PostgreSQL, rouges avant. Règle de réintroduction à valider par le propriétaire |
+| 0.58 | `la-barre` et `ADVE-project` : servie derrière La Fusée, chaque nouvelle décision, ligne de journal et version de bilan porte l'identité de la session, scellée par La Fusée à l'enregistrement ; le navigateur ne peut ni la forger, ni la modifier, ni l'effacer (LB3, ADR-0245), lot 6.27.569 | [la-barre#20](https://github.com/xtincell/la-barre/pull/20) et [ADVE-project#1183](https://github.com/xtincell/ADVE-project/pull/1183), **fusionnées**, La Barre et La Fusée redéployées ; 12 tests La Barre et 14 La Fusée, rouges avant, PostgreSQL 9/9, recette croisée locale. Le port de La Barre ne doit être joint que par La Fusée |
+| 0.59 | `hermes-cockpit` : verrou consultatif entre processus sur les fichiers partagés, avec reprise d'un verrou abandonné et refus borné, et `fsync` du répertoire après renommage ; protocole écrit pour les écrivains de l'hôte (CK4) | [hermes-cockpit#6](https://github.com/xtincell/hermes-cockpit/pull/6), **fusionnée** et redéployée ; 12 tests multi-processus, rouges avant (29 à 42 incréments perdus sur 200 sans verrou, aucun avec). Les écrivains de l'hôte ne sont dans aucun dépôt |
+| 0.60 | `shinkiro` et `danmem` : le profil d'installation d'une entreprise porte Radar (`radar: true`, base, volumes et secrets propres, aucun réseau partagé avec La Fusée) et la mémoire `danmem` (`danmem: true`, base pgvector, migrations, file `jobs`) ; sauvegarde v3 vérifiée par empreintes, v1/v2 toujours lisibles, profil sans option identique à l'octet (IN4) | [shinkiro#58](https://github.com/xtincell/shinkiro/pull/58) et [danmem#8](https://github.com/xtincell/danmem/pull/8), **fusionnées** ; 27 tests d'installation (10 nouveaux rouges avant), recette Docker réelle sur entreprises fictives : 237 + 8 + 5 tables identiques après restauration, `foreign_id_writer_in_B` en 404 sur 6.27.569. Argos-studio (bibliothèque publique commune) et les rôles Galahad (secrets externes) restent hors du profil, raisons dans `installation/README.md` |
+| 0.61 | `radar` : les mots de passe personnels choisis sur `/profil` étaient stockés et sauvegardés en clair (constat de la recette IN4). Ils sont désormais stockés sous empreinte PBKDF2-SHA256 (600 000 itérations, sel aléatoire, comparaison en temps constant), les anciennes valeurs converties à la connexion ou par `server/hash-passwords.js` ; en-tête Basic décodé en UTF-8 | [radar#7](https://github.com/xtincell/radar/pull/7), **fusionnée** et redéployée (`e0e4b38`) ; 11 tests, 8 rouges avant, suite 45/45. Conversion en masse lancée en production après déploiement : 0 entrée, donc aucun mot de passe personnel en clair à convertir. Pas de limitation des tentatives de connexion |
+| 0.62 | `ADVE-project` : un identifiant inconnu ou refusé reçoit le même 404, sans message Prisma ni fuite d'existence, dans les 45 routeurs (161 lectures converties) ; refus documentaires typés ; cinq écrivains qui acceptaient une entité d'une autre marque corrigés ; cliquet à 0 lecture `OrThrow` keyée par l'entrée (dette 557) | [ADVE-project#1184](https://github.com/xtincell/ADVE-project/pull/1184), **fusionnée**, livrée avec 6.27.571 ; PostgreSQL deux entreprises 13 rouges sur 14 avant, 14/14 après. Restent `brand-node` (404/403 distincts) et les lectures des services |
+| 0.63 | `ADVE-project` : le script lancé au démarrage de l'image ne dépend plus de tRPC (`TypedRefusal` de domaine, converti par un middleware de base) ; garde qui rejoue le bundle du Dockerfile et refuse tout paquet absent de l'image, lot 6.27.571 | [ADVE-project#1185](https://github.com/xtincell/ADVE-project/pull/1185), **fusionnée** et livrée ; image 570 refusée par son test de démarrage, production restée en 6.27.569 jusqu'à la 571 |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -521,12 +549,22 @@ ont été déclenchés par l'API Coolify, sans attendre l'App GitHub.
   publiée. La ressource de production est passée de `sha-b9bfbfb…` (6.27.552) à
   `sha-d52ffad…` (6.27.556), sans migration nouvelle : 107 migrations sur 107 étaient
   déjà en base. Revenir en arrière, c'est remettre l'ancien tag et redéployer.
-- La migration `sql/002` de `danmem` reste à passer **avant** de redémarrer le service
-  de l'hôte. Aucun accès à l'hôte n'est ouvert à un agent.
+  Même geste ensuite pour #1170 : `sha-564bcc2…`, 6.27.557, toujours 107 migrations
+  sur 107 déjà en base, `/api/version` et `/login` à 200. Puis #1171 : `sha-fbbad43…`,
+  6.27.558, même résultat. Puis #1172 : `sha-9ec5661…`, 6.27.559, et #1173 : `sha-ccbd083…`, 6.27.560, même résultat ;
+  `/status`, `/pricing` et `/lafusee` à 200. Puis #1174 : `sha-4bb5ebb…`, 6.27.561 ;
+  `/argos`, `/sitemap.xml` et `/leaderboard` à 200. Puis #1175 : `sha-567f28a…`, 6.27.562,
+  la migration additive `20261111120000_recommendation_applied_intent` appliquée au démarrage (108 sur 108). Puis #1176 : `sha-0f2f336…`, 6.27.563, et #1177 : `sha-394856f…`, 6.27.564, puis #1178 : `sha-0e0dd69…`, 6.27.565, puis #1180 : `sha-d085132…`, 6.27.566, toujours 108 migrations sur 108 ; `/la-barre/bilan` refuse l'appel anonyme en 401. Puis #1181 : `sha-4ff1c14…`, 6.27.567 ; `/api/ingest/metrics` répond désormais 401 à un appel anonyme, au lieu de 400 avec le détail du contrat. Puis #1182 et #1183 ensemble : `sha-e079613…`, 6.27.569 (l'image 568 seule a été remplacée par celle-ci avant d'être livrée), toujours 108 migrations sur 108. L'image 570 (#1184) a été refusée par son test de démarrage : un service importait `@trpc/server`, absent de l'image ; corrigé par #1185, `sha-c9858bc…`, 6.27.571, livrée avec les refus typés de la 570.
+- La Barre et `hermes-cockpit` étaient épinglées dans Coolify sur des commits
+  d'octobre. Les épingles sont passées respectivement de `9735c56` à `e771494`, puis à `f3bc903`
+  après la-barre#19 et à `49e5744` après la-barre#20, et de `1ea757b` à `2ec9fe1`, puis à `f8ed2c5` après hermes-cockpit#5 et à `ef95e0c` après hermes-cockpit#6. Revenir en arrière, c'est remettre l'ancien SHA dans
+  `git_commit_sha` et redéployer. Radar, `galahad-landing` et le portail suivent `HEAD`.
+- Les migrations `sql/002` et `sql/003` de `danmem` restent à passer **avant** de
+  redémarrer le service de l'hôte. Aucun accès à l'hôte n'est ouvert à un agent.
 
 | Dépôt | Ordre | Ce qu'il faut savoir |
 |---|---|---|
-| `shinkiro` | #56 | Ce plan. Après fusion, redéployer le portail par Coolify. |
+| `shinkiro` | #56 | Ce plan. **Fusionnée** le 11 novembre ; portail redéployé, `source.json` servi identique à `main`. |
 | `galahad` | #22, #23, #24, #25, #26 | Aucun conflit deux à deux. Le `CHANGELOG` à 0.1.16 se fait après les cinq. |
 | `danmem` | #2, #3, #4, #5 | #4 après #3 : conflit `CHANGELOG` à résoudre en gardant les deux listes, et le bloc `JOB_LEASE_S` à ajouter à `deploy/danmem.env.example` (texte dans #4). #5 : conflit `CHANGELOG` seul. En production, la migration `sql/002` passe **avant** le redémarrage. |
 | `la-barre` | #14, #15, #17, puis #16 | #16 (README) en dernier : reprendre la ligne `HOST`, la liste des étapes de CI et la ligne `test:decisions`. |
@@ -543,7 +581,7 @@ Chacun est posé comme une question. Une réponse courte suffit.
 
 | # | Question | Ce qu'elle débloque |
 |---|---|---|
-| 5.1 | Quel palier vise-t-on : P1, P2, P3 ou P4 ? | L'ordre de tout le reste |
+| 5.1 | ~~Quel palier vise-t-on : P1, P2, P3 ou P4 ?~~ *Tranché le 11 novembre* : P2, chaque point `[commit]` fermé, PR fusionnée, CI verte | — |
 | 5.2 | Le partage des cockpits est-il celui que montre le code : `galahad/cockpit` pour exécuter dans une installation, `hermes-cockpit` pour observer et exploiter l'hôte ? | 3.2 |
 | 5.3 | `talos` et `hulysse` : les archiver comme dépôts historiques, ou les réparer ? Quelles capacités porter dans `galahad` : serveur MCP, mur S7, garde d'isolation ? | 2.7, 4.2 |
 | 5.4 | Taxonomies : un écart a-t-il un type ou plusieurs (le Ghana en a deux) ? Se déclare-t-il sur l'adaptation ou sur le couple projet × marché ? | 3.4, 4.10 |
@@ -561,7 +599,7 @@ Chacun est posé comme une question. Une réponse courte suffit.
 | 5.16 | `galahad` suit un profil personnel (`deploy/dan-hermes/wiki-Alexandre_Profil.md`). Doit-il rester dans ce dépôt ? | `docs/CLOISON.md` |
 | 5.17 | `wiki-prive` est-il bien `adjacent` ? | Le classement posé le 10 novembre |
 | 5.18 | Deux instances de La Fusée hors canon tournent sur le VPS, chacune avec sa base : la lignée archivée `ADVE_v8`, et une branche d'`ADVE-project`. Les arrêter ? | La capacité du VPS ; le classement des lignées |
-| 5.19 | La Barre en production a quatre commits de retard sur `main`. Est-ce voulu ? | Le déploiement de la-barre#14, puisque le déploiement automatique est activé |
+| 5.19 | ~~La Barre en production a quatre commits de retard sur `main`. Est-ce voulu ?~~ *Tranché le 11 novembre* : l'épingle Coolify est passée de `9735c56` à `e771494` | — |
 
 ## 6. Ce qui se fait selon ce qui est débloqué
 
