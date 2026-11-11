@@ -21,8 +21,8 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 3902
-    poids_ko: 109235
+    fichiers: 3939
+    poids_ko: 109708
     licence: presente
     commits_90j: 100
     topics: ["layer-method", shinkiro]
@@ -100,10 +100,10 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 198
-    poids_ko: 38437
+    fichiers: 205
+    poids_ko: 38504
     licence: presente
-    commits_90j: 9
+    commits_90j: 13
     topics: ["layer-tools", shinkiro]
     racines: [app, workers]
     artefacts:
@@ -159,10 +159,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 20
-    poids_ko: 146
+    fichiers: 23
+    poids_ko: 219
     licence: presente
-    commits_90j: 13
+    commits_90j: 16
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
@@ -173,10 +173,10 @@ composants:
     branche: main
     prive: true
     langue: Python
-    fichiers: 19
-    poids_ko: 137
+    fichiers: 22
+    poids_ko: 214
     licence: presente
-    commits_90j: 11
+    commits_90j: 16
     topics: ["layer-tools", shinkiro]
     racines: [.]
     artefacts:
@@ -188,10 +188,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 121
-    poids_ko: 714
+    fichiers: 123
+    poids_ko: 740
     licence: presente
-    commits_90j: 66
+    commits_90j: 70
     topics: ["layer-execution", shinkiro]
     racines: [., bridge, cockpit, engine, setup]
     artefacts:
@@ -234,10 +234,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 13
-    poids_ko: 83
+    fichiers: 16
+    poids_ko: 132
     licence: presente
-    commits_90j: 7
+    commits_90j: 10
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
@@ -277,8 +277,8 @@ composants:
     branche: main
     prive: false
     langue: JavaScript
-    fichiers: 287
-    poids_ko: 8007
+    fichiers: 289
+    poids_ko: 8086
     licence: presente
     commits_90j: 100
     topics: ["layer-tools", shinkiro]

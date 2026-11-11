@@ -342,6 +342,32 @@ partiel/complet et téléchargements sont reçus nativement en ligne le 7 octobr
 admission dans le dossier et ouverture hors ligne restent à recevoir. Le repli
 sans stockage est livré (`indice-maturite` `app.js:46-54`, relevé du 10 novembre). Voir [le contrat de l'outil](https://github.com/xtincell/indice-maturite/blob/main/README.md).
 
+## la-barre → la-fusee — bilan de campagne
+
+« Clore le bilan de campagne » passe par la fabrique de décision de La Barre et
+fige une version dans `campagne.bilanVersions`. Chaque version porte une identité
+stable `BIL-<campagne>`, un numéro, son empreinte SHA-256 et celle de la version
+précédente. Une version n'est jamais réécrite.
+
+La Barre ne propose la transmission que si `contexte.json` déclare
+`CAMPAIGN_REVIEW_V1`. Elle n'envoie que l'identité, le numéro et l'empreinte à
+`POST /la-barre/bilan`, avec la même garde que la publication. La Fusée relit la
+version dans la base de La Barre, recalcule l'empreinte, puis la range comme
+proposition dans les sources de la marque, par l'Intent
+`INGEST_BARRE_CAMPAIGN_REVIEW`. Un rejeu est sans effet. Sont refusés :
+
+- une autre empreinte sous un numéro déjà reçu ;
+- une version plus ancienne ;
+- une chaîne d'empreintes rompue ;
+- une marque absente ou ambiguë.
+
+Livré le 11 novembre (la-barre#19, ADVE-project#1180, ADR-0244). Ne sont pas
+encore faits :
+
+- la relecture du bilan dans le brief de la campagne suivante ;
+- la transmission automatique ;
+- un acteur authentifié.
+
 ## talos ↔ radar — MCP
 
 `talos/radar-mcp/` contient `index.js`, son `package.json` et un `test-client.mjs`. C'est le
