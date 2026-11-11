@@ -46,11 +46,20 @@ plusieurs touchent la sécurité. Ils sont en [section 3](#3-constats-que-les-do
 mesurables, fermer les failles, écrire ce qui n'est écrit nulle part, réparer
 dépôt par dépôt, puis recevoir en production.
 
-**Au 11 novembre** : 37 gestes faits ([lot 0](#lot-0--fait-le-10-novembre)), portés
-par **32 PR ouvertes, toutes vertes et sans conflit**. Aucune n'est fusionnée : la
-fusion revient au propriétaire, dans l'ordre de la [section 4 ter](#4-ter-fusionner-les-pr-ouvertes).
-Ce qu'un agent peut encore faire seul est désormais petit ; le reste attend les
-six blocages ci-dessus.
+**Au 11 novembre, 5 h UTC** : les 37 premiers gestes du [lot 0](#lot-0--fait-le-10-novembre)
+sont fusionnés, toutes CI vertes, dans l'ordre de la [section 4 ter](#4-ter-fusionner-les-pr-ouvertes).
+Cinq ressources Coolify sont redéployées depuis `main` et répondent :
+
+- La Barre ;
+- `hermes-cockpit` ;
+- Radar ;
+- `galahad-landing` ;
+- La Fusée en 6.27.556.
+
+Restent à redéployer sur l'hôte, où aucun agent n'a d'accès : les services systemd
+(`danmem`, `talos`, `hulysse`) et le moteur `galahad`, qui tourne en compose et en
+unités systemd et n'a pas de ressource visible par l'API Coolify. L'état de chacun des 43 points `[commit]` est dans
+l'[inventaire](INVENTAIRE-POINTS-OUVERTS.md#état-des-points-commit-au-11-novembre).
 
 ## 1. Ce qu'« achevé » peut vouloir dire
 
@@ -345,6 +354,9 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.35 | `ADVE-project` : un compte supprimé ne retrouve plus sa session ; seuil CODB, préflight du relais, Oracle vide et Lighthouse corrigés (4.11.b, c, e, f, g), lot 6.27.554 | [ADVE-project#1165](https://github.com/xtincell/ADVE-project/pull/1165), 16 échecs puis 25/25, 5 696 tests unitaires |
 | 0.36 | `ADVE-project` : huit suites PostgreSQL orphelines branchées en CI, mémoire du job fixée ; `deploy.yml` (mort, trompeur) et `release.yml` (mort) retirés (4.11.h, 4.11.i), lot 6.27.555 | [ADVE-project#1167](https://github.com/xtincell/ADVE-project/pull/1167), 767 tests PostgreSQL en rejeu local ; une assertion périmée depuis 519 révélée |
 | 0.37 | `ADVE-project` : 9 alertes critiques et 21 hautes fermées, arbre de production sans alerte ; `next` 16.4.6 ferme des failles d'exécution de code à distance (4.11.j), lot 6.27.556 | [ADVE-project#1168](https://github.com/xtincell/ADVE-project/pull/1168), build et smoke compilé, 5 672 unitaires, 726 PostgreSQL ; constat : la garde de couches ESLint ne signale rien |
+| 0.38 | `indice-maturite` : la page se rouvre sans réseau après une première visite ; un stockage indisponible ne promet plus de conserver la progression (IM2) | [indice-maturite#2](https://github.com/xtincell/indice-maturite/pull/2), **fusionnée** le 11 novembre ; 16 tests, dont 9 neufs rouges sur l'ancien code ; score identique sur 50 101 jeux de réponses |
+| 0.39 | `danmem` : la CI de réception exécute 41 tests sur 41, consommateur Galahad compris (DM4) | [danmem#6](https://github.com/xtincell/danmem/pull/6), 41/41 en local ; **bloquée** : la CI attend le secret `GALAHAD_DEPLOY_KEY`, à créer par le propriétaire (commandes dans la PR) |
+| 0.40 | `galahad` : un effet interrompu n'est ni perdu ni rejoué ; objectifs isolés par installation et par marque (G4) | [galahad#27](https://github.com/xtincell/galahad/pull/27), 206 tests, dont 10 neufs (8 rouges sur `main`) |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -500,11 +512,17 @@ Chacun passe par une ADR quand il est structurant, selon la règle de ce dépôt
 
 ## 4 ter. Fusionner les PR ouvertes
 
-Toutes sont en brouillon, vertes au 11 novembre, sans conflit avec `main`. Les
-fusions d'essai deux à deux ont été faites dans chaque dépôt où plusieurs PR
-coexistent. **Fusionner ne déploie rien** tant que l'App GitHub de Coolify ne
-redéclenche pas les builds (blocage B2) ; chaque mise en production reste un
-geste du lot 5.
+**Fait le 11 novembre** : les 31 PR ci-dessous hors `shinkiro` sont fusionnées dans
+cet ordre, CI verte. Les conflits de `CHANGELOG` ont été résolus en gardant les deux
+listes ; le bloc `JOB_LEASE_S` est dans `deploy/danmem.env.example`. Les déploiements
+ont été déclenchés par l'API Coolify, sans attendre l'App GitHub.
+
+- La Fusée : l'image `sha-d52ffad…` a été construite, démarrée en smoke-test, puis
+  publiée. La ressource de production est passée de `sha-b9bfbfb…` (6.27.552) à
+  `sha-d52ffad…` (6.27.556), sans migration nouvelle : 107 migrations sur 107 étaient
+  déjà en base. Revenir en arrière, c'est remettre l'ancien tag et redéployer.
+- La migration `sql/002` de `danmem` reste à passer **avant** de redémarrer le service
+  de l'hôte. Aucun accès à l'hôte n'est ouvert à un agent.
 
 | Dépôt | Ordre | Ce qu'il faut savoir |
 |---|---|---|
@@ -550,7 +568,7 @@ Chacun est posé comme une question. Une réponse courte suffit.
 | Si le propriétaire… | Alors un agent peut… |
 |---|---|
 | ne fait rien de plus | Les gestes « Agent » restants : 4.11.a, d, k, l ; la garde de couches ESLint inerte (constat de #1168) ; 4.18, qui demande un démon Docker |
-| fusionne les 32 PR | Régénérer le relevé, puis recevoir chaque correctif en production dès qu'une voie vers le VPS existe |
+| fusionne les 32 PR | *Fait le 11 novembre*, avec cinq ressources Coolify redéployées. Reste à redémarrer les services systemd de l'hôte |
 | régénère `FLEET_TOKEN` | Fermer P1 côté flotte |
 | donne son accord sur #873 | Fermer 1.2 et 1.3 |
 | ouvre une voie vers le VPS | Commencer le lot 5 |
