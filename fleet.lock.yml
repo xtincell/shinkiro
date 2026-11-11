@@ -9,7 +9,7 @@
 #   make releve                régénère ce fichier
 #   git diff fleet.lock.yml    ce qui a bougé dans la flotte depuis le dernier relevé
 #
-releve_le: "2026-10-20"
+releve_le: "2026-11-11"
 owner: xtincell
 topic: shinkiro
 fenetre_vitalite_jours: 90
@@ -21,8 +21,8 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 3580
-    poids_ko: 105296
+    fichiers: 3902
+    poids_ko: 109235
     licence: presente
     commits_90j: 100
     topics: ["layer-method", shinkiro]
@@ -101,9 +101,9 @@ composants:
     prive: false
     langue: TypeScript
     fichiers: 198
-    poids_ko: 38440
+    poids_ko: 38437
     licence: presente
-    commits_90j: 7
+    commits_90j: 9
     topics: ["layer-tools", shinkiro]
     racines: [app, workers]
     artefacts:
@@ -132,47 +132,51 @@ composants:
     branche: main
     prive: true
     langue: HTML
-    fichiers: 12
-    poids_ko: 60
+    fichiers: 14
+    poids_ko: 68
     licence: presente
-    commits_90j: 1
+    commits_90j: 9
     topics: ["layer-tools", shinkiro]
     racines: [.]
+    artefacts:
+      workflows: [.github/workflows/verification.yml]
   - nom: charadesign-generator
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 24
-    poids_ko: 365
+    fichiers: 31
+    poids_ko: 400
     licence: presente
-    commits_90j: 5
+    commits_90j: 9
     topics: ["layer-tools", shinkiro]
     racines: ["lsi-cd-app"]
     artefacts:
       index_html: ["lsi-cd-app/index.html"]
       package: ["lsi-cd-app/package.json"]
       workflows: [.github/workflows/verify.yml]
+      env_example: ["lsi-cd-app/.env.example"]
   - nom: danmem
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 12
-    poids_ko: 60
+    fichiers: 20
+    poids_ko: 146
     licence: presente
-    commits_90j: 2
+    commits_90j: 13
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
+      systemd: [deploy/danmem.service]
       package: [package.json]
       workflows: [.github/workflows/reception.yml]
   - nom: datacollector
     branche: main
     prive: true
     langue: Python
-    fichiers: 21
-    poids_ko: 140
+    fichiers: 19
+    poids_ko: 137
     licence: presente
-    commits_90j: 7
+    commits_90j: 11
     topics: ["layer-tools", shinkiro]
     racines: [.]
     artefacts:
@@ -184,16 +188,16 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 98
-    poids_ko: 444
+    fichiers: 121
+    poids_ko: 714
     licence: presente
-    commits_90j: 26
+    commits_90j: 66
     topics: ["layer-execution", shinkiro]
     racines: [., bridge, cockpit, engine, setup]
     artefacts:
       compose: ["deploy/dan-hermes/docker-compose.yml", "deploy/sas-admin/docker-compose.yml", "docker-compose.yml"]
       dockerfile: [Dockerfile, bridge/Dockerfile, "deploy/sas-admin/gateway/Dockerfile"]
-      systemd: ["deploy/dan-oauth/dan-oauth.service", "deploy/systemd/galahad-docker-firewall.service"]
+      systemd: ["deploy/dan-oauth/dan-oauth.service", "deploy/systemd/galahad-docker-firewall.service", "deploy/systemd/galahad-sales-fleet.service"]
       index_html: [cockpit/index.html, setup/index.html]
       package: [bridge/package.json, engine/package.json]
       python: ["deploy/dan-oauth/server.py", "deploy/sas-admin/gateway/requirements.txt"]
@@ -203,15 +207,16 @@ composants:
     branche: main
     prive: false
     langue: HTML
-    fichiers: 4
-    poids_ko: 24
+    fichiers: 6
+    poids_ko: 29
     licence: presente
-    commits_90j: 3
+    commits_90j: 5
     topics: ["layer-company", shinkiro]
     racines: [.]
     artefacts:
       dockerfile: [Dockerfile]
       index_html: [index.html]
+      workflows: [.github/workflows/verification.yml]
   - nom: generateur-approches
     branche: main
     prive: true
@@ -229,10 +234,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 12
-    poids_ko: 78
+    fichiers: 13
+    poids_ko: 83
     licence: presente
-    commits_90j: 3
+    commits_90j: 7
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
@@ -245,23 +250,24 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 23
+    fichiers: 24
     poids_ko: 58
     licence: presente
-    commits_90j: 1
+    commits_90j: 3
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
       systemd: [ops/hulysse.service]
       package: [package.json]
+      workflows: [.github/workflows/verification.yml]
   - nom: indice-maturite
     branche: main
     prive: false
     langue: JavaScript
-    fichiers: 8
-    poids_ko: 22
+    fichiers: 12
+    poids_ko: 47
     licence: presente
-    commits_90j: 3
+    commits_90j: 7
     topics: ["layer-method", shinkiro]
     racines: [.]
     artefacts:
@@ -271,8 +277,8 @@ composants:
     branche: main
     prive: false
     langue: JavaScript
-    fichiers: 279
-    poids_ko: 7898
+    fichiers: 287
+    poids_ko: 8007
     licence: presente
     commits_90j: 100
     topics: ["layer-tools", shinkiro]
@@ -298,21 +304,23 @@ composants:
   - nom: market-expansion-system
     branche: main
     prive: true
-    langue: null
-    fichiers: 6
-    poids_ko: 11
+    langue: JavaScript
+    fichiers: 8
+    poids_ko: 15
     licence: presente
-    commits_90j: 1
+    commits_90j: 3
     topics: ["layer-method", shinkiro]
     racines: []
+    artefacts:
+      workflows: [.github/workflows/verification.yml]
   - nom: radar
     branche: main
     prive: false
     langue: HTML
     fichiers: 73
-    poids_ko: 1825
+    poids_ko: 1826
     licence: presente
-    commits_90j: 8
+    commits_90j: 10
     topics: ["layer-execution", shinkiro]
     racines: [., briefs, briefs/rh]
     artefacts:
@@ -326,20 +334,21 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 28
+    fichiers: 29
     poids_ko: 155
     licence: presente
-    commits_90j: 1
+    commits_90j: 3
     topics: ["layer-execution", shinkiro]
     racines: [., "radar-mcp"]
     artefacts:
       systemd: [ops/talos.service]
       package: [package.json, "radar-mcp/package.json"]
+      workflows: [.github/workflows/verification.yml]
 
 # Dépôts du compte ne portant PAS le topic shinkiro. Liste brute : certains sont
 # légitimement hors flotte (employeur, client, labo) et fleet.yml:hors_perimetre
 # les écarte nommément. Ce qui reste après soustraction est non classé.
-depots_du_compte: 40
+depots_du_compte: 41
 sans_topic:
   - 15B_Stories
   - ADVERT-web
@@ -358,3 +367,4 @@ sans_topic:
   - project_spawt_mobile_ci
   - spawt-ci-mobile-v1-mvp
   - spawt-meute-quiz
+  - wiki-prive

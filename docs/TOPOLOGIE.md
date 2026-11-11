@@ -4,6 +4,23 @@ Le relevé initial du 14 septembre 2026 est complété par les réceptions daté
 Une arborescence, une installation réellement servie et un parcours reçu sont
 trois preuves distinctes.
 
+## Correction du 10 novembre — pas de Vercel
+
+Le propriétaire le confirme : **Vercel n'est pas utilisé, tout est servi par le
+VPS.** Le mode « Vercel » du relevé initial est donc une supposition tirée des
+fichiers, pas un déploiement.
+
+- `ADVE-project` est livré par Coolify. Le `vercel.json` de son arbre est un
+  reliquat.
+- `Argos-studio` n'est déployé nulle part. Son dépôt ne porte ni Dockerfile ni
+  compose : il lui manque l'artefact qui permettrait de le servir depuis le VPS.
+  `fleet.yml` le déclare désormais `coolify`, avec son état : non déployé.
+- [`SHK-0002`](adr/SHK-0002-argos-unifie-et-autonome.md) écrit qu'Argos « se
+  déploie seul sur Vercel ». La décision d'autonomie tient ; la plateforme
+  nommée ne tient plus, et l'ADR reste à amender.
+
+Il reste quatre modes en service, et non cinq.
+
 ## Correction du 7 octobre — Galahad et Danmem
 
 Danmem est un service HTTP Node sous systemd avec PostgreSQL/pgvector. Il ne
@@ -44,11 +61,11 @@ par un compose racine.
 
 | Mode | Composants | Artefact constaté |
 |---|---|---|
-| **Coolify** *(le VPS)* | `galahad`, `hermes-cockpit` | compose piloté par Coolify, labels Traefik, TLS par FQDN, réseau `coolify` externe |
+| **Coolify** *(le VPS)* | `galahad`, `hermes-cockpit`, `la-barre` | compose piloté par Coolify, labels Traefik, TLS par FQDN, réseau `coolify` externe ; `la-barre` depuis son Dockerfile, sous `powerupgraders.com/la-barre`, derrière la session de La Fusée |
 | **systemd** *(l'hôte)* | `talos`, `hulysse`, `danmem`, `galahad` (pare-feu docker) | unités des rôles ; `danmem.service` observé sur l'hôte ; `deploy/systemd/galahad-docker-firewall.service` |
-| **Vercel** | `ADVE-project`, `Argos-studio` | `next.config.ts`, `vercel.json`, Prisma |
+| ~~Vercel~~ *(non utilisé — voir la correction du 10 novembre)* | `ADVE-project`, `Argos-studio` | `next.config.ts`, `vercel.json`, Prisma |
 | **Docker autonome** | `radar`, `galahad-landing` | Dockerfile sans orchestration imposée |
-| **Statique / Pages** | `indice-maturite`, `la-barre`, `charadesign-generator`, `generateur-approches`, `character-engine`, `la-fusee-blueprint`, front `datacollector` | `index.html` ouvrable, ou Pages |
+| **Statique / Pages** | `indice-maturite`, `la-barre` (hors production), `charadesign-generator`, `generateur-approches`, `character-engine`, `la-fusee-blueprint`, front `datacollector` | `index.html` ouvrable, ou Pages |
 
 DataCollector ne possède pas de Dockerfile. Son front HTML appelle un serveur
 Flask distinct (`server.py`, dépendances Python) ; ouvrir le HTML ne reçoit pas
@@ -143,12 +160,44 @@ côte : un chiffre déclaré à plus de dix points du réel est une dérive.
 
 ### 2 · Deux cockpits
 
-`galahad/cockpit/index.html` et le dépôt `hermes-cockpit`. Le second est déployé
-sur Coolify, voit les process de l'hôte (`pid: host`, `SYS_PTRACE`), lit la santé
-de `radar` et `danmem`, et sert un portail client.
+`galahad/cockpit/index.html` et le dépôt `hermes-cockpit`. Le relevé du
+10 novembre 2026 les a lus tous les deux : ils se recouvrent très peu.
 
-Le premier n'est pas documenté. **Le partage de responsabilité n'est écrit nulle
-part** — à trancher avant qu'un agent ne construise sur le mauvais.
+| Capacité | `galahad/cockpit` | `hermes-cockpit` |
+|---|---|---|
+| Charge, mémoire, disque et modèle d'un rôle | oui | non |
+| Présence des agents | partiel : les services compose de l'installation | oui : tout l'hôte, par le socket Docker et `/proc` |
+| Procédures : catalogue, lancement, reprise, abandon, verdict humain, reçus | **lui seul** | non |
+| Construction de l'image, écriture du `.env`, déploiement compose | **lui seul** | non |
+| Modèle d'un agent | lecture | lecture, et demande de changement pour `talos` et `hulysse` |
+| Projets et domaines Coolify, registre des projets | non | **lui seul** |
+| Tâches, notes, calendrier, coffre, alerte de repli | non | **lui seul** |
+| Mémoire Danmem | non | **lui seul**, par fichier |
+| Espace de travail partagé | non | **lui seul** |
+| Portail client de l'employeur | non | **lui seul** |
+| Santé de Radar | non | non |
+| Exposition | boucle locale, sans compte, une installation | Traefik et TLS, authentification Basic, l'hôte entier |
+
+Deux recouvrements seulement : la présence des agents, par deux mécanismes, et la
+lecture du modèle.
+
+**Le partage que montre le code** : `galahad/cockpit` est le poste d'exécution
+d'une installation ; `hermes-cockpit` est le poste d'observation et
+d'exploitation de l'hôte. Il reste à confirmer par le propriétaire : c'est
+l'arbitrage 5.2 du [plan d'achèvement](PLAN-ACHEVEMENT.md).
+
+Trois défauts entretiennent la confusion en attendant :
+
+- les deux pages portent presque le même titre, « Galahad · Cockpit » et
+  « Galahad — Cockpit » ;
+- le second affiche le Guardian en ligne dès qu'un processus de l'hôte exécute
+  `src/index.js`, ce que fait aussi `hulysse` (`hermes-cockpit` `portal.mjs:90`) ;
+- les exemples de routage de `galahad` décrivent un cockpit statique, alors qu'il
+  dépend de `/status` et `/operate`, et que son serveur refuse tout hôte non local.
+
+Le relevé initial disait que `hermes-cockpit` « lit la santé de `radar` et
+`danmem` ». C'était inexact : il ne lit rien de Radar, et lit Danmem par un
+fichier. Voir [`INTERFACES.md`](INTERFACES.md).
 
 ### 3 · Deux taxonomies d'écart, complémentaires et non reliées
 
@@ -197,13 +246,25 @@ promesse d'installation ne peut les réduire à une seule dépendance commune.
 
 ## Ce qui reste à écrire
 
-1. **Le contrat MCP `talos ↔ radar`.** `talos/radar-mcp/index.js` existe, le
-   protocole n'est décrit nulle part.
-2. **Le partage cockpit.** Qui affiche quoi, entre `galahad/cockpit` et
-   `hermes-cockpit`.
-3. **La réception des couches mémoire.** Leurs responsabilités sont décrites
-   ci-dessus ; restauration, droits et reprise de tous les effets restent ouverts.
+État au 10 novembre 2026. Trois des cinq points sont écrits ; les deux derniers
+attendent un arbitrage.
+
+1. **Le contrat MCP `talos ↔ radar`.** Écrit dans [`INTERFACES.md`](INTERFACES.md).
+   Neuf écarts de sens avec Radar restent à fermer.
+2. **Le partage cockpit.** Qui affiche quoi est écrit plus haut. Le partage
+   lui-même attend sa confirmation.
+3. **Les couches mémoire.** Qui écrit quoi, et les dix manques avant une
+   restauration recevable, sont dans [`INTERFACES.md`](INTERFACES.md). La
+   restauration elle-même reste à recevoir.
 4. **La jointure des deux taxonomies d'écart**, et le branchement de
-   `la-barre/vue-matrice` sur le Market Expansion System.
+   `la-barre/vue-matrice` sur le Market Expansion System. Trois options sont
+   posées dans [SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md) ; elles
+   attendent l'arbitrage 5.4 du plan.
 5. **Le câblage `la-barre` → `radar`.** La Barre produit les décisions, Radar
    tient le journal. La mesure avant/après du Transformation Pilot en dépend.
+   Aujourd'hui, dans la flotte, aucune décision ne circule, dans aucun sens, et
+   le dépôt `radar` ne contient aucune admission La Barre. L'admission décrite
+   dans [`INTERFACES.md`](INTERFACES.md) vit dans l'installation de l'employeur,
+   hors flotte. Les trois sens de flux sont posés dans
+   [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md) ; ils attendent les
+   arbitrages 5.5 et 5.6 du plan.

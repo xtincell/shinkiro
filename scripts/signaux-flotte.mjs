@@ -103,6 +103,30 @@ const SIGNAUX = {
         : [`${c.nom} — entrée « ${d.entree} » annoncée sous « ${attendue} », qui ne porte aucun point d'entrée`];
     }),
 
+  /* SHK-0001 — l'en-tête de fleet.yml le promettait : un mode de déploiement se
+   * dément par l'absence de son artefact. Aucun contrôle ne le vérifiait.
+   *
+   * Seuls les modes qui exigent un fichier précis sont contrôlés ici. Les modes
+   * statiques ont déjà leur contrôle (entree-fantome) : le relevé ne reconnaît que
+   * les fichiers nommés index.html, et une vue comme LA_FUSEE_PHILO_VIEW.html
+   * passerait pour absente.
+   *
+   * Un état déclaré (deploiement.etat) assume l'écart : il est dit, donc ce n'est
+   * pas une dérive silencieuse. Vercel n'est plus utilisé : le déclarer en est une. */
+  "mode-dementi": () => {
+    const EXIGE = { coolify: ["compose", "dockerfile"], docker: ["dockerfile"], systemd: ["systemd"] };
+    return composantsFY.flatMap((c) => {
+      const d = c.deploiement || {};
+      if (d.mode === "vercel")
+        return [`${c.nom} — mode « vercel » : Vercel n'est pas utilisé, tout est servi par le VPS`];
+      const exige = EXIGE[d.mode];
+      if (!exige || d.etat || !parNom[c.nom]) return [];
+      const releves = Object.keys(parNom[c.nom].artefacts || {});
+      return exige.some((k) => releves.includes(k)) ? []
+        : [`${c.nom} — mode « ${d.mode} » sans ${exige.join(" ni ")} dans le dépôt (relevé : ${releves.join(", ") || "aucun artefact"}) — déclarer deploiement.etat si l'écart est assumé`];
+    });
+  },
+
   /* SHK-0001 — le jugement ne réénonce pas les faits. Un champ factuel qui
    * réapparaît dans fleet.yml est une régression vers le manifeste écrit à la
    * main, qui était vrai le jour du relevé et faux au commit suivant. */

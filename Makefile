@@ -77,9 +77,13 @@ releve:
 
 # En CI : relève, puis échoue si le fichier committé n'est plus à jour.
 # Le diff affiché EST le rapport — pas besoin d'en écrire un autre.
+#
+# La ligne releve_le est ignorée : le relevé la réécrit à chaque passage, donc
+# la comparer déclarait une dérive chaque jour où rien n'avait bougé. La
+# fraîcheur du relevé a son propre signal, releve-perime.
 derive: releve
-	@git diff --quiet --exit-code fleet.lock.yml || { \
+	@git diff --quiet --exit-code -I'^releve_le:' fleet.lock.yml || { \
 	  printf "\nDÉRIVE — fleet.lock.yml committé ne reflète plus GitHub :\n\n"; \
-	  git --no-pager diff fleet.lock.yml; \
+	  git --no-pager diff -I'^releve_le:' fleet.lock.yml; \
 	  printf "\nCorriger avec : make releve && git add fleet.lock.yml\n"; exit 1; }
 	@echo "Flotte conforme au relevé committé."

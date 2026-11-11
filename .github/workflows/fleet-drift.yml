@@ -54,11 +54,15 @@ jobs:
             echo "detail=le relevé a échoué (code ${code}) — voir releve.log" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          if git diff --quiet --exit-code fleet.lock.yml; then
+          # La ligne releve_le est ignorée : le relevé la réécrit à chaque
+          # passage. La comparer déclarait une dérive chaque semaine où rien
+          # n'avait bougé — une alarme qui sonne toujours, soit le mal combattu.
+          # La fraîcheur du relevé a son propre signal, releve-perime.
+          if git diff --quiet --exit-code -I'^releve_le:' fleet.lock.yml; then
             echo "etat=conforme" >> "$GITHUB_OUTPUT"
           else
             echo "etat=derive" >> "$GITHUB_OUTPUT"
-            git --no-pager diff fleet.lock.yml > releve.diff
+            git --no-pager diff -I'^releve_le:' fleet.lock.yml > releve.diff
           fi
 
       # ── 2. les signaux, qui ne demandent aucun réseau ───────────────────

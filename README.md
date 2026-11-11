@@ -69,14 +69,14 @@ couches en dessous disent comment.
 
 | Dépôt | Rôle |
 |---|---|
-| [`ADVE-project`](https://github.com/xtincell/ADVE-project) | **Canonique.** La Fusée v6.19 — Industry OS du marché créatif africain. Un brief entre en PDF, le diagnostic tombe en 15 min, la stratégie est écrite sous 48 h. Modules Neteru (7/7 actifs), Oracle, APOGEE, gouvernance Thot. |
+| [`ADVE-project`](https://github.com/xtincell/ADVE-project) | **Canonique.** La Fusée — Industry OS du marché créatif africain. Un brief entre en PDF ; la promesse affichée est un diagnostic en 15 min et une stratégie sous 48 h, qu'aucune mesure ne vérifie encore. Modules Neteru (7/7 actifs), Oracle, APOGEE, gouvernance Thot. |
 | [`la-fusee-blueprint`](https://github.com/xtincell/la-fusee-blueprint) | Atlas doctrinal — la doctrine, pas le code. |
 
 ### 02 · Entreprise — la couche qui parle au marché
 
 | Dépôt | Rôle |
 |---|---|
-| [`galahad-landing`](https://github.com/xtincell/galahad-landing) | Page publique. |
+| [`galahad-landing`](https://github.com/xtincell/galahad-landing) | Page produit de `galahad`. Pas encore publiée. |
 
 > UPgraders utilise ADVE pour identifier les transformations créatives à plus forte valeur,
 > puis construit les systèmes qui permettent de les exécuter à grande échelle.
@@ -86,18 +86,18 @@ couches en dessous disent comment.
 | Dépôt | Rôle |
 |---|---|
 | [`galahad`](https://github.com/xtincell/galahad) | **Canonique, et produit du portefeuille.** Une équipe d'IA organisée en agents qui fait tourner l'agence en autonomie depuis un serveur dédié. Pilotée depuis Telegram, agnostique au fournisseur. Zéro build, zéro port entrant. |
-| [`talos`](https://github.com/xtincell/talos) | Rôle **Guardian** — patrouille santé et QA code. |
-| [`hulysse`](https://github.com/xtincell/hulysse) | Rôle **Traveler** — explorateur autonome, bâtisseur de nuit. |
-| [`danmem`](https://github.com/xtincell/danmem) | Couche mémoire — peers, deriver, dialectique. |
+| [`talos`](https://github.com/xtincell/talos) | Rôle **Guardian** — patrouille santé et QA code. Dépôt historique : le service sert une variante de `galahad`. |
+| [`hulysse`](https://github.com/xtincell/hulysse) | Rôle **Traveler** — explorateur autonome, bâtisseur de nuit. Dépôt historique, comme `talos`. |
+| [`danmem`](https://github.com/xtincell/danmem) | Mémoire partagée — service HTTP et PostgreSQL distinct de `galahad`, file de travaux entre agents. |
 | [`radar`](https://github.com/xtincell/radar) | Tracker de tâches auto-hébergeable. **Reste autonome** : c'est sa valeur. |
 
-Les trois rôles sont décrits dans `galahad/engine/roles/{chef,guardian,traveler}.md`.
+Les quatre rôles sont décrits dans `galahad/engine/roles/{chef,guardian,traveler,commercial}.md`.
 
 ### 04 · Outils métier — ce qui démontre le positionnement
 
 | Dépôt | Rôle |
 |---|---|
-| [`la-barre`](https://github.com/xtincell/la-barre) | **Pièce maîtresse.** Le poste de travail du directeur de la création : du brief au livrable, et les talents qui les font. Aucun serveur, aucun compte. |
+| [`la-barre`](https://github.com/xtincell/la-barre) | **Pièce maîtresse.** Le poste de travail du directeur de la création : du brief au livrable, et les talents qui les font. S'ouvre sans serveur ni compte ; servie en production par un petit serveur, derrière la session de La Fusée. |
 | [`Argos-studio`](https://github.com/xtincell/Argos-studio) | La plus grande bibliothèque qualifiée de campagnes. Socle du Content Performance Loop. |
 | [`charadesign-generator`](https://github.com/xtincell/charadesign-generator) | Pipeline LSI-CD v3.4 — de l'archétype triangulé à la sortie multi-vues. |
 
@@ -112,8 +112,8 @@ Outils légers, chacun dans son dépôt et monté en submodule sous `tools/`.
 
 | Dépôt | Rôle |
 |---|---|
-| [`indice-maturite`](https://github.com/xtincell/indice-maturite) | **Produit 00 du portefeuille** — le diagnostic d'entrée gratuit. Seize questions, quatre axes, score 0-5, prescription. [En ligne](https://xtincell.github.io/indice-maturite/). |
-| [`market-expansion-system`](https://github.com/xtincell/market-expansion-system) | **Produit 04** — décliner une campagne d'un marché à N marchés sans perdre la marque. Preuve terrain sur **neuf pays**, bascule de marque et de langue au Ghana. Inclut la matrice de déploiement et les gabarits de cadrage. |
+| [`indice-maturite`](https://github.com/xtincell/indice-maturite) | **Produit 01 du portefeuille** — le diagnostic d'entrée gratuit. Seize questions, quatre axes, score 0-5, prescription. [En ligne](https://xtincell.github.io/indice-maturite/). |
+| [`market-expansion-system`](https://github.com/xtincell/market-expansion-system) | **Produit 06** — décliner une campagne d'un marché à N marchés sans perdre la marque. Preuve terrain sur **neuf pays**, bascule de marque et de langue au Ghana. Inclut la matrice de déploiement et les gabarits de cadrage. |
 | [`generateur-approches`](https://github.com/xtincell/generateur-approches) | Générateur d'approches publicitaires, sans API ni dépendance. |
 | [`character-engine`](https://github.com/xtincell/character-engine) | Moteur à 48 paramètres et règles de direction artistique. |
 | [`datacollector`](https://github.com/xtincell/datacollector) | Collecte multi-sources pour l'intelligence marketing. |
@@ -122,14 +122,31 @@ Outils légers, chacun dans son dépôt et monté en submodule sous `tools/`.
 
 ## Navigation
 
-**Réceptions des 8 et 9 octobre 2026** — les capacités décrites ci-dessus ne valent pas
-réception complète du programme. Les sept chantiers restent ouverts :
+**Réceptions partielles d'octobre 2026** — les capacités décrites ci-dessus ne valent pas
+réception complète du programme. Les sept chantiers restent ouverts. Les quinze réceptions :
 
-- [Corpus et identité SPAWT](docs/RECEPTION-CORPUS-SPAWT.md)
-- [Application SPAWT et continuité](docs/RECEPTION-SPAWT-APPLICATION.md)
-- [Demandes et admission des productions dans La Fusée](docs/RECEPTION-ADMISSION-FORGE.md)
-- [BanaHealth, coordonnées et maintenance client](docs/RECEPTION-BANAHEALTH.md)
-- [Décisions communes et assise des bilans dans La Barre](docs/RECEPTION-DECISIONS-BILANS.md)
+- Programme et méthode : [méthode et élaboration de marque](docs/RECEPTION-METHODE-MARQUE.md),
+  [15B](docs/RECEPTION-15B-STORIES.md)
+- La Fusée : [admission des productions](docs/RECEPTION-ADMISSION-FORGE.md),
+  [reprises de campagne et surfaces](docs/RECEPTION-REPRISES-SURFACES.md)
+- Moteur et agents : [Galahad et Danmem](docs/RECEPTION-GALAHAD-DANMEM.md),
+  [Talos et Hulysse](docs/RECEPTION-TALOS-HULYSSE.md),
+  [cockpit d'exploitation](docs/RECEPTION-COCKPIT.md)
+- Tracker et poste de travail : [autorité des tâches dans Radar](docs/RECEPTION-RADAR-ROLES.md),
+  [décisions et bilans dans La Barre](docs/RECEPTION-DECISIONS-BILANS.md)
+- Outils : [Argos](docs/RECEPTION-ARGOS.md), [ateliers spécialisés](docs/RECEPTION-ATELIERS-SPECIALISES.md),
+  [DataCollector](docs/RECEPTION-DATACOLLECTOR.md)
+- Projets clients, hors flotte : [corpus SPAWT](docs/RECEPTION-CORPUS-SPAWT.md),
+  [application SPAWT](docs/RECEPTION-SPAWT-APPLICATION.md),
+  [BanaHealth](docs/RECEPTION-BANAHEALTH.md)
+
+Ces reçus sont des journaux datés : une limite ouverte plus haut peut être fermée
+plus bas dans le même fichier, et les compteurs de parcours y varient d'une
+réception à l'autre. Le décompte qui fait foi est celui du plan.
+
+**Pour terminer** — [`docs/PLAN-ACHEVEMENT.md`](docs/PLAN-ACHEVEMENT.md) dit ce qui
+reste, ce qui bloque chaque point et dans quel ordre intervenir. Son
+[inventaire](docs/INVENTAIRE-POINTS-OUVERTS.md) liste les 111 points ouverts, un par un.
 
 **Pour construire** — commence par là, dans cet ordre :
 

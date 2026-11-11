@@ -52,6 +52,10 @@ doit pas brouiller la lecture du profil. Topic `lab`.
 `Folio_Spark` est le portfolio personnel. Il vend **la personne**, pas la méthode. Il reste
 sur le compte personnel et hors de l'organisation.
 
+`wiki-prive` est le complément privé du wiki de `Folio_Spark`. Il suit le même
+classement : privé, personnel, hors flotte. Relevé le 10 novembre 2026 ; son
+contenu n'a pas été lu pour le classer, seule sa description l'a été.
+
 ## Cockpit : rôle qualifié, accès à cloisonner
 
 `hermes-cockpit` est confronté à sa source et au service du VPS : poste privilégié
