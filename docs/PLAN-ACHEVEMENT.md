@@ -54,7 +54,7 @@ Cinq ressources Coolify servent désormais `main` :
 - `hermes-cockpit`, au commit `f8ed2c5` ;
 - Radar ;
 - `galahad-landing` ;
-- La Fusée en 6.27.558.
+- La Fusée en 6.27.559.
 
 Au premier redéploiement, La Barre et `hermes-cockpit` sont revenues sur d'anciens
 commits, parce que Coolify les épinglait (`9735c56` du 19 octobre et `1ea757b` du
@@ -368,6 +368,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.44 | `ADVE-project` : un écrivain de source répond 404 typé à un id inconnu ou étranger, au lieu d'un 500 Prisma (IN1), lot 6.27.557 | [ADVE-project#1170](https://github.com/xtincell/ADVE-project/pull/1170), **fusionnée** et livrée en production ; 17 unitaires et 12 PostgreSQL neufs, rouges sur l'ancien code ; 14 contrôles CI verts |
 | 0.45 | `Argos-studio` : erreurs lisibles avec reprise, focus et clavier, 390 px sans débordement, dates enregistrées sans date inventée (AR4) | [Argos-studio#5](https://github.com/xtincell/Argos-studio/pull/5), **fusionnée** ; 23 scénarios Playwright (22 rouges sur `main`) et 26 tests unitaires ; pas de ressource Coolify pour Argos (arbitrage 5.8) |
 | 0.46 | `ADVE-project` : la note de version ouverte d'elle-même ne vole plus le premier clic ; les clés MCP limitées à un serveur sont reçues sur PostgreSQL réel, et la console émet toutes les portées (F13, partiel : l'historique des identifiants produit reste), lot 6.27.558 | [ADVE-project#1171](https://github.com/xtincell/ADVE-project/pull/1171), **fusionnée** et livrée en production ; 7 tests PostgreSQL, 5 unitaires et un e2e, rouges sur l'ancien code ; 15 contrôles CI verts |
+| 0.47 | `ADVE-project` : un compte rétrogradé perd ses droits sur sa session déjà ouverte ; refus typés au lieu de 500 ; suppression refusée proprement quand un lien la retient (IN7), lot 6.27.559 | [ADVE-project#1172](https://github.com/xtincell/ADVE-project/pull/1172), **fusionnée** et livrée en production ; 9 tests PostgreSQL par la vraie connexion Auth.js (4 rouges avant), 10 unitaires ; 14 contrôles CI verts |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -534,7 +535,7 @@ ont été déclenchés par l'API Coolify, sans attendre l'App GitHub.
   déjà en base. Revenir en arrière, c'est remettre l'ancien tag et redéployer.
   Même geste ensuite pour #1170 : `sha-564bcc2…`, 6.27.557, toujours 107 migrations
   sur 107 déjà en base, `/api/version` et `/login` à 200. Puis #1171 : `sha-fbbad43…`,
-  6.27.558, même résultat.
+  6.27.558, même résultat. Puis #1172 : `sha-9ec5661…`, 6.27.559, même résultat.
 - La Barre et `hermes-cockpit` étaient épinglées dans Coolify sur des commits
   d'octobre. Les épingles sont passées respectivement de `9735c56` à `e771494` et
   de `1ea757b` à `2ec9fe1`, puis à `f8ed2c5` après hermes-cockpit#5. Revenir en arrière, c'est remettre l'ancien SHA dans
