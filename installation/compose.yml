@@ -84,6 +84,141 @@ services:
     labels:
       shinkiro.profile: socle-manuel-fusee-barre-v2
       shinkiro.installation: ${SHINKIRO_INSTALLATION_ID:?Installation identity required}
+  # Radar: its own PostgreSQL on its own internal network, and its own loopback
+  # entry. It shares no network with La Fusée or its database: the raccord is the
+  # identity contract (RADAR / instance / brief / id), not a network path.
+  radar-db:
+    profiles: [radar]
+    image: ${SHINKIRO_DATABASE_IMAGE:?Pinned database image required}
+    pull_policy: if_not_present
+    environment:
+      POSTGRES_DB: radar
+      POSTGRES_USER: radar
+      POSTGRES_PASSWORD: ${SHINKIRO_RADAR_DB_PASSWORD:-}
+    volumes:
+      - radar-database:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 30s
+      timeout: 3s
+      start_period: 10s
+      start_interval: 2s
+      retries: 3
+    mem_limit: 192m
+    cpus: 0.25
+    networks: [radar-data]
+    labels:
+      shinkiro.profile: socle-manuel-fusee-radar-v3
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID:?Installation identity required}
+  radar:
+    profiles: [radar]
+    image: ${SHINKIRO_RADAR_IMAGE:-}
+    pull_policy: if_not_present
+    # Node as PID 1 ignores SIGTERM; the init relays it so `arreter` stops at once.
+    init: true
+    depends_on:
+      radar-db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      TZ: ${SHINKIRO_RADAR_TZ:-}
+      DATABASE_URL: postgresql://radar:${SHINKIRO_RADAR_DB_PASSWORD:-}@radar-db:5432/radar
+      RADAR_ADMIN_EMAIL: ${SHINKIRO_RADAR_ADMIN_EMAIL:-}
+      DASH_PASSWORD: ${SHINKIRO_RADAR_PASSWORD:-}
+      DASH_COOKIE_SECRET: ${SHINKIRO_RADAR_COOKIE_SECRET:-}
+      RADAR_API_KEY: ${SHINKIRO_RADAR_API_KEY:-}
+      FEED_TOKEN: ${SHINKIRO_RADAR_FEED_TOKEN:-}
+      SQLITE_PATH: /data/dash-users.sqlite3
+      VISUELS_DIR: /data/visuels
+    ports:
+      - 127.0.0.1:${SHINKIRO_RADAR_HTTP_PORT:-}:3000
+    volumes:
+      - radar-data:/data
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3000/rest/v1/briefs?select=id&limit=1',{headers:{Authorization:'Bearer '+process.env.RADAR_API_KEY},signal:AbortSignal.timeout(2000)}).then(r=>process.exit(r.ok?0:1),()=>process.exit(1))"]
+      interval: 60s
+      timeout: 5s
+      start_period: 20s
+      start_interval: 3s
+      retries: 3
+    mem_limit: 192m
+    cpus: 0.25
+    networks: [radar-data, radar-ingress]
+    labels:
+      shinkiro.profile: socle-manuel-fusee-radar-v3
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID:?Installation identity required}
+  # Danmem: shared memory and job queue of the installation's agents, deterministic
+  # mode (no worker, no provider), no port. Only services joined to the internal
+  # `memoire` network reach its API; none of the socle does.
+  danmem-db:
+    profiles: [memoire]
+    image: ${SHINKIRO_DATABASE_IMAGE:?Pinned database image required}
+    pull_policy: if_not_present
+    environment:
+      POSTGRES_DB: danmem
+      POSTGRES_USER: danmem
+      POSTGRES_PASSWORD: ${SHINKIRO_DANMEM_DB_PASSWORD:-}
+    volumes:
+      - danmem-database:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 30s
+      timeout: 3s
+      start_period: 10s
+      start_interval: 2s
+      retries: 3
+    mem_limit: 192m
+    cpus: 0.25
+    networks: [danmem-data]
+    labels:
+      shinkiro.profile: socle-manuel-fusee-danmem-v3
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID:?Installation identity required}
+  # The pinned image's sql/NNN-*.sql, additive and replayable, before the service.
+  danmem-migrate:
+    profiles: [memoire]
+    image: ${SHINKIRO_DANMEM_IMAGE:-}
+    pull_policy: if_not_present
+    command: [node, scripts/migrate.mjs]
+    restart: "no"
+    depends_on:
+      danmem-db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://danmem:${SHINKIRO_DANMEM_DB_PASSWORD:-}@danmem-db:5432/danmem
+    mem_limit: 96m
+    cpus: 0.25
+    networks: [danmem-data]
+    labels:
+      shinkiro.profile: socle-manuel-fusee-danmem-v3
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID:?Installation identity required}
+  danmem:
+    profiles: [memoire]
+    image: ${SHINKIRO_DANMEM_IMAGE:-}
+    pull_policy: if_not_present
+    init: true
+    depends_on:
+      danmem-migrate:
+        condition: service_completed_successfully
+    environment:
+      NODE_ENV: production
+      PORT: 8790
+      DATABASE_URL: postgresql://danmem:${SHINKIRO_DANMEM_DB_PASSWORD:-}@danmem-db:5432/danmem
+      MEMORY_API_TOKEN: ${SHINKIRO_DANMEM_TOKEN:-}
+      WORKER_ENABLED: "false"
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:8790/health',{signal:AbortSignal.timeout(2000)}).then(r=>process.exit(r.ok?0:1),()=>process.exit(1))"]
+      interval: 60s
+      timeout: 5s
+      start_period: 20s
+      start_interval: 3s
+      retries: 3
+    mem_limit: 128m
+    cpus: 0.25
+    networks: [danmem-data, memoire]
+    labels:
+      shinkiro.profile: socle-manuel-fusee-danmem-v3
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID:?Installation identity required}
 volumes:
   barre-depots:
     labels:
@@ -97,9 +232,36 @@ volumes:
   media:
     labels:
       shinkiro.installation: ${SHINKIRO_INSTALLATION_ID}
+  radar-database:
+    labels:
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID}
+  radar-data:
+    labels:
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID}
+  danmem-database:
+    labels:
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID}
 networks:
   private:
     internal: true
+    labels:
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID}
+  radar-data:
+    internal: true
+    labels:
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID}
+  danmem-data:
+    internal: true
+    labels:
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID}
+  memoire:
+    internal: true
+    labels:
+      shinkiro.installation: ${SHINKIRO_INSTALLATION_ID}
+  radar-ingress:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"
     labels:
       shinkiro.installation: ${SHINKIRO_INSTALLATION_ID}
   ingress:
