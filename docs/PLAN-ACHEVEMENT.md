@@ -50,7 +50,7 @@ dépôt par dépôt, puis recevoir en production.
 sont fusionnés, toutes CI vertes, dans l'ordre de la [section 4 ter](#4-ter-fusionner-les-pr-ouvertes).
 Cinq ressources Coolify servent désormais `main` :
 
-- La Barre, au commit `49e5744` ;
+- La Barre, au commit `45dda9c` ;
 - `hermes-cockpit`, au commit `ef95e0c` ;
 - Radar ;
 - `galahad-landing` ;
@@ -385,6 +385,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.61 | `radar` : les mots de passe personnels choisis sur `/profil` étaient stockés et sauvegardés en clair (constat de la recette IN4). Ils sont désormais stockés sous empreinte PBKDF2-SHA256 (600 000 itérations, sel aléatoire, comparaison en temps constant), les anciennes valeurs converties à la connexion ou par `server/hash-passwords.js` ; en-tête Basic décodé en UTF-8 | [radar#7](https://github.com/xtincell/radar/pull/7), **fusionnée** et redéployée (`e0e4b38`) ; 11 tests, 8 rouges avant, suite 45/45. Conversion en masse lancée en production après déploiement : 0 entrée, donc aucun mot de passe personnel en clair à convertir. Pas de limitation des tentatives de connexion |
 | 0.62 | `ADVE-project` : un identifiant inconnu ou refusé reçoit le même 404, sans message Prisma ni fuite d'existence, dans les 45 routeurs (161 lectures converties) ; refus documentaires typés ; cinq écrivains qui acceptaient une entité d'une autre marque corrigés ; cliquet à 0 lecture `OrThrow` keyée par l'entrée (dette 557) | [ADVE-project#1184](https://github.com/xtincell/ADVE-project/pull/1184), **fusionnée**, livrée avec 6.27.571 ; PostgreSQL deux entreprises 13 rouges sur 14 avant, 14/14 après. Restent `brand-node` (404/403 distincts) et les lectures des services |
 | 0.63 | `ADVE-project` : le script lancé au démarrage de l'image ne dépend plus de tRPC (`TypedRefusal` de domaine, converti par un middleware de base) ; garde qui rejoue le bundle du Dockerfile et refuse tout paquet absent de l'image, lot 6.27.571 | [ADVE-project#1185](https://github.com/xtincell/ADVE-project/pull/1185), **fusionnée** et livrée ; image 570 refusée par son test de démarrage, production restée en 6.27.569 jusqu'à la 571 |
+| 0.64 | `market-expansion-system` et `la-barre` : un même vocabulaire de types d'écart (`langue`, `marque`, `produit`, `reglementaire`), plusieurs types déclarés sur le couple projet × marché, format `ecarts-marche` v1 lu et écrit des deux côtés ; signal `ecart-types-alignes` ajouté ; SHK-0004 Accepted, option C (ME2, arbitrage 5.4) | [market-expansion-system#2](https://github.com/xtincell/market-expansion-system/pull/2) et [la-barre#21](https://github.com/xtincell/la-barre/pull/21), **fusionnées**, La Barre redéployée (`45dda9c`) ; 11 et 42 tests, rouges avant. Le classement du cas Bonnet Rouge est à requalifier par le propriétaire ; une adaptation qui sort de son écart déclaré n'en produit pas encore |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -557,7 +558,7 @@ ont été déclenchés par l'API Coolify, sans attendre l'App GitHub.
   la migration additive `20261111120000_recommendation_applied_intent` appliquée au démarrage (108 sur 108). Puis #1176 : `sha-0f2f336…`, 6.27.563, et #1177 : `sha-394856f…`, 6.27.564, puis #1178 : `sha-0e0dd69…`, 6.27.565, puis #1180 : `sha-d085132…`, 6.27.566, toujours 108 migrations sur 108 ; `/la-barre/bilan` refuse l'appel anonyme en 401. Puis #1181 : `sha-4ff1c14…`, 6.27.567 ; `/api/ingest/metrics` répond désormais 401 à un appel anonyme, au lieu de 400 avec le détail du contrat. Puis #1182 et #1183 ensemble : `sha-e079613…`, 6.27.569 (l'image 568 seule a été remplacée par celle-ci avant d'être livrée), toujours 108 migrations sur 108. L'image 570 (#1184) a été refusée par son test de démarrage : un service importait `@trpc/server`, absent de l'image ; corrigé par #1185, `sha-c9858bc…`, 6.27.571, livrée avec les refus typés de la 570.
 - La Barre et `hermes-cockpit` étaient épinglées dans Coolify sur des commits
   d'octobre. Les épingles sont passées respectivement de `9735c56` à `e771494`, puis à `f3bc903`
-  après la-barre#19 et à `49e5744` après la-barre#20, et de `1ea757b` à `2ec9fe1`, puis à `f8ed2c5` après hermes-cockpit#5 et à `ef95e0c` après hermes-cockpit#6. Revenir en arrière, c'est remettre l'ancien SHA dans
+  après la-barre#19, à `49e5744` après la-barre#20 et à `45dda9c` après la-barre#21, et de `1ea757b` à `2ec9fe1`, puis à `f8ed2c5` après hermes-cockpit#5 et à `ef95e0c` après hermes-cockpit#6. Revenir en arrière, c'est remettre l'ancien SHA dans
   `git_commit_sha` et redéployer. Radar, `galahad-landing` et le portail suivent `HEAD`.
 - Les migrations `sql/002` et `sql/003` de `danmem` restent à passer **avant** de
   redémarrer le service de l'hôte. Aucun accès à l'hôte n'est ouvert à un agent.

@@ -1,6 +1,6 @@
 # SHK-0004 — Jointure des taxonomies d'écart
 
-- **Statut** : Proposed
+- **Statut** : Accepted (11 novembre 2026, option C)
 - **Date** : 2026-11-10
 - **Composants** : `market-expansion-system`, `la-barre`, `radar`
 
@@ -145,8 +145,17 @@ l'option retenue.
 
 ## Décision
 
-Rien n'est tranché. Trois options sont posées. Les chemins marqués « à créer »
-sont des propositions de nom.
+**Tranché le 11 novembre 2026 par le propriétaire (arbitrage 5.4) : option C.**
+Un écart peut porter plusieurs types et se déclare sur le couple projet × marché.
+Mis en œuvre par market-expansion-system#2 (codes `langue`, `marque`, `produit`,
+`reglementaire`, format `ecarts-marche` v1, colonne `ecart_types` séparée par `+`)
+et la-barre#21 (déclaration sous `perimetre.ecarts[marché]`, import et export du
+format, types portés par les écarts calculés). Reste ouvert : une adaptation qui
+sort de son écart déclaré ne produit pas encore d'écart, faute d'origine
+calculable, et la règle « déclaré avant le premier crayon » n'est pas contrôlée.
+
+Les trois options posées le 10 novembre sont conservées ci-dessous. Les chemins
+marqués « à créer » étaient des propositions de nom.
 
 ### Option A — Une correspondance de lecture, rien de stocké
 
@@ -285,9 +294,8 @@ déclaration se compare à celle de la première pièce du marché.
 
 ## Signal d'audit
 
-Proposé. **Il n'existe pas encore** : ni dans
-`galahad/engine/skills/audit-fleet.json`, ni dans
-`shinkiro/scripts/signaux-flotte.mjs`. Cette ADR ne l'ajoute pas.
+Ajouté le 11 novembre dans `shinkiro/scripts/signaux-flotte.mjs`. Il n'est pas
+encore dans `galahad/engine/skills/audit-fleet.json`.
 
 - `ecart-types-alignes` — la liste des types d'écart est la même dans les
   gabarits du Market Expansion System et dans le code de La Barre. Toute
@@ -298,13 +306,13 @@ Proposé. **Il n'existe pas encore** : ni dans
   (`shinkiro/scripts/signaux-flotte.mjs:189`). Avec l'option A, il vérifie en
   plus que chaque type nomme un contrôle présent dans `kv-modele.js`.
 
-Aujourd'hui, ce signal s'allumerait : `référence` et `aucun` sont hors liste
-(`market-expansion-system/gabarits/cadrage-matrice.csv:2`,
-`market-expansion-system/gabarits/cadrage-matrice.csv:7-9`).
+Le 10 novembre, ce signal se serait allumé : `référence` et `aucun` étaient hors
+liste. Depuis market-expansion-system#2, `aucun` vaut « aucun écart » et
+`référence` a disparu : le signal est vert.
 
 ## Portée
 
-Cette ADR ne choisit pas, et n'écrit aucun code.
+Écrite le 10 novembre sans choisir ni écrire de code ; le choix et le code sont venus le 11 (voir Décision).
 
 Elle ne corrige ni le « + » de la grille (F1), ni `facturable` jamais lu (F4).
 Mais une option qui prétend dire qui paie devra lire `facturable`.

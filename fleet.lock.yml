@@ -278,8 +278,8 @@ composants:
     branche: main
     prive: false
     langue: JavaScript
-    fichiers: 291
-    poids_ko: 8118
+    fichiers: 293
+    poids_ko: 8155
     licence: presente
     commits_90j: 100
     topics: ["layer-tools", shinkiro]
@@ -306,10 +306,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 8
-    poids_ko: 15
+    fichiers: 11
+    poids_ko: 42
     licence: presente
-    commits_90j: 3
+    commits_90j: 5
     topics: ["layer-method", shinkiro]
     racines: []
     artefacts:

@@ -215,6 +215,46 @@ const SIGNAUX = {
         : [];
     }),
 
+  /* SHK-0004 (option C, arbitrage 5.4) : un seul vocabulaire de types d'écart
+   * entre la méthode et La Barre. La méthode le porte dans scripts/ecarts.mjs,
+   * La Barre dans app/ecarts-marche.js ; chaque valeur des gabarits doit en être.
+   * Ne joue que si les deux dépôts sont clonés à côté de shinkiro. */
+  "ecart-types-alignes": () => {
+    const mes = join(RACINE, "..", "market-expansion-system");
+    const barre = join(RACINE, "..", "la-barre");
+    const fMes = join(mes, "scripts/ecarts.mjs");
+    const fBarre = join(barre, "app/ecarts-marche.js");
+    if (!existsSync(fMes) || !existsSync(fBarre)) return [];
+    const codes = (texte) => {
+      const bloc = texte.match(/TYPES\s*=\s*\[([\s\S]*?)\];/);
+      return bloc ? [...bloc[1].matchAll(/code:\s*"([a-z]+)"/g)].map((m) => m[1]) : [];
+    };
+    const tMes = codes(readFileSync(fMes, "utf8"));
+    const tBarre = codes(readFileSync(fBarre, "utf8"));
+    if (!tMes.length) return ["market-expansion-system — liste TYPES introuvable dans scripts/ecarts.mjs"];
+    if (!tBarre.length) return ["la-barre — liste TYPES introuvable dans app/ecarts-marche.js"];
+    const ecarts = [];
+    const manquants = (a, b) => a.filter((t) => !b.includes(t));
+    for (const t of manquants(tMes, tBarre)) ecarts.push(`type « ${t} » dans la méthode, absent de La Barre`);
+    for (const t of manquants(tBarre, tMes)) ecarts.push(`type « ${t} » dans La Barre, absent de la méthode`);
+    const dir = join(mes, "gabarits");
+    if (existsSync(dir)) {
+      for (const f of readdirSync(dir).filter((n) => n.endsWith(".csv"))) {
+        const lignes = readFileSync(join(dir, f), "utf8").split(/\r?\n/).filter(Boolean);
+        const tete = lignes[0].split(",");
+        const col = tete.indexOf("ecart_types");
+        if (col < 0) continue;
+        lignes.slice(1).forEach((l, i) => {
+          const cellule = (l.match(/("([^"]|"")*"|[^,]*)(,|$)/g) || [])[col]?.replace(/,$/, "").replace(/^"|"$/g, "").trim();
+          if (!cellule || cellule === "aucun") return;
+          for (const t of cellule.split("+").map((s) => s.trim()))
+            if (!tMes.includes(t)) ecarts.push(`gabarits/${f}:${i + 2} — type « ${t} » hors liste`);
+        });
+      }
+    }
+    return ecarts.map((e) => `écarts — ${e}`);
+  },
+
   /* Le manifeste et le portefeuille numérotaient les produits différemment —
    * 00/04/05 d'un côté, 01 à 07 de l'autre — et les TROIS valeurs déclarées
    * étaient fausses. Personne ne l'avait vu parce qu'aucun contrôle ne lisait

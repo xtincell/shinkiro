@@ -104,6 +104,7 @@ node scripts/signaux-flotte.mjs --strict     # sort en 1 s'il trouve (pour la CI
 | `etage-invalide` | un outil versé sur le papier seulement |
 | `source-partagee` | une source que personne ne possède, ou que deux composants revendiquent |
 | `divergence-perimee` | une duplication affirmée sans chiffre, ou dont le chiffre a menti |
+| `ecart-types-alignes` | deux listes de types d'écart qui divergent, ou un gabarit hors liste |
 | `produit-inconnu` | un produit déclaré dans `fleet.yml` que `docs/PORTFOLIO.md` ne connaît pas |
 | `derive-sans-canon` | un dérivé non canon dont le dépôt de référence n'existe pas |
 | `portail-perime` | un portail généré sur un manifeste qui a changé depuis |
