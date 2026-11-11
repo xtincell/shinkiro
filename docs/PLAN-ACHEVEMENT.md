@@ -356,7 +356,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.37 | `ADVE-project` : 9 alertes critiques et 21 hautes fermées, arbre de production sans alerte ; `next` 16.4.6 ferme des failles d'exécution de code à distance (4.11.j), lot 6.27.556 | [ADVE-project#1168](https://github.com/xtincell/ADVE-project/pull/1168), build et smoke compilé, 5 672 unitaires, 726 PostgreSQL ; constat : la garde de couches ESLint ne signale rien |
 | 0.38 | `indice-maturite` : la page se rouvre sans réseau après une première visite ; un stockage indisponible ne promet plus de conserver la progression (IM2) | [indice-maturite#2](https://github.com/xtincell/indice-maturite/pull/2), **fusionnée** le 11 novembre ; 16 tests, dont 9 neufs rouges sur l'ancien code ; score identique sur 50 101 jeux de réponses |
 | 0.39 | `danmem` : la CI de réception exécute 41 tests sur 41, consommateur Galahad compris (DM4) | [danmem#6](https://github.com/xtincell/danmem/pull/6), 41/41 en local ; **bloquée** : la CI attend le secret `GALAHAD_DEPLOY_KEY`, à créer par le propriétaire (commandes dans la PR) |
-| 0.40 | `galahad` : un effet interrompu n'est ni perdu ni rejoué ; objectifs isolés par installation et par marque (G4) | [galahad#27](https://github.com/xtincell/galahad/pull/27), 206 tests, dont 10 neufs (8 rouges sur `main`) |
+| 0.40 | `galahad` : un effet interrompu n'est ni perdu ni rejoué ; objectifs isolés par installation et par marque (G4) | [galahad#27](https://github.com/xtincell/galahad/pull/27), **fusionnée** le 11 novembre ; 206 tests, dont 10 neufs (8 rouges sur `main`) |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -526,7 +526,7 @@ ont été déclenchés par l'API Coolify, sans attendre l'App GitHub.
 
 | Dépôt | Ordre | Ce qu'il faut savoir |
 |---|---|---|
-| `shinkiro` | #56 | Ce plan. Après fusion, redéployer le portail par Coolify. |
+| `shinkiro` | #56 | Ce plan. **Fusionnée** le 11 novembre ; portail redéployé, `source.json` servi identique à `main`. |
 | `galahad` | #22, #23, #24, #25, #26 | Aucun conflit deux à deux. Le `CHANGELOG` à 0.1.16 se fait après les cinq. |
 | `danmem` | #2, #3, #4, #5 | #4 après #3 : conflit `CHANGELOG` à résoudre en gardant les deux listes, et le bloc `JOB_LEASE_S` à ajouter à `deploy/danmem.env.example` (texte dans #4). #5 : conflit `CHANGELOG` seul. En production, la migration `sql/002` passe **avant** le redémarrage. |
 | `la-barre` | #14, #15, #17, puis #16 | #16 (README) en dernier : reprendre la ligne `HOST`, la liste des étapes de CI et la ligne `test:decisions`. |
