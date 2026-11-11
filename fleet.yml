@@ -390,7 +390,7 @@ composants:
     licence: proprietaire
     vitalite: relance-prioritaire
     ordre_construction: 6
-    deploiement: {mode: coolify, racine: app, aussi: workers, etat: "non déployé — ni Dockerfile ni compose dans le dépôt"}
+    deploiement: {mode: coolify, racine: app, aussi: workers, url: "https://argos.76-13-128-23.sslip.io"}
     stack: [next, prisma, tailwind, biome]
     produits_portefeuille: ["02 · Creative Operations Audit"]
     source_partagee: {produit: argos, role: canonique}   # SHK-0002
