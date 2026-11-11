@@ -54,7 +54,7 @@ Cinq ressources Coolify servent désormais `main` :
 - `hermes-cockpit`, au commit `f8ed2c5` ;
 - Radar ;
 - `galahad-landing` ;
-- La Fusée en 6.27.566.
+- La Fusée en 6.27.567.
 
 Au premier redéploiement, La Barre et `hermes-cockpit` sont revenues sur d'anciens
 commits, parce que Coolify les épinglait (`9735c56` du 19 octobre et `1ea757b` du
@@ -377,6 +377,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.53 | `ADVE-project` : un seul contrat pour S. La maturité est bornée par le schéma strict, et le gateway, l'auto-filler, la composition et `sequence-vault` lisent le même verdict (F2, ADR-0214 amendé), lot 6.27.564 | [ADVE-project#1177](https://github.com/xtincell/ADVE-project/pull/1177), **fusionnée** et livrée ; 20 unitaires et 2 PostgreSQL neufs, rouges avant. Effet en production : les S réels de forme historique passent « Brouillon » jusqu'à leur recalcul gouverné |
 | 0.54 | `datacollector` et `ADVE-project` : le reçu exporté porte une enveloppe versionnée et vérifiable (schéma, identité, empreinte SHA-256, provenance par mesure, absences jamais à 0). La Fusée l'admet par `INGEST_EXTERNAL_METRIC` (ADR-0146 amendé), avec rejeu idempotent et conflit d'empreinte refusé (DC3), lot 6.27.565 | [datacollector#6](https://github.com/xtincell/datacollector/pull/6) et [ADVE-project#1178](https://github.com/xtincell/ADVE-project/pull/1178), **fusionnées**, La Fusée livrée ; 49 tests Python et 12 Node, 59 unitaires et 5 PostgreSQL côté La Fusée, rouges avant ; vrai reçu admis en local. Pas encore de dépôt depuis une page de console |
 | 0.55 | `la-barre` et `ADVE-project` : « Clore le bilan de campagne » fige une version par la fabrique de décision (identité stable, numéro, empreinte chaînée, jamais réécrite) ; La Fusée la relit dans la base de La Barre, recalcule son empreinte et la range comme proposition dans les sources de la marque (Intent `INGEST_BARRE_CAMPAIGN_REVIEW`, ADR-0244) (LB4), lot 6.27.566 | [la-barre#19](https://github.com/xtincell/la-barre/pull/19) et [ADVE-project#1180](https://github.com/xtincell/ADVE-project/pull/1180), **fusionnées**, La Barre et La Fusée redéployées ; 11 tests La Barre, 7 de route et 8 PostgreSQL côté La Fusée, rouges avant ; recette croisée locale (versions 1 et 2 reçues, rejeu sans seconde source). Restent : relecture du bilan dans le brief suivant, transmission manuelle version par version, acteur déclaré et non authentifié |
+| 0.56 | `ADVE-project` : la route d'admission des observations authentifie avant de lire le corps ; un appel anonyme reçoit 401 sans détail de contrat (défaut constaté en production 6.27.565), lot 6.27.567 | [ADVE-project#1181](https://github.com/xtincell/ADVE-project/pull/1181), **fusionnée** et livrée ; un test rouge sur 6.27.566 puis vert, 5 PostgreSQL sur base neuve ; 401 relu en production |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -546,7 +547,7 @@ ont été déclenchés par l'API Coolify, sans attendre l'App GitHub.
   6.27.558, même résultat. Puis #1172 : `sha-9ec5661…`, 6.27.559, et #1173 : `sha-ccbd083…`, 6.27.560, même résultat ;
   `/status`, `/pricing` et `/lafusee` à 200. Puis #1174 : `sha-4bb5ebb…`, 6.27.561 ;
   `/argos`, `/sitemap.xml` et `/leaderboard` à 200. Puis #1175 : `sha-567f28a…`, 6.27.562,
-  la migration additive `20261111120000_recommendation_applied_intent` appliquée au démarrage (108 sur 108). Puis #1176 : `sha-0f2f336…`, 6.27.563, et #1177 : `sha-394856f…`, 6.27.564, puis #1178 : `sha-0e0dd69…`, 6.27.565, puis #1180 : `sha-d085132…`, 6.27.566, toujours 108 migrations sur 108 ; `/la-barre/bilan` refuse l'appel anonyme en 401.
+  la migration additive `20261111120000_recommendation_applied_intent` appliquée au démarrage (108 sur 108). Puis #1176 : `sha-0f2f336…`, 6.27.563, et #1177 : `sha-394856f…`, 6.27.564, puis #1178 : `sha-0e0dd69…`, 6.27.565, puis #1180 : `sha-d085132…`, 6.27.566, toujours 108 migrations sur 108 ; `/la-barre/bilan` refuse l'appel anonyme en 401. Puis #1181 : `sha-4ff1c14…`, 6.27.567 ; `/api/ingest/metrics` répond désormais 401 à un appel anonyme, au lieu de 400 avec le détail du contrat.
 - La Barre et `hermes-cockpit` étaient épinglées dans Coolify sur des commits
   d'octobre. Les épingles sont passées respectivement de `9735c56` à `e771494`, puis à `f3bc903`
   après la-barre#19, et de `1ea757b` à `2ec9fe1`, puis à `f8ed2c5` après hermes-cockpit#5. Revenir en arrière, c'est remettre l'ancien SHA dans
