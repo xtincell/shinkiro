@@ -54,7 +54,7 @@ Cinq ressources Coolify servent désormais `main` :
 - `hermes-cockpit`, au commit `f8ed2c5` ;
 - Radar ;
 - `galahad-landing` ;
-- La Fusée en 6.27.562.
+- La Fusée en 6.27.563.
 
 Au premier redéploiement, La Barre et `hermes-cockpit` sont revenues sur d'anciens
 commits, parce que Coolify les épinglait (`9735c56` du 19 octobre et `1ea757b` du
@@ -373,6 +373,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.49 | `ADVE-project` : recette des promesses publiques. Sur 53 pages, 129 promesses : 39 reçues, 69 corrigées, 21 laissées au propriétaire. `/status` n'affiche plus « Opérationnel » sans mesure (F16), lot 6.27.560 | [ADVE-project#1173](https://github.com/xtincell/ADVE-project/pull/1173), **fusionnée** et livrée en production ; verrou de 80 fichiers publics (72 formules relevées avant correction) ; 16 contrôles CI verts. Recette : `docs/governance/RECEPTION-PROMESSES-PUBLIQUES.md` du dépôt |
 | 0.50 | `ADVE-project` : les lectures publiques d'Argos passent par l'API v1 du studio quand `ARGOS_STUDIO_URL` est posée, sinon par le journal avec la source affichée ; jamais de 500 (AR6, SHK-0002 point 5), lot 6.27.561 | [ADVE-project#1174](https://github.com/xtincell/ADVE-project/pull/1174), **fusionnée** et livrée ; 14 tests de service et 11 de rendu, rouges sur l'ancien code ; studio réel lu en local, 8/8 références. Variable non posée en production tant que le studio n'est pas déployé (5.8) et que les anciens liens `/argos/…` ne sont pas redirigés |
 | 0.51 | `ADVE-project` : un seul restaurateur de piliers ; l'historique et le retrait Notoria compensent comme le journal (ADR-0207), avec des refus typés au lieu de 500 (F8), lot 6.27.562 | [ADVE-project#1175](https://github.com/xtincell/ADVE-project/pull/1175), **fusionnée** et livrée, migration comprise ; 14 tests PostgreSQL (10 rouges avant) et un test HARD contre tout second restaurateur. Les 76 archives historiques restent sans filiation inventée ; deux cas de retrait attendent une décision métier |
+| 0.52 | `ADVE-project` : santé de campagne calculée sans modèle, « non calculable » plutôt qu'un vert fabriqué ; le brouillon de reprise survit au remontage ; les éditions concurrentes de tâches et de reprises sont refusées en 409 au lieu de s'écraser (F9), lot 6.27.563 | [ADVE-project#1176](https://github.com/xtincell/ADVE-project/pull/1176), **fusionnée** et livrée ; 11 unitaires, 8 de composant et 15 PostgreSQL, rouges avant. Décision au propriétaire : le défaut historique `GREEN` des campagnes jamais calculées |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -542,7 +543,7 @@ ont été déclenchés par l'API Coolify, sans attendre l'App GitHub.
   6.27.558, même résultat. Puis #1172 : `sha-9ec5661…`, 6.27.559, et #1173 : `sha-ccbd083…`, 6.27.560, même résultat ;
   `/status`, `/pricing` et `/lafusee` à 200. Puis #1174 : `sha-4bb5ebb…`, 6.27.561 ;
   `/argos`, `/sitemap.xml` et `/leaderboard` à 200. Puis #1175 : `sha-567f28a…`, 6.27.562,
-  la migration additive `20261111120000_recommendation_applied_intent` appliquée au démarrage (108 sur 108).
+  la migration additive `20261111120000_recommendation_applied_intent` appliquée au démarrage (108 sur 108). Puis #1176 : `sha-0f2f336…`, 6.27.563.
 - La Barre et `hermes-cockpit` étaient épinglées dans Coolify sur des commits
   d'octobre. Les épingles sont passées respectivement de `9735c56` à `e771494` et
   de `1ea757b` à `2ec9fe1`, puis à `f8ed2c5` après hermes-cockpit#5. Revenir en arrière, c'est remettre l'ancien SHA dans
