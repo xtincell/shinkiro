@@ -1,0 +1,767 @@
+{
+  "schema": 1,
+  "at": "2026-11-11T15:21:36Z",
+  "startedAt": "2026-11-11T15:19:13Z",
+  "profile": "socle-manuel-fusee-v3",
+  "environment": "poste Docker local de la session (Docker 29.9.2, Compose 5.6.1, Linux amd64), pas le VPS de recette",
+  "fixtureOnly": true,
+  "companies": {
+    "A": "Atelier Fictif Alpha — socle + Radar + Danmem, origine http://localhost:3401",
+    "B": "Bureau Fictif Beta — socle seul, origine http://127.0.0.1:3402",
+    "reprises": [
+      "in4-a-reprise (http://localhost:3403, Radar 3413)",
+      "in4-b-reprise (http://127.0.0.1:3404)"
+    ]
+  },
+  "version": {
+    "fusee": "6.27.567",
+    "fuseeImage": "ghcr.io/xtincell/adve-project@sha256:a2441d128d936f7ccb02d88f962b9531899fe809626823c9e686fe72b245c1c4",
+    "fuseeTag": "ghcr.io/xtincell/adve-project:sha-4ff1c14c946d2f5ac7fa0b7d241b8e49ff920920",
+    "fuseeImagePulled": true,
+    "fuseeMigrations": 108,
+    "database": "pgvector/pgvector@sha256:ad2e18408bf447f62092a8a5259e7df10505c5a0360bd1a1853ac8b8b0763da2 (PostgreSQL 16.14, pgvector 0.8.4)",
+    "radar": {
+      "imageId": "sha256:f02799591fac231438e385a9b79f5ee68f4d66323d6794ca439515e5f2a4cb82",
+      "sourceCommit": "ce6b61bfc37b287ac0bbd863c61ec27db85c0cd0",
+      "sourceBranch": "radar origin/main",
+      "base": "node:22-alpine (sha256:0e1754758c2df4cfa3e68d59e2e1b7374bb7fd9ea6328eaaacf15cc934af8202)",
+      "registryImage": false
+    },
+    "danmem": {
+      "imageId": "sha256:bdf7d34be3ebb83bd9912cf9073dc457d049dcbda328d93528aba6e28b72a145",
+      "sourceCommit": "4fac1608c3021c43944984c3fd7a56928911e61d",
+      "sourceBranch": "danmem claude/profil-installation",
+      "registryImage": false
+    },
+    "localBuild": "Images Radar et Danmem construites sur ce poste depuis le Dockerfile du commit cité. Le proxy TLS du poste a imposé de passer son CA à l’étape npm ci par un secret de construction (--secret, RUN --mount dans une copie de recette du Dockerfile) ; le CA est absent des images. Aucune image de registre n’existe pour ces deux composants.",
+    "recipeFiles": {
+      "entreprise.py": "0cdcdf90fe8d5e0f833fadfdf99377d6b89f550bf15a0e4990f3004460b5adaa",
+      "compose.yml": "70480ae5ba993a1e3901c5daf356e567a069010834f796d1cb4bf0a932104bc2"
+    },
+    "recipeFilesAtRun": {
+      "entreprise.py": "0cdcdf90fe8d5e0f833fadfdf99377d6b89f550bf15a0e4990f3004460b5adaa",
+      "compose.yml": "70480ae5ba993a1e3901c5daf356e567a069010834f796d1cb4bf0a932104bc2"
+    }
+  },
+  "unitBoundaryTests": {
+    "before": {
+      "suite": "origin/main 1e053de avec les tests de ce lot",
+      "ran": 27,
+      "failedTests": 10,
+      "failuresAndErrors": "7 échecs, 6 erreurs (sous-tests compris)",
+      "greenNewTests": [
+        "socle sans option : environnement exact (garde)",
+        "options sans effet sur les services du socle (garde)",
+        "sauvegarde v3 sans empreinte refusée (refus déjà acquis : v3 inconnue)",
+        "archive Radar avec chemin sortant refusée (idem)"
+      ]
+    },
+    "after": {
+      "ran": 27,
+      "failed": 0,
+      "historicTests": 13,
+      "newTests": 14
+    },
+    "initRedThenGreen": "Le test init: true a échoué sur le compose de la passe 1 (Radar en PID 1 ignorait SIGTERM), puis réussi.",
+    "danmemImageTests": {
+      "before": "6 échecs sur 7 sans Dockerfile",
+      "after": "7/7 ; suite danmem complète sur pgvector jetable : 53 réussis, 9 sautés, 0 échec"
+    }
+  },
+  "effectiveComposeUnchanged": {
+    "method": "docker compose config sur une installation préparée avec des secrets déterministes, recette origin/main contre recette de ce lot",
+    "socle": true,
+    "barre": true,
+    "socleStderr": ""
+  },
+  "received": {
+    "nativeRegistrationAndProvisioning": {
+      "a": {
+        "register": 200,
+        "provisioned": true,
+        "login": 302,
+        "role": "ADMIN",
+        "operator": "in4-a",
+        "strategyCreate": 200,
+        "originalUpload": 200,
+        "originalBytes": 2440
+      },
+      "b": {
+        "register": 200,
+        "provisioned": true,
+        "login": 302,
+        "role": "ADMIN",
+        "operator": "in4-b",
+        "strategyCreate": 200,
+        "originalUpload": 200,
+        "originalBytes": 2440
+      }
+    },
+    "secondProvisionRefused": true,
+    "secretsSharedBetweenAandB": [],
+    "privateModes": {
+      "a": {
+        "dir": "0o700",
+        "env": "0o600"
+      },
+      "b": {
+        "dir": "0o700",
+        "env": "0o600"
+      }
+    },
+    "startSeconds": {
+      "a": 19.4,
+      "b": 10.6
+    },
+    "radar": {
+      "briefCreate": 201,
+      "briefId": "1",
+      "visuel": 201,
+      "visuelSha256": "d24aed274be00c4152c9788cc0ff7b8c05319ab93213859ce208c5b8226449e3",
+      "personalPasswordSet": 200,
+      "personalLogin": 200,
+      "feedWithoutToken": 403,
+      "feedWithToken": 200,
+      "fuseeBrandNodeWithRadarReference": 200,
+      "fuseeError": null,
+      "verify": {
+        "instance": "radar-27a5f0386bd53b17ca714ee3463f63ef",
+        "anonymousStatus": 401,
+        "references": 1,
+        "resolved": 1,
+        "received": true,
+        "otherRadarReferences": 1
+      }
+    },
+    "danmem": {
+      "observe": 200,
+      "job": 200,
+      "identityKeyCreated": true,
+      "identityWhoami": 200,
+      "identity": "lecteur-recette",
+      "identityRecall": 200,
+      "recalled": 1,
+      "writeOutsideMandate": 403,
+      "verify": {
+        "schema": "complet",
+        "worker": false,
+        "anonymousStatus": 401,
+        "identity": "danmem:instance",
+        "received": true
+      }
+    },
+    "networkIsolation": {
+      "in4-a-fusee-1 -> radar:3000": "ENOTFOUND",
+      "in4-a-fusee-1 -> radar-db:5432": "ENOTFOUND",
+      "in4-a-fusee-1 -> danmem:8790": "ENOTFOUND",
+      "in4-a-fusee-1 -> danmem-db:5432": "ENOTFOUND",
+      "in4-a-radar-1 -> db:5432": "ENOTFOUND",
+      "in4-a-radar-1 -> danmem:8790": "ENOTFOUND",
+      "in4-a-danmem-1 -> db:5432": "EAI_AGAIN",
+      "in4-a-danmem-1 -> radar:3000": "EAI_AGAIN",
+      "in4-b-fusee-1 -> radar:3000": "ENOTFOUND",
+      "in4-b-fusee-1 -> danmem:8790": "ENOTFOUND",
+      "in4-a-radar-1 -> 1.1.1.1:443": "délai",
+      "in4-a-danmem-1 -> 1.1.1.1:443": "ENETUNREACH"
+    },
+    "publishedPorts": [
+      "in4-b-fusee-1 127.0.0.1:3402->3000/tcp",
+      "in4-b-db-1 5432/tcp",
+      "in4-a-danmem-1 8790/tcp",
+      "in4-a-radar-1 127.0.0.1:3411->3000/tcp",
+      "in4-a-radar-db-1 5432/tcp",
+      "in4-a-danmem-db-1 5432/tcp",
+      "in4-a-fusee-1 127.0.0.1:3401->3000/tcp",
+      "in4-a-db-1 5432/tcp"
+    ]
+  },
+  "accessChecks": [
+    {
+      "case": "own_original",
+      "status": 200,
+      "expected": 200,
+      "received": true,
+      "bytesMatch": true
+    },
+    {
+      "case": "own_original_B",
+      "status": 200,
+      "expected": 200,
+      "received": true,
+      "bytesMatch": true
+    },
+    {
+      "case": "anonymous_original",
+      "status": 401,
+      "expected": 401,
+      "received": true
+    },
+    {
+      "case": "foreign_session_on_A",
+      "status": 401,
+      "expected": 401,
+      "received": true
+    },
+    {
+      "case": "foreign_session_on_B",
+      "status": 401,
+      "expected": 401,
+      "received": true
+    },
+    {
+      "case": "foreign_id_in_B",
+      "status": 404,
+      "expected": 404,
+      "received": true
+    },
+    {
+      "case": "foreign_writer_on_A",
+      "status": 401,
+      "expected": 401,
+      "errorCode": "UNAUTHORIZED",
+      "expectedCode": "UNAUTHORIZED",
+      "sourceTablesUnchanged": true,
+      "businessTablesChanged": {
+        "a": [],
+        "b": []
+      },
+      "journalTablesChanged": {
+        "a": [],
+        "b": []
+      },
+      "received": true
+    },
+    {
+      "case": "foreign_id_writer_in_B",
+      "status": 404,
+      "expected": 404,
+      "errorCode": "NOT_FOUND",
+      "expectedCode": "NOT_FOUND",
+      "sourceTablesUnchanged": true,
+      "businessTablesChanged": {
+        "a": [],
+        "b": []
+      },
+      "journalTablesChanged": {
+        "a": [],
+        "b": [
+          "ErrorEvent",
+          "IntentEmission"
+        ]
+      },
+      "received": true
+    },
+    {
+      "case": "unknown_id_writer_in_B",
+      "status": 404,
+      "expected": 404,
+      "errorCode": "NOT_FOUND",
+      "expectedCode": "NOT_FOUND",
+      "sourceTablesUnchanged": true,
+      "businessTablesChanged": {
+        "a": [],
+        "b": []
+      },
+      "journalTablesChanged": {
+        "a": [],
+        "b": [
+          "ErrorEvent",
+          "IntentEmission"
+        ]
+      },
+      "received": true
+    },
+    {
+      "case": "anonymous_writer",
+      "status": 401,
+      "expected": 401,
+      "errorCode": "UNAUTHORIZED",
+      "expectedCode": "UNAUTHORIZED",
+      "sourceTablesUnchanged": true,
+      "businessTablesChanged": {
+        "a": [],
+        "b": []
+      },
+      "journalTablesChanged": {
+        "a": [],
+        "b": []
+      },
+      "received": true
+    },
+    {
+      "case": "foreign_and_unknown_ids_indistinguishable_in_B",
+      "sameMessageAndStatus": true,
+      "received": true
+    },
+    {
+      "case": "own_writer_in_B",
+      "status": 200,
+      "expected": 200,
+      "received": true
+    }
+  ],
+  "in1Replay": {
+    "case": "foreign_id_writer_in_B",
+    "previous": "HTTP 500 INTERNAL_SERVER_ERROR le 19 octobre (Fusée 6.27.492)",
+    "fusee": "6.27.567 dans la recette complète ; rejoué sur 6.27.569 ci-dessous",
+    "now": {
+      "status": 404,
+      "errorCode": "NOT_FOUND"
+    },
+    "businessWrite": false,
+    "sourceTablesUnchangedInAandB": true,
+    "journalRowsInB": "Une émission LEGACY_INGESTION_UPDATE_SOURCE au statut FAILED (journal gouverné chaîné) et un ErrorEvent WARN NOT_FOUND (coffre d’erreurs) ; aucune table métier modifiée, rien dans A.",
+    "unknownIdSameAnswer": true,
+    "received": true,
+    "onFusee569": {
+      "image": "ghcr.io/xtincell/adve-project@sha256:651964338af9b7e30a573abf0cfccb9ff209ff9d9fdaadf039dcc7a4366cefab",
+      "tag": "ghcr.io/xtincell/adve-project:sha-e0796138a56152c5dfe163adef186987f723286e",
+      "imagePulled": true,
+      "companies": "in4-c (Comptoir Fictif Gamma, rôle A) et in4-d (Domaine Fictif Delta, rôle B), socle seul, neuves",
+      "migrations": 108,
+      "native": {
+        "a": {
+          "register": 200,
+          "provisioned": true,
+          "login": 302,
+          "role": "ADMIN",
+          "strategyCreate": 200,
+          "originalUpload": 200
+        },
+        "b": {
+          "register": 200,
+          "provisioned": true,
+          "login": 302,
+          "role": "ADMIN",
+          "strategyCreate": 200,
+          "originalUpload": 200
+        }
+      },
+      "foreignIdWriterInB": {
+        "status": 404,
+        "expected": 404,
+        "errorCode": "NOT_FOUND",
+        "expectedCode": "NOT_FOUND",
+        "sourceTablesUnchanged": true,
+        "businessTablesChanged": {
+          "a": [],
+          "b": []
+        },
+        "journalTablesChanged": {
+          "a": [],
+          "b": [
+            "ErrorEvent",
+            "IntentEmission"
+          ]
+        },
+        "received": true
+      },
+      "allAccessChecksReceived": true,
+      "accessChecks": [
+        {
+          "case": "own_original",
+          "status": 200,
+          "expected": 200,
+          "received": true,
+          "bytesMatch": true
+        },
+        {
+          "case": "anonymous_original",
+          "status": 401,
+          "expected": 401,
+          "received": true
+        },
+        {
+          "case": "foreign_session_on_A",
+          "status": 401,
+          "expected": 401,
+          "received": true
+        },
+        {
+          "case": "foreign_session_on_B",
+          "status": 401,
+          "expected": 401,
+          "received": true
+        },
+        {
+          "case": "foreign_id_in_B",
+          "status": 404,
+          "expected": 404,
+          "received": true
+        },
+        {
+          "case": "foreign_writer_on_A",
+          "status": 401,
+          "expected": 401,
+          "errorCode": "UNAUTHORIZED",
+          "expectedCode": "UNAUTHORIZED",
+          "sourceTablesUnchanged": true,
+          "businessTablesChanged": {
+            "a": [],
+            "b": []
+          },
+          "journalTablesChanged": {
+            "a": [],
+            "b": []
+          },
+          "received": true
+        },
+        {
+          "case": "foreign_id_writer_in_B",
+          "status": 404,
+          "expected": 404,
+          "errorCode": "NOT_FOUND",
+          "expectedCode": "NOT_FOUND",
+          "sourceTablesUnchanged": true,
+          "businessTablesChanged": {
+            "a": [],
+            "b": []
+          },
+          "journalTablesChanged": {
+            "a": [],
+            "b": [
+              "ErrorEvent",
+              "IntentEmission"
+            ]
+          },
+          "received": true
+        },
+        {
+          "case": "unknown_id_writer_in_B",
+          "status": 404,
+          "expected": 404,
+          "errorCode": "NOT_FOUND",
+          "expectedCode": "NOT_FOUND",
+          "sourceTablesUnchanged": true,
+          "businessTablesChanged": {
+            "a": [],
+            "b": []
+          },
+          "journalTablesChanged": {
+            "a": [],
+            "b": [
+              "ErrorEvent",
+              "IntentEmission"
+            ]
+          },
+          "received": true
+        },
+        {
+          "case": "anonymous_writer",
+          "status": 401,
+          "expected": 401,
+          "errorCode": "UNAUTHORIZED",
+          "expectedCode": "UNAUTHORIZED",
+          "sourceTablesUnchanged": true,
+          "businessTablesChanged": {
+            "a": [],
+            "b": []
+          },
+          "journalTablesChanged": {
+            "a": [],
+            "b": []
+          },
+          "received": true
+        },
+        {
+          "case": "foreign_and_unknown_ids_indistinguishable_in_B",
+          "sameMessageAndStatus": true,
+          "received": true
+        },
+        {
+          "case": "own_writer_in_B",
+          "status": 200,
+          "expected": 200,
+          "received": true
+        }
+      ],
+      "at": "2026-11-11T16:37:15Z"
+    }
+  },
+  "backupRestore": {
+    "backupA": {
+      "profile": "socle-manuel-fusee-v3",
+      "files": {
+        "database.dump": {
+          "sha256": "27f1668e981bedb2fac59d80d9e67c4cfd698f5f5939d165d40a34ec9bc8e0b7",
+          "mode": "0o600"
+        },
+        "media.tar": {
+          "sha256": "e58e7eaac31d743363169893fb3f6d963a6b017e129d6ce17d7dcf0f847084eb",
+          "mode": "0o600"
+        },
+        ".env": {
+          "sha256": "b83798aa7dac7e090b6586c7277b12e1d5ea55794684efccbebf731725c0da14",
+          "mode": "0o600"
+        },
+        "instance.json": {
+          "sha256": "33d09e4329c3d8e1d545cc82e9777773193f24844c05e208bb14b054201fc238",
+          "mode": "0o600"
+        },
+        "compose.yml": {
+          "sha256": "70480ae5ba993a1e3901c5daf356e567a069010834f796d1cb4bf0a932104bc2",
+          "mode": "0o600"
+        },
+        "radar.dump": {
+          "sha256": "4fcad0f189f49a04e81c4c636fc559721882e6e7596b1363c0be4dee05747418",
+          "mode": "0o600"
+        },
+        "danmem.dump": {
+          "sha256": "cf99a9a52f3abc4a1acf1d2d0011c7a8ec1bc67e78417535f7092a92be5db1ec",
+          "mode": "0o600"
+        },
+        "radar-data.tar": {
+          "sha256": "97e47e0bd66be9216f170b795e7b5400e36adcceee5578830e8ff2d18d38fc91",
+          "mode": "0o600"
+        }
+      },
+      "seconds": 12.7,
+      "schema": 3,
+      "components": [
+        "radar",
+        "danmem"
+      ],
+      "dirMode": "0o700",
+      "fusee": {
+        "tables": 237,
+        "sha256": "37510b5f14b82b87a58fbc326328bc1e1c6d455a7e971c5c0c6a99465c46621d"
+      },
+      "radar": {
+        "tables": 8,
+        "sha256": "65a6be61c1b024755719b4626e120706bb86924d3d7870069c54d649c0b04d85"
+      },
+      "radarFiles": 2,
+      "danmem": {
+        "tables": 5,
+        "sha256": "348f24029d02dda306f5cb202cb7107b84e49981d62565d1bd44c45784a1cda2"
+      },
+      "danmemExtensions": {
+        "vector": "0.8.4"
+      },
+      "danmemClaimedJobs": [],
+      "radarReferences": {
+        "fusee": 1,
+        "resolved": 1
+      },
+      "excluded": [
+        "La Barre",
+        "Argos",
+        "Galahad",
+        "Talos",
+        "Hulysse",
+        "connecteurs externes"
+      ],
+      "fingerprintsEqualLiveBeforeFreeze": {
+        "fusee": true,
+        "radar": true,
+        "danmem": true
+      },
+      "writersRunningAfter": [
+        "in4-a-danmem-1",
+        "in4-a-radar-1",
+        "in4-a-radar-db-1",
+        "in4-a-danmem-db-1",
+        "in4-a-fusee-1",
+        "in4-a-db-1"
+      ]
+    },
+    "backupB": {
+      "profile": "socle-manuel-fusee-v1",
+      "files": [
+        ".env",
+        "compose.yml",
+        "database.dump",
+        "instance.json",
+        "media.tar"
+      ],
+      "seconds": 3.6,
+      "schema": 1,
+      "validates": "socle-manuel-fusee-v1"
+    },
+    "restoreA": {
+      "migrations": 108,
+      "checksumsMatch": true,
+      "radar": {
+        "instance": "radar-27a5f0386bd53b17ca714ee3463f63ef",
+        "anonymousStatus": 401,
+        "references": 1,
+        "resolved": 1,
+        "received": true,
+        "otherRadarReferences": 1
+      },
+      "danmem": {
+        "schema": "complet",
+        "worker": false,
+        "anonymousStatus": 401,
+        "identity": "danmem:instance",
+        "received": true
+      },
+      "restoredTables": 237,
+      "radarTables": 8,
+      "danmemTables": 5,
+      "databaseContentMatches": true,
+      "seconds": 24.6,
+      "identity": {
+        "radarInstanceKept": true,
+        "newDockerIdentity": true,
+        "keysKept": true,
+        "radarPort": "3413"
+      },
+      "afterBootTablesDifferentFromBackup": {
+        "fusee": [],
+        "radar": [],
+        "danmem": []
+      }
+    },
+    "restoreB": {
+      "migrations": 108,
+      "checksumsMatch": true,
+      "restoredTables": 237,
+      "databaseContentMatches": true,
+      "seconds": 13.1
+    },
+    "recovered": {
+      "fuseeOriginalStatus": 200,
+      "fuseeOriginalBytesMatch": true,
+      "radarBrief": 200,
+      "radarBriefFound": true,
+      "radarVisuel": 200,
+      "radarVisuelBytesMatch": true,
+      "radarPersonalLogin": 200,
+      "danmemIdentityKey": 200,
+      "danmemRecalled": 1,
+      "danmemJobs": 1
+    },
+    "divergenceAfterRecovery": {
+      "radarBriefInRecovery": 201,
+      "radarBriefAbsentFromOriginal": true,
+      "danmemObservationInRecovery": 200,
+      "danmemObservationAbsentFromOriginal": true
+    },
+    "verifyRecoveryA": {
+      "migrations": 108,
+      "checksumsMatch": true,
+      "radar": {
+        "instance": "radar-27a5f0386bd53b17ca714ee3463f63ef",
+        "anonymousStatus": 401,
+        "references": 1,
+        "resolved": 1,
+        "received": true,
+        "otherRadarReferences": 1
+      },
+      "danmem": {
+        "schema": "complet",
+        "worker": false,
+        "anonymousStatus": 401,
+        "identity": "danmem:instance",
+        "received": true
+      }
+    },
+    "verifyRecoveryB": {
+      "migrations": 108,
+      "checksumsMatch": true
+    }
+  },
+  "stop": {
+    "in4-a": {
+      "result": {
+        "stopped": "in4-a",
+        "resourcesDeleted": false
+      },
+      "seconds": 1.6
+    },
+    "in4-b": {
+      "result": {
+        "stopped": "in4-b",
+        "resourcesDeleted": false
+      },
+      "seconds": 0.9
+    },
+    "in4-a-reprise": {
+      "result": {
+        "stopped": "in4-a-reprise",
+        "resourcesDeleted": false
+      },
+      "seconds": 1.7
+    },
+    "in4-b-reprise": {
+      "result": {
+        "stopped": "in4-b-reprise",
+        "resourcesDeleted": false
+      },
+      "seconds": 1.3
+    }
+  },
+  "firstPass": {
+    "summary": "Passe 1 complète et verte avec la même recette sans init. Radar et Danmem ignoraient SIGTERM (Node en PID 1) : chaque arrêt attendait le délai de Compose avant SIGKILL. Ajout de init: true, puis passe 2 rejouée de bout en bout ; ses résultats font foi ci-dessus.",
+    "backupSecondsA": 22.9,
+    "backupSecondsAAfterInit": 12.7,
+    "accessChecksAllReceived": true,
+    "restoreA": {
+      "restoredTables": 237,
+      "radarTables": 8,
+      "danmemTables": 5,
+      "databaseContentMatches": true,
+      "seconds": 23.2
+    }
+  },
+  "ownership": {
+    "dockerOutsideIn4Before": {
+      "containers": [],
+      "volumes": [
+        "7b7218909f6c232919e849912f02a03f9574091bd38bec2c74bf7bf087e04f9d"
+      ],
+      "networks": [
+        "bridge",
+        "host",
+        "none"
+      ]
+    },
+    "dockerOutsideIn4After": {
+      "containers": [],
+      "volumes": [
+        "7b7218909f6c232919e849912f02a03f9574091bd38bec2c74bf7bf087e04f9d"
+      ],
+      "networks": [
+        "bridge",
+        "host",
+        "none"
+      ]
+    },
+    "note": "Aucune ressource étrangère sur ce démon. Le volume anonyme listé est celui de la base jetable in4-danmem-test-db (base shinkiro_danmem_reception_in4), créée par cette recette puis supprimée.",
+    "cleanup": "Conteneurs, volumes et réseaux in4-* supprimés après contrôle de leur identité d’installation ; dossiers privés de recette conservés hors dépôt."
+  },
+  "findings": [
+    {
+      "component": "radar",
+      "finding": "Les mots de passe personnels choisis sur /profil sont conservés en clair dans dash-users.sqlite3 (functions/profil.js, server/kv-sqlite.js). Le volume radar-data et la sauvegarde les transportent.",
+      "classification": "sécurité",
+      "owner": "dépôt radar",
+      "fixedHere": false
+    },
+    {
+      "component": "radar, danmem",
+      "finding": "Node en PID 1 sans gestionnaire de SIGTERM : arrêt au délai puis SIGKILL. Contourné dans le profil par init: true, pas dans les images.",
+      "classification": "exploitation",
+      "fixedHere": "profil seulement"
+    }
+  ],
+  "notConnected": {
+    "argos-studio": "SHK-0002 en fait la bibliothèque canonique publique, pas un stockage d’entreprise ; La Fusée exige un point d’accès Argos HTTPS public et refuse un hôte privé (seshat/argos/studio-url.ts, garde SSRF). Pas de Dockerfile, base SQLite, administration et POST non authentifiés.",
+    "galahad-roles": "Démarrage refusé sans TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID et LLM_API_KEY (engine/src/config.js) : secrets externes non générables par installation ; sortie réseau vers Telegram et le fournisseur absente du profil ; image sans digest publié.",
+    "galahad-queues": "La file est la table jobs de Danmem : installée, isolée et sauvegardée. Le côté consommateur (volume galahad-memory, reçus non acquittés) ne l’est pas."
+  },
+  "sourceAndOwnership": "Entreprises, comptes, marques, documents, dossiers Radar et mémoires fictifs, créés pour cette recette. Aucun corpus, client, clé de fournisseur, OAuth ou agent actif. Secrets générés par installation, jamais affichés, gardés hors dépôt.",
+  "wholeFleetReceived": false,
+  "releaseComplete": false,
+  "remaining": [
+    "Rôles d’agents Galahad et volume galahad-memory : canal, fournisseur, image par digest, sortie réseau limitée, clés Danmem à identité par rôle",
+    "Argos-studio : décision SHK sur un Argos privé d’entreprise, puis contrat Fusée vers un hôte privé",
+    "Images Radar et Danmem publiées par digest dans un registre et tirées depuis un hôte neuf",
+    "Recette sur le VPS de recette, à côté des services réels, et réception native des écrans Radar",
+    "Mots de passe personnels Radar en clair (correctif dans radar)",
+    "Reverse proxy HTTPS de Radar, sauvegardes hors de l’hôte et rétention",
+    "RPO/RTO du service entier, charge, support et coût mensuel réel",
+    "Données de hermes-cockpit et producteur de danmem-status.json, hors de tout dépôt"
+  ]
+}
