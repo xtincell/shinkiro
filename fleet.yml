@@ -305,7 +305,7 @@ composants:
     maturite: partiel
     licence: proprietaire
     vitalite: actif
-    deploiement: {mode: systemd, entree: src/index.mjs, requiert: postgres, etat: "unité systemd et environnement sur l'hôte seulement, dans aucun dépôt"}
+    deploiement: {mode: systemd, entree: src/index.mjs, unite: deploy/danmem.service, requiert: postgres, etat: "unité d'exemple versionnée le 11 novembre ; l'unité servie sur l'hôte n'a pas été relue"}
     description: >-
       Mémoire contextuelle partagée : observations attribuées, rappel hybride,
       cartes, dérivation et historique de consolidation. File de travaux entre
