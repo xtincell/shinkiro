@@ -54,7 +54,7 @@ Cinq ressources Coolify servent désormais `main` :
 - `hermes-cockpit`, au commit `f8ed2c5` ;
 - Radar ;
 - `galahad-landing` ;
-- La Fusée en 6.27.560.
+- La Fusée en 6.27.561.
 
 Au premier redéploiement, La Barre et `hermes-cockpit` sont revenues sur d'anciens
 commits, parce que Coolify les épinglait (`9735c56` du 19 octobre et `1ea757b` du
@@ -371,6 +371,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.47 | `ADVE-project` : un compte rétrogradé perd ses droits sur sa session déjà ouverte ; refus typés au lieu de 500 ; suppression refusée proprement quand un lien la retient (IN7), lot 6.27.559 | [ADVE-project#1172](https://github.com/xtincell/ADVE-project/pull/1172), **fusionnée** et livrée en production ; 9 tests PostgreSQL par la vraie connexion Auth.js (4 rouges avant), 10 unitaires ; 14 contrôles CI verts |
 | 0.48 | `danmem` : chaque clé porte une identité et un mandat ; écritures attribuées à la clé réelle ; rectification tracée des souvenirs ; une erreur du traitement de fond n'arrête plus le service (DM3) | [danmem#7](https://github.com/xtincell/danmem/pull/7), **fusionnée** ; 55/55 sur PostgreSQL et pgvector, consommateur Galahad compris ; migration additive `sql/003` à passer sur l'hôte avant redémarrage, avec `sql/002` |
 | 0.49 | `ADVE-project` : recette des promesses publiques. Sur 53 pages, 129 promesses : 39 reçues, 69 corrigées, 21 laissées au propriétaire. `/status` n'affiche plus « Opérationnel » sans mesure (F16), lot 6.27.560 | [ADVE-project#1173](https://github.com/xtincell/ADVE-project/pull/1173), **fusionnée** et livrée en production ; verrou de 80 fichiers publics (72 formules relevées avant correction) ; 16 contrôles CI verts. Recette : `docs/governance/RECEPTION-PROMESSES-PUBLIQUES.md` du dépôt |
+| 0.50 | `ADVE-project` : les lectures publiques d'Argos passent par l'API v1 du studio quand `ARGOS_STUDIO_URL` est posée, sinon par le journal avec la source affichée ; jamais de 500 (AR6, SHK-0002 point 5), lot 6.27.561 | [ADVE-project#1174](https://github.com/xtincell/ADVE-project/pull/1174), **fusionnée** et livrée ; 14 tests de service et 11 de rendu, rouges sur l'ancien code ; studio réel lu en local, 8/8 références. Variable non posée en production tant que le studio n'est pas déployé (5.8) et que les anciens liens `/argos/…` ne sont pas redirigés |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -538,7 +539,8 @@ ont été déclenchés par l'API Coolify, sans attendre l'App GitHub.
   Même geste ensuite pour #1170 : `sha-564bcc2…`, 6.27.557, toujours 107 migrations
   sur 107 déjà en base, `/api/version` et `/login` à 200. Puis #1171 : `sha-fbbad43…`,
   6.27.558, même résultat. Puis #1172 : `sha-9ec5661…`, 6.27.559, et #1173 : `sha-ccbd083…`, 6.27.560, même résultat ;
-  `/status`, `/pricing` et `/lafusee` à 200.
+  `/status`, `/pricing` et `/lafusee` à 200. Puis #1174 : `sha-4bb5ebb…`, 6.27.561 ;
+  `/argos`, `/sitemap.xml` et `/leaderboard` à 200.
 - La Barre et `hermes-cockpit` étaient épinglées dans Coolify sur des commits
   d'octobre. Les épingles sont passées respectivement de `9735c56` à `e771494` et
   de `1ea757b` à `2ec9fe1`, puis à `f8ed2c5` après hermes-cockpit#5. Revenir en arrière, c'est remettre l'ancien SHA dans
