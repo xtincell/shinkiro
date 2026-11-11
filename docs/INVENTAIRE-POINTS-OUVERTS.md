@@ -253,7 +253,7 @@ CI verte. Voici où en est chacun des 43.
 | **Fermé en partie** | F13 : clé MCP limitée à un serveur et premier clic Sources corrigés (ADVE-project#1171) ; l'historique des retraits et réintroductions des identifiants produit reste à faire. LB3 : gestes de choix et portée des déviations faits (la-barre#18) ; l'acteur authentifié attend une identité transmise par La Fusée. CK4 : format des sondes écrit (`hermes-cockpit/docs/SONDES.md`) et lecture tolérante aux écrivains concurrents (hermes-cockpit#5) ; il manque un verrou entre processus, et la forme réelle des fichiers produits par l'hôte n'est pas relue |
 | **En cours** | DM4 (danmem#6, attend le secret `GALAHAD_DEPLOY_KEY`), AR6 (agent lancé le 11 novembre) |
 | **Attend un arbitrage** | ME2 (5.4), LB1 (5.5, 5.6), GL1 (5.12), TA2 et G3 (5.3), RA3 (5.7), BP1 (5.11), AR3 (5.8) |
-| **Faisable par un agent** | F2, F8, F9 (`ADVE-project`) ; LB2, LB4, LB6 (`la-barre`)  ; DC3 (`datacollector`) ; IN4 (profil d'installation, demande un démon Docker) |
+| **Faisable par un agent** | F2, F8, F9 (`ADVE-project`) ; LB2, LB4, LB6 (`la-barre`) ; DC3 (`datacollector`) ; IN4 (profil d'installation, demande un démon Docker) |
 | **Hors programme** | SP1, SP9, SP10, SP11 (SPAWT) et BH3 (BanaHealth) sont des projets clients ; HF1 (15B Stories) et HF3 (CosmicMachine, Atlas, Tauri) sont au `labo`. [`CLOISON.md`](CLOISON.md) les tient hors du programme : ils se traitent dans leur propre cadre et ne conditionnent pas P2. |
 
 ## Contradictions entre documents
