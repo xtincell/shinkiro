@@ -159,13 +159,14 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 23
-    poids_ko: 219
+    fichiers: 26
+    poids_ko: 225
     licence: presente
-    commits_90j: 16
+    commits_90j: 18
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
+      dockerfile: [Dockerfile]
       systemd: [deploy/danmem.service]
       package: [package.json]
       workflows: [.github/workflows/reception.yml]
