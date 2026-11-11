@@ -256,10 +256,12 @@ attendent un arbitrage.
 3. **Les couches mémoire.** Qui écrit quoi, et les dix manques avant une
    restauration recevable, sont dans [`INTERFACES.md`](INTERFACES.md). La
    restauration elle-même reste à recevoir.
-4. **La jointure des deux taxonomies d'écart**, et le branchement de
-   `la-barre/vue-matrice` sur le Market Expansion System. Trois options sont
-   posées dans [SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md) ; elles
-   attendent l'arbitrage 5.4 du plan.
+4. **La jointure des deux taxonomies d'écart** est faite depuis le 11 novembre
+   ([SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md), option C) : un
+   même vocabulaire de types, plusieurs types par couple projet × marché, et le
+   format `ecarts-marche` v1 lu et écrit par la méthode et par La Barre. Le signal
+   `ecart-types-alignes` défend l'alignement. Reste à faire juger les adaptations
+   contre leur écart déclaré.
 5. **Le câblage `la-barre` → `radar`.** La Barre produit les décisions, Radar
    tient le journal. La mesure avant/après du Transformation Pilot en dépend.
    Aujourd'hui, dans la flotte, aucune décision ne circule, dans aucun sens, et
