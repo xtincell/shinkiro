@@ -579,7 +579,7 @@ Chacun est posé comme une question. Une réponse courte suffit.
 
 | # | Question | Ce qu'elle débloque |
 |---|---|---|
-| 5.1 | Quel palier vise-t-on : P1, P2, P3 ou P4 ? | L'ordre de tout le reste |
+| 5.1 | ~~Quel palier vise-t-on : P1, P2, P3 ou P4 ?~~ *Tranché le 11 novembre* : P2, chaque point `[commit]` fermé, PR fusionnée, CI verte | — |
 | 5.2 | Le partage des cockpits est-il celui que montre le code : `galahad/cockpit` pour exécuter dans une installation, `hermes-cockpit` pour observer et exploiter l'hôte ? | 3.2 |
 | 5.3 | `talos` et `hulysse` : les archiver comme dépôts historiques, ou les réparer ? Quelles capacités porter dans `galahad` : serveur MCP, mur S7, garde d'isolation ? | 2.7, 4.2 |
 | 5.4 | Taxonomies : un écart a-t-il un type ou plusieurs (le Ghana en a deux) ? Se déclare-t-il sur l'adaptation ou sur le couple projet × marché ? | 3.4, 4.10 |
