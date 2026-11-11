@@ -12,7 +12,7 @@ ce qui est proposé, ce qui est retenu, ce qui doit revenir et ce qui peut parti
 
 | Moment | Responsable | Passage concret |
 |---|---|---|
-| Cadrer | ADVE / La Fusée | Le diagnostic et la stratégie alimentent le brief. Le transfert reste manuel. |
+| Cadrer | ADVE / La Fusée | Le diagnostic et la stratégie alimentent le brief. Une fois la marque reliée (geste manuel), La Barre lit ses champs ADVE par `contexte.json`, avec leur provenance ; les champs déduits restent marqués « à confirmer », et le brief de production les reprend (`la-barre` `e06af7e`, 17 octobre). |
 | Examiner et décider | La Barre | Bureau de revue par pièce, version et projet ; critères, retours et verdicts. |
 | Organiser l'exécution | Radar / Galahad | Le registre Radar peut être consulté dans La Barre. Aucun envoi automatique de décisions dans Radar avec leur trace n'est livré. |
 | Apprendre | Argos / ADVE | Les références et le bilan nourrissent la prochaine campagne. La boucle de retour automatique reste à construire. |
