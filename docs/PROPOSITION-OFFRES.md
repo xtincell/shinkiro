@@ -1,13 +1,15 @@
 # Proposition — Content Operations, Content Velocity System, grille tarifaire
 
-> **À valider par le propriétaire.** Rédigée le 12 novembre 2026 (arbitrage 5.13). Ce document
-> propose des critères et un modèle ; il n'engage rien tant qu'il n'est pas validé. Il ne
-> s'appuie que sur ce que les outils savent faire aujourd'hui, et il dit ce qui reste à mesurer.
-> Aucun chiffre de résultat n'y est promis.
+> **Validée par le propriétaire le 12 novembre 2026** (arbitrage 5.13), telle quelle. Elle
+> fixe les critères d'acceptation de Content Operations, le modèle opératoire du Content
+> Velocity System et la méthode de validation de la grille. Elle ne s'appuie que sur ce que
+> les outils savent faire aujourd'hui, et elle dit ce qui reste à mesurer. Aucun chiffre de
+> résultat n'y est promis ; la grille reste une hypothèse tant que deux pilotes ne l'ont pas
+> mesurée.
 
-Le [portefeuille](PORTFOLIO.md) laisse trois trous : les critères d'acceptation de **Content
+Le [portefeuille](PORTFOLIO.md) laissait trois trous : les critères d'acceptation de **Content
 Operations** (produit 05), le modèle opératoire du **Content Velocity System** (produit 04) et
-la validation de la **grille tarifaire**. Les voici, proposés.
+la validation de la **grille tarifaire**. Les voici, validés.
 
 ---
 
