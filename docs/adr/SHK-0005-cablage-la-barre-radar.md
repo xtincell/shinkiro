@@ -207,9 +207,11 @@ La Barre de production étant vide. Les suivantes répondent « inchangé ».
 
 **Reste ouvert.**
 
-- Le calcul des indicateurs retenus, et le relevé avant/après qui en sort.
+- ~~Le calcul des indicateurs retenus~~ : fait le 12 novembre ([Radar #10](https://github.com/xtincell/radar/pull/10)),
+  avec la règle des dossiers ouverts avant la bascule et clos après (comptés à
+  part, « à cheval »). Le taux de reprise sur versions et les tours au-delà du
+  vendu restent non calculables depuis Radar.
 - La saisie de la correspondance projet ↔ dossier dans l'écran Radar.
-- La règle des dossiers ouverts avant la bascule et clos après.
 - Le traitement des 125 événements anciens, privés jusqu'à leur relecture
   (5.7).
 
@@ -398,7 +400,8 @@ Deux contrôles avaient été proposés le 10 novembre ; ils ne sont pas écrits
 Le premier, une déclaration de flux dans `fleet.yml`, attend que le manifeste
 porte des flux. Le second, garder la condition « le before/after se rédige »
 de `docs/PORTFOLIO.md` tant qu'aucun flux n'existe, est dépassé : le flux
-existe, et c'est désormais le calcul des indicateurs qui manque.
+existe, et le calcul des indicateurs aussi (Radar #10) ; les tests de Radar
+défendent ce calcul.
 
 ## Portée
 

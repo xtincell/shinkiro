@@ -43,8 +43,9 @@ disponibilité de service non écrite au cadrage (voir la page publique, section
 ne promettons pas »).
 
 **Ce qui manque pour tenir ces critères.**
-- Le calcul automatique du relevé avant/après n'existe pas encore. Le câblage La Barre → Radar
-  existe (arbitrage 5.5) ; le calcul des indicateurs choisis en 5.6 reste à écrire.
+- Le relevé avant/après est calculé par Radar depuis le 12 novembre (`/mesure/avant-apres`).
+  Il couvre C3, C4 et C6. Le taux de reprise et les tours au-delà du vendu (C5) restent
+  dans La Barre : le relevé mensuel doit encore les y lire.
 - L'écran Direction doit lire Radar pour afficher C3 et C4. Il ne le fait pas encore.
 
 ---

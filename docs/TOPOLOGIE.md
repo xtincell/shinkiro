@@ -250,7 +250,7 @@ promesse d'installation ne peut les réduire à une seule dépendance commune.
 
 État au 12 novembre 2026, 11 h 30 UTC. Les cinq points sont écrits. Le partage
 cockpit, la jointure des taxonomies et le câblage La Barre → Radar sont tranchés
-et défendus par un signal. Reste le calcul de la mesure avant/après.
+et défendus par un signal. La mesure avant/après est calculée depuis le 12 novembre (Radar #10).
 
 1. **Le contrat MCP avec Radar.** Écrit dans [`INTERFACES.md`](INTERFACES.md).
    Le pont vit dans `galahad` depuis le 12 novembre (galahad #29) ; Talos est
@@ -273,7 +273,7 @@ et défendus par un signal. Reste le calcul de la mesure avant/après.
    l'instance Radar de l'agence les lit tous les quarts d'heure, par le réseau
    interne du VPS, et les garde privées. Première lecture réussie le
    12 novembre à 11 h 06 UTC : c'est la date de bascule de l'arbitrage 5.6. Le
-   signal `decisions-barre-radar` défend le contrat. Reste à écrire le calcul
-   des indicateurs. L'admission de dossiers décrite dans
+   signal `decisions-barre-radar` défend le contrat. Le calcul des
+   indicateurs est en production (`/mesure/avant-apres`, Radar #10). L'admission de dossiers décrite dans
    [`INTERFACES.md`](INTERFACES.md) vit toujours dans l'installation de
    l'employeur, hors flotte.

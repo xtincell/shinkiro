@@ -274,10 +274,11 @@ composants:
       La divergence déclarée mesure les dépôts historiques, pas le code servi.
       Les services Talos et Hulysse utilisent une variante commune de Galahad.
       Missions, Agora, cron, briefing et sessions nommées sont réintégrés au
-      canon Galahad (moteur 0.1.6). Restent donneuses : le pont MCP, le mur S7
-      et la mémoire stratifiée, plusieurs contrôles de patrouille, l'alerte de
-      repli, et un garde de commandes plus couvrant que celui de Galahad.
-      Aucun service actif migré. Voir docs/RECEPTION-TALOS-HULYSSE.md.
+      canon Galahad (moteur 0.1.6). Le pont MCP, le mur S7 et la garde
+      d'isolation (galahad#29), puis la mémoire stratifiée, les contrôles de
+      patrouille et l'alerte de repli (galahad#30, moteur 0.1.18) y sont
+      repris : ce dépôt est archivé (arbitrage 5.3). Aucun service actif migré
+      sur l'hôte. Voir docs/RECEPTION-TALOS-HULYSSE.md.
 
   - nom: hulysse
     couche: execution
@@ -376,8 +377,9 @@ composants:
     parcours: docs/LA-BARRE.md
     manque: >-
       Le transfert ADVE vers le brief et la boucle de résultats vers Argos
-      restent manuels. Radar lit les décisions (SHK-0005), mais le calcul des
-      indicateurs avant/après n'est pas écrit. labarre.powerupgraders.com
+      restent manuels. Radar lit les décisions (SHK-0005) et calcule la mesure
+      avant/après (radar#10) ; le taux de reprise et les tours au-delà du vendu
+      restent à lire dans La Barre. labarre.powerupgraders.com
       redirige vers powerupgraders.com/la-barre, qui exige la session de La Fusée
       (401 sans session, relevé le 10 novembre) : les outils du poste dédié
       (kit-ordi-dedie/barre.py, outils/*.py) qui écrivent directement sur ce
@@ -407,10 +409,10 @@ composants:
       du studio. Aucun MCP n'est écrit ; la boucle de résultats reste à recevoir.
     manque: >-
       Réception native et projection des dossiers de La Fusée vers le studio
-      (console, puis ARGOS_STUDIO_URL). La Fusée poste sans version attendue :
-      un second envoi d'un dossier modifié serait refusé et lu comme une
-      panne. Une page dynamique inconnue répond 200 avec la page introuvable.
-      La boucle de résultats reste ouverte ; voir docs/RECEPTION-ARGOS.md.
+      (console, puis ARGOS_STUDIO_URL). La boucle de résultats reste ouverte ;
+      voir docs/RECEPTION-ARGOS.md. Depuis le 12 novembre, La Fusée envoie la
+      version attendue (#1194) et une page inconnue ou privée sans clé répond
+      404 (Argos-studio#8).
       Livrés : authentification de l'admission, licence par actif, amendements
       concurrents (0.2.0) ; clé unique, image Docker et déploiement sur le VPS
       (Argos-studio#6) ; espace privé UPgraders lu par la clé et purgé 24 mois
