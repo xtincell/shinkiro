@@ -15,8 +15,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write        # pousser la branche du verrou rafraîchi (geste 1.8)
   issues: write
+  pull-requests: write
 
 jobs:
   derive:
@@ -79,7 +80,49 @@ jobs:
           fi
           cat signaux.txt
 
-      # ── 3. une issue, toujours la même ──────────────────────────────────
+      # ── 3. le verrou rafraîchi, proposé en une PR, toujours la même ─────
+      # Geste 1.8 (arbitrage du 12 novembre) : quand le relevé change le
+      # verrou, le geste hebdomadaire devient une fusion. Une seule branche,
+      # réécrite à chaque passage, une seule PR ouverte, mise à jour sur place.
+      # La PR est ouverte avec FLEET_TOKEN : le jeton du workflow ne peut pas
+      # ouvrir de PR sur un dépôt qui ne l'autorise pas. Un échec ici ne cache
+      # rien : la dérive reste dans l'issue et le job reste rouge.
+      - name: Proposer le verrou rafraîchi en PR
+        id: pr
+        if: steps.releve.outputs.etat == 'derive'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.FLEET_TOKEN }}
+        run: |
+          BRANCHE=fleet/verrou-rafraichi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCHE"
+          git add fleet.lock.yml
+          git commit -q -m "chore(fleet): verrou rafraîchi par le relevé du $(date -u +%F)"
+          git push -q --force origin "$BRANCHE"
+          {
+            echo "Le relevé hebdomadaire a changé \`fleet.lock.yml\` (hors ligne \`releve_le\`)."
+            echo "Fusionner cette PR enregistre l'état de la flotte ; la relire d'abord dit ce qui a bougé."
+            echo
+            echo "Exécution : ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            echo
+            echo '```diff'
+            head -c 6000 releve.diff
+            echo '```'
+            echo
+            echo "Ouverte et mise à jour par \`.github/workflows/fleet-drift.yml\` : une seule PR, réécrite à chaque passage."
+          } > pr-corps.md
+          numero=$(gh pr list --head "$BRANCHE" --state open --json number --jq '.[0].number // empty')
+          if [ -z "$numero" ]; then
+            url=$(gh pr create --base main --head "$BRANCHE" --title "Relevé de flotte — verrou rafraîchi" --body-file pr-corps.md)
+          else
+            gh pr edit "$numero" --body-file pr-corps.md >/dev/null
+            url=$(gh pr view "$numero" --json url --jq .url)
+          fi
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+
+      # ── 4. une issue, toujours la même ──────────────────────────────────
       # Titre stable, recherche par label, mise à jour sur place. Un titre qui
       # contient un identifiant d'exécution fabrique une issue par passage et
       # n'est jamais dédoublonnable : c'est exactement ce qui en a produit 541.
@@ -90,13 +133,15 @@ jobs:
           ETAT_RELEVE: ${{ steps.releve.outputs.etat }}
           DETAIL_RELEVE: ${{ steps.releve.outputs.detail }}
           ETAT_SIGNAUX: ${{ steps.signaux.outputs.etat }}
+          URL_PR: ${{ steps.pr.outputs.url }}
+          ISSUE_PR: ${{ steps.pr.outcome }}
         with:
           script: |
             const fs = require('fs');
             const lire = (f, n) => { try { return fs.readFileSync(f, 'utf8').slice(0, n); } catch { return ''; } };
             const TITRE = 'Dérive de flotte — contrôle hebdomadaire';
             const LABEL = 'fleet-drift';
-            const { ETAT_RELEVE = '', DETAIL_RELEVE = '', ETAT_SIGNAUX = '' } = process.env;
+            const { ETAT_RELEVE = '', DETAIL_RELEVE = '', ETAT_SIGNAUX = '', URL_PR = '', ISSUE_PR = '' } = process.env;
 
             const nonMesurable = ETAT_RELEVE === 'non-mesurable';
             const derive = ETAT_RELEVE === 'derive' || ETAT_SIGNAUX === 'derive';
@@ -109,6 +154,8 @@ jobs:
               `Relevé : \`${ETAT_RELEVE || 'non exécuté'}\` · Signaux : \`${ETAT_SIGNAUX || 'non exécuté'}\``,
               `Exécution : ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
               '',
+              ...(URL_PR ? [`Verrou rafraîchi proposé : ${URL_PR}`, '']
+                : ISSUE_PR === 'failure' ? ['> La PR du verrou rafraîchi n\'a pas pu être ouverte : voir le journal du job.', ''] : []),
               ...(nonMesurable ? ['> ' + DETAIL_RELEVE, '>',
                    '> Un contrôle qui ne peut pas mesurer n\'est pas un contrôle qui passe.',
                    '> Tant que ceci dure, la conformité affichée ne vaut rien.', ''] : []),
@@ -143,7 +190,7 @@ jobs:
               core.info(`Issue #${n.number} ouverte.`);
             }
 
-      # ── 4. l'état du job reflète la mesure, pas l'inverse ────────────────
+      # ── 5. l'état du job reflète la mesure, pas l'inverse ────────────────
       - name: Conclure
         if: always()
         env:
