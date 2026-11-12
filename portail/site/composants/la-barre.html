@@ -34,14 +34,14 @@ Outils métier</p>
 <p><span class="source">fleet.yml</span></p>
 
 
-<div class="encart encart-manque"><div class="encart-titre">Ce qui manque</div><p>Le transfert ADVE vers le brief et la boucle de résultats vers Argos restent manuels. Le registre Radar ne constitue pas une synchronisation des décisions dans Radar avec leur trace. labarre.powerupgraders.com redirige vers powerupgraders.com/la-barre, qui exige la session de La Fusée (401 sans session, relevé le 10 novembre) : les outils du poste dédié (kit-ordi-dedie/barre.py, outils/*.py) qui écrivent directement sur ce domaine ne passent plus, et servir.mjs n'a pas d'authentification propre.</p></div>
+<div class="encart encart-manque"><div class="encart-titre">Ce qui manque</div><p>Le transfert ADVE vers le brief et la boucle de résultats vers Argos restent manuels. Radar lit les décisions (SHK-0005), mais le calcul des indicateurs avant/après n'est pas écrit. labarre.powerupgraders.com redirige vers powerupgraders.com/la-barre, qui exige la session de La Fusée (401 sans session, relevé le 10 novembre) : les outils du poste dédié (kit-ordi-dedie/barre.py, outils/*.py) qui écrivent directement sur ce domaine ne passent plus, et servir.mjs n'a pas d'authentification propre.</p></div>
 <div class="encart encart-pepite"><div class="encart-titre">La pépite</div><p>app/vue-matrice.js implémente la matrice support × marché en trois lectures — calendrier, mur, grille — avec mémoire du mode par dossier. app/ecarts.js classe les écarts par origine et dit qui doit la reprise et si elle se facture. C'est la pièce la plus démonstrative du programme.</p></div>
 
 
 
 
 <h2 id="deploiement">Déploiement</h2>
-<div class="table-enveloppe"><table><tbody><tr><td><code>mode</code></td><td><code>coolify</code></td></tr><tr><td><code>entree</code></td><td><code>index.html</code></td></tr><tr><td><code>serveur</code></td><td><code>servir.mjs</code></td></tr><tr><td><code>url</code></td><td><a href="https://powerupgraders.com/la-barre">https://powerupgraders.com/la-barre</a></td></tr></tbody></table></div>
+<div class="table-enveloppe"><table><tbody><tr><td><code>mode</code></td><td><code>coolify</code></td></tr><tr><td><code>entree</code></td><td><code>index.html</code></td></tr><tr><td><code>serveur</code></td><td><code>servir.mjs</code></td></tr><tr><td><code>url</code></td><td><a href="https://powerupgraders.com/la-barre">https://powerupgraders.com/la-barre</a></td></tr><tr><td><code>vitrine</code></td><td><a href="https://la-barre-vitrine.powerupgraders.com">https://la-barre-vitrine.powerupgraders.com</a></td></tr></tbody></table></div>
 <p><span class="source">fleet.yml</span> — mode constaté dans le dépôt, jamais supposé.</p>
 
 <h2 id="releve">Ce que le relevé constate</h2>

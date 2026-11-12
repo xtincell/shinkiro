@@ -43,6 +43,14 @@ opérateur, aucun brief client importé, aucun appel payant ni déploiement.
 
 ## Conditions encore ouvertes
 
+> **Mise à jour du 12 novembre 2026.** Sont désormais livrés et déployés sur le
+> VPS : l'authentification de l'admission et de l'administration par une clé
+> unique (Argos-studio#6), la licence par actif, la protection d'un amendement
+> concurrent, et l'espace privé UPgraders, lu par la seule clé et purgé 24 mois
+> après sa dernière modification (Argos-studio#7). Le reste de cette section
+> garde son état du relevé initial.
+
+
 Les quatre parcours larges restent ouverts : collecte, recherche, lecture/
 correction, composition/transfert. Authentifier et autoriser le POST et l'admin ;
 recevoir le namespace privé annoncé mais absent du modèle de consultation ;

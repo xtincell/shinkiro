@@ -150,9 +150,19 @@ Un écart peut porter plusieurs types et se déclare sur le couple projet × mar
 Mis en œuvre par market-expansion-system#2 (codes `langue`, `marque`, `produit`,
 `reglementaire`, format `ecarts-marche` v1, colonne `ecart_types` séparée par `+`)
 et la-barre#21 (déclaration sous `perimetre.ecarts[marché]`, import et export du
-format, types portés par les écarts calculés). Reste ouvert : une adaptation qui
-sort de son écart déclaré ne produit pas encore d'écart, faute d'origine
-calculable, et la règle « déclaré avant le premier crayon » n'est pas contrôlée.
+format, types portés par les écarts calculés).
+
+**Complété le 12 novembre 2026** par [la-barre #23](https://github.com/xtincell/la-barre/pull/23),
+sur décision du propriétaire : une adaptation qui change ce que son marché n'a
+pas déclaré n'est pas bloquée. Elle est signalée « hors écart déclaré », avec la
+dimension qui sort, et la revue tranche. Le point de départ de l'adaptation
+(master, version, champs reçus) est désormais posé à sa création ; une
+adaptation plus ancienne est « non évaluée », comptée, jamais signalée. La
+revue corrige soit la déclaration, soit l'adaptation, chaque fois par la
+fabrique de décision.
+
+Reste ouvert : la règle « déclaré avant le premier crayon » n'est pas
+contrôlée.
 
 Les trois options posées le 10 novembre sont conservées ci-dessous. Les chemins
 marqués « à créer » étaient des propositions de nom.

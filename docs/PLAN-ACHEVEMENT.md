@@ -56,6 +56,17 @@ Cinq ressources Coolify servent désormais `main` :
 - `galahad-landing` ;
 - La Fusée en 6.27.571.
 
+**Au 12 novembre, midi UTC**, le VPS sert :
+
+- La Fusée en 6.27.581 ;
+- La Barre au commit `86efbf2`, et sa vitrine sur données fictives ;
+- deux instances Radar au commit `bf4a22b` : la personnelle, et celle de
+  l'agence, qui lit La Barre depuis 11 h 06 UTC ;
+- `galahad-landing` réécrite ;
+- Argos-studio, avec son espace privé UPgraders (Argos-studio#7).
+
+Les deux copies hors canon de La Fusée sont retirées (ligne 0.66).
+
 Au premier redéploiement, La Barre et `hermes-cockpit` sont revenues sur d'anciens
 commits, parce que Coolify les épinglait (`9735c56` du 19 octobre et `1ea757b` du
 7 octobre). Les épingles ont ensuite été déplacées vers `main`, ce qui tranche
@@ -386,9 +397,15 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.62 | `ADVE-project` : un identifiant inconnu ou refusé reçoit le même 404, sans message Prisma ni fuite d'existence, dans les 45 routeurs (161 lectures converties) ; refus documentaires typés ; cinq écrivains qui acceptaient une entité d'une autre marque corrigés ; cliquet à 0 lecture `OrThrow` keyée par l'entrée (dette 557) | [ADVE-project#1184](https://github.com/xtincell/ADVE-project/pull/1184), **fusionnée**, livrée avec 6.27.571 ; PostgreSQL deux entreprises 13 rouges sur 14 avant, 14/14 après. Restent `brand-node` (404/403 distincts) et les lectures des services |
 | 0.63 | `ADVE-project` : le script lancé au démarrage de l'image ne dépend plus de tRPC (`TypedRefusal` de domaine, converti par un middleware de base) ; garde qui rejoue le bundle du Dockerfile et refuse tout paquet absent de l'image, lot 6.27.571 | [ADVE-project#1185](https://github.com/xtincell/ADVE-project/pull/1185), **fusionnée** et livrée ; image 570 refusée par son test de démarrage, production restée en 6.27.569 jusqu'à la 571 |
 | 0.64 | `market-expansion-system` et `la-barre` : un même vocabulaire de types d'écart (`langue`, `marque`, `produit`, `reglementaire`), plusieurs types déclarés sur le couple projet × marché, format `ecarts-marche` v1 lu et écrit des deux côtés ; signal `ecart-types-alignes` ajouté ; SHK-0004 Accepted, option C (ME2, arbitrage 5.4) | [market-expansion-system#2](https://github.com/xtincell/market-expansion-system/pull/2) et [la-barre#21](https://github.com/xtincell/la-barre/pull/21), **fusionnées**, La Barre redéployée (`45dda9c`) ; 11 et 42 tests, rouges avant. Le classement du cas Bonnet Rouge est à requalifier par le propriétaire ; une adaptation qui sort de son écart déclaré n'en produit pas encore |
-| 0.65 | `Argos-studio` : clé unique `ARGOS_ADMIN_KEY` pour toute écriture et l'administration (session signée, comparaison en temps constant, fermé sans clé), image Docker, SQLite sur le volume `/data` avec sauvegarde à chaud (AR3, arbitrage 5.8). Déployé sur le VPS : https://argos.76-13-128-23.sslip.io, 8 dossiers publics du dépôt admis | [Argos-studio#6](https://github.com/xtincell/Argos-studio/pull/6), **fusionnée** ; 39 tests et 24 Playwright (14 et 17 rouges avant), recette Docker de 22 contrôles. En production : lecture 200, écriture sans clé 401, administration redirigée vers la connexion. La Fusée lit encore son journal (13 dossiers) : la projection de ces dossiers vers le studio passe par la console, puis `ARGOS_STUDIO_URL` ; l'espace privé attend ses décisions |
+| 0.65 | `Argos-studio` : clé unique `ARGOS_ADMIN_KEY` pour toute écriture et l'administration (session signée, comparaison en temps constant, fermé sans clé), image Docker, SQLite sur le volume `/data` avec sauvegarde à chaud (AR3, arbitrage 5.8). Déployé sur le VPS : https://argos.76-13-128-23.sslip.io, 8 dossiers publics du dépôt admis | [Argos-studio#6](https://github.com/xtincell/Argos-studio/pull/6), **fusionnée** ; 39 tests et 24 Playwright (14 et 17 rouges avant), recette Docker de 22 contrôles. En production : lecture 200, écriture sans clé 401, administration redirigée vers la connexion. La Fusée lit encore son journal (13 dossiers) : la projection de ces dossiers vers le studio passe par la console, puis `ARGOS_STUDIO_URL` ; espace privé fait (ligne 0.72) |
 | 0.66 | VPS : les deux copies de La Fusée hors canon sont retirées (arbitrage 5.18) — `lafusee-v7` (branche d'`ADVE-project`) et `lafusee-v8` (lignée `ADVE_v8`), avec leurs bases `lafusee-v7-db` et `lafusee-db` ; variable morte `LAFUSEE_DATABASE_URL` retirée de `hermes-cockpit`, que son code ne lit pas. Partage des cockpits confirmé (5.2) et défendu par le signal `frontiere-cockpits` ; `talos` et `hulysse` passent en `vitalite: archive` (5.3) | Sauvegardes `pg_dump` réussies avant suppression (54 657 et 118 802 octets), conservées sur le VPS sous `/data/coolify/backups/databases/root-team-0/` ; la suppression d'une base n'efface pas ce dossier. Production `lafusee-postgres` et l'application de repli intactes, `/api/version` en 200 ; anciens domaines en 503. Archivage GitHub des deux dépôts : geste du propriétaire |
 | 0.67 | `galahad`, `galahad-landing`, `market-expansion-system`, `wiki-prive` : pont MCP Radar avec suppression sous confirmation, garde d'isolation d'`hulysse` et mur S7 de `talos` repris dans le moteur 0.1.17 (5.3) ; landing réécrite pour le dirigeant d'agence, avec le prix de Content Operations (5.12) ; écarts Bonnet Rouge typés selon les SKU distribués, seul le master reste sans écart, le Ghana porte `langue+marque+produit` ; profil personnel sorti de `galahad` vers `wiki-prive` (5.16) | [galahad#29](https://github.com/xtincell/galahad/pull/29) (238 tests, 25 rouges avant), [galahad-landing#3](https://github.com/xtincell/galahad-landing/pull/3) redéployée et servie, [market-expansion-system#3](https://github.com/xtincell/market-expansion-system/pull/3) (11 tests), [galahad#28](https://github.com/xtincell/galahad/pull/28) et [wiki-prive#1](https://github.com/xtincell/wiki-prive/pull/1), **fusionnées**. Recette Docker d'isolation de galahad jouée par la CI, pas sur le VPS ; la landing porte une illustration marquée fictive et deux termes de service à valider |
+| 0.68 | `la-barre` et `radar` : câblage des décisions, sens 1 de SHK-0005 (arbitrages 5.5 et 5.6) — La Barre sert ses seules décisions sur `GET /radar/decisions` derrière `BARRE_RADAR_TOKEN` ; Radar les lit, en reçus versionnés sans doublon, privées, hors du journal et des flux. Radar : `ndeg` unique par instance, flux privés par défaut, anciens événements privés jusqu'à relecture (5.7). Nouvelle instance `radar-agence` sur le VPS, base propre, branchée sur La Barre par le réseau interne ; **bascule le 12 novembre 2026 à 11 h 06 UTC** ; signal `decisions-barre-radar`, SHK-0005 Accepted | [la-barre#22](https://github.com/xtincell/la-barre/pull/22) (6 tests), [radar#8](https://github.com/xtincell/radar/pull/8) (12 tests), [radar#9](https://github.com/xtincell/radar/pull/9) (69/69, 13 rouges avant), **fusionnées** et déployées. Production : première lecture « reçue », zéro décision, puis « inchangé » (304). Radar personnel migré après sauvegarde (164 Ko) : 4 codes en double, 4 dossiers renommés et tracés, 1 ancien rattachement ambigu conservé ; ses flux répondent 401. Le calcul des indicateurs n'est pas écrit |
+| 0.69 | `la-barre` : une adaptation hors de son écart déclaré est signalée, la revue tranche (décision du 12 novembre, SHK-0004) ; vitrine du brief-au-BAT sur une marque fictive, démonstration isolée (LB6) | [la-barre#23](https://github.com/xtincell/la-barre/pull/23), **fusionnée** et déployée (12 tests hors écart, rouges avant). Vitrine publiée en distribution statique, extraite du commit `adf4540` et vérifiée (155 fichiers) : https://la-barre-vitrine.powerupgraders.com. Pages en 200, fichiers du dépôt en 404, démonstration chargée sans erreur dans Chromium |
+| 0.70 | `character-engine` : cinq profils d'exemple, marqués fictifs (5.10) ; `la-fusee-blueprint` : livre et vue rattrapés sur le canon actuel (5.11) | [character-engine#4](https://github.com/xtincell/character-engine/pull/4) et [la-fusee-blueprint#4](https://github.com/xtincell/la-fusee-blueprint/pull/4), **fusionnées** |
+| 0.71 | `ADVE-project` : lots 6.27.572 à 6.27.580 — restitution d'intake sans statistiques non sourcées (4.11.d), garde de couches ESLint réparée, compositeur sans appel à entrées vides (4.11.a), grand document en 2 s (4.11.l), transaction de vente sérialisée rejouée après attente, marque non évaluée plus affichée à zéro, canaux et calendrier du playbook repris des pièces de référence, canons de démonstration au bon contrat et deux nombres retirés au modèle, contrôle SLO sans issue par exécution (1.2, 1.3) | [#1188](https://github.com/xtincell/ADVE-project/pull/1188), [#1189](https://github.com/xtincell/ADVE-project/pull/1189), [#1190](https://github.com/xtincell/ADVE-project/pull/1190), [#1191](https://github.com/xtincell/ADVE-project/pull/1191), [#1192](https://github.com/xtincell/ADVE-project/pull/1192), [#1150](https://github.com/xtincell/ADVE-project/pull/1150), [#1152](https://github.com/xtincell/ADVE-project/pull/1152), [#696](https://github.com/xtincell/ADVE-project/pull/696), [#873](https://github.com/xtincell/ADVE-project/pull/873), **fusionnées** dans l'ordre et livrées le 12 novembre : image du commit `6ea7abd` (build 43207899853, test de démarrage vert), `/api/version` 6.27.580, 108 migrations déjà en base, `/login` 200, écritures anonymes refusées 401. Les anciennes PR #696 et #873 relèvent du tri 5.14 |
+| 0.72 | `Argos-studio` : espace privé UPgraders, lu par la seule clé d'administration et purgé 24 mois après sa dernière modification (ADR-0010 du dépôt). Sans clé, un dossier privé répond comme une adresse inconnue et n'apparaît dans aucune liste, recherche ou exportation ; publier revérifie les règles d'admission ; purge quotidienne avec aperçu à blanc. `la-barre` : notice de la vitrine publiée | [Argos-studio#7](https://github.com/xtincell/Argos-studio/pull/7) (53/53 tests, 13 rouges avant ; Playwright 25/25 ; recette Docker verte en CI après correction de son attente de page), **fusionnée** et déployée : migration additive appliquée, 8 dossiers publics identiques avant et après, purge active, admission privée et purge sans clé 401. [la-barre#24](https://github.com/xtincell/la-barre/pull/24), **fusionnée**, La Barre redéployée sur `86efbf2`. Une page dynamique inconnue répond encore 200 avec la page introuvable (défaut antérieur, suivi à part) |
+| 0.73 | `ADVE-project` : les cinq mises à jour Dependabot reprises en un lot — actions Docker `setup-buildx` v4, `login` v4, `build-push` v7 ; `recharts` 3.10.1 ; `commitlint` 21.2.4 —, lot 6.27.581. Fin du tri 5.14 sur ce dépôt : aucune PR ouverte | [#1193](https://github.com/xtincell/ADVE-project/pull/1193), **fusionnée** et livrée : image du commit `ff6a0d0` construite par les nouvelles actions (build 43210242262, test de démarrage vert), `/api/version` 6.27.581, 108 migrations déjà en base, `/login` 200, écritures anonymes 401. #483, #484, #701, #702 et #703 fermées avec un renvoi vers #1193 |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -397,8 +414,8 @@ Sans ce lot, rien de ce qui suit ne peut être déclaré fini.
 | # | Dépôt | Geste | Preuve attendue | Prérequis |
 |---|---|---|---|---|
 | 1.1 | `shinkiro` | Régénérer `FLEET_TOKEN` | Workflow hebdomadaire vert, issue #5 fermée d'elle-même | **Propriétaire** (B1) |
-| 1.2 | `ADVE-project` | Fusionner la PR #873 | Une seule issue SLO, à titre stable | **Accord du propriétaire.** Sans effet sur la production : fusionner sur `main` ne déploie rien (`.github/workflows/build-image.yml:19-25`). Mais le job sera rouge toutes les six heures tant que 1.4 n'est pas fait |
-| 1.3 | `ADVE-project` | Fermer les 211 issues « SLO breach » | Zéro issue de ce titre | Après 1.2. Agent, sur accord : 211 notifications |
+| 1.2 | `ADVE-project` | Fusionner la PR #873 | Une seule issue SLO, à titre stable | **Fait le 12 novembre** (tri 5.14, lot 6.27.580). Le contrôle restera rouge, sans ouvrir d'issue, tant que 1.4 n'est pas fait |
+| 1.3 | `ADVE-project` | Fermer les 211 issues « SLO breach » | Zéro issue de ce titre | **Confié au workflow** depuis #873 : un job ferme les anciennes issues, avec un commentaire, à chaque passage planifié, jusqu'à épuisement (216 comptées à la fusion). À constater après le prochain passage |
 | 1.4 | `ADVE-project`, `galahad` | Mesurer le SLO depuis le VPS, où la base est joignable, plutôt que depuis GitHub | Un relevé SLO daté, lu par le workflow | Arbitrage : procédure `galahad` ou tâche planifiée. Puis B2 |
 | 1.5 | `talos`, `hulysse`, `character-engine`, `galahad-landing`, `market-expansion-system` | Une CI minimale par dépôt : syntaxe, liens, gabarits | Cinq workflows verts | **Fait** — cinq PR, lot 0.19 |
 | 1.6 | `shinkiro` | Signal `mode-dementi` : un mode déclaré sans son artefact est une dérive | Il a relevé `danmem` ; Argos l'assume par son état déclaré | **Fait** |
@@ -433,11 +450,11 @@ journaux datés : le README le dit, sans les réécrire.
 
 | # | Geste | Matière disponible | Prérequis |
 |---|---|---|---|
-| 3.1 | Le contrat MCP `talos` ↔ `radar` dans `docs/INTERFACES.md` | Transport stdio, sept outils avec leurs appels, douze écarts avec Radar | Agent |
+| 3.1 | Le contrat MCP avec `radar` dans `docs/INTERFACES.md` | **Fait** — pont repris par `galahad` (galahad#29) ; trois écarts fermés, six ouverts ou à vérifier | — |
 | 3.2 | Le partage des cockpits dans `docs/TOPOLOGIE.md` | **Fait** — tableau de onze capacités, partage confirmé (5.2), signal `frontiere-cockpits` | — |
 | 3.3 | Les couches mémoire : qui écrit quoi, et les dix manques avant une restauration recevable | Relevé complet des deux dépôts | Agent |
-| 3.4 | Une ADR sur la jointure des taxonomies d'écart | **Proposée** : [SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md), trois options chiffrées en fichiers touchés | Arbitrage 5.4, puis passage en Accepted |
-| 3.5 | Une ADR sur le câblage La Barre → Radar | **Proposée** : [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md), trois sens, fichiers de chaque côté, neuf points pour 5.6 | Arbitrages 5.5 et 5.6, puis passage en Accepted |
+| 3.4 | Une ADR sur la jointure des taxonomies d'écart | **Accepted** : [SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md), option C ; hors écart signalé (la-barre#23) | — |
+| 3.5 | Une ADR sur le câblage La Barre → Radar | **Accepted** : [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md), sens 1, en production depuis le 12 novembre (ligne 0.68), signal `decisions-barre-radar` | Calcul des indicateurs : lot 6 |
 | 3.6 | Reprendre les jugements périmés de `fleet.yml` et les dix-huit contradictions | Section 3.4 | Agent |
 | 3.7 | La définition d'« achevé » | — | **B3** |
 | 3.8 | Le contrat de fichier `agent-brains.json` → `cerveau.txt` | **Écrit** dans `docs/INTERFACES.md` ; le maillon central reste hors git | Verser le script de l'hôte dans un dépôt : B2 |
@@ -451,7 +468,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.1 | `galahad` | **Faits** : rôles (galahad#23), `dan-oauth` en CI et reçus refusés (galahad#24). Unité commerciale et `deliver.sh` **faits** (galahad#25). Les trois scripts de patrouille sont alignés (galahad#25). Restent le `CHANGELOG` à 0.1.16 (après fusion des PR), la version de Hermes servie, et l'appel de `release` vers Danmem (danmem#4), utile seulement si un consommateur rend un travail sans le finir | Agent ; B2 pour la version servie |
 | 4.2 | `galahad` | **Fait en partie** ([galahad#29](https://github.com/xtincell/galahad/pull/29), moteur 0.1.17) — pont MCP Radar, garde d'isolation d'`hulysse`, mur S7 de `talos`. Restent : contrôles de patrouille, alerte de repli, mémoire stratifiée, sessions nommées, cron et briefing, veille | Agent |
 | 4.3 | `radar` | README des migrations (F13) ; `npm ci` dans le Dockerfile ; format `RADAR_INSTANCES` | **Fait** — radar#6 |
-| 4.4 | `radar` | Unicité de `ndeg` : aujourd'hui un POST rejoué crée un doublon, et `update` frappe tous les homonymes | Arbitrage 5.7 |
+| 4.4 | `radar` | **Fait** ([radar#9](https://github.com/xtincell/radar/pull/9)) — `ndeg` unique par instance, homonymes renommés sans perte, flux privés par défaut ; en production sur les deux instances (ligne 0.68) | — |
 | 4.5 | `danmem` | **Faits** : F6 (danmem#2), unité, environnement et défauts morts (danmem#3), bail et remise en file F7 (danmem#4, à fusionner après #3). Restent l'appel de `release` côté Galahad et la relecture de l'unité servie | B2 pour l'unité servie |
 | 4.6 | `danmem`, `galahad` | **Écrit et éprouvé localement** (danmem#5, galahad#26). Reste la recette sur le VPS : noms réels, version de `pg_dump`, volume, stockage hors hôte | Recette B2 |
 | 4.7 | `hermes-cockpit` | F10, titre et README **faits** (hermes-cockpit#3, #4) ; reste la configuration morte du compose | Arbitrage : retirer des montages de production |
@@ -460,11 +477,11 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.10 | `market-expansion-system` | Gabarits cohérents avec la méthode ; promesse d'import tenue ou retirée (F9) | Arbitrage 5.4 |
 | 4.11 | `ADVE-project` | Voir [section 4 bis](#4-bis-la-fusée) | — |
 | 4.12 | `Argos-studio` | Artefact de déploiement pour le VPS ; `If-Match` côté Fusée (F14) ; isolation des consultations ; bouchons | Arbitrage 5.8 pour l'hébergement |
-| 4.13 | `character-engine` | **Fait** : F8 (character-engine#2), export et contradictions (character-engine#3). Reste un test versionné du parcours | — |
+| 4.13 | `character-engine` | **Fait** : F8 (character-engine#2), export et contradictions (character-engine#3), cinq profils d'exemple fictifs (character-engine#4, 5.10). Reste un test versionné du parcours | — |
 | 4.14 | `charadesign-generator` | **Fait** (charadesign-generator#5) ; outil local, pas de service (5.9). Restent le statut partiel des étapes déjà affichées, les retours tardifs de `ImageGen.jsx`, une recette navigateur avec fournisseur | Agent |
 | 4.15 | `datacollector` | **Fait** (datacollector#4) ; outil local, pas de service (5.9). Reste : servir Tailwind localement pour lui donner une empreinte | Agent |
 | 4.16 | `galahad-landing` | **Fait** ([galahad-landing#3](https://github.com/xtincell/galahad-landing/pull/3)), servie sur `galahad.powerupgraders.com` | — |
-| 4.17 | `la-fusee-blueprint` | Régénérer la vue ou l'archiver | Arbitrage 5.11 |
+| 4.17 | `la-fusee-blueprint` | **Fait** (la-fusee-blueprint#4) — livre et vue rattrapés sur le canon actuel | — |
 | 4.18 | `installation` | **Fait** (IN4, ligne 0.60) — Radar et la mémoire `danmem` dans le profil, responsable rattaché par son compte ordinaire ; Argos-studio et les rôles Galahad écartés avec leurs raisons | Recette B2 sur le VPS |
 
 ### Lot 5 — Recevoir en production
@@ -516,10 +533,10 @@ Ce lot ne se planifie pas, il se prépare. Trois préparations sont à portée :
 
 | # | Geste | Référence |
 |---|---|---|
-| 4.11.a | Le compositeur de production appelle l'outil cible avec une entrée vide | `docs/governance/RESIDUAL-DEBT.md:109-131` |
+| 4.11.a | **Fait** (#1190) — Le compositeur de production appelle l'outil cible avec une entrée vide | `docs/governance/RESIDUAL-DEBT.md:109-131` |
 | 4.11.b | **Fait** (#1165) — Seuil faux du calculateur CODB | `src/server/services/glory-tools/calculators.ts:95` |
 | 4.11.c | **Fait** (#1165) — `generateAiFollowUps` teste les clés et ignore le relais OAuth | `src/server/services/quick-intake/question-bank.ts:302-304` |
-| 4.11.d | Chiffres non sourcés dans la restitution | `docs/governance/RESIDUAL-DEBT.md:1750-1759` |
+| 4.11.d | **Fait** (#1188) — Chiffres non sourcés dans la restitution | `docs/governance/RESIDUAL-DEBT.md:1750-1759` |
 | 4.11.e | **Fait** (#1165) — Oracle annonce « 6 sections complètes » pour zéro section rédigée | `docs/governance/RESIDUAL-DEBT.md:3768-3782` |
 | 4.11.f | **Fait** (#1165) — Un utilisateur supprimé peut être recréé depuis un jeton encore signé | `docs/governance/RESIDUAL-DEBT.md:3501-3509` |
 | 4.11.g | **Fait** (#1165) — Préréglage Lighthouse invalide | `.lighthouserc.json:5` |
@@ -527,7 +544,7 @@ Ce lot ne se planifie pas, il se prépare. Trois préparations sont à portée :
 | 4.11.i | **Fait** (#1167) — Réparer ou retirer `deploy.yml` et `release.yml` (M10) | `.github/workflows/` |
 | 4.11.j | **Fait** (#1168) — 63 alertes de dépendances, dont 9 critiques ; restent 15 moderate d'outillage, sans correctif publié | relevé à l'installation |
 | 4.11.k | Formats ADVE anciens hors des schémas stricts | `docs/governance/RESIDUAL-DEBT.md:252-275` |
-| 4.11.l | Le document de 112 s sous un plafond de 120 s | `docs/governance/RESIDUAL-DEBT.md:342-352` |
+| 4.11.l | **Fait** (#1191) — Le document de 112 s sous un plafond de 120 s | `docs/governance/RESIDUAL-DEBT.md:342-352` |
 
 Chacun passe par une ADR quand il est structurant, selon la règle de ce dépôt.
 
@@ -541,6 +558,7 @@ Chacun passe par une ADR quand il est structurant, selon la règle de ce dépôt
   la redémarre (`.github/workflows/ops-env-fix.yml:16`).
 - **Les PR en attente** : 14 ouvertes, dont neuf mises à jour automatiques, #873
   et #875 prêtes depuis le 14 septembre, #696 en conflit depuis le 31 juillet.
+  *Au 12 novembre : aucune PR ouverte sur ce dépôt (tri 5.14, lignes 0.71 et 0.73).*
 
 ## 4 ter. Fusionner les PR ouvertes
 
@@ -598,7 +616,7 @@ Chacun est posé comme une question. Une réponse courte suffit.
 | 5.11 | ~~`la-fusee-blueprint` : rattraper le canon (ADR 0083 à 0243), ou assumer une photographie de mai ?~~ *Tranché le 12 novembre* : rattraper le canon actuel | 4.17 |
 | 5.12 | ~~`galahad-landing` : quel acheteur, quelle promesse, quel prix ?~~ *Tranché le 12 novembre* : le dirigeant d'agence ; « votre agence avance, même quand vous n'y êtes pas » ; Content Operations à partir de 900 K FCFA par mois, fourchette 900 K – 3 M ; fait (ligne 0.67) | 4.16 |
 | 5.13 | Critères d'acceptation de Content Operations, modèle de Content Velocity, grille tarifaire — *12 novembre* : proposition rédigée, **à valider** ([`PROPOSITION-OFFRES.md`](PROPOSITION-OFFRES.md)) ; la grille ne se fixe qu'après deux pilotes mesurés | Lot 6 |
-| 5.14 | ~~Les PR en attente : #875, #696, #679 sur `ADVE-project` ; les brouillons de `la-fusee-blueprint`, `galahad`, `radar`, `charadesign-generator`. Fusionner ou fermer ?~~ *Tranché le 11 novembre* : tri délégué, fusion de ce qui est juste et vert, fermeture motivée du reste | L'hygiène de chaque dépôt |
+| 5.14 | ~~Les PR en attente : #875, #696, #679 sur `ADVE-project` ; les brouillons de `la-fusee-blueprint`, `galahad`, `radar`, `charadesign-generator`. Fusionner ou fermer ?~~ *Tranché le 11 novembre* : tri délégué, fusion de ce qui est juste et vert, fermeture motivée du reste ; **fait le 12 novembre** sur `ADVE-project` : #696 et #873 remises à jour et livrées, les cinq mises à jour Dependabot reprises dans #1193, aucune PR ouverte (lignes 0.71 et 0.73) | L'hygiène de chaque dépôt |
 | 5.15 | ~~L'admission La Barre écrite pour l'employeur peut-elle entrer dans le canon `radar`, ou doit-elle être réécrite ?~~ *Tranché le 12 novembre* : réécrite neuve dans `radar`, sans rien reprendre de l'employeur | 3.5 ; voir `docs/CLOISON.md` |
 | 5.16 | ~~`galahad` suit un profil personnel (`deploy/dan-hermes/wiki-Alexandre_Profil.md`). Doit-il rester dans ce dépôt ?~~ *Tranché le 12 novembre* : non ; il vit dans `wiki-prive` ([wiki-prive#1](https://github.com/xtincell/wiki-prive/pull/1)), retiré de galahad ([galahad#28](https://github.com/xtincell/galahad/pull/28)) | `docs/CLOISON.md` |
 | 5.17 | ~~`wiki-prive` est-il bien `adjacent` ?~~ *Tranché le 12 novembre* : oui | Le classement posé le 10 novembre |
@@ -609,13 +627,13 @@ Chacun est posé comme une question. Une réponse courte suffit.
 
 | Si le propriétaire… | Alors un agent peut… |
 |---|---|
-| ne fait rien de plus | Les gestes « Agent » restants : 4.11.a, d, k, l et la garde de couches ESLint inerte (constat de #1168), en cours depuis le 12 novembre ; 4.18 est fait |
+| ne fait rien de plus | Le geste « Agent » restant de 4.11 : k, les formats ADVE anciens hors des schémas stricts. 4.11.a, d, l et la garde de couches ESLint sont faits (#1188 à #1191) ; 4.18 est fait |
 | fusionne les 32 PR | *Fait le 11 novembre*, avec cinq ressources Coolify redéployées. Reste à redémarrer les services systemd de l'hôte |
 | régénère `FLEET_TOKEN` | Fermer P1 côté flotte |
-| donne son accord sur #873 | Fermer 1.2 et 1.3 |
+| ~~donne son accord sur #873~~ | *Fait le 12 novembre* : #873 fusionnée au tri 5.14 ; 1.3 se ferme par le workflow |
 | ouvre une voie vers le VPS | Commencer le lot 5 |
 | exporte la définition des chantiers | Écrire 3.7, et rattacher chaque intervention à son chantier |
-| tranche les arbitrages 5.2 à 5.5 | Passer SHK-0004 et SHK-0005 en Accepted, écrire leurs signaux d'audit, lancer le câblage |
+| ~~tranche les arbitrages 5.2 à 5.5~~ | *Fait le 12 novembre* : SHK-0004 et SHK-0005 Accepted, signaux `ecart-types-alignes` et `decisions-barre-radar`, câblage en production. Reste le calcul des indicateurs 5.6 |
 
 ## Méthode et limites
 

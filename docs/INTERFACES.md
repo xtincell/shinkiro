@@ -94,7 +94,7 @@ tout ce qui n'y figure pas est refusé, ce n'est pas un oubli mais une protectio
 
 | Table | Clé | Rôle |
 |---|---|---|
-| `briefs` | `id` | Le dossier. `ndeg` est un code métier actuellement non unique ; il ne remplace pas l'identifiant stable. |
+| `briefs` | `id` | Le dossier. `ndeg` est un code métier **unique par instance** depuis [Radar #9](https://github.com/xtincell/radar/pull/9) (contrainte `briefs_ndeg_unique`). Les homonymes anciens sont renommés `<ndeg>-2`, `-3`… sans rien supprimer, et tracés dans `briefs_ndeg_renommes`. `ndeg` ne remplace pas l'identifiant stable `id`. |
 | `clients` · `client_markets` · `client_contacts` | `id` | Référentiel client. `data` en JSONB. |
 | `task_events` | `id` | **Le journal en lecture seule par REST.** `brief_id` rattache le mouvement ; `private_to` conserve sa confidentialité historique. |
 | `comments` | `id` | Fil par `ndeg`. |
@@ -130,9 +130,23 @@ de livraison ni d'accord client. Voir `radar/docs/RECEPTION-JOURNAL.md`.
 - `GET /activity.json` — JSON Feed 1.1
 
 Ils exposent les mouvements publics qualifiés de `task_events`, avec un signal
-d'histoire incomplète. Leur publication publique par défaut et l'option
-`FEED_TOKEN` restent à prendre en compte pour chaque installation. Un ancien
-PostgREST dépourvu du contrat de confidentialité n'est plus un repli public.
+d'histoire incomplète. Un ancien PostgREST dépourvu du contrat de
+confidentialité n'est plus un repli public.
+
+**Privés par défaut** depuis [Radar #9](https://github.com/xtincell/radar/pull/9)
+(arbitrage 5.7). `/feed.xml` et `/activity.json` s'ouvrent par
+`FEED_PUBLIC=1` ou aux détenteurs de `FEED_TOKEN` ; sinon ils restent derrière
+le mur, en aperçu pour `owner`, `supervisor` et la clé machine. `/jour.html` et
+`/jour.json` s'ouvrent par `JOUR_PUBLIC=1` ; sinon `/jour.json` suit le
+périmètre du rôle. Le CORS n'est posé que sur une sortie publiée. Les
+événements à confidentialité inconnue restent privés jusqu'à leur relecture
+par `POST /journal/revue`, tout ou rien, avec `revue_par` et `revue_le`.
+Relevé du 12 novembre 2026, sans session : les deux instances du VPS,
+personnelle et agence, répondent 401 sur `/`, `/feed.xml` et
+`/activity.json`. Aucun outil de la flotte ne lisait ces flux.
+
+Côté API, il n'y a pas d'upsert : un `POST` ou un `PATCH` qui prend un code
+existant reçoit 409, sans écriture et sans révéler le dossier.
 
 ### Entrée libre
 
@@ -208,6 +222,54 @@ conservés au reçu. Le rattachement Fusée est reçu dans son interface ; l'éc
 Radar Matanga, le retour des résultats, le cycle complet et le second locataire
 restent ouverts.
 Voir [le contrat d'admission](https://github.com/xtincell/Matanga-Creative-dashboard/blob/main/docs/ADMISSION-LA-BARRE.md).
+
+### La Barre → Radar agence — les décisions (SHK-0005, sens 1)
+
+Arbitrage 5.5 du 11 novembre 2026 : **Radar va lire, La Barre n'envoie rien.**
+Distinct de l'admission Matanga ci-dessus, qui crée des dossiers dans une
+installation hors flotte.
+
+**Côté La Barre** ([la-barre #22](https://github.com/xtincell/la-barre/pull/22)) :
+`GET /radar/decisions` sert la seule collection `decisions` du dépôt désigné
+par `depots/manifeste.json` ; ni personnes, ni facturation, ni reste de la
+base. Jeton `BARRE_RADAR_TOKEN` en Bearer, 32 caractères au moins, comparé en
+temps constant : sans jeton configuré, 503 ; jeton absent ou faux, 401 ; autre
+méthode que `GET`/`HEAD`, 405. Champs servis : `id`, `projet`, `objet`, `type`,
+`verdict`, `motif`, `quand`, `qui`, `acteur`, `titre`, plus `campagne`,
+`marque`, `version`, `portee`, `remplace`, `ecart`, `empreinte`,
+`revisionSource`, `cree_le` quand la décision les porte. Chaque décision porte
+`empreinte_contenu` (SHA-256 du JSON canonique). L'`ETag` ne change qu'avec les
+décisions. Une décision sans identifiant ou à identifiant pris deux fois est
+nommée dans `ecartees`, pas servie.
+
+**Côté Radar** ([Radar #8](https://github.com/xtincell/radar/pull/8)) :
+`server/barre.js` lit toutes les `BARRE_INTERVAL_MIN` minutes (15 par défaut,
+0 désactive), une lecture à la fois. Il refuse une redirection, borne la
+réponse à 32 Mo et 30 s, recalcule l'empreinte et refuse une décision altérée.
+Tables :
+
+- `barre_recus` — un reçu par (instance La Barre, `decision.id`, version). Même
+  empreinte : rien. Empreinte changée : version suivante, l'ancienne reste.
+  Décision disparue de la même base : version « retiree », jamais effacée.
+- `barre_projets` — la correspondance projet La Barre ↔ (instance Radar,
+  `briefs.id`), tenue dans Radar. Aucun `ndeg` n'est deviné.
+- `barre_lectures` — l'état de la dernière lecture (`statut`, `derniere_reussite`).
+- vue `barre_decisions` — versions, remplacement et rattachement calculé.
+
+`quand` garde la date de la décision ; `at` reste l'heure d'écriture dans
+Radar. Les décisions sont **privées** : rien dans `briefs` ni `task_events`,
+donc rien dans les flux. Les trois tables sont réservées à `owner` et
+`supervisor`.
+
+**En production depuis le 12 novembre 2026, 11 h 06 UTC.** Une instance Radar
+dédiée à l'agence (`radar-agence`, base propre) lit La Barre par le réseau
+interne du VPS (`la-barre-source:3000`), sans exposer la route au public.
+Première lecture réussie : zéro décision, La Barre de production étant vide ;
+les lectures suivantes répondent « inchangé » (304). Cette heure est la date de
+bascule de l'arbitrage 5.6. L'instance personnelle ne lit pas La Barre.
+
+Restent ouverts : le calcul des indicateurs retenus en 5.6 et la saisie de la
+correspondance projet ↔ dossier dans l'écran Radar.
 
 ## la-fusee ↔ radar — identité et accès au suivi
 
@@ -371,28 +433,43 @@ Fusée joint le port de La Barre. Ne sont pas encore faites :
 - la relecture du bilan dans le brief de la campagne suivante ;
 - la transmission automatique.
 
-## talos ↔ radar — MCP
+## galahad ↔ radar — MCP
 
-`talos/radar-mcp/` contient `index.js`, son `package.json` et un `test-client.mjs`. C'est le
-pont MCP historique prévu pour exposer Radar au rôle Guardian. Les quinze
-modules actuellement servis n’appellent pas ce client ; ils possèdent une
-intégration HTTP distincte. Le contrat MCP reste une capacité donneuse à recevoir,
-pas une connexion active prouvée. Voir [la réception des rôles](RECEPTION-TALOS-HULYSSE.md).
+Le pont MCP vit désormais dans `galahad` : `engine/src/radar-mcp.js` et
+`engine/src/mcp-stdio.js`, reçus par [galahad #29](https://github.com/xtincell/galahad/pull/29)
+(arbitrage 5.3). Talos et Hulysse sont archivés ; `talos/radar-mcp/` n'est plus
+qu'une trace historique. Le pont sert les sept outils Radar du rôle par
+`runRadarTool` : même portée de rôle, mêmes gardes et même client HTTP que la
+boucle d'agent. Il n'y a qu'un contrat, servi par deux transports. Le protocole
+est écrit à la main (`initialize`, `ping`, `tools/list`, `tools/call`), sans
+dépendance npm. Un test parle au vrai processus du pont, Radar simulé.
+
+Lancement : `GALAHAD_ROLE=guardian node --env-file=.env src/radar-mcp.js`.
+Les instances viennent de `RADAR_INSTANCES`, avec `RADAR_<NOM>_URL` et
+`RADAR_<NOM>_KEY`. Sans instance déclarée pour un rôle autorisé, le pont sert
+zéro outil et le dit sur stderr.
+
+Le contrat ci-dessous a été reconstitué sur le pont Talos ; galahad #29 garde
+le nom du serveur (`radar`, version 1.0.0), les noms, les schémas et les
+requêtes Radar.
 
 ### Le contrat
 
 Reconstitué le 10 novembre 2026 depuis `talos/radar-mcp/index.js` et
-`talos/src/mcp.js`, puis rejoué de bout en bout sur un Radar local.
+`talos/src/mcp.js`, puis rejoué de bout en bout sur un Radar local. Les
+paragraphes **Lancement** et **Configuration** décrivent le pont Talos
+historique ; ceux du pont galahad sont plus haut.
 
-**Transport.** stdio, JSON-RPC 2.0, aucun port. SDK `@modelcontextprotocol/sdk`
-1.29.0. Le serveur se nomme `radar`, version 1.0.0, et ne déclare que des outils.
+**Transport.** stdio, JSON-RPC 2.0, aucun port. Le pont Talos utilisait le SDK
+`@modelcontextprotocol/sdk` 1.29.0 ; le pont galahad écrit le protocole à la
+main. Le serveur se nomme `radar`, version 1.0.0, et ne déclare que des outils.
 
-**Lancement.** Talos lance `node --env-file=<dir>/.env <dir>/index.js`, où `<dir>`
+**Lancement (Talos).** Talos lançait `node --env-file=<dir>/.env <dir>/index.js`, où `<dir>`
 vaut `RADAR_MCP_DIR`, par défaut `/opt/talos/radar-mcp`. Ce `.env` est ignoré de
 git et l'installeur ne le crée pas. Sans lui, le pont expose zéro outil, sans
 erreur visible.
 
-**Configuration.** `RADAR_MATANGA_URL`, `RADAR_MATANGA_KEY`, `RADAR_PERSO_URL`,
+**Configuration (Talos).** `RADAR_MATANGA_URL`, `RADAR_MATANGA_KEY`, `RADAR_PERSO_URL`,
 `RADAR_PERSO_KEY`. Les deux instances, `matanga` et `perso`, sont figées dans le
 schéma des outils.
 
@@ -418,42 +495,45 @@ Le schéma d'entrée n'est pas validé côté serveur, et aucun délai ne borne 
 
 ### Les écarts avec Radar
 
-La forme tient : les sept appels existent encore côté Radar, avec les mêmes
-tables et colonnes. Les écarts sont de sens.
+Relevés le 10 novembre sur le pont Talos, revus le 12 novembre sur le pont
+galahad et Radar #9.
 
-1. **`ndeg` n'est pas unique.** `radar_get` rend une ligne sans ordre ;
-   `radar_update` et `radar_delete` frappent tous les homonymes ; `radar_comment`
-   répond 409. Le pont ignore `briefs.id`.
-2. **La confidentialité est sautée.** La clé machine lève le filtre de
-   `task_events`. Le pont ne lit ni `private_to` ni l'en-tête
-   `X-Radar-Unqualified-Events` : un mouvement privé arrive au modèle sans marque.
-3. **`radar_delete` échappe à la confirmation.** Dans Talos, les outils du pont
-   contournent le garde (`talos` `src/agent-loop.js:80-82`).
-4. **Une création sans `ndeg` réussit**, et devient inatteignable par les autres
-   outils. Les champs inconnus sont ignorés en silence.
-5. **Les branches « Aucune tâche » sont mortes.** Sur un `ndeg` inconnu, Radar
-   répond 404 (`radar` `server/pgrest.js:393`) ; le pont le rend comme une erreur.
-6. **La liste des événements est périmée.** Radar émet aussi `deleted`,
-   `reopened`, `unfrozen`, `deadline`, `visibility`, `updated`, `asset` et
-   `asset_deleted`.
-7. **Toute écriture est anonyme.** Elle porte l'identité `service@radar` ;
-   l'auteur d'un commentaire est un texte libre.
-8. **Le client de test n'affirme rien.** Il écrit dans le Radar visé et y laisse
-   trois événements définitifs.
-9. **Aucun test ne lie les deux côtés.**
+1. **`ndeg` n'est pas unique** — *fermé côté Radar.* Depuis Radar #9, un code
+   ne désigne qu'un dossier par instance ; `radar_get`, `radar_update`,
+   `radar_delete` et `radar_comment` ne touchent plus d'homonymes. Le pont
+   ignore toujours `briefs.id`.
+2. **La confidentialité est sautée** — *ouvert.* La clé machine lève le filtre
+   de `task_events`. `radar_activity` ne lit ni `private_to` ni l'en-tête
+   `X-Radar-Unqualified-Events` : un mouvement privé arrive au modèle sans
+   marque.
+3. **`radar_delete` échappe à la confirmation** — *fermé par galahad #29.*
+   Il exige le consentement existant (« oui », `/grant`, nuit autorisée),
+   contrôlé avant toute requête. Par le pont, seule la fenêtre `/grant` de la
+   même installation compte : un client MCP ne confirme pas à la place de
+   l'opérateur.
+4. **Une création sans `ndeg`** — *à vérifier.* Les champs inconnus sont
+   ignorés en silence.
+5. **Les branches « Aucune tâche »** — *à revérifier sur le pont galahad.*
+6. **La liste des événements est périmée** — *ouvert.* Radar émet aussi
+   `deleted`, `reopened`, `unfrozen`, `deadline`, `visibility`, `updated`,
+   `asset`, `asset_deleted` et désormais `renamed`.
+7. **Toute écriture est anonyme** — *ouvert.* Elle porte l'identité
+   `service@radar` ; l'auteur d'un commentaire est le nom de l'agent par
+   défaut.
+8. **Le client de test n'affirme rien** — *fermé.* Le test de galahad #29
+   affirme le contrat contre un Radar simulé.
+9. **Aucun test ne lie les deux côtés** — *ouvert.* Le test simule Radar ; il
+   ne joue pas contre un Radar réel.
 
 L'instance `matanga` tourne sur un autre code, hors flotte : sa parité n'est pas
 vérifiée, et ne peut pas l'être d'ici.
 
 ### Qui s'en sert
 
-Le moteur Talos de git l'utilise. `galahad` n'a ni client ni serveur MCP : il
-porte les sept mêmes outils en HTTP direct (`galahad` `engine/src/integrations.js`),
-donc les écarts 1, 2, 4, 7 et 9 s'y appliquent aussi. Il y ajoute un défaut
-propre : une erreur HTTP y lève une exception non rattrapée, et le tour meurt sans
-réponse à l'opérateur.
-
-Savoir lequel des deux le service du VPS appelle reste à relever sur place.
+La boucle d'agent de `galahad` appelle les mêmes outils en HTTP direct
+(`galahad` `engine/src/integrations.js`) ; le pont les sert à un client MCP
+(Claude Code…). Depuis [galahad #22](https://github.com/xtincell/galahad/pull/22),
+une panne d'intégration revient à l'opérateur au lieu de tuer le tour.
 
 ## galahad — sas-admin, le sas de sécurité
 
@@ -532,7 +612,7 @@ contrat ; la troisième n'était pas ce qu'on en disait.
 
 | Liaison | État |
 |---|---|
-| `talos/radar-mcp` → `radar` | **Contrat écrit ci-dessus.** Neuf écarts de sens restent ouverts. |
+| `galahad` (pont MCP) → `radar` | **Contrat écrit ci-dessus.** Repris de `talos/radar-mcp` par galahad #29. Trois écarts fermés (1, 3, 8), six ouverts ou à vérifier. |
 | `hermes-cockpit` → `radar` | **Cette liaison n'existe pas.** Le cockpit ne lit aucune santé de Radar. Il relaie le portail client de l'installation de l'employeur, par `PORTAL_API_URL`. |
 | `hermes-cockpit` → `danmem` | Le cockpit lit un fichier, `danmem-status.json`, et non le service. **Le producteur de ce fichier est sur le VPS, dans aucun dépôt.** |
 | `danmem` ↔ `galahad/engine/src/memory.js` | **Responsabilités et manques écrits ci-dessus.** Restauration, droits et parcours vivant non reçus. |
