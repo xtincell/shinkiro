@@ -181,12 +181,14 @@ côte : un chiffre déclaré à plus de dix points du réel est une dérive.
 Deux recouvrements seulement : la présence des agents, par deux mécanismes, et la
 lecture du modèle.
 
-**Le partage que montre le code** : `galahad/cockpit` est le poste d'exécution
-d'une installation ; `hermes-cockpit` est le poste d'observation et
-d'exploitation de l'hôte. Il reste à confirmer par le propriétaire : c'est
-l'arbitrage 5.2 du [plan d'achèvement](PLAN-ACHEVEMENT.md).
+**Le partage, confirmé le 11 novembre 2026 (arbitrage 5.2)** : `galahad/cockpit`
+est le poste d'exécution d'une installation ; `hermes-cockpit` est le poste
+d'observation et d'exploitation de l'hôte. Le signal `frontiere-cockpits` le
+défend dans le code : le premier ne touche ni au socket Docker, ni à Coolify, ni à
+`/proc` de l'hôte ; le second ne lance ni procédure `/operate`, ni construction
+d'image, ni déploiement compose.
 
-Trois défauts entretiennent la confusion en attendant :
+Trois défauts entretiennent encore la confusion :
 
 - les deux pages portent presque le même titre, « Galahad · Cockpit » et
   « Galahad — Cockpit » ;
@@ -246,13 +248,15 @@ promesse d'installation ne peut les réduire à une seule dépendance commune.
 
 ## Ce qui reste à écrire
 
-État au 10 novembre 2026. Trois des cinq points sont écrits ; les deux derniers
-attendent un arbitrage.
+État au 12 novembre 2026. Les cinq points sont écrits. Le partage cockpit et la
+jointure des taxonomies sont tranchés et défendus par un signal ; le câblage est
+tranché (Radar lit La Barre), sa mesure attend l'arbitrage 5.6.
 
 1. **Le contrat MCP `talos ↔ radar`.** Écrit dans [`INTERFACES.md`](INTERFACES.md).
    Neuf écarts de sens avec Radar restent à fermer.
-2. **Le partage cockpit.** Qui affiche quoi est écrit plus haut. Le partage
-   lui-même attend sa confirmation.
+2. **Le partage cockpit.** Qui affiche quoi est écrit plus haut. Le partage est
+   confirmé depuis le 11 novembre (arbitrage 5.2), et défendu par le signal
+   `frontiere-cockpits`.
 3. **Les couches mémoire.** Qui écrit quoi, et les dix manques avant une
    restauration recevable, sont dans [`INTERFACES.md`](INTERFACES.md). La
    restauration elle-même reste à recevoir.
@@ -268,5 +272,6 @@ attendent un arbitrage.
    le dépôt `radar` ne contient aucune admission La Barre. L'admission décrite
    dans [`INTERFACES.md`](INTERFACES.md) vit dans l'installation de l'employeur,
    hors flotte. Les trois sens de flux sont posés dans
-   [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md) ; ils attendent les
-   arbitrages 5.5 et 5.6 du plan.
+   [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md). Le 11 novembre,
+   l'arbitrage 5.5 a retenu le sens 1 : Radar lit La Barre. La mesure
+   avant/après attend l'arbitrage 5.6.
