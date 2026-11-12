@@ -56,9 +56,9 @@ Cinq ressources Coolify servent désormais `main` :
 - `galahad-landing` ;
 - La Fusée en 6.27.571.
 
-**Au 12 novembre, 15 h 30 UTC**, le VPS sert :
+**Au 12 novembre, 16 h 15 UTC**, le VPS sert :
 
-- La Fusée en 6.27.586, avec la tâche planifiée `slo-check` toutes les six heures ;
+- La Fusée en 6.27.587, avec la tâche planifiée `slo-check` toutes les six heures ;
 - La Barre au commit `aa45a4d`, et sa vitrine sur données fictives, republiée depuis ce commit ;
 - deux instances Radar au commit `3a3e532` : la personnelle, et celle de
   l'agence, qui lit La Barre depuis 11 h 06 UTC et calcule la mesure avant/après ;
@@ -85,7 +85,7 @@ critère de sortie qu'une commande ou un reçu peut vérifier.
 
 | Palier | Énoncé | Critère de sortie | État au 10 novembre |
 |---|---|---|---|
-| **P1** | Le programme se mesure lui-même | `signaux-flotte.mjs --strict` vert, `make derive` vert, workflow hebdomadaire vert, un SLO réellement mesuré | Vert en local. Bloqué en CI par `FLEET_TOKEN`. SLO **mesuré** depuis le 12 novembre (tâche Coolify `slo-check`, ligne 0.82) : 23 kinds mesurés, 4 dépassés, à trier. |
+| **P1** | Le programme se mesure lui-même | `signaux-flotte.mjs --strict` vert, `make derive` vert, workflow hebdomadaire vert, un SLO réellement mesuré | Vert en local. Bloqué en CI par `FLEET_TOKEN`. SLO **mesuré** depuis le 12 novembre (tâche Coolify `slo-check`, ligne 0.82) : 23 kinds mesurés, 4 dépassés, triés (ligne 0.83) : deux défauts corrigés, deux budgets de latence au propriétaire. |
 | **P2** | Tout ce qu'un commit peut fermer est fermé | Chaque point `[commit]` a sa PR fusionnée, CI verte | À faire. Aucun prérequis extérieur. |
 | **P3** | Ce qui est construit est reçu en service | Chaque point `[prod]` et `[secret]` a son reçu daté | Exige l'accès au VPS et les clés. |
 | **P4** | Le programme est vendu et mesuré | Un pilote réel avec sa mesure avant/après, une facture | Exige des tiers. Ne se décrète pas. |
@@ -416,6 +416,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.80 | `ADVE-project` : l'inventaire des formes ADVE est bundlé dans l'image de production (`node adve-shapes-audit.cjs`), garde des paquets étendue, lot 6.27.584 ; puis **lancé sur la base de production** par une tâche Coolify ponctuelle, supprimée après usage | [#1196](https://github.com/xtincell/ADVE-project/pull/1196) et [#1197](https://github.com/xtincell/ADVE-project/pull/1197), **fusionnées** ; 6.27.584 livrée. Lecture `READ ONLY` / `REPEATABLE READ` confirmée, 4 s : 69 stratégies, 274 piliers, 263 refusés ; 2 691 chemins (708 valeurs présentes refusées, dont 546 comptées présentes ; 1 422 absents à côté de clés hors schéma ; 561 absents). Sortie nominative hors dépôt |
 | 0.81 | `hermes-cockpit` : configuration morte retirée du compose et du second chemin de déploiement, sans changement de code (4.7, arbitrage du 12 novembre) | [hermes-cockpit#7](https://github.com/xtincell/hermes-cockpit/pull/7), **fusionnée** et redéployée sur `23def21` ; portail en 401 sans authentification, `/healthz` 200, journaux de démarrage sans erreur |
 | 0.82 | `ADVE-project` : le contrôle SLO mesure depuis le serveur de production (1.4) — script bundlé dans l'image, budgets lus en millisecondes et taux d'erreur en part (547 budgets sur 635 étaient lus 1 000 fois trop petits), workflow GitHub retiré, tâche Coolify `slo-check` toutes les six heures ; le bilan de campagne reçu admet le compte des reprises (lots 6.27.585 et 6.27.586). `la-barre` : chaque version arrêtée du bilan compte les reprises facturables au client, à la charge de l'agence et non qualifiées, sans montant (4.8, arbitrage du 12 novembre) | [#1198](https://github.com/xtincell/ADVE-project/pull/1198), [#1199](https://github.com/xtincell/ADVE-project/pull/1199), [la-barre#27](https://github.com/xtincell/la-barre/pull/27), **fusionnées** ; 6.27.586 livrée (`/api/version`, `/login` 200). Premier relevé réel : 23 kinds mesurés, 19 tenus, 4 dépassés (deux en erreur, deux en latence), à trier sans relever de budget (#1200). La Barre redéployée sur `aa45a4d` ; vitrine republiée, deux pages sans erreur au navigateur. Une version arrêtée avant garde son empreinte |
+| 0.83 | `ADVE-project` : tri des quatre dépassements du premier relevé SLO, par lecture seule des émissions — deux défauts corrigés (lot 6.27.587) : les émissions `INVOKE_GLORY_TOOL` closes gardaient le statut « en attente », de sorte qu'un outil échoué passait pour réussi ; le caractère U+0000 extrait d'un document faisait refuser le dépôt par PostgreSQL. Les deux autres dépassements sont des budgets de latence posés sans mesure face à des appels au modèle | [#1201](https://github.com/xtincell/ADVE-project/pull/1201), **fusionnée** et livrée (`/api/version` 6.27.587, `/login` 200, tâche `slo-check` conservée) ; tests rouges avant correction, 4 657 tests gouvernance et services verts. Budgets de `GENERATE_RECOMMENDATIONS`, `INVOKE_GLORY_TOOL` et `LEGACY_GLORY_EXECUTE_SEQUENCE` : propriétaire, d'après les relevés qui s'accumulent |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -426,7 +427,7 @@ Sans ce lot, rien de ce qui suit ne peut être déclaré fini.
 | 1.1 | `shinkiro` | Régénérer `FLEET_TOKEN` | Workflow hebdomadaire vert, issue #5 fermée d'elle-même | **Propriétaire** (B1) |
 | 1.2 | `ADVE-project` | Fusionner la PR #873 | Une seule issue SLO, à titre stable | **Fait le 12 novembre** (tri 5.14, lot 6.27.580). Le contrôle depuis GitHub est ensuite retiré par 1.4, qui mesure depuis le serveur |
 | 1.3 | `ADVE-project` | Fermer les 211 issues « SLO breach » | Zéro issue de ce titre | **Fait** : le job ajouté par #873 a fermé les 216 issues, avec un commentaire ; zéro ouverte au relevé du 12 novembre, 14 h 40 UTC |
-| 1.4 | `ADVE-project`, `galahad` | Mesurer le SLO depuis le VPS, où la base est joignable, plutôt que depuis GitHub | Un relevé SLO daté | **Fait le 12 novembre** (arbitrage : tâche Coolify ; ADVE-project#1198, #1200) : relevé réel à 15 h 16 UTC, 635 déclarés, 23 mesurés, 19 tenus, 4 dépassés. Le workflow GitHub est retiré ; le relevé se lit dans le journal de la tâche. Tri des dépassements : RESIDUAL-DEBT d'ADVE-project |
+| 1.4 | `ADVE-project`, `galahad` | Mesurer le SLO depuis le VPS, où la base est joignable, plutôt que depuis GitHub | Un relevé SLO daté | **Fait le 12 novembre** (arbitrage : tâche Coolify ; ADVE-project#1198, #1200) : relevé réel à 15 h 16 UTC, 635 déclarés, 23 mesurés, 19 tenus, 4 dépassés. Le workflow GitHub est retiré ; le relevé se lit dans le journal de la tâche. Tri fait (ligne 0.83) ; budgets de latence des kinds qui appellent un modèle : propriétaire |
 | 1.5 | `talos`, `hulysse`, `character-engine`, `galahad-landing`, `market-expansion-system` | Une CI minimale par dépôt : syntaxe, liens, gabarits | Cinq workflows verts | **Fait** — cinq PR, lot 0.19 |
 | 1.6 | `shinkiro` | Signal `mode-dementi` : un mode déclaré sans son artefact est une dérive | Il a relevé `danmem` ; Argos l'assume par son état déclaré | **Fait** |
 | 1.7 | `shinkiro` | Étendre `vitalite-dementie` aux composants « gelés » qui bougent | — | **Écarté** : un compte de commits ne distingue pas l'hygiène du programme d'un vrai travail ; le signal crierait au loup |
