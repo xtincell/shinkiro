@@ -58,8 +58,8 @@ Cinq ressources Coolify servent désormais `main` :
 
 **Au 12 novembre, midi UTC**, le VPS sert :
 
-- La Fusée en 6.27.580 ;
-- La Barre au commit `adf4540`, et sa vitrine sur données fictives ;
+- La Fusée en 6.27.581 ;
+- La Barre au commit `86efbf2`, et sa vitrine sur données fictives ;
 - deux instances Radar au commit `bf4a22b` : la personnelle, et celle de
   l'agence, qui lit La Barre depuis 11 h 06 UTC ;
 - `galahad-landing` réécrite ;
@@ -405,6 +405,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.70 | `character-engine` : cinq profils d'exemple, marqués fictifs (5.10) ; `la-fusee-blueprint` : livre et vue rattrapés sur le canon actuel (5.11) | [character-engine#4](https://github.com/xtincell/character-engine/pull/4) et [la-fusee-blueprint#4](https://github.com/xtincell/la-fusee-blueprint/pull/4), **fusionnées** |
 | 0.71 | `ADVE-project` : lots 6.27.572 à 6.27.580 — restitution d'intake sans statistiques non sourcées (4.11.d), garde de couches ESLint réparée, compositeur sans appel à entrées vides (4.11.a), grand document en 2 s (4.11.l), transaction de vente sérialisée rejouée après attente, marque non évaluée plus affichée à zéro, canaux et calendrier du playbook repris des pièces de référence, canons de démonstration au bon contrat et deux nombres retirés au modèle, contrôle SLO sans issue par exécution (1.2, 1.3) | [#1188](https://github.com/xtincell/ADVE-project/pull/1188), [#1189](https://github.com/xtincell/ADVE-project/pull/1189), [#1190](https://github.com/xtincell/ADVE-project/pull/1190), [#1191](https://github.com/xtincell/ADVE-project/pull/1191), [#1192](https://github.com/xtincell/ADVE-project/pull/1192), [#1150](https://github.com/xtincell/ADVE-project/pull/1150), [#1152](https://github.com/xtincell/ADVE-project/pull/1152), [#696](https://github.com/xtincell/ADVE-project/pull/696), [#873](https://github.com/xtincell/ADVE-project/pull/873), **fusionnées** dans l'ordre et livrées le 12 novembre : image du commit `6ea7abd` (build 43207899853, test de démarrage vert), `/api/version` 6.27.580, 108 migrations déjà en base, `/login` 200, écritures anonymes refusées 401. Les anciennes PR #696 et #873 relèvent du tri 5.14 |
 | 0.72 | `Argos-studio` : espace privé UPgraders, lu par la seule clé d'administration et purgé 24 mois après sa dernière modification (ADR-0010 du dépôt). Sans clé, un dossier privé répond comme une adresse inconnue et n'apparaît dans aucune liste, recherche ou exportation ; publier revérifie les règles d'admission ; purge quotidienne avec aperçu à blanc. `la-barre` : notice de la vitrine publiée | [Argos-studio#7](https://github.com/xtincell/Argos-studio/pull/7) (53/53 tests, 13 rouges avant ; Playwright 25/25 ; recette Docker verte en CI après correction de son attente de page), **fusionnée** et déployée : migration additive appliquée, 8 dossiers publics identiques avant et après, purge active, admission privée et purge sans clé 401. [la-barre#24](https://github.com/xtincell/la-barre/pull/24), **fusionnée**, La Barre redéployée sur `86efbf2`. Une page dynamique inconnue répond encore 200 avec la page introuvable (défaut antérieur, suivi à part) |
+| 0.73 | `ADVE-project` : les cinq mises à jour Dependabot reprises en un lot — actions Docker `setup-buildx` v4, `login` v4, `build-push` v7 ; `recharts` 3.10.1 ; `commitlint` 21.2.4 —, lot 6.27.581. Fin du tri 5.14 sur ce dépôt : aucune PR ouverte | [#1193](https://github.com/xtincell/ADVE-project/pull/1193), **fusionnée** et livrée : image du commit `ff6a0d0` construite par les nouvelles actions (build 43210242262, test de démarrage vert), `/api/version` 6.27.581, 108 migrations déjà en base, `/login` 200, écritures anonymes 401. #483, #484, #701, #702 et #703 fermées avec un renvoi vers #1193 |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -557,6 +558,7 @@ Chacun passe par une ADR quand il est structurant, selon la règle de ce dépôt
   la redémarre (`.github/workflows/ops-env-fix.yml:16`).
 - **Les PR en attente** : 14 ouvertes, dont neuf mises à jour automatiques, #873
   et #875 prêtes depuis le 14 septembre, #696 en conflit depuis le 31 juillet.
+  *Au 12 novembre : aucune PR ouverte sur ce dépôt (tri 5.14, lignes 0.71 et 0.73).*
 
 ## 4 ter. Fusionner les PR ouvertes
 
@@ -614,7 +616,7 @@ Chacun est posé comme une question. Une réponse courte suffit.
 | 5.11 | ~~`la-fusee-blueprint` : rattraper le canon (ADR 0083 à 0243), ou assumer une photographie de mai ?~~ *Tranché le 12 novembre* : rattraper le canon actuel | 4.17 |
 | 5.12 | ~~`galahad-landing` : quel acheteur, quelle promesse, quel prix ?~~ *Tranché le 12 novembre* : le dirigeant d'agence ; « votre agence avance, même quand vous n'y êtes pas » ; Content Operations à partir de 900 K FCFA par mois, fourchette 900 K – 3 M ; fait (ligne 0.67) | 4.16 |
 | 5.13 | Critères d'acceptation de Content Operations, modèle de Content Velocity, grille tarifaire — *12 novembre* : proposition rédigée, **à valider** ([`PROPOSITION-OFFRES.md`](PROPOSITION-OFFRES.md)) ; la grille ne se fixe qu'après deux pilotes mesurés | Lot 6 |
-| 5.14 | ~~Les PR en attente : #875, #696, #679 sur `ADVE-project` ; les brouillons de `la-fusee-blueprint`, `galahad`, `radar`, `charadesign-generator`. Fusionner ou fermer ?~~ *Tranché le 11 novembre* : tri délégué, fusion de ce qui est juste et vert, fermeture motivée du reste | L'hygiène de chaque dépôt |
+| 5.14 | ~~Les PR en attente : #875, #696, #679 sur `ADVE-project` ; les brouillons de `la-fusee-blueprint`, `galahad`, `radar`, `charadesign-generator`. Fusionner ou fermer ?~~ *Tranché le 11 novembre* : tri délégué, fusion de ce qui est juste et vert, fermeture motivée du reste ; **fait le 12 novembre** sur `ADVE-project` : #696 et #873 remises à jour et livrées, les cinq mises à jour Dependabot reprises dans #1193, aucune PR ouverte (lignes 0.71 et 0.73) | L'hygiène de chaque dépôt |
 | 5.15 | ~~L'admission La Barre écrite pour l'employeur peut-elle entrer dans le canon `radar`, ou doit-elle être réécrite ?~~ *Tranché le 12 novembre* : réécrite neuve dans `radar`, sans rien reprendre de l'employeur | 3.5 ; voir `docs/CLOISON.md` |
 | 5.16 | ~~`galahad` suit un profil personnel (`deploy/dan-hermes/wiki-Alexandre_Profil.md`). Doit-il rester dans ce dépôt ?~~ *Tranché le 12 novembre* : non ; il vit dans `wiki-prive` ([wiki-prive#1](https://github.com/xtincell/wiki-prive/pull/1)), retiré de galahad ([galahad#28](https://github.com/xtincell/galahad/pull/28)) | `docs/CLOISON.md` |
 | 5.17 | ~~`wiki-prive` est-il bien `adjacent` ?~~ *Tranché le 12 novembre* : oui | Le classement posé le 10 novembre |
