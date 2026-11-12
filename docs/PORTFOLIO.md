@@ -74,8 +74,9 @@ données, il ne se rédige pas.
 > 11 h 06 UTC, l'instance Radar de l'agence lit les décisions de La Barre
 > ([SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md)). Ces décisions restent
 > privées : elles ne passent pas dans le flux. Le calcul des indicateurs retenus
-> (arbitrage 5.6) n'est pas encore écrit. Tant qu'il manque, le before/after se
-> rédige à partir des données, il ne se calcule pas encore.
+> (arbitrage 5.6) est en production depuis le même jour (`/mesure/avant-apres`).
+> Les fenêtres sont encore très courtes, et il n'y a pas d'« avant » mesuré là où
+> l'équipe n'utilisait pas Radar : le relevé le dit au lieu de remplir.
 
 **La Barre** — du brief au bon à tirer, chaque arbitrage est situé.
 

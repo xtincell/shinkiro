@@ -268,8 +268,25 @@ Première lecture réussie : zéro décision, La Barre de production étant vide
 les lectures suivantes répondent « inchangé » (304). Cette heure est la date de
 bascule de l'arbitrage 5.6. L'instance personnelle ne lit pas La Barre.
 
-Restent ouverts : le calcul des indicateurs retenus en 5.6 et la saisie de la
-correspondance projet ↔ dossier dans l'écran Radar.
+**La mesure avant/après** ([Radar #10](https://github.com/xtincell/radar/pull/10),
+en production depuis le 12 novembre). `GET /mesure/avant-apres` (JSON) et la page
+`briefs/mesure.html` calculent les trois familles d'indicateurs de 5.6. Elles
+sont réservées à `owner`, `supervisor` et à la clé machine ; un membre reçoit
+403.
+- **Bascule.** Elle est lue dans `MESURE_BASCULE`, sinon dans le premier reçu de
+  `barre_recus`. Sur l'instance de l'agence, `MESURE_BASCULE` vaut
+  `2026-11-12T11:06:21Z`.
+- **Fenêtres.** Elles sont égales de part et d'autre de la bascule (90 jours
+  par défaut, réduites tant que la bascule est plus récente).
+- **Dossiers à cheval.** Un dossier ouvert avant la bascule et clos après est
+  compté à part.
+- **Assise.** Chaque chiffre porte son `n`, et une absence de mesure est
+  `null` avec son motif. Les filtres de confidentialité sont ceux de la REST.
+
+Le taux de reprise sur versions et les tours au-delà du vendu restent « non
+calculables depuis Radar » : ces données sont dans La Barre.
+
+Reste ouverte la saisie de la correspondance projet ↔ dossier dans l'écran Radar.
 
 ## la-fusee ↔ radar — identité et accès au suivi
 
