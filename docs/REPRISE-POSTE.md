@@ -1,0 +1,149 @@
+# Reprise depuis le poste du propriétaire
+
+À ouvrir dans une session Claude Code lancée **sur un poste qui a les droits** :
+SSH sur le VPS (`powerupgraders.com`), droits d'administration sur les dépôts
+`xtincell/*`, compte administrateur Coolify. Une session dans le cloud n'a aucun
+de ces trois accès : c'est pourquoi ces gestes sont regroupés ici.
+
+État au 12 novembre 2026, 17 h 30 UTC. Plan détaillé : [`PLAN-ACHEVEMENT.md`](PLAN-ACHEVEMENT.md).
+Inventaire : [`INVENTAIRE-POINTS-OUVERTS.md`](INVENTAIRE-POINTS-OUVERTS.md).
+
+## Ce qui est déjà fait
+
+- Tous les points `[commit]` sont fermés, sauf DM4 et la relecture de CK4
+  (gestes 2 et 5 ci-dessous).
+- Le VPS sert :
+  - La Fusée 6.27.587, avec la tâche planifiée `slo-check` toutes les 6 h ;
+  - La Barre `ce6abe7` et sa vitrine ;
+  - Radar perso et agence `3a3e532` ;
+  - le cockpit `23def21`, Argos-studio, `galahad-landing` et le portail Shinkiro.
+- Aucun arbitrage n'est en attente dans le plan.
+- Un rappel est planifié le 26 novembre pour proposer les budgets SLO.
+
+## Règles pour la session qui reprend
+
+- Ne jamais écrire un secret dans un fichier versionné, un message de commit ou une PR.
+- Sauvegarder avant toute migration de base.
+- Après chaque geste, consigner le reçu (date, commande, résultat) dans
+  `PLAN-ACHEVEMENT.md`, une ligne `0.8x`, puis `node scripts/signaux-flotte.mjs`
+  (doit afficher `COHÉRENT`), puis une PR fusionnée.
+- Ne jamais redéployer l'application Coolify `rfkgtj7us50jlbaiz1tjke2a`, arrêtée
+  volontairement : c'est le retour arrière de La Fusée. La production est
+  `q9b4m57yh93gxbjykj470giy`.
+
+## 1. Révoquer les accès transmis le 12 novembre (urgent)
+
+1. Coolify → Keys & Tokens : révoquer le token API utilisé par la session cloud,
+   en créer un nouveau, et le garder hors de tout dépôt.
+2. GitHub → Settings → Developer settings → Personal access tokens : révoquer le
+   jeton transmis dans la conversation.
+
+## 2. Secrets GitHub
+
+| Secret | Dépôt | Contenu | Débloque |
+|---|---|---|---|
+| `FLEET_TOKEN` | `xtincell/shinkiro` | jeton fin, lecture de tous les dépôts `xtincell/*`, écriture *Contents* et *Pull requests* sur `shinkiro` | contrôle hebdomadaire vert (P1), PR du verrou rafraîchi (1.8) |
+| `GALAHAD_DEPLOY_KEY` | `xtincell/danmem` | clé privée d'une clé de déploiement en lecture ajoutée à `xtincell/galahad` | DM4 : fusionner danmem#6 |
+
+```bash
+ssh-keygen -t ed25519 -N '' -C danmem-ci -f /tmp/galahad_deploy
+gh repo deploy-key add /tmp/galahad_deploy.pub -R xtincell/galahad -t danmem-ci
+gh secret set GALAHAD_DEPLOY_KEY -R xtincell/danmem < /tmp/galahad_deploy
+shred -u /tmp/galahad_deploy /tmp/galahad_deploy.pub
+gh secret set FLEET_TOKEN -R xtincell/shinkiro    # coller le jeton à l'invite
+gh pr checks 6 -R xtincell/danmem --watch && gh pr merge 6 -R xtincell/danmem --merge
+gh workflow run fleet-drift.yml -R xtincell/shinkiro
+```
+
+## 3. Archiver `talos` et `hulysse` (arbitrage 5.3)
+
+```bash
+gh repo archive xtincell/talos --yes
+gh repo archive xtincell/hulysse --yes
+```
+
+## 4. Sur le VPS : danmem et galahad (palier P3)
+
+### danmem : migrations `sql/002` et `sql/003`
+
+Le service refuse de fonctionner sans elles (`/health` en 503
+`schema: incomplet`). Elles sont additives et rejouables.
+
+```bash
+ssh <vps>
+systemctl cat danmem.service          # relire l'unité servie avant tout
+sudo -u danmem bash -lc 'cd /opt/danmem && git fetch && git log --oneline -1 origin/main'
+# Sauvegarde d'abord, depuis un poste qui a pg_dump de la même version majeure :
+DATABASE_URL=… npm run sauvegarder -- --destination <dossier-neuf> --unite danmem.service
+cd /opt/danmem && sudo -u danmem git pull --ff-only && sudo -u danmem npm ci --ignore-scripts
+sudo systemd-run --uid=danmem --wait --pipe -p WorkingDirectory=/opt/danmem \
+  -p EnvironmentFile=/etc/danmem/danmem.env /usr/bin/node scripts/migrate.mjs
+sudo systemctl restart danmem && curl -s localhost:8790/health
+```
+
+Reçu attendu :
+- trois lignes `Danmem: schema 00N-… received` ;
+- `/health` en 200, avec le schéma complet.
+
+Chemins et noms d'unité à confirmer avec `systemctl cat` : ils viennent du README,
+pas de l'hôte.
+
+### galahad : moteur 0.1.18
+
+```bash
+cd /opt/galahad            # ou le dossier réel, à confirmer
+git fetch && git log --oneline -1 origin/main     # attendu : a0e8426 ou plus récent
+git pull --ff-only
+docker compose up -d       # + --profile bridge si le pont est utilisé
+docker compose ps
+```
+
+Vérifier aussi la patrouille : `cat /etc/cron.d/galahad-patrol` doit porter
+l'utilisateur `root` (voir `deploy/patrol/README.md`).
+
+## 5. Sur le VPS : relectures (CK4, port 7681)
+
+- **CK4** : comparer les fichiers réellement écrits par l'hôte avec le contrat
+  `hermes-cockpit/docs/SONDES.md`. Les fichiers se trouvent sous
+  `/home/hermes-agent/hermes-config/data/` vu de l'hôte, ou `/data` dans le
+  conteneur. Les relire tous :
+  - `projets.json` ;
+  - `agent-status/fallback.json` ;
+  - `dan-refresh.json` ;
+  - `vault-index.json` ;
+  - `agent-brains-status.json` ;
+  - `danmem-status.json` ;
+  - `agent-brains.json`.
+
+  Pour chacun, noter la forme, la fraîcheur et l'écrivain. Vérifier aussi que les
+  écrivains de l'hôte suivent le verrou `<fichier>.lock`. Verser le script
+  `agent-brains.json` → `cerveau.txt` dans un dépôt (3.8).
+- **Port 7681** (terminal web lié au cockpit) : depuis un réseau extérieur au VPS,
+  `nc -vz powerupgraders.com 7681`. Le résultat attendu est « refused » ou un délai
+  dépassé ; sinon, fermer le port au pare-feu.
+
+## 6. Argos-studio
+
+1. Dans la console de La Fusée, lancer la projection des 13 dossiers vers le studio.
+2. Poser la variable `ARGOS_STUDIO_URL` sur l'application de production
+   `q9b4m57yh93gxbjykj470giy`, puis la redémarrer : une variable n'est lue qu'au
+   démarrage.
+
+## 7. Autres gestes du propriétaire
+
+- Révoquer chez son fournisseur la clé écrite en dur dans BrandForge.
+- Relire la normalisation ADVE, à partir de l'inventaire des 2 691 chemins
+  (`npm run audit:adve-shapes` dans `ADVE-project` ; sortie à garder hors dépôt).
+- Saisir dans Radar agence les correspondances projet ↔ dossier.
+- Décider s'il faut réécrire l'historique git de `galahad`.
+
+## 8. Ce qui ne se fait qu'en écrivant
+
+- **Définition d'« achevé » (point 3.7)** : l'écrire, même brièvement, dans
+  `PLAN-ACHEVEMENT.md`, section 1. Proposition de départ :
+  - P2 fermé ;
+  - P3 avec un reçu daté pour chaque point `[prod]` et `[secret]` ;
+  - P4 constaté : un pilote réel, sa mesure avant/après et une facture.
+- **Le 26 novembre** : budgets SLO de `GENERATE_RECOMMENDATIONS`,
+  `INVOKE_GLORY_TOOL` et `LEGACY_GLORY_EXECUTE_SEQUENCE`, d'après les relevés de
+  la tâche `slo-check` (rappel déjà planifié).
