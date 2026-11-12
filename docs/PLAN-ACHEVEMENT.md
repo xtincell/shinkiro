@@ -452,10 +452,10 @@ journaux datés : le README le dit, sans les réécrire.
 |---|---|---|---|
 | 3.1 | Le contrat MCP avec `radar` dans `docs/INTERFACES.md` | **Fait** — pont repris par `galahad` (galahad#29) ; trois écarts fermés, six ouverts ou à vérifier | — |
 | 3.2 | Le partage des cockpits dans `docs/TOPOLOGIE.md` | **Fait** — tableau de onze capacités, partage confirmé (5.2), signal `frontiere-cockpits` | — |
-| 3.3 | Les couches mémoire : qui écrit quoi, et les dix manques avant une restauration recevable | Relevé complet des deux dépôts | Agent |
+| 3.3 | Les couches mémoire : qui écrit quoi, et les dix manques avant une restauration recevable | **Fait** le 10 novembre, dans `docs/INTERFACES.md` ; la restauration elle-même reste à recevoir (4.6) | Recette B2 |
 | 3.4 | Une ADR sur la jointure des taxonomies d'écart | **Accepted** : [SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md), option C ; hors écart signalé (la-barre#23) | — |
 | 3.5 | Une ADR sur le câblage La Barre → Radar | **Accepted** : [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md), sens 1, en production depuis le 12 novembre (ligne 0.68), signal `decisions-barre-radar` | Calcul des indicateurs : lot 6 |
-| 3.6 | Reprendre les jugements périmés de `fleet.yml` et les dix-huit contradictions | Section 3.4 | Agent |
+| 3.6 | Reprendre les jugements périmés de `fleet.yml` et les dix-huit contradictions | **Fait** le 10 novembre : seize contradictions corrigées à la source, deux journaux datés laissés tels quels ; jugements repris à chaque lot depuis | — |
 | 3.7 | La définition d'« achevé » | — | **B3** |
 | 3.8 | Le contrat de fichier `agent-brains.json` → `cerveau.txt` | **Écrit** dans `docs/INTERFACES.md` ; le maillon central reste hors git | Verser le script de l'hôte dans un dépôt : B2 |
 
