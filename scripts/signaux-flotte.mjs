@@ -255,6 +255,42 @@ const SIGNAUX = {
     return ecarts.map((e) => `écarts — ${e}`);
   },
 
+  /* Arbitrage 5.2 (11 novembre 2026) : `galahad/cockpit` exécute dans UNE
+   * installation ; `hermes-cockpit` observe et exploite l'hôte. La frontière se
+   * lit dans le code : le premier ne touche ni au socket Docker, ni au jeton
+   * Coolify, ni à `/proc` de l'hôte ; le second ne lance ni procédure
+   * (`/operate`), ni construction d'image, ni déploiement compose. Ne joue que
+   * si les deux clones sont présents à côté de ce dépôt. */
+  "frontiere-cockpits": () => {
+    const galahad = join(RACINE, "..", "galahad");
+    const hermes = join(RACINE, "..", "hermes-cockpit");
+    if (!existsSync(join(galahad, "cockpit")) || !existsSync(join(hermes, "portal.mjs"))) return [];
+    const ecarts = [];
+    const fouiller = (dossier, fichiers, motifs, role) => {
+      for (const f of fichiers) {
+        const chemin = join(dossier, f);
+        if (!existsSync(chemin)) continue;
+        const lignes = readFileSync(chemin, "utf8").split(/\r?\n/);
+        lignes.forEach((ligne, i) => {
+          for (const [motif, sens] of motifs)
+            if (motif.test(ligne)) ecarts.push(`${role} ${f}:${i + 1} — ${sens}`);
+        });
+      }
+    };
+    const fichiersGalahad = ["cockpit/index.html", "setup/server.mjs"];
+    fouiller(galahad, fichiersGalahad, [
+      [/docker\.sock/, "socket Docker de l'hôte : c'est le rôle de hermes-cockpit"],
+      [/COOLIFY_TOKEN|COOLIFY_API/, "jeton ou API Coolify : c'est le rôle de hermes-cockpit"],
+      [/["'`]\/proc\//, "lecture de /proc de l'hôte : c'est le rôle de hermes-cockpit"],
+    ], "galahad");
+    const fichiersHermes = ["portal.mjs", "index.html", "local-store.mjs"];
+    fouiller(hermes, fichiersHermes, [
+      [/["'`]\/operate\b/, "procédure /operate : c'est le rôle de galahad/cockpit"],
+      [/docker\s+(build|buildx)|compose\s+(up|build)/, "construction ou déploiement d'installation : c'est le rôle de galahad/cockpit"],
+    ], "hermes-cockpit");
+    return ecarts.map((e) => `cockpits — ${e}`);
+  },
+
   /* Le manifeste et le portefeuille numérotaient les produits différemment —
    * 00/04/05 d'un côté, 01 à 07 de l'autre — et les TROIS valeurs déclarées
    * étaient fausses. Personne ne l'avait vu parce qu'aucun contrôle ne lisait

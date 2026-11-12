@@ -387,6 +387,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.63 | `ADVE-project` : le script lancé au démarrage de l'image ne dépend plus de tRPC (`TypedRefusal` de domaine, converti par un middleware de base) ; garde qui rejoue le bundle du Dockerfile et refuse tout paquet absent de l'image, lot 6.27.571 | [ADVE-project#1185](https://github.com/xtincell/ADVE-project/pull/1185), **fusionnée** et livrée ; image 570 refusée par son test de démarrage, production restée en 6.27.569 jusqu'à la 571 |
 | 0.64 | `market-expansion-system` et `la-barre` : un même vocabulaire de types d'écart (`langue`, `marque`, `produit`, `reglementaire`), plusieurs types déclarés sur le couple projet × marché, format `ecarts-marche` v1 lu et écrit des deux côtés ; signal `ecart-types-alignes` ajouté ; SHK-0004 Accepted, option C (ME2, arbitrage 5.4) | [market-expansion-system#2](https://github.com/xtincell/market-expansion-system/pull/2) et [la-barre#21](https://github.com/xtincell/la-barre/pull/21), **fusionnées**, La Barre redéployée (`45dda9c`) ; 11 et 42 tests, rouges avant. Le classement du cas Bonnet Rouge est à requalifier par le propriétaire ; une adaptation qui sort de son écart déclaré n'en produit pas encore |
 | 0.65 | `Argos-studio` : clé unique `ARGOS_ADMIN_KEY` pour toute écriture et l'administration (session signée, comparaison en temps constant, fermé sans clé), image Docker, SQLite sur le volume `/data` avec sauvegarde à chaud (AR3, arbitrage 5.8). Déployé sur le VPS : https://argos.76-13-128-23.sslip.io, 8 dossiers publics du dépôt admis | [Argos-studio#6](https://github.com/xtincell/Argos-studio/pull/6), **fusionnée** ; 39 tests et 24 Playwright (14 et 17 rouges avant), recette Docker de 22 contrôles. En production : lecture 200, écriture sans clé 401, administration redirigée vers la connexion. La Fusée lit encore son journal (13 dossiers) : la projection de ces dossiers vers le studio passe par la console, puis `ARGOS_STUDIO_URL` ; l'espace privé attend ses décisions |
+| 0.66 | VPS : les deux copies de La Fusée hors canon sont retirées (arbitrage 5.18) — `lafusee-v7` (branche d'`ADVE-project`) et `lafusee-v8` (lignée `ADVE_v8`), avec leurs bases `lafusee-v7-db` et `lafusee-db` ; variable morte `LAFUSEE_DATABASE_URL` retirée de `hermes-cockpit`, que son code ne lit pas. Partage des cockpits confirmé (5.2) et défendu par le signal `frontiere-cockpits` ; `talos` et `hulysse` passent en `vitalite: archive` (5.3) | Sauvegardes `pg_dump` réussies avant suppression (54 657 et 118 802 octets), conservées sur le VPS sous `/data/coolify/backups/databases/root-team-0/` ; la suppression d'une base n'efface pas ce dossier. Production `lafusee-postgres` et l'application de repli intactes, `/api/version` en 200 ; anciens domaines en 503. Archivage GitHub des deux dépôts : geste du propriétaire |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -432,7 +433,7 @@ journaux datés : le README le dit, sans les réécrire.
 | # | Geste | Matière disponible | Prérequis |
 |---|---|---|---|
 | 3.1 | Le contrat MCP `talos` ↔ `radar` dans `docs/INTERFACES.md` | Transport stdio, sept outils avec leurs appels, douze écarts avec Radar | Agent |
-| 3.2 | Le partage des cockpits dans `docs/TOPOLOGIE.md` | Tableau de onze capacités ; deux recouvrements seulement | Agent, puis arbitrage 5.2 |
+| 3.2 | Le partage des cockpits dans `docs/TOPOLOGIE.md` | **Fait** — tableau de onze capacités, partage confirmé (5.2), signal `frontiere-cockpits` | — |
 | 3.3 | Les couches mémoire : qui écrit quoi, et les dix manques avant une restauration recevable | Relevé complet des deux dépôts | Agent |
 | 3.4 | Une ADR sur la jointure des taxonomies d'écart | **Proposée** : [SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md), trois options chiffrées en fichiers touchés | Arbitrage 5.4, puis passage en Accepted |
 | 3.5 | Une ADR sur le câblage La Barre → Radar | **Proposée** : [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md), trois sens, fichiers de chaque côté, neuf points pour 5.6 | Arbitrages 5.5 et 5.6, puis passage en Accepted |
@@ -463,7 +464,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.15 | `datacollector` | **Fait** (datacollector#4) ; l'entrée réelle était déjà au manifeste. Reste : servir Tailwind localement pour lui donner une empreinte | 5.9 pour le service |
 | 4.16 | `galahad-landing` | Réécriture pour le bon acheteur | Arbitrage 5.12 |
 | 4.17 | `la-fusee-blueprint` | Régénérer la vue ou l'archiver | Arbitrage 5.11 |
-| 4.18 | `installation` | Étendre le profil : Radar, Argos, mémoires ; comptes ordinaires | Agent, puis recette B2 |
+| 4.18 | `installation` | **Fait** (IN4, ligne 0.60) — Radar et la mémoire `danmem` dans le profil, responsable rattaché par son compte ordinaire ; Argos-studio et les rôles Galahad écartés avec leurs raisons | Recette B2 sur le VPS |
 
 ### Lot 5 — Recevoir en production
 
@@ -584,8 +585,8 @@ Chacun est posé comme une question. Une réponse courte suffit.
 | # | Question | Ce qu'elle débloque |
 |---|---|---|
 | 5.1 | ~~Quel palier vise-t-on : P1, P2, P3 ou P4 ?~~ *Tranché le 11 novembre* : P2, chaque point `[commit]` fermé, PR fusionnée, CI verte | — |
-| 5.2 | Le partage des cockpits est-il celui que montre le code : `galahad/cockpit` pour exécuter dans une installation, `hermes-cockpit` pour observer et exploiter l'hôte ? | 3.2 |
-| 5.3 | `talos` et `hulysse` : les archiver comme dépôts historiques, ou les réparer ? Quelles capacités porter dans `galahad` : serveur MCP, mur S7, garde d'isolation ? | 2.7, 4.2 |
+| 5.2 | ~~Le partage des cockpits est-il celui que montre le code : `galahad/cockpit` pour exécuter dans une installation, `hermes-cockpit` pour observer et exploiter l'hôte ?~~ *Tranché le 11 novembre* : oui, ce partage ; signal `frontiere-cockpits` | 3.2 |
+| 5.3 | ~~`talos` et `hulysse` : les archiver comme dépôts historiques, ou les réparer ? Quelles capacités porter dans `galahad` : serveur MCP, mur S7, garde d'isolation ?~~ *Tranché le 11 novembre* : archiver ; porter dans `galahad` le pont MCP de Radar (suppression sous confirmation) et la garde d'isolation | 2.7, 4.2 |
 | 5.4 | ~~Taxonomies : un écart a-t-il un type ou plusieurs (le Ghana en a deux) ? Se déclare-t-il sur l'adaptation ou sur le couple projet × marché ?~~ *Tranché le 11 novembre* : plusieurs types possibles, déclarés sur le couple projet × marché | 3.4, 4.10 |
 | 5.5 | ~~La Barre → Radar : Radar lit le fichier de La Barre, La Barre pousse, ou un humain dépose un paquet ?~~ *Tranché le 11 novembre* : Radar lit La Barre | 3.5 |
 | 5.6 | Quels indicateurs pour la mesure avant/après, et quelle date de bascule ? | Lot 6 |
@@ -596,18 +597,18 @@ Chacun est posé comme une question. Une réponse courte suffit.
 | 5.11 | `la-fusee-blueprint` : rattraper le canon (ADR 0083 à 0243), ou assumer une photographie de mai ? | 4.17 |
 | 5.12 | `galahad-landing` : quel acheteur, quelle promesse, quel prix ? | 4.16 |
 | 5.13 | Critères d'acceptation de Content Operations, modèle de Content Velocity, grille tarifaire | Lot 6 |
-| 5.14 | Les PR en attente : #875, #696, #679 sur `ADVE-project` ; les brouillons de `la-fusee-blueprint`, `galahad`, `radar`, `charadesign-generator`. Fusionner ou fermer ? | L'hygiène de chaque dépôt |
+| 5.14 | ~~Les PR en attente : #875, #696, #679 sur `ADVE-project` ; les brouillons de `la-fusee-blueprint`, `galahad`, `radar`, `charadesign-generator`. Fusionner ou fermer ?~~ *Tranché le 11 novembre* : tri délégué, fusion de ce qui est juste et vert, fermeture motivée du reste | L'hygiène de chaque dépôt |
 | 5.15 | L'admission La Barre écrite pour l'employeur peut-elle entrer dans le canon `radar`, ou doit-elle être réécrite ? | 3.5 ; voir `docs/CLOISON.md` |
 | 5.16 | `galahad` suit un profil personnel (`deploy/dan-hermes/wiki-Alexandre_Profil.md`). Doit-il rester dans ce dépôt ? | `docs/CLOISON.md` |
 | 5.17 | `wiki-prive` est-il bien `adjacent` ? | Le classement posé le 10 novembre |
-| 5.18 | Deux instances de La Fusée hors canon tournent sur le VPS, chacune avec sa base : la lignée archivée `ADVE_v8`, et une branche d'`ADVE-project`. Les arrêter ? | La capacité du VPS ; le classement des lignées |
+| 5.18 | ~~Deux instances de La Fusée hors canon tournent sur le VPS, chacune avec sa base : la lignée archivée `ADVE_v8`, et une branche d'`ADVE-project`. Les arrêter ?~~ *Tranché le 11 novembre* : arrêter et supprimer, après sauvegarde ; fait (ligne 0.66) | La capacité du VPS ; le classement des lignées |
 | 5.19 | ~~La Barre en production a quatre commits de retard sur `main`. Est-ce voulu ?~~ *Tranché le 11 novembre* : l'épingle Coolify est passée de `9735c56` à `e771494` | — |
 
 ## 6. Ce qui se fait selon ce qui est débloqué
 
 | Si le propriétaire… | Alors un agent peut… |
 |---|---|
-| ne fait rien de plus | Les gestes « Agent » restants : 4.11.a, d, k, l ; la garde de couches ESLint inerte (constat de #1168) ; 4.18, qui demande un démon Docker |
+| ne fait rien de plus | Les gestes « Agent » restants : 4.11.a, d, k, l et la garde de couches ESLint inerte (constat de #1168), en cours depuis le 12 novembre ; 4.18 est fait |
 | fusionne les 32 PR | *Fait le 11 novembre*, avec cinq ressources Coolify redéployées. Reste à redémarrer les services systemd de l'hôte |
 | régénère `FLEET_TOKEN` | Fermer P1 côté flotte |
 | donne son accord sur #873 | Fermer 1.2 et 1.3 |

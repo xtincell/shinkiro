@@ -9,7 +9,7 @@
 #   make releve                régénère ce fichier
 #   git diff fleet.lock.yml    ce qui a bougé dans la flotte depuis le dernier relevé
 #
-releve_le: "2026-11-11"
+releve_le: "2026-11-12"
 owner: xtincell
 topic: shinkiro
 fenetre_vitalite_jours: 90

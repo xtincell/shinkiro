@@ -254,7 +254,7 @@ composants:
     etage: reference
     maturite: partiel
     licence: proprietaire
-    vitalite: fige
+    vitalite: archive   # arbitrage 5.3, 11 novembre 2026
     deploiement: {mode: systemd, unite: ops/talos.service, installateur: ops/install.sh}
     description: >-
       Gardien de l’installation : observer la santé, diagnostiquer les incidents
@@ -279,7 +279,7 @@ composants:
     etage: reference
     maturite: partiel
     licence: proprietaire
-    vitalite: fige
+    vitalite: archive   # arbitrage 5.3, 11 novembre 2026
     deploiement: {mode: systemd, unite: ops/hulysse.service, installateur: ops/install.sh}
     description: >-
       Explorateur de l’installation et de ses objectifs : observer, préparer
