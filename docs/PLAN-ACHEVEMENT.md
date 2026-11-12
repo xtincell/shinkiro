@@ -58,7 +58,7 @@ Cinq ressources Coolify servent désormais `main` :
 
 **Au 12 novembre, midi UTC**, le VPS sert :
 
-- La Fusée en 6.27.583 ;
+- La Fusée en 6.27.584 ;
 - La Barre au commit `b1d2031`, et sa vitrine sur données fictives, republiée depuis ce commit ;
 - deux instances Radar au commit `3a3e532` : la personnelle, et celle de
   l'agence, qui lit La Barre depuis 11 h 06 UTC et calcule la mesure avant/après ;
@@ -412,6 +412,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.77 | `character-engine` : « NOUVEAU VECTEUR » ne sort plus toujours un TANK (200 sur 200 avant, six rôles répartis après). `datacollector` : Tailwind servi localement avec son empreinte (4.15). `charadesign-generator` : étapes partielles affichées comme telles, retours tardifs d'image sans écrasement (4.14) | [character-engine#5](https://github.com/xtincell/character-engine/pull/5), [datacollector#7](https://github.com/xtincell/datacollector/pull/7), [charadesign-generator#6](https://github.com/xtincell/charadesign-generator/pull/6), **fusionnées** ; outils locaux, rien à déployer. Recette de charadesign avec un vrai fournisseur : clés Anthropic et OpenAI |
 | 0.78 | `la-barre` : identifiants de décision uniques entre postes (`DEC-<poste>-<12>`), renommage tracé en cas de collision, jamais de fusion de deux décisions ; l'import de fichier passe par la fabrique et ne retire plus aucune décision du registre ; le serveur refuse une base qui dupliquerait ou remplacerait une décision (4.9). Vitrine republiée depuis ce commit | [la-barre#26](https://github.com/xtincell/la-barre/pull/26), **fusionnée** et déployée sur `b1d2031` (30 rouges avant, 266 tests verts, Playwright vert) ; contrat `GET /radar/decisions` inchangé, Radar agence lit toujours. Vitrine : distribution de `b1d2031` vérifiée, chargée sans erreur |
 | 0.79 | `ADVE-project` : inventaire en lecture seule des formes ADVE hors schéma strict (`npm run audit:adve-shapes`), étape 1 de la dette « Formats ADVE legacy » (4.11.k) ; un enum absent n'est plus classé « hors énumération », lot 6.27.583 | [#1195](https://github.com/xtincell/ADVE-project/pull/1195), **fusionnée** et livrée (`/api/version` 6.27.583, `/login` 200). Sur les canons : 623 chemins refusés, dont 346 comptés présents par la maturité ; UPgraders et La Fusée VALIDATED à 100 % malgré 7 à 46 refus chacun. Lancement en production et normalisation : revue humaine |
+| 0.80 | `ADVE-project` : l'inventaire des formes ADVE est bundlé dans l'image de production (`node adve-shapes-audit.cjs`), garde des paquets étendue, lot 6.27.584 ; puis **lancé sur la base de production** par une tâche Coolify ponctuelle, supprimée après usage | [#1196](https://github.com/xtincell/ADVE-project/pull/1196) et [#1197](https://github.com/xtincell/ADVE-project/pull/1197), **fusionnées** ; 6.27.584 livrée. Lecture `READ ONLY` / `REPEATABLE READ` confirmée, 4 s : 69 stratégies, 274 piliers, 263 refusés ; 2 691 chemins (708 valeurs présentes refusées, dont 546 comptées présentes ; 1 422 absents à côté de clés hors schéma ; 561 absents). Sortie nominative hors dépôt |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -549,7 +550,7 @@ Ce lot ne se planifie pas, il se prépare. Trois préparations sont à portée :
 | 4.11.h | **Fait** (#1167) — Brancher en CI les huit fichiers de tests PostgreSQL orphelins, et fixer la mémoire du job (M7, M8) | `.github/workflows/ci.yml:73-125` |
 | 4.11.i | **Fait** (#1167) — Réparer ou retirer `deploy.yml` et `release.yml` (M10) | `.github/workflows/` |
 | 4.11.j | **Fait** (#1168) — 63 alertes de dépendances, dont 9 critiques ; restent 15 moderate d'outillage, sans correctif publié | relevé à l'installation |
-| 4.11.k | **Étape 1 faite** (#1195) — inventaire en lecture seule des formes ADVE hors schéma strict ; normalisation soumise à revue humaine | `docs/governance/RESIDUAL-DEBT.md` (« Formats ADVE legacy ») |
+| 4.11.k | **Étape 1 faite et lancée en production** (#1195, #1196, #1197) — 2 691 chemins inventoriés sur 69 stratégies ; normalisation soumise à revue humaine | `docs/governance/RESIDUAL-DEBT.md` (« Formats ADVE legacy ») |
 | 4.11.l | **Fait** (#1191) — Le document de 112 s sous un plafond de 120 s | `docs/governance/RESIDUAL-DEBT.md:342-352` |
 
 Chacun passe par une ADR quand il est structurant, selon la règle de ce dépôt.
