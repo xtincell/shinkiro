@@ -81,12 +81,12 @@ propose, l'humain valide, et la trace survit à la mission.
 
 ## Ce qu'il reste à faire
 
-1. Écrire les critères d'acceptation de **Content Operations** — le produit le plus proche du marché.
+1. Écrire les critères d'acceptation de **Content Operations** — le produit le plus proche du marché. *Proposition à valider : [`PROPOSITION-OFFRES.md`](PROPOSITION-OFFRES.md).*
 2. Assembler le **Content Velocity System** : les briques existent, le modèle opératoire non.
 3. Fermer la boucle de mesure d'**Argos** — sans elle, pas de Creative Intelligence vendable.
 4. Mettre **La Barre** en vitrine : une page, une démo, un README qui raconte le brief-au-BAT.
 5. Valider la grille tarifaire sur coûts réels et premiers pilotes.
-6. **Réécrire `galahad-landing` pour le bon acheteur.** Elle dit aujourd'hui « self-hosted
+6. ~~**Réécrire `galahad-landing` pour le bon acheteur.**~~ *Fait le 12 novembre* ([galahad-landing#3](https://github.com/xtincell/galahad-landing/pull/3)) : la page parle au dirigeant d'agence et affiche le prix de Content Operations. Elle dit aujourd'hui « self-hosted
    team of autonomous AI agents » et « self-host in 60 seconds » — écrit pour un développeur
    qui veut auto-héberger. Le produit s'adresse à un patron d'agence qui veut que sa boîte
    tourne sans lui. Elle vend la technologie au lieu du résultat, ce que la règle ci-dessus
