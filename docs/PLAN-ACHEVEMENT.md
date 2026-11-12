@@ -58,8 +58,8 @@ Cinq ressources Coolify servent désormais `main` :
 
 **Au 12 novembre, midi UTC**, le VPS sert :
 
-- La Fusée en 6.27.582 ;
-- La Barre au commit `b062469`, et sa vitrine sur données fictives ;
+- La Fusée en 6.27.583 ;
+- La Barre au commit `b1d2031`, et sa vitrine sur données fictives, republiée depuis ce commit ;
 - deux instances Radar au commit `3a3e532` : la personnelle, et celle de
   l'agence, qui lit La Barre depuis 11 h 06 UTC et calcule la mesure avant/après ;
 - `galahad-landing` réécrite ;
@@ -410,6 +410,8 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.75 | `radar` : la mesure avant/après des trois familles de 5.6 (`/mesure/avant-apres`, page `briefs/mesure.html`), fenêtres égales autour de la bascule, dossiers « à cheval » à part, assise `n` sur chaque chiffre, filtres de confidentialité de la REST | [radar#10](https://github.com/xtincell/radar/pull/10), **fusionnée** et déployée sur les deux instances ; 9 cas rouges puis verts, suite 78/78, 12 contre-épreuves. `MESURE_BASCULE` posée à `2026-11-12T11:06:21Z` sur l'instance de l'agence ; le relevé de production répond, fenêtres tronquées et vides le disant, 401 sans clé |
 | 0.76 | `la-barre` : écarter un écart avec motif puis le reprendre, par la fabrique de décision (4.8, F4). `galahad` : mémoire stratifiée, contrôles de patrouille et alerte de repli repris de Talos, moteur 0.1.18 (4.1, 4.2). `Argos-studio` : une page inconnue ou privée sans clé répond 404 | [la-barre#25](https://github.com/xtincell/la-barre/pull/25) (9 rouges puis verts, La Barre redéployée sur `b062469`) ; [galahad#30](https://github.com/xtincell/galahad/pull/30) (267/267, 25 rouges avant ; mise en service sur l'hôte : B2) ; [Argos-studio#8](https://github.com/xtincell/Argos-studio/pull/8) (56/56, Playwright 26/26, recette Docker verte, redéployée : `/work/<inconnu>` et `/brand/<inconnu>` en 404, pages publiques en 200), **fusionnées** |
 | 0.77 | `character-engine` : « NOUVEAU VECTEUR » ne sort plus toujours un TANK (200 sur 200 avant, six rôles répartis après). `datacollector` : Tailwind servi localement avec son empreinte (4.15). `charadesign-generator` : étapes partielles affichées comme telles, retours tardifs d'image sans écrasement (4.14) | [character-engine#5](https://github.com/xtincell/character-engine/pull/5), [datacollector#7](https://github.com/xtincell/datacollector/pull/7), [charadesign-generator#6](https://github.com/xtincell/charadesign-generator/pull/6), **fusionnées** ; outils locaux, rien à déployer. Recette de charadesign avec un vrai fournisseur : clés Anthropic et OpenAI |
+| 0.78 | `la-barre` : identifiants de décision uniques entre postes (`DEC-<poste>-<12>`), renommage tracé en cas de collision, jamais de fusion de deux décisions ; l'import de fichier passe par la fabrique et ne retire plus aucune décision du registre ; le serveur refuse une base qui dupliquerait ou remplacerait une décision (4.9). Vitrine republiée depuis ce commit | [la-barre#26](https://github.com/xtincell/la-barre/pull/26), **fusionnée** et déployée sur `b1d2031` (30 rouges avant, 266 tests verts, Playwright vert) ; contrat `GET /radar/decisions` inchangé, Radar agence lit toujours. Vitrine : distribution de `b1d2031` vérifiée, chargée sans erreur |
+| 0.79 | `ADVE-project` : inventaire en lecture seule des formes ADVE hors schéma strict (`npm run audit:adve-shapes`), étape 1 de la dette « Formats ADVE legacy » (4.11.k) ; un enum absent n'est plus classé « hors énumération », lot 6.27.583 | [#1195](https://github.com/xtincell/ADVE-project/pull/1195), **fusionnée** et livrée (`/api/version` 6.27.583, `/login` 200). Sur les canons : 623 chemins refusés, dont 346 comptés présents par la maturité ; UPgraders et La Fusée VALIDATED à 100 % malgré 7 à 46 refus chacun. Lancement en production et normalisation : revue humaine |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -477,8 +479,8 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.6 | `danmem`, `galahad` | **Écrit et éprouvé localement** (danmem#5, galahad#26). Reste la recette sur le VPS : noms réels, version de `pg_dump`, volume, stockage hors hôte | Recette B2 |
 | 4.7 | `hermes-cockpit` | F10, titre et README **faits** (hermes-cockpit#3, #4) ; reste la configuration morte du compose | Arbitrage : retirer des montages de production |
 | 4.8 | `la-barre` | F1, F2 (la-barre#14), F3 et les tests (la-barre#15), README (la-barre#16), écarter et reprendre un écart (la-barre#25) **faits**. Restent `facturable`, jamais lu, et les outils du poste dédié coupés par la session | Arbitrage pour `facturable` et pour les outils |
-| 4.9 | `la-barre` | **Fait** (la-barre#17). Restent l'unicité entre postes et le passage de l'import par la fabrique | Arbitrage 5.5 |
-| 4.10 | `market-expansion-system` | Gabarits cohérents avec la méthode ; promesse d'import tenue ou retirée (F9) | Arbitrage 5.4 |
+| 4.9 | `la-barre` | **Fait** (la-barre#17, la-barre#26) — fabrique de décision, identifiants uniques entre postes, import par la fabrique. Restent les identifiants des autres objets (projets, livrables) et l'écriture directe du fichier, non contrôlée | — |
+| 4.10 | `market-expansion-system` | **Fait** (market-expansion-system#2, #3) — gabarits cohérents avec la méthode et ses types d'écart ; la promesse d'import vise La Barre, et le README dit que `cadrage-briefs.csv` ne s'importe pas tel quel dans Radar (F9) | — |
 | 4.11 | `ADVE-project` | Voir [section 4 bis](#4-bis-la-fusée) | — |
 | 4.12 | `Argos-studio` | **Faits** : déploiement sur le VPS (Argos-studio#6), espace privé (Argos-studio#7), vrais 404 (Argos-studio#8), `If-Match` côté Fusée (F14, #1194). Reste la projection réelle des 13 dossiers depuis la console | Propriétaire (console) |
 | 4.13 | `character-engine` | **Fait** : F8 (character-engine#2), export et contradictions (character-engine#3), cinq profils d'exemple fictifs (character-engine#4, 5.10), « NOUVEAU VECTEUR » réparé et testé à graine fixe en CI (character-engine#5) | — |
@@ -547,7 +549,7 @@ Ce lot ne se planifie pas, il se prépare. Trois préparations sont à portée :
 | 4.11.h | **Fait** (#1167) — Brancher en CI les huit fichiers de tests PostgreSQL orphelins, et fixer la mémoire du job (M7, M8) | `.github/workflows/ci.yml:73-125` |
 | 4.11.i | **Fait** (#1167) — Réparer ou retirer `deploy.yml` et `release.yml` (M10) | `.github/workflows/` |
 | 4.11.j | **Fait** (#1168) — 63 alertes de dépendances, dont 9 critiques ; restent 15 moderate d'outillage, sans correctif publié | relevé à l'installation |
-| 4.11.k | Formats ADVE anciens hors des schémas stricts | `docs/governance/RESIDUAL-DEBT.md:252-275` |
+| 4.11.k | **Étape 1 faite** (#1195) — inventaire en lecture seule des formes ADVE hors schéma strict ; normalisation soumise à revue humaine | `docs/governance/RESIDUAL-DEBT.md` (« Formats ADVE legacy ») |
 | 4.11.l | **Fait** (#1191) — Le document de 112 s sous un plafond de 120 s | `docs/governance/RESIDUAL-DEBT.md:342-352` |
 
 Chacun passe par une ADR quand il est structurant, selon la règle de ce dépôt.
@@ -631,7 +633,7 @@ Chacun est posé comme une question. Une réponse courte suffit.
 
 | Si le propriétaire… | Alors un agent peut… |
 |---|---|
-| ne fait rien de plus | Le geste « Agent » restant de 4.11 : k, les formats ADVE anciens hors des schémas stricts. 4.11.a, d, l et la garde de couches ESLint sont faits (#1188 à #1191) ; 4.18 est fait |
+| ne fait rien de plus | Plus aucun geste « Agent » ouvert. 4.11.k a son étape 1 (#1195) ; les suivantes demandent une revue humaine des formes, puis une écriture par les rails existants |
 | fusionne les 32 PR | *Fait le 11 novembre*, avec cinq ressources Coolify redéployées. Reste à redémarrer les services systemd de l'hôte |
 | régénère `FLEET_TOKEN` | Fermer P1 côté flotte |
 | ~~donne son accord sur #873~~ | *Fait le 12 novembre* : #873 fusionnée au tri 5.14 ; 1.3 se ferme par le workflow |
