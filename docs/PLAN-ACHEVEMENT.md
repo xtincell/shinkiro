@@ -63,7 +63,8 @@ Cinq ressources Coolify servent désormais `main` :
 - deux instances Radar au commit `3a3e532` : la personnelle, et celle de
   l'agence, qui lit La Barre depuis 11 h 06 UTC et calcule la mesure avant/après ;
 - `galahad-landing` réécrite ;
-- Argos-studio, avec son espace privé UPgraders et ses vrais 404 (Argos-studio#7, #8).
+- Argos-studio, avec son espace privé UPgraders et ses vrais 404 (Argos-studio#7, #8) ;
+- `hermes-cockpit` au commit `23def21`, sans ses montages morts (hermes-cockpit#7).
 
 Les deux copies hors canon de La Fusée sont retirées (ligne 0.66).
 
@@ -413,6 +414,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.78 | `la-barre` : identifiants de décision uniques entre postes (`DEC-<poste>-<12>`), renommage tracé en cas de collision, jamais de fusion de deux décisions ; l'import de fichier passe par la fabrique et ne retire plus aucune décision du registre ; le serveur refuse une base qui dupliquerait ou remplacerait une décision (4.9). Vitrine republiée depuis ce commit | [la-barre#26](https://github.com/xtincell/la-barre/pull/26), **fusionnée** et déployée sur `b1d2031` (30 rouges avant, 266 tests verts, Playwright vert) ; contrat `GET /radar/decisions` inchangé, Radar agence lit toujours. Vitrine : distribution de `b1d2031` vérifiée, chargée sans erreur |
 | 0.79 | `ADVE-project` : inventaire en lecture seule des formes ADVE hors schéma strict (`npm run audit:adve-shapes`), étape 1 de la dette « Formats ADVE legacy » (4.11.k) ; un enum absent n'est plus classé « hors énumération », lot 6.27.583 | [#1195](https://github.com/xtincell/ADVE-project/pull/1195), **fusionnée** et livrée (`/api/version` 6.27.583, `/login` 200). Sur les canons : 623 chemins refusés, dont 346 comptés présents par la maturité ; UPgraders et La Fusée VALIDATED à 100 % malgré 7 à 46 refus chacun. Lancement en production et normalisation : revue humaine |
 | 0.80 | `ADVE-project` : l'inventaire des formes ADVE est bundlé dans l'image de production (`node adve-shapes-audit.cjs`), garde des paquets étendue, lot 6.27.584 ; puis **lancé sur la base de production** par une tâche Coolify ponctuelle, supprimée après usage | [#1196](https://github.com/xtincell/ADVE-project/pull/1196) et [#1197](https://github.com/xtincell/ADVE-project/pull/1197), **fusionnées** ; 6.27.584 livrée. Lecture `READ ONLY` / `REPEATABLE READ` confirmée, 4 s : 69 stratégies, 274 piliers, 263 refusés ; 2 691 chemins (708 valeurs présentes refusées, dont 546 comptées présentes ; 1 422 absents à côté de clés hors schéma ; 561 absents). Sortie nominative hors dépôt |
+| 0.81 | `hermes-cockpit` : configuration morte retirée du compose et du second chemin de déploiement, sans changement de code (4.7, arbitrage du 12 novembre) | [hermes-cockpit#7](https://github.com/xtincell/hermes-cockpit/pull/7), **fusionnée** et redéployée sur `23def21` ; portail en 401 sans authentification, `/healthz` 200, journaux de démarrage sans erreur |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -422,7 +424,7 @@ Sans ce lot, rien de ce qui suit ne peut être déclaré fini.
 |---|---|---|---|---|
 | 1.1 | `shinkiro` | Régénérer `FLEET_TOKEN` | Workflow hebdomadaire vert, issue #5 fermée d'elle-même | **Propriétaire** (B1) |
 | 1.2 | `ADVE-project` | Fusionner la PR #873 | Une seule issue SLO, à titre stable | **Fait le 12 novembre** (tri 5.14, lot 6.27.580). Le contrôle restera rouge, sans ouvrir d'issue, tant que 1.4 n'est pas fait |
-| 1.3 | `ADVE-project` | Fermer les 211 issues « SLO breach » | Zéro issue de ce titre | **Confié au workflow** depuis #873 : un job ferme les anciennes issues, avec un commentaire, à chaque passage planifié, jusqu'à épuisement (216 comptées à la fusion). À constater après le prochain passage |
+| 1.3 | `ADVE-project` | Fermer les 211 issues « SLO breach » | Zéro issue de ce titre | **Fait** : le job ajouté par #873 a fermé les 216 issues, avec un commentaire ; zéro ouverte au relevé du 12 novembre, 14 h 40 UTC |
 | 1.4 | `ADVE-project`, `galahad` | Mesurer le SLO depuis le VPS, où la base est joignable, plutôt que depuis GitHub | Un relevé SLO daté, lu par le workflow | Arbitrage : procédure `galahad` ou tâche planifiée. Puis B2 |
 | 1.5 | `talos`, `hulysse`, `character-engine`, `galahad-landing`, `market-expansion-system` | Une CI minimale par dépôt : syntaxe, liens, gabarits | Cinq workflows verts | **Fait** — cinq PR, lot 0.19 |
 | 1.6 | `shinkiro` | Signal `mode-dementi` : un mode déclaré sans son artefact est une dérive | Il a relevé `danmem` ; Argos l'assume par son état déclaré | **Fait** |
@@ -478,7 +480,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.4 | `radar` | **Fait** ([radar#9](https://github.com/xtincell/radar/pull/9)) — `ndeg` unique par instance, homonymes renommés sans perte, flux privés par défaut ; en production sur les deux instances (ligne 0.68) | — |
 | 4.5 | `danmem` | **Faits** : F6 (danmem#2), unité, environnement et défauts morts (danmem#3), bail et remise en file F7 (danmem#4, à fusionner après #3). Restent l'appel de `release` côté Galahad et la relecture de l'unité servie | B2 pour l'unité servie |
 | 4.6 | `danmem`, `galahad` | **Écrit et éprouvé localement** (danmem#5, galahad#26). Reste la recette sur le VPS : noms réels, version de `pg_dump`, volume, stockage hors hôte | Recette B2 |
-| 4.7 | `hermes-cockpit` | F10, titre et README **faits** (hermes-cockpit#3, #4) ; reste la configuration morte du compose | Arbitrage : retirer des montages de production |
+| 4.7 | `hermes-cockpit` | **Fait** : F10, titre et README (hermes-cockpit#3, #4) ; configuration morte retirée du compose et de `ops/redeploy.sh` — cinq secrets montés, `/gdrive`, `RCLONE_CONF` et le pont média, qu'aucun code ne lisait (hermes-cockpit#7, arbitrage du 12 novembre) | — |
 | 4.8 | `la-barre` | F1, F2 (la-barre#14), F3 et les tests (la-barre#15), README (la-barre#16), écarter et reprendre un écart (la-barre#25) **faits**. Restent `facturable`, jamais lu, et les outils du poste dédié coupés par la session | Arbitrage pour `facturable` et pour les outils |
 | 4.9 | `la-barre` | **Fait** (la-barre#17, la-barre#26) — fabrique de décision, identifiants uniques entre postes, import par la fabrique. Restent les identifiants des autres objets (projets, livrables) et l'écriture directe du fichier, non contrôlée | — |
 | 4.10 | `market-expansion-system` | **Fait** (market-expansion-system#2, #3) — gabarits cohérents avec la méthode et ses types d'écart ; la promesse d'import vise La Barre, et le README dit que `cadrage-briefs.csv` ne s'importe pas tel quel dans Radar (F9) | — |
