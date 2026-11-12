@@ -56,10 +56,10 @@ Cinq ressources Coolify servent désormais `main` :
 - `galahad-landing` ;
 - La Fusée en 6.27.571.
 
-**Au 12 novembre, 16 h 15 UTC**, le VPS sert :
+**Au 12 novembre, 17 h 05 UTC**, le VPS sert :
 
 - La Fusée en 6.27.587, avec la tâche planifiée `slo-check` toutes les six heures ;
-- La Barre au commit `aa45a4d`, et sa vitrine sur données fictives, republiée depuis ce commit ;
+- La Barre au commit `ce6abe7`, et sa vitrine sur données fictives, republiée depuis ce commit ;
 - deux instances Radar au commit `3a3e532` : la personnelle, et celle de
   l'agence, qui lit La Barre depuis 11 h 06 UTC et calcule la mesure avant/après ;
 - `galahad-landing` réécrite ;
@@ -417,6 +417,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.81 | `hermes-cockpit` : configuration morte retirée du compose et du second chemin de déploiement, sans changement de code (4.7, arbitrage du 12 novembre) | [hermes-cockpit#7](https://github.com/xtincell/hermes-cockpit/pull/7), **fusionnée** et redéployée sur `23def21` ; portail en 401 sans authentification, `/healthz` 200, journaux de démarrage sans erreur |
 | 0.82 | `ADVE-project` : le contrôle SLO mesure depuis le serveur de production (1.4) — script bundlé dans l'image, budgets lus en millisecondes et taux d'erreur en part (547 budgets sur 635 étaient lus 1 000 fois trop petits), workflow GitHub retiré, tâche Coolify `slo-check` toutes les six heures ; le bilan de campagne reçu admet le compte des reprises (lots 6.27.585 et 6.27.586). `la-barre` : chaque version arrêtée du bilan compte les reprises facturables au client, à la charge de l'agence et non qualifiées, sans montant (4.8, arbitrage du 12 novembre) | [#1198](https://github.com/xtincell/ADVE-project/pull/1198), [#1199](https://github.com/xtincell/ADVE-project/pull/1199), [la-barre#27](https://github.com/xtincell/la-barre/pull/27), **fusionnées** ; 6.27.586 livrée (`/api/version`, `/login` 200). Premier relevé réel : 23 kinds mesurés, 19 tenus, 4 dépassés (deux en erreur, deux en latence), à trier sans relever de budget (#1200). La Barre redéployée sur `aa45a4d` ; vitrine republiée, deux pages sans erreur au navigateur. Une version arrêtée avant garde son empreinte |
 | 0.83 | `ADVE-project` : tri des quatre dépassements du premier relevé SLO, par lecture seule des émissions — deux défauts corrigés (lot 6.27.587) : les émissions `INVOKE_GLORY_TOOL` closes gardaient le statut « en attente », de sorte qu'un outil échoué passait pour réussi ; le caractère U+0000 extrait d'un document faisait refuser le dépôt par PostgreSQL. Les deux autres dépassements sont des budgets de latence posés sans mesure face à des appels au modèle | [#1201](https://github.com/xtincell/ADVE-project/pull/1201), **fusionnée** et livrée (`/api/version` 6.27.587, `/login` 200, tâche `slo-check` conservée) ; tests rouges avant correction, 4 657 tests gouvernance et services verts. Budgets de `GENERATE_RECOMMENDATIONS`, `INVOKE_GLORY_TOOL` et `LEGACY_GLORY_EXECUTE_SEQUENCE` : propriétaire, d'après les relevés qui s'accumulent |
+| 0.84 | `la-barre` : projets et livrables uniques entre postes (même générateur que les décisions, départage au rapprochement sans fusion, refus serveur `PROJET_EN_DOUBLE`, `PROJET_REMPLACE`, `LIVRABLE_EN_DOUBLE`, `LIVRABLE_REMPLACE`) ; puis la référence lisible d'un projet attribuée par le serveur au premier enregistrement, provisoire et jamais montrée au client avant (arbitrage du 12 novembre) — fin de 4.9 | [la-barre#28](https://github.com/xtincell/la-barre/pull/28) et [la-barre#29](https://github.com/xtincell/la-barre/pull/29), **fusionnées** (CI et deux images Docker vertes) et déployées sur `ce6abe7` ; 11 puis 12 tests rouges avant, toutes les suites et Playwright verts. Aucun identifiant ni référence existants réécrits ; `GET /radar/decisions` inchangé. Vitrine republiée, deux pages sans erreur |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -484,7 +485,7 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.6 | `danmem`, `galahad` | **Écrit et éprouvé localement** (danmem#5, galahad#26). Reste la recette sur le VPS : noms réels, version de `pg_dump`, volume, stockage hors hôte | Recette B2 |
 | 4.7 | `hermes-cockpit` | **Fait** : F10, titre et README (hermes-cockpit#3, #4) ; configuration morte retirée du compose et de `ops/redeploy.sh` — cinq secrets montés, `/gdrive`, `RCLONE_CONF` et le pont média, qu'aucun code ne lisait (hermes-cockpit#7, arbitrage du 12 novembre) | — |
 | 4.8 | `la-barre` | F1, F2 (la-barre#14), F3 et les tests (la-barre#15), README (la-barre#16), écarter et reprendre un écart (la-barre#25) **faits** ; `facturable` compté dans chaque version du bilan de campagne (la-barre#27, La Fusée l'accepte depuis #1199). Restent les outils du poste dédié coupés par la session | Arbitrage pour les outils |
-| 4.9 | `la-barre` | **Fait** (la-barre#17, la-barre#26) — fabrique de décision, identifiants uniques entre postes, import par la fabrique. Restent les identifiants des autres objets (projets, livrables) et l'écriture directe du fichier, non contrôlée | — |
+| 4.9 | `la-barre` | **Fait** (la-barre#17, #26, #28, #29) — fabrique de décision, identifiants uniques entre postes pour les décisions, projets et livrables, rapprochés sans fusion ; import par la fabrique ; le serveur refuse une base qui dupliquerait ou remplacerait l'un d'eux ; la référence lisible d'un projet est attribuée par le serveur au premier enregistrement (arbitrage du 12 novembre) | — |
 | 4.10 | `market-expansion-system` | **Fait** (market-expansion-system#2, #3) — gabarits cohérents avec la méthode et ses types d'écart ; la promesse d'import vise La Barre, et le README dit que `cadrage-briefs.csv` ne s'importe pas tel quel dans Radar (F9) | — |
 | 4.11 | `ADVE-project` | Voir [section 4 bis](#4-bis-la-fusée) | — |
 | 4.12 | `Argos-studio` | **Faits** : déploiement sur le VPS (Argos-studio#6), espace privé (Argos-studio#7), vrais 404 (Argos-studio#8), `If-Match` côté Fusée (F14, #1194). Reste la projection réelle des 13 dossiers depuis la console | Propriétaire (console) |
@@ -638,7 +639,7 @@ Chacun est posé comme une question. Une réponse courte suffit.
 
 | Si le propriétaire… | Alors un agent peut… |
 |---|---|
-| ne fait rien de plus | Plus aucun geste « Agent » ouvert. 4.11.k a son étape 1 (#1195) ; les suivantes demandent une revue humaine des formes, puis une écriture par les rails existants |
+| ne fait rien de plus | Plus aucun geste « Agent » ouvert : 4.9 est fini (ligne 0.84), le tri SLO fait (ligne 0.83). 4.11.k a son étape 1 (#1195) ; les suivantes demandent une revue humaine des formes, puis une écriture par les rails existants |
 | fusionne les 32 PR | *Fait le 11 novembre*, avec cinq ressources Coolify redéployées. Reste à redémarrer les services systemd de l'hôte |
 | régénère `FLEET_TOKEN` | Fermer P1 côté flotte |
 | ~~donne son accord sur #873~~ | *Fait le 12 novembre* : #873 fusionnée au tri 5.14 ; 1.3 se ferme par le workflow |
