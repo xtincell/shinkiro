@@ -56,6 +56,17 @@ Cinq ressources Coolify servent désormais `main` :
 - `galahad-landing` ;
 - La Fusée en 6.27.571.
 
+**Au 12 novembre, midi UTC**, le VPS sert :
+
+- La Fusée en 6.27.580 ;
+- La Barre au commit `adf4540`, et sa vitrine sur données fictives ;
+- deux instances Radar au commit `bf4a22b` : la personnelle, et celle de
+  l'agence, qui lit La Barre depuis 11 h 06 UTC ;
+- `galahad-landing` réécrite ;
+- Argos-studio, dont l'espace privé attend la fusion d'Argos-studio#7.
+
+Les deux copies hors canon de La Fusée sont retirées (ligne 0.66).
+
 Au premier redéploiement, La Barre et `hermes-cockpit` sont revenues sur d'anciens
 commits, parce que Coolify les épinglait (`9735c56` du 19 octobre et `1ea757b` du
 7 octobre). Les épingles ont ensuite été déplacées vers `main`, ce qui tranche
@@ -392,6 +403,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.68 | `la-barre` et `radar` : câblage des décisions, sens 1 de SHK-0005 (arbitrages 5.5 et 5.6) — La Barre sert ses seules décisions sur `GET /radar/decisions` derrière `BARRE_RADAR_TOKEN` ; Radar les lit, en reçus versionnés sans doublon, privées, hors du journal et des flux. Radar : `ndeg` unique par instance, flux privés par défaut, anciens événements privés jusqu'à relecture (5.7). Nouvelle instance `radar-agence` sur le VPS, base propre, branchée sur La Barre par le réseau interne ; **bascule le 12 novembre 2026 à 11 h 06 UTC** ; signal `decisions-barre-radar`, SHK-0005 Accepted | [la-barre#22](https://github.com/xtincell/la-barre/pull/22) (6 tests), [radar#8](https://github.com/xtincell/radar/pull/8) (12 tests), [radar#9](https://github.com/xtincell/radar/pull/9) (69/69, 13 rouges avant), **fusionnées** et déployées. Production : première lecture « reçue », zéro décision, puis « inchangé » (304). Radar personnel migré après sauvegarde (164 Ko) : 4 codes en double, 4 dossiers renommés et tracés, 1 ancien rattachement ambigu conservé ; ses flux répondent 401. Le calcul des indicateurs n'est pas écrit |
 | 0.69 | `la-barre` : une adaptation hors de son écart déclaré est signalée, la revue tranche (décision du 12 novembre, SHK-0004) ; vitrine du brief-au-BAT sur une marque fictive, démonstration isolée (LB6) | [la-barre#23](https://github.com/xtincell/la-barre/pull/23), **fusionnée** et déployée (12 tests hors écart, rouges avant). Vitrine publiée en distribution statique, extraite du commit `adf4540` et vérifiée (155 fichiers) : https://la-barre-vitrine.powerupgraders.com. Pages en 200, fichiers du dépôt en 404, démonstration chargée sans erreur dans Chromium |
 | 0.70 | `character-engine` : cinq profils d'exemple, marqués fictifs (5.10) ; `la-fusee-blueprint` : livre et vue rattrapés sur le canon actuel (5.11) | [character-engine#4](https://github.com/xtincell/character-engine/pull/4) et [la-fusee-blueprint#4](https://github.com/xtincell/la-fusee-blueprint/pull/4), **fusionnées** |
+| 0.71 | `ADVE-project` : lots 6.27.572 à 6.27.580 — restitution d'intake sans statistiques non sourcées (4.11.d), garde de couches ESLint réparée, compositeur sans appel à entrées vides (4.11.a), grand document en 2 s (4.11.l), transaction de vente sérialisée rejouée après attente, marque non évaluée plus affichée à zéro, canaux et calendrier du playbook repris des pièces de référence, canons de démonstration au bon contrat et deux nombres retirés au modèle, contrôle SLO sans issue par exécution (1.2, 1.3) | [#1188](https://github.com/xtincell/ADVE-project/pull/1188), [#1189](https://github.com/xtincell/ADVE-project/pull/1189), [#1190](https://github.com/xtincell/ADVE-project/pull/1190), [#1191](https://github.com/xtincell/ADVE-project/pull/1191), [#1192](https://github.com/xtincell/ADVE-project/pull/1192), [#1150](https://github.com/xtincell/ADVE-project/pull/1150), [#1152](https://github.com/xtincell/ADVE-project/pull/1152), [#696](https://github.com/xtincell/ADVE-project/pull/696), [#873](https://github.com/xtincell/ADVE-project/pull/873), **fusionnées** dans l'ordre et livrées le 12 novembre : image du commit `6ea7abd` (build 43207899853, test de démarrage vert), `/api/version` 6.27.580, 108 migrations déjà en base, `/login` 200, écritures anonymes refusées 401. Les anciennes PR #696 et #873 relèvent du tri 5.14 |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
