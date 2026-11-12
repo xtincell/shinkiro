@@ -20,7 +20,8 @@
 #   verse      outil léger : dépôt propre + submodule sous tools/.
 #
 # maturite   produit | utilisable | partiel | a-qualifier | gele
-# vitalite   actif | gele | fige | relance-prioritaire   (commits sur 90 j)
+# vitalite   actif | gele | fige | relance-prioritaire | archive   (commits sur 90 j ;
+#            archive = dépôt historique par décision du propriétaire)
 #
 # deploiement.mode — constaté, pas supposé :
 #   coolify   compose piloté par Coolify sur le VPS (Traefik + TLS par FQDN)
@@ -30,6 +31,7 @@
 #   pages     statique servi par GitHub Pages
 #   statique  HTML ouvrable sans serveur
 #   document  ni service ni page : méthode, gabarits, doctrine
+#   poste     outil local d'opérateur, lancé sur le poste ; jamais hébergé
 #   module    ne se déploie pas seul, passe par son hôte
 #
 # deploiement.racine — sous-dossier du point d'entrée quand il n'est pas à la
@@ -417,7 +419,7 @@ composants:
     licence: proprietaire
     vitalite: gele
     ordre_construction: 6
-    deploiement: {mode: statique, racine: lsi-cd-app, stack: vite, entree: index.html, etat: "le build seul ne fonctionne pas — chaque étape appelle un proxy qui n'existe que dans le serveur de développement"}
+    deploiement: {mode: poste, racine: lsi-cd-app, stack: vite, lancement: "npm run dev", note: "outil local d'opérateur (arbitrage 5.9, 11 novembre 2026) : chaque étape appelle le proxy du serveur de développement ; aucun hébergement"}
     description: >-
       Atelier LSI-CD : progression de jugement sémantique, de l'archétype au
       master et aux vues. Bibliothèque, brouillon et checkpoints existants.
@@ -463,7 +465,7 @@ composants:
     maturite: partiel
     licence: proprietaire
     vitalite: actif
-    deploiement: {mode: statique, entree: index.html, serveur: server.py, requiert: requirements.txt, etat: "le front seul ne collecte rien — l'entrée réelle est python server.py"}
+    deploiement: {mode: poste, serveur: server.py, requiert: requirements.txt, lancement: "python server.py", note: "outil local d'opérateur (arbitrage 5.9, 11 novembre 2026) : le front seul ne collecte rien, l'entrée réelle est python server.py ; aucun hébergement"}
     description: >-
       Acquérir des observations publiques hétérogènes, avec leur périmètre,
       leur date et leurs erreurs. CLI et serveur Python partagent le même reçu ;

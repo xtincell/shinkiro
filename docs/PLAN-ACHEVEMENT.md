@@ -460,8 +460,8 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.11 | `ADVE-project` | Voir [section 4 bis](#4-bis-la-fusée) | — |
 | 4.12 | `Argos-studio` | Artefact de déploiement pour le VPS ; `If-Match` côté Fusée (F14) ; isolation des consultations ; bouchons | Arbitrage 5.8 pour l'hébergement |
 | 4.13 | `character-engine` | **Fait** : F8 (character-engine#2), export et contradictions (character-engine#3). Reste un test versionné du parcours | — |
-| 4.14 | `charadesign-generator` | **Fait** (charadesign-generator#5). Restent le statut partiel des étapes déjà affichées, les retours tardifs de `ImageGen.jsx`, une recette navigateur avec fournisseur | Agent ; 5.9 pour le service |
-| 4.15 | `datacollector` | **Fait** (datacollector#4) ; l'entrée réelle était déjà au manifeste. Reste : servir Tailwind localement pour lui donner une empreinte | 5.9 pour le service |
+| 4.14 | `charadesign-generator` | **Fait** (charadesign-generator#5) ; outil local, pas de service (5.9). Restent le statut partiel des étapes déjà affichées, les retours tardifs de `ImageGen.jsx`, une recette navigateur avec fournisseur | Agent |
+| 4.15 | `datacollector` | **Fait** (datacollector#4) ; outil local, pas de service (5.9). Reste : servir Tailwind localement pour lui donner une empreinte | Agent |
 | 4.16 | `galahad-landing` | Réécriture pour le bon acheteur | Arbitrage 5.12 |
 | 4.17 | `la-fusee-blueprint` | Régénérer la vue ou l'archiver | Arbitrage 5.11 |
 | 4.18 | `installation` | **Fait** (IN4, ligne 0.60) — Radar et la mémoire `danmem` dans le profil, responsable rattaché par son compte ordinaire ; Argos-studio et les rôles Galahad écartés avec leurs raisons | Recette B2 sur le VPS |
@@ -590,17 +590,17 @@ Chacun est posé comme une question. Une réponse courte suffit.
 | 5.4 | ~~Taxonomies : un écart a-t-il un type ou plusieurs (le Ghana en a deux) ? Se déclare-t-il sur l'adaptation ou sur le couple projet × marché ?~~ *Tranché le 11 novembre* : plusieurs types possibles, déclarés sur le couple projet × marché | 3.4, 4.10 |
 | 5.5 | ~~La Barre → Radar : Radar lit le fichier de La Barre, La Barre pousse, ou un humain dépose un paquet ?~~ *Tranché le 11 novembre* : Radar lit La Barre | 3.5 |
 | 5.6 | Quels indicateurs pour la mesure avant/après, et quelle date de bascule ? | Lot 6 |
-| 5.7 | Radar : `ndeg` doit-il devenir unique ? Les flux sont-ils publics par défaut ? Que faire des 125 événements anciens à confidentialité inconnue ? | 4.4 |
+| 5.7 | ~~Radar : `ndeg` doit-il devenir unique ? Les flux sont-ils publics par défaut ? Que faire des 125 événements anciens à confidentialité inconnue ?~~ *Tranché le 12 novembre* : `ndeg` unique par instance, homonymes dédoublonnés sans perte ; flux privés par défaut ; les 125 anciens événements traités comme privés jusqu'à relecture | 4.4 |
 | 5.8 | ~~Argos sur le VPS : SQLite sur volume, ou PostgreSQL ? Des comptes, ou une clé unique assumée ?~~ *Tranché le 11 novembre* : SQLite sur volume et une clé unique pour l'administration | 4.12 |
-| 5.9 | `charadesign-generator` et `datacollector` : outils locaux d'opérateur, ou services ? | 4.14, 4.15 |
+| 5.9 | ~~`charadesign-generator` et `datacollector` : outils locaux d'opérateur, ou services ?~~ *Tranché le 12 novembre* : outils locaux d'opérateur, mode `poste` dans `fleet.yml`, aucun hébergement | 4.14, 4.15 |
 | 5.10 | `character-engine` : verser des profils, ou retirer le sélecteur ? | 4.13 |
-| 5.11 | `la-fusee-blueprint` : rattraper le canon (ADR 0083 à 0243), ou assumer une photographie de mai ? | 4.17 |
+| 5.11 | ~~`la-fusee-blueprint` : rattraper le canon (ADR 0083 à 0243), ou assumer une photographie de mai ?~~ *Tranché le 12 novembre* : rattraper le canon actuel | 4.17 |
 | 5.12 | `galahad-landing` : quel acheteur, quelle promesse, quel prix ? | 4.16 |
 | 5.13 | Critères d'acceptation de Content Operations, modèle de Content Velocity, grille tarifaire | Lot 6 |
 | 5.14 | ~~Les PR en attente : #875, #696, #679 sur `ADVE-project` ; les brouillons de `la-fusee-blueprint`, `galahad`, `radar`, `charadesign-generator`. Fusionner ou fermer ?~~ *Tranché le 11 novembre* : tri délégué, fusion de ce qui est juste et vert, fermeture motivée du reste | L'hygiène de chaque dépôt |
 | 5.15 | L'admission La Barre écrite pour l'employeur peut-elle entrer dans le canon `radar`, ou doit-elle être réécrite ? | 3.5 ; voir `docs/CLOISON.md` |
-| 5.16 | `galahad` suit un profil personnel (`deploy/dan-hermes/wiki-Alexandre_Profil.md`). Doit-il rester dans ce dépôt ? | `docs/CLOISON.md` |
-| 5.17 | `wiki-prive` est-il bien `adjacent` ? | Le classement posé le 10 novembre |
+| 5.16 | ~~`galahad` suit un profil personnel (`deploy/dan-hermes/wiki-Alexandre_Profil.md`). Doit-il rester dans ce dépôt ?~~ *Tranché le 12 novembre* : non ; il vit dans `wiki-prive` ([wiki-prive#1](https://github.com/xtincell/wiki-prive/pull/1)), retiré de galahad ([galahad#28](https://github.com/xtincell/galahad/pull/28)) | `docs/CLOISON.md` |
+| 5.17 | ~~`wiki-prive` est-il bien `adjacent` ?~~ *Tranché le 12 novembre* : oui | Le classement posé le 10 novembre |
 | 5.18 | ~~Deux instances de La Fusée hors canon tournent sur le VPS, chacune avec sa base : la lignée archivée `ADVE_v8`, et une branche d'`ADVE-project`. Les arrêter ?~~ *Tranché le 11 novembre* : arrêter et supprimer, après sauvegarde ; fait (ligne 0.66) | La capacité du VPS ; le classement des lignées |
 | 5.19 | ~~La Barre en production a quatre commits de retard sur `main`. Est-ce voulu ?~~ *Tranché le 11 novembre* : l'épingle Coolify est passée de `9735c56` à `e771494` | — |
 
