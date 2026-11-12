@@ -66,13 +66,16 @@ preuve** — relève de l'outillage, et c'est celui qui tue la plupart des offre
 | Économie unitaire | galahad + Thot — patrouille à coût nul |
 | Chemin d'expansion | Market Expansion System — neuf pays |
 
-**Radar** — chaque tâche génère un événement horodaté versé dans un flux. Le rapport
-avant/après se lit dans les données, il ne se rédige pas.
+**Radar** — chaque tâche génère un événement horodaté, versé dans un journal ; les
+flux qui le publient sont privés par défaut. Le rapport avant/après se lit dans les
+données, il ne se rédige pas.
 
-> **Condition, au 10 novembre 2026.** Cette mesure suppose que La Barre verse ses
-> décisions dans Radar. Ce câblage n'existe pas encore dans la flotte
-> ([`TOPOLOGIE.md`](TOPOLOGIE.md), point 5 de « Ce qui reste à écrire »). Tant
-> qu'il manque, le before/after se rédige.
+> **Condition, au 12 novembre 2026.** Le câblage existe : depuis le 12 novembre,
+> 11 h 06 UTC, l'instance Radar de l'agence lit les décisions de La Barre
+> ([SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md)). Ces décisions restent
+> privées : elles ne passent pas dans le flux. Le calcul des indicateurs retenus
+> (arbitrage 5.6) n'est pas encore écrit. Tant qu'il manque, le before/after se
+> rédige à partir des données, il ne se calcule pas encore.
 
 **La Barre** — du brief au bon à tirer, chaque arbitrage est situé.
 

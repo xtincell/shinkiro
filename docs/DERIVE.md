@@ -106,6 +106,7 @@ node scripts/signaux-flotte.mjs --strict     # sort en 1 s'il trouve (pour la CI
 | `divergence-perimee` | une duplication affirmée sans chiffre, ou dont le chiffre a menti |
 | `ecart-types-alignes` | deux listes de types d'écart qui divergent, ou un gabarit hors liste |
 | `frontiere-cockpits` | `galahad/cockpit` qui touche à l'hôte (socket Docker, Coolify, `/proc`), ou `hermes-cockpit` qui exécute dans une installation (`/operate`, construction, déploiement compose) |
+| `decisions-barre-radar` | La Barre et Radar qui ne nomment plus la même route, la même variable ou le même seuil de jeton (32), ou Radar qui verse une décision La Barre dans `briefs` ou `task_events` (SHK-0005) |
 | `produit-inconnu` | un produit déclaré dans `fleet.yml` que `docs/PORTFOLIO.md` ne connaît pas |
 | `derive-sans-canon` | un dérivé non canon dont le dépôt de référence n'existe pas |
 | `portail-perime` | un portail généré sur un manifeste qui a changé depuis |

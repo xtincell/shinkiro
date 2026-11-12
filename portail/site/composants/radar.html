@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>radar — Shinkiro</title>
-<meta name="description" content="Tracker de tâches auto-hébergeable. Backend Node en stdlib, API façon PostgREST sur Postgres, flux RSS et JSON, ingestion des retours clients par LLM local, tro">
+<meta name="description" content="Tracker de tâches auto-hébergeable. Backend Node en stdlib, API façon PostgREST sur Postgres, flux RSS et JSON privés par défaut, ingestion des retours clients ">
 <link rel="stylesheet" href="../style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9673;</text></svg>">
 </head>
@@ -26,14 +26,14 @@ Exécution</p>
   <span class="et">privé</span>
 </div>
 
-<p class="intro">Tracker de tâches auto-hébergeable. Backend Node en stdlib, API façon PostgREST sur Postgres, flux RSS et JSON, ingestion des retours clients par LLM local, trois niveaux d'autorité.</p>
+<p class="intro">Tracker de tâches auto-hébergeable. Backend Node en stdlib, API façon PostgREST sur Postgres, flux RSS et JSON privés par défaut, ingestion des retours clients par LLM local, trois niveaux d'autorité. Lit les décisions de La Barre (SHK-0005).</p>
 
 
 <h2 id="produits">Ce qu'il sert</h2>
 <div class="grille grille-2"><a class="carte" href="../produits/03.html"><h3>03 · Transformation Pilot</h3></a><a class="carte" href="../produits/05.html"><h3>05 · Content Operations</h3></a></div>
 <p><span class="source">fleet.yml</span></p>
 
-<div class="encart encart-attention"><div class="encart-titre">Point de vigilance</div><p>Reste autonome. Une instance = une équipe = une base. L’installation Matanga garde son portail client, ses accords par visuel et ses créneaux ; elle est distincte de l’installation personnelle. Le journal partage son contrat, pas ses données. L'admission La Barre n'existe que dans l'installation de l'employeur, hors flotte : ce dépôt n'en porte ni route ni test, et aucune décision ne circule entre La Barre et lui. La porter au canon ou la réécrire est un arbitrage ; voir docs/PLAN-ACHEVEMENT.md.</p></div>
+<div class="encart encart-attention"><div class="encart-titre">Point de vigilance</div><p>Reste autonome. Une instance = une équipe = une base. L’installation Matanga garde son portail client, ses accords par visuel et ses créneaux ; elle est distincte de l’installation personnelle. Le journal partage son contrat, pas ses données. Deux instances tournent sur le VPS : la personnelle, et celle de l'agence, qui lit les décisions de La Barre depuis le 12 novembre 2026 (SHK-0005). Ces décisions restent privées, hors du journal et des flux. &lt;code&gt;ndeg&lt;/code&gt; est unique par instance. L'admission de dossiers La Barre n'existe que dans l'installation de l'employeur, hors flotte.</p></div>
 
 
 
@@ -62,7 +62,7 @@ Exécution</p>
 <p><span class="source">fleet.lock.yml</span> — relevé du 2026-11-12, régénéré par <code>make releve</code>.</p>
 
 <h2 id="contient">Ce qu'il contient</h2>
-<div class="table-enveloppe"><table><tbody><tr><td><code>tables</code></td><td><code>briefs</code> <code>clients</code> <code>client_markets</code> <code>client_contacts</code> <code>task_events</code> <code>comments</code> <code>brief_assets</code> <code>app_config</code></td></tr><tr><td><code>front</code></td><td>dashboard, direction, entrees, equipe, faits, gabarits, gantt, gel, archive, bilan — plus les fontes Familjen Grotesk, Hanken Grotesk et JetBrains Mono.</td></tr></tbody></table></div>
+<div class="table-enveloppe"><table><tbody><tr><td><code>tables</code></td><td><code>briefs</code> <code>clients</code> <code>client_markets</code> <code>client_contacts</code> <code>task_events</code> <code>comments</code> <code>brief_assets</code> <code>app_config</code> <code>briefs_ndeg_renommes</code> <code>barre_recus</code> <code>barre_projets</code> <code>barre_lectures</code></td></tr><tr><td><code>front</code></td><td>dashboard, direction, entrees, equipe, faits, gabarits, gantt, gel, archive, bilan — plus les fontes Familjen Grotesk, Hanken Grotesk et JetBrains Mono.</td></tr></tbody></table></div>
 <p><span class="source">fleet.yml</span></p>
 
 

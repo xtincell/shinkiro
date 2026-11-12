@@ -291,6 +291,37 @@ const SIGNAUX = {
     return ecarts.map((e) => `cockpits — ${e}`);
   },
 
+  /* SHK-0005 (sens 1, arbitrages 5.5 et 5.6) : Radar lit les décisions de La
+   * Barre sur une route dédiée, derrière un jeton machine, et les garde
+   * privées. Les deux dépôts doivent nommer la même route, la même variable
+   * et le même seuil de jeton ; Radar ne verse aucune décision dans briefs ni
+   * dans task_events, qui alimentent les flux. Ne joue que si les deux dépôts
+   * sont clonés à côté de shinkiro. */
+  "decisions-barre-radar": () => {
+    const fBarre = join(RACINE, "..", "la-barre", "servir.mjs");
+    const fRadar = join(RACINE, "..", "radar", "server", "barre.js");
+    const fSql = join(RACINE, "..", "radar", "server", "barre.sql");
+    if (!existsSync(fBarre) || !existsSync(fRadar)) return [];
+    const barre = readFileSync(fBarre, "utf8");
+    const radar = readFileSync(fRadar, "utf8");
+    const ecarts = [];
+    if (!/["'`]\/radar\/decisions["'`]/.test(barre)) ecarts.push("la-barre servir.mjs ne sert plus la route /radar/decisions");
+    if (!/["'`]radar\/decisions["'`]/.test(radar)) ecarts.push("radar server/barre.js ne lit plus la route radar/decisions");
+    for (const [nom, texte] of [["la-barre servir.mjs", barre], ["radar server/barre.js", radar]])
+      if (!/process\.env\.BARRE_RADAR_TOKEN|env\.BARRE_RADAR_TOKEN/.test(texte)) ecarts.push(`${nom} ne lit plus BARRE_RADAR_TOKEN`);
+    const seuil = (texte, nom) => Number(texte.match(new RegExp(`${nom}\\s*=\\s*(\\d+)`))?.[1]);
+    const sBarre = seuil(barre, "JETON_RADAR_MIN");
+    const sRadar = seuil(radar, "JETON_MIN");
+    if (!(sBarre >= 32)) ecarts.push(`la-barre — seuil du jeton machine introuvable ou inférieur à 32 (${sBarre})`);
+    if (!(sRadar >= 32)) ecarts.push(`radar — seuil du jeton machine introuvable ou inférieur à 32 (${sRadar})`);
+    if (sBarre && sRadar && sBarre !== sRadar) ecarts.push(`seuils du jeton différents : La Barre ${sBarre}, Radar ${sRadar}`);
+    const sql = existsSync(fSql) ? readFileSync(fSql, "utf8") : "";
+    for (const [nom, texte] of [["server/barre.js", radar], ["server/barre.sql", sql]])
+      if (/insert\s+into\s+(task_events|briefs)\b/i.test(texte))
+        ecarts.push(`radar ${nom} écrit dans briefs ou task_events : une décision La Barre partirait dans les flux`);
+    return ecarts.map((e) => `décisions La Barre → Radar — ${e}`);
+  },
+
   /* Le manifeste et le portefeuille numérotaient les produits différemment —
    * 00/04/05 d'un côté, 01 à 07 de l'autre — et les TROIS valeurs déclarées
    * étaient fausses. Personne ne l'avait vu parce qu'aucun contrôle ne lisait

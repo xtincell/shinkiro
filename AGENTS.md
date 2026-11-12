@@ -54,7 +54,7 @@ docker compose -f galahad/docker-compose.yml logs chef | tail
 cd radar && npm ci
 DATABASE_URL=postgres://user:motdepasse@localhost:5432/radar npm start
 curl -s 'localhost:3000/rest/v1/briefs?limit=1'
-curl -s localhost:3000/activity.json | head
+curl -s localhost:3000/activity.json | head   # 401 par défaut : flux privés, FEED_PUBLIC=1 pour l'ouvrir
 
 # 3 · talos, hulysse, danmem — la syntaxe tient, la mémoire passe ses contrats
 (cd talos && npm run check)

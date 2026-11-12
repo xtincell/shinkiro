@@ -229,10 +229,11 @@ composants:
     produits_portefeuille: ["03 · Transformation Pilot", "05 · Content Operations"]
     description: >-
       Tracker de tâches auto-hébergeable. Backend Node en stdlib, API façon
-      PostgREST sur Postgres, flux RSS et JSON, ingestion des retours clients
-      par LLM local, trois niveaux d'autorité.
+      PostgREST sur Postgres, flux RSS et JSON privés par défaut, ingestion des
+      retours clients par LLM local, trois niveaux d'autorité. Lit les
+      décisions de La Barre (SHK-0005).
     contient:
-      tables: [briefs, clients, client_markets, client_contacts, task_events, comments, brief_assets, app_config]
+      tables: [briefs, clients, client_markets, client_contacts, task_events, comments, brief_assets, app_config, briefs_ndeg_renommes, barre_recus, barre_projets, barre_lectures]
       front: >-
         dashboard, direction, entrees, equipe, faits, gabarits, gantt, gel,
         archive, bilan — plus les fontes Familjen Grotesk, Hanken Grotesk et
@@ -246,10 +247,12 @@ composants:
       Reste autonome. Une instance = une équipe = une base. L’installation
       Matanga garde son portail client, ses accords par visuel et ses créneaux ;
       elle est distincte de l’installation personnelle. Le journal partage son
-      contrat, pas ses données. L'admission La Barre n'existe que dans
-      l'installation de l'employeur, hors flotte : ce dépôt n'en porte ni route
-      ni test, et aucune décision ne circule entre La Barre et lui. La porter
-      au canon ou la réécrire est un arbitrage ; voir docs/PLAN-ACHEVEMENT.md.
+      contrat, pas ses données. Deux instances tournent sur le VPS : la
+      personnelle, et celle de l'agence, qui lit les décisions de La Barre
+      depuis le 12 novembre 2026 (SHK-0005). Ces décisions restent privées,
+      hors du journal et des flux. `ndeg` est unique par instance. L'admission
+      de dossiers La Barre n'existe que dans l'installation de l'employeur,
+      hors flotte.
 
   - nom: talos
     couche: execution
@@ -353,7 +356,7 @@ composants:
     licence: proprietaire
     vitalite: actif
     ordre_construction: 4
-    deploiement: {mode: coolify, entree: index.html, serveur: servir.mjs, url: "https://powerupgraders.com/la-barre"}
+    deploiement: {mode: coolify, entree: index.html, serveur: servir.mjs, url: "https://powerupgraders.com/la-barre", vitrine: "https://la-barre-vitrine.powerupgraders.com"}
     produits_portefeuille: ["03 · Transformation Pilot", "04 · Content Velocity System"]
     description: >-
       Le poste de travail du directeur de la création. Du brief au livrable, et
@@ -373,8 +376,8 @@ composants:
     parcours: docs/LA-BARRE.md
     manque: >-
       Le transfert ADVE vers le brief et la boucle de résultats vers Argos
-      restent manuels. Le registre Radar ne constitue pas une synchronisation
-      des décisions dans Radar avec leur trace. labarre.powerupgraders.com
+      restent manuels. Radar lit les décisions (SHK-0005), mais le calcul des
+      indicateurs avant/après n'est pas écrit. labarre.powerupgraders.com
       redirige vers powerupgraders.com/la-barre, qui exige la session de La Fusée
       (401 sans session, relevé le 10 novembre) : les outils du poste dédié
       (kit-ordi-dedie/barre.py, outils/*.py) qui écrivent directement sur ce

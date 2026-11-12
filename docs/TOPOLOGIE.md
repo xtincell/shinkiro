@@ -248,12 +248,13 @@ promesse d'installation ne peut les réduire à une seule dépendance commune.
 
 ## Ce qui reste à écrire
 
-État au 12 novembre 2026. Les cinq points sont écrits. Le partage cockpit et la
-jointure des taxonomies sont tranchés et défendus par un signal ; le câblage est
-tranché (Radar lit La Barre), sa mesure attend l'arbitrage 5.6.
+État au 12 novembre 2026, 11 h 30 UTC. Les cinq points sont écrits. Le partage
+cockpit, la jointure des taxonomies et le câblage La Barre → Radar sont tranchés
+et défendus par un signal. Reste le calcul de la mesure avant/après.
 
-1. **Le contrat MCP `talos ↔ radar`.** Écrit dans [`INTERFACES.md`](INTERFACES.md).
-   Neuf écarts de sens avec Radar restent à fermer.
+1. **Le contrat MCP avec Radar.** Écrit dans [`INTERFACES.md`](INTERFACES.md).
+   Le pont vit dans `galahad` depuis le 12 novembre (galahad #29) ; Talos est
+   archivé. Trois écarts sont fermés, six restent ouverts ou à vérifier.
 2. **Le partage cockpit.** Qui affiche quoi est écrit plus haut. Le partage est
    confirmé depuis le 11 novembre (arbitrage 5.2), et défendu par le signal
    `frontiere-cockpits`.
@@ -264,14 +265,15 @@ tranché (Radar lit La Barre), sa mesure attend l'arbitrage 5.6.
    ([SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md), option C) : un
    même vocabulaire de types, plusieurs types par couple projet × marché, et le
    format `ecarts-marche` v1 lu et écrit par la méthode et par La Barre. Le signal
-   `ecart-types-alignes` défend l'alignement. Reste à faire juger les adaptations
-   contre leur écart déclaré.
-5. **Le câblage `la-barre` → `radar`.** La Barre produit les décisions, Radar
-   tient le journal. La mesure avant/après du Transformation Pilot en dépend.
-   Aujourd'hui, dans la flotte, aucune décision ne circule, dans aucun sens, et
-   le dépôt `radar` ne contient aucune admission La Barre. L'admission décrite
-   dans [`INTERFACES.md`](INTERFACES.md) vit dans l'installation de l'employeur,
-   hors flotte. Les trois sens de flux sont posés dans
-   [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md). Le 11 novembre,
-   l'arbitrage 5.5 a retenu le sens 1 : Radar lit La Barre. La mesure
-   avant/après attend l'arbitrage 5.6.
+   `ecart-types-alignes` défend l'alignement. Depuis le 12 novembre, une
+   adaptation qui sort de son écart déclaré est signalée, et la revue tranche.
+5. **Le câblage `la-barre` → `radar`.** Fait le 12 novembre
+   ([SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md), Accepted). La Barre sert
+   ses seules décisions sur `/radar/decisions`, derrière un jeton machine ;
+   l'instance Radar de l'agence les lit tous les quarts d'heure, par le réseau
+   interne du VPS, et les garde privées. Première lecture réussie le
+   12 novembre à 11 h 06 UTC : c'est la date de bascule de l'arbitrage 5.6. Le
+   signal `decisions-barre-radar` défend le contrat. Reste à écrire le calcul
+   des indicateurs. L'admission de dossiers décrite dans
+   [`INTERFACES.md`](INTERFACES.md) vit toujours dans l'installation de
+   l'employeur, hors flotte.

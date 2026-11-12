@@ -1,6 +1,6 @@
 # SHK-0005 — Câblage La Barre → Radar
 
-- **Statut** : Proposed
+- **Statut** : Accepted (sens 1 — arbitrage 5.5 du 11 novembre 2026 ; indicateurs et bascule — arbitrage 5.6 du 12 novembre 2026)
 - **Date** : 2026-11-10
 - **Composants** : `la-barre`, `radar`
 
@@ -170,8 +170,51 @@ le raccord authentifié de La Fusée
 
 ## Décision
 
-Rien n'est tranché. Trois sens de flux sont posés. Les chemins marqués « à
-créer » sont des propositions de nom.
+**Tranché par le propriétaire.**
+
+- **Arbitrage 5.5, 11 novembre 2026 : sens 1.** Radar va lire, La Barre
+  n'envoie rien. La correspondance projet ↔ dossier vit dans Radar. Les
+  décisions restent privées, hors de `briefs` et de `task_events`.
+  L'authentification est un jeton machine dédié, pas `RADAR_API_KEY`. La
+  route d'admission de l'employeur n'est pas reprise (5.15 : admission écrite
+  neuve).
+- **Arbitrage 5.6, 12 novembre 2026.** Les trois familles d'indicateurs sont
+  retenues :
+  - durée et ponctualité, tirées de Radar ;
+  - reprises et tours au-delà du vendu, tirés de La Barre ;
+  - réouvertures, réattributions, reports et révisions, tirés de Radar.
+
+  La bascule est le jour où Radar commence à lire La Barre en production :
+  **12 novembre 2026, 11 h 06 UTC**, première lecture réussie de
+  l'instance `radar-agence`.
+
+**Mis en œuvre.**
+
+- [la-barre #22](https://github.com/xtincell/la-barre/pull/22) sert
+  `GET /radar/decisions`, derrière `BARRE_RADAR_TOKEN`.
+- [Radar #8](https://github.com/xtincell/radar/pull/8) écrit le lecteur
+  `server/barre.js` et les tables `barre_recus`, `barre_projets`,
+  `barre_lectures`, ainsi que la vue `barre_decisions`.
+- [Radar #9](https://github.com/xtincell/radar/pull/9) rend `ndeg` unique par
+  instance et les flux privés par défaut (5.7).
+
+Le contrat est écrit dans
+[INTERFACES](../INTERFACES.md#la-barre--radar-agence--les-décisions-shk-0005-sens-1).
+
+**En production.** Une instance Radar dédiée à l'agence, base propre, lit La
+Barre par le réseau interne du VPS. La première lecture a reçu zéro décision,
+La Barre de production étant vide. Les suivantes répondent « inchangé ».
+
+**Reste ouvert.**
+
+- Le calcul des indicateurs retenus, et le relevé avant/après qui en sort.
+- La saisie de la correspondance projet ↔ dossier dans l'écran Radar.
+- La règle des dossiers ouverts avant la bascule et clos après.
+- Le traitement des 125 événements anciens, privés jusqu'à leur relecture
+  (5.7).
+
+Les trois sens posés le 10 novembre sont conservés ci-dessous. Les chemins
+marqués « à créer » étaient des propositions de nom.
 
 ### Ce qui vaut pour les trois sens
 
@@ -342,19 +385,20 @@ que les données permettent aujourd'hui. Aucun n'est choisi ici.
 
 ## Signal d'audit
 
-Proposés. **Ils n'existent pas encore** : ni dans
-`galahad/engine/skills/audit-fleet.json`, ni dans
-`shinkiro/scripts/signaux-flotte.mjs`. Cette ADR ne les ajoute pas.
+- `decisions-barre-radar` — La Barre et Radar nomment la même route
+  (`/radar/decisions`), la même variable (`BARRE_RADAR_TOKEN`) et le même
+  seuil de jeton, au moins 32 caractères. Radar n'écrit aucune décision dans
+  `briefs` ni dans `task_events`, qui alimentent les flux. Violation : une
+  route ou une variable absente d'un côté, deux seuils différents ou inférieurs
+  à 32, ou un `insert into briefs|task_events` dans `server/barre.js` ou
+  `server/barre.sql`. Le contrôle ne joue que si les deux dépôts sont clonés à
+  côté de `shinkiro`, comme `ecart-types-alignes`.
 
-- `flux-declare` — `fleet.yml` déclare tout flux entre composants, avec `de`,
-  `vers`, `via` et `cle`, sur le modèle de `source_partagee`
-  (`shinkiro/scripts/signaux-flotte.mjs:155-176`). Violation : un champ
-  manquant ; une route `via` introuvable dans le dépôt récepteur quand il est
-  cloné à côté ; une `cle` qui nomme `ndeg` tant que `ndeg` n'est pas unique.
-- `mesure-sans-flux` — tant qu'aucun flux `la-barre → radar` n'est déclaré,
-  `docs/PORTFOLIO.md` garde sa condition « le before/after se rédige »
-  (`shinkiro/docs/PORTFOLIO.md:72-75`). Violation : la condition retirée sans
-  flux déclaré.
+Deux contrôles avaient été proposés le 10 novembre ; ils ne sont pas écrits.
+Le premier, une déclaration de flux dans `fleet.yml`, attend que le manifeste
+porte des flux. Le second, garder la condition « le before/after se rédige »
+de `docs/PORTFOLIO.md` tant qu'aucun flux n'existe, est dépassé : le flux
+existe, et c'est désormais le calcul des indicateurs qui manque.
 
 ## Portée
 

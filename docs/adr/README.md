@@ -54,5 +54,5 @@ aucun`, et dit pourquoi. C'est une déclaration, pas un oubli.
 | [SHK-0001](SHK-0001-programme-et-deux-etages.md) | Le programme, et ses deux étages | Accepted |
 | [SHK-0002](SHK-0002-argos-unifie-et-autonome.md) | Argos : une bibliothèque, deux surfaces | Accepted |
 | [SHK-0003](SHK-0003-deux-moteurs-pas-trois.md) | Deux moteurs, pas trois | Accepted |
-| [SHK-0004](SHK-0004-jointure-des-taxonomies-ecart.md) | Jointure des taxonomies d'écart : trois options | Proposed |
-| [SHK-0005](SHK-0005-cablage-la-barre-radar.md) | Câblage La Barre → Radar : trois sens de flux | Proposed |
+| [SHK-0004](SHK-0004-jointure-des-taxonomies-ecart.md) | Jointure des taxonomies d'écart : option C, plusieurs types par projet × marché | Accepted |
+| [SHK-0005](SHK-0005-cablage-la-barre-radar.md) | Câblage La Barre → Radar : Radar lit les décisions | Accepted |
