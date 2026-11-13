@@ -213,6 +213,10 @@ versés dans `hermes-cockpit/ops/hote/` et posés par `ops/hote/installer.sh`
   - P2 fermé ;
   - P3 avec un reçu daté pour chaque point `[prod]` et `[secret]` ;
   - P4 constaté : un pilote réel, sa mesure avant/après et une facture.
+
+  **Écrite le 13 novembre** en section 1 du plan (« Définition retenue »), avec
+  P1 comme condition de maintien. Elle vaut dès que le propriétaire fusionne la
+  PR qui la porte.
 - **Le 26 novembre** : budgets SLO de `GENERATE_RECOMMENDATIONS`,
   `INVOKE_GLORY_TOOL` et `LEGACY_GLORY_EXECUTE_SEQUENCE`, d'après les relevés de
   la tâche `slo-check` (rappel déjà planifié).

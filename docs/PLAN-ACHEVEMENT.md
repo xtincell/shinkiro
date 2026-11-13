@@ -104,6 +104,32 @@ critère de sortie qu'une commande ou un reçu peut vérifier.
 P1 et P2 sont à portée d'agent. P3 dépend de deux gestes du propriétaire. P4
 dépend du marché : aucun plan ne le ferme, il se constate.
 
+### Définition retenue (point 3.7)
+
+*Proposée le 13 novembre à partir de `REPRISE-POSTE.md` § 8 ; elle vaut dès la
+fusion de la PR qui la porte, par le propriétaire.*
+
+Le programme est **achevé** quand les trois conditions suivantes sont vraies en
+même temps :
+
+1. **P2 fermé** : chaque point `[commit]` de l'inventaire a sa PR fusionnée, CI
+   verte. Se vérifie dans la section « État des points `[commit]` » de
+   l'inventaire : plus aucune ligne « En cours » ni « Faisable par un agent ».
+2. **P3 reçu** : chaque point `[prod]` et `[secret]` a un reçu daté dans ce plan,
+   ou une décision datée qui le sort du programme. Se vérifie dans l'inventaire :
+   aucun de ces points n'y reste non barré.
+3. **P4 constaté** : au moins un pilote réel, avec sa mesure avant/après tirée du
+   journal de Radar, et une facture émise rapprochée de son coût. Ce palier se
+   constate ; il ne se planifie pas.
+
+**P1 est la condition de maintien.** Un contrôle hebdomadaire rouge ou non
+mesurable suspend le statut « achevé » jusqu'au passage suivant vert.
+
+**Hors de cette définition** : les sept chantiers, les dix portes et les 116
+parcours de LeRadar, tant que leur définition n'est pas exportée dans ce dépôt
+(B3). Les y faire entrer est une décision du propriétaire, qui modifierait cette
+section.
+
 **Ce que les documents permettent de reconstruire des chantiers**, sans
 garantie :
 
@@ -490,7 +516,7 @@ journaux datés : le README le dit, sans les réécrire.
 | 3.4 | Une ADR sur la jointure des taxonomies d'écart | **Accepted** : [SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md), option C ; hors écart signalé (la-barre#23) | — |
 | 3.5 | Une ADR sur le câblage La Barre → Radar | **Accepted** : [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md), sens 1, en production depuis le 12 novembre (ligne 0.68), signal `decisions-barre-radar` ; calcul de la mesure fait (ligne 0.75) | Saisie projet ↔ dossier dans Radar : usage |
 | 3.6 | Reprendre les jugements périmés de `fleet.yml` et les dix-huit contradictions | **Fait** le 10 novembre : seize contradictions corrigées à la source, deux journaux datés laissés tels quels ; jugements repris à chaque lot depuis | — |
-| 3.7 | La définition d'« achevé » | — | **B3** |
+| 3.7 | La définition d'« achevé » | **Écrite** en section 1, « Définition retenue » ; elle vaut à la fusion par le propriétaire. Les chantiers de LeRadar restent hors de git | **B3** pour les chantiers |
 | 3.8 | Le contrat de fichier `agent-brains.json` → `cerveau.txt` | **Fait** : contrat dans `docs/INTERFACES.md` ; maillon central versé dans `hermes-cockpit/ops/hote/` et posé sur l'hôte le 13 novembre (ligne 0.88) | — |
 
 ### Lot 4 — Réparer, dépôt par dépôt
