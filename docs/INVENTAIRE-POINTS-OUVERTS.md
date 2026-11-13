@@ -133,10 +133,10 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 
 ### danmem
 
-- DM1 `[prod]` Corrections reçues sur copies, non livrées au service actif — TOPO:12 ; MAT:157-158
-- DM2 `[prod]` Installation, restauration d'une sauvegarde, isolation, coût récurrent — TOPO:36 ; R-GD:54-56
+- ~~DM1 `[prod]` Corrections reçues sur copies, non livrées au service actif — TOPO:12 ; MAT:157-158~~ — **fermé le 13 novembre** : le service sert `main` `970eb09`, schéma `001` à `003` en base, après réception sur une copie (plan, ligne 0.87)
+- DM2 `[prod]` Installation, restauration d'une sauvegarde, isolation, coût récurrent — TOPO:36 ; R-GD:54-56 — *en partie le 13 novembre* : sauvegarde de la base servie et restauration vérifiée sur une copie de l'hôte (ligne 0.87) ; restent l'installation durcie, l'isolation, le coût récurrent et une sauvegarde hors hôte
 - DM3 `[commit]` Clés globales : identités et mandats, bail de claim, rectification des souvenirs — INT:22 ; R-GD:54-57
-- DM4 `[commit]` CI : consommateur Galahad sauté, deux contrôles vectoriels sautés en local — R-GD:39-44
+- ~~DM4 `[commit]` CI : consommateur Galahad sauté, deux contrôles vectoriels sautés en local — R-GD:39-44~~ — **fermé le 13 novembre** : danmem#6 fusionnée, 41/41 en CI, aucun saut (ligne 0.86)
 - DM5 `[prod]` Bus des agents vivants et retour vers une campagne — INT:25-26
 
 ### hermes-cockpit
@@ -144,7 +144,7 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 - CK1 `[prod]` `portal-api.service` raccordé à une adresse de conteneur — un endpoint stable — R-CK:75-78 ; INT:266-267
 - CK2 `[prod]` Navigateur authentifié et effet réel d'une commande — R-CK:71-73, 82 ; INT:256-257
 - CK3 `[prod]` Fraîcheur par source, identité des agents, isolation, restauration, coûts — R-CK:16-18, 81-83
-- CK4 `[commit]` Écrivains externes concurrents ; format des sondes non écrit — R-CK:80-81 ; INT:355
+- ~~CK4 `[commit]` Écrivains externes concurrents ; format des sondes non écrit — R-CK:80-81 ; INT:355~~ — **fermé le 13 novembre** : écrivains de l'hôte versés et posés, publication atomique, verrou partagé (hermes-cockpit#8, ligne 0.88)
 
 ### la-barre
 
@@ -250,7 +250,7 @@ CI verte. Voici où en est chacun des 43.
 | État | Points |
 |---|---|
 | **Fermé** (PR fusionnée, ou déjà vrai sur `main`) | TA1 (contrat MCP écrit), CD1 (charadesign-generator#5), CE1 (character-engine#2, #3), TR8 (déjà couvert par le signal `source-partagee` de SHK-0002 ; l'inventaire était en retard), TR9 (documents repris, plan 3.6), F4 (le diff schéma/migrations tourne en CI depuis le lot 451, reconfirmé par #1168), IM2 (indice-maturite#2), G4 (galahad#27), DC2 (datacollector#5), TR2 (contrat `danmem` ↔ `memory.js`, puis format des sondes dans hermes-cockpit#5), IN1 (ADVE-project#1170), AR4 (Argos-studio#5), IN7 (ADVE-project#1172), DM3 (bail : danmem#4 ; identités, mandats et rectification : danmem#7), F16 (ADVE-project#1173 ; 21 engagements contractuels ou commerciaux restent au propriétaire), AR6 (ADVE-project#1174 ; branchement réel du studio après l'arbitrage 5.8), F8 (ADVE-project#1175 ; retrait d'une proposition multi-piliers et retrait groupé attendent une décision métier), F9 (ADVE-project#1176), F2 (ADVE-project#1177 ; les S historiques réels sont à recalculer), DC3 (datacollector#6, ADVE-project#1178), LB4 (la-barre#19, ADVE-project#1180 ; le bilan reçu n'est pas encore relu dans le brief de la campagne suivante, et l'acteur reste déclaré), LB2 (transfert ADVE vers le brief depuis `la-barre` `e06af7e` ; retour vers La Fusée par LB4, transmission manuelle version par version), F13 (ADVE-project#1171 puis #1182 ; règle de réintroduction validée le 11 novembre), LB3 (la-barre#18, puis la-barre#20 et ADVE-project#1183 ; l'attestation suppose que seul La Fusée joint le port de La Barre), IN4 (shinkiro#58, danmem#8 ; Radar et la mémoire dans le profil, Argos-studio et les rôles Galahad écartés avec leurs raisons), ME2 (market-expansion-system#2, la-barre#21 ; SHK-0004 option C, signal `ecart-types-alignes`), GL1 (galahad-landing#3, page réécrite pour le dirigeant d'agence, prix affiché, servie), TA2 et G3 (galahad#29 ; dépôts `talos` et `hulysse` en archive, archivage GitHub au propriétaire), RA3 (radar#9 ; `ndeg` unique par instance, en production sur les deux instances ; les permissions métier complètes par rôle restent à recevoir), LB6 (la-barre#23 ; vitrine publiée sur https://la-barre-vitrine.powerupgraders.com), BP1 (la-fusee-blueprint#4 ; livre et vue sur le canon actuel), LB1 (câblage en production depuis le 12 novembre à 11 h 06 UTC, SHK-0005 Accepted, mesure avant/après calculée par radar#10), CE1 complété par character-engine#4 (profils d'exemple fictifs, 5.10), AR3 (authentification, licence par actif et amendement concurrent déjà livrés ; clé unique et déploiement : Argos-studio#6 ; espace privé UPgraders purgé à 24 mois : Argos-studio#7, déployé le 12 novembre), F1 (contrôle SLO mesuré depuis le serveur de production : ADVE-project#1198, tâche Coolify `slo-check`, premier relevé réel le 12 novembre, ADVE-project#1200 ; quatre dépassements à trier) |
-| **Fermé en partie** | CK4 : format des sondes écrit (`hermes-cockpit/docs/SONDES.md`) et lecture tolérante aux écrivains concurrents (hermes-cockpit#5), verrou entre processus et `fsync` du répertoire (hermes-cockpit#6) ; la forme réelle des fichiers produits par l'hôte et le respect du protocole par ses écrivains ne sont pas relus, faute d'accès à l'hôte |
+| **Fermé le 13 novembre** | CK4 (format des sondes : hermes-cockpit#5 ; verrou et `fsync` : hermes-cockpit#6 ; forme réelle relue sur l'hôte, écrivains versés, atomiques et sous verrou : hermes-cockpit#8), DM4 (danmem#6, 41/41 en CI) ; archivage GitHub de `talos` et `hulysse` fait (TA2, G3) |
 | **En cours** | DM4 (danmem#6, attend le secret `GALAHAD_DEPLOY_KEY`) |
 | **Attend un arbitrage** | Aucun point de cet inventaire. La proposition 5.13 (offres et grille) est validée depuis le 12 novembre. |
 | **Faisable par un agent** | Aucun point en attente d'un agent. |

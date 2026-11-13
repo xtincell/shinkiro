@@ -36,7 +36,8 @@ plusieurs touchent la sécurité. Ils sont en [section 3](#3-constats-que-les-do
 **Six blocages décident de tout le reste** ([section 2](#2-les-blocages)) :
 
 1. Le secret `FLEET_TOKEN` est refusé par GitHub depuis le 21 septembre.
-2. Aucun agent n'a de voie d'accès au VPS.
+2. Aucun agent cloud n'a de voie d'accès au VPS. Une session lancée sur le poste
+   du propriétaire en a une depuis le 13 novembre (lignes 0.86 à 0.89).
 3. La définition d'« achevé » est hors de git.
 4. Les clés des fournisseurs ne sont accessibles à aucun agent.
 5. Une vingtaine d'arbitrages attendent.
@@ -73,9 +74,19 @@ commits, parce que Coolify les épinglait (`9735c56` du 19 octobre et `1ea757b` 
 7 octobre). Les épingles ont ensuite été déplacées vers `main`, ce qui tranche
 l'arbitrage 5.19 dans le sens de la consigne « tout déployer ».
 
-Restent à redéployer sur l'hôte, où aucun agent n'a d'accès : les services systemd
-(`danmem`, `talos`, `hulysse`) et le moteur `galahad`, qui tourne en compose et en
-unités systemd et n'a pas de ressource visible par l'API Coolify. L'état de chacun des 43 points `[commit]` est dans
+**Au 13 novembre, 1 h UTC**, une session lancée sur le poste du propriétaire a eu
+accès à l'hôte ([`REPRISE-POSTE.md`](REPRISE-POSTE.md)) :
+
+- `danmem` sert `main` (`970eb09`), schéma `001` à `003` en base, après sauvegarde
+  et réception sur une copie (ligne 0.87) ;
+- les écrivains de l'hôte qui alimentent le cockpit sont versés dans
+  `hermes-cockpit/ops/hote/` et posés (ligne 0.88) ;
+- `talos` et `hulysse` sont archivés sur GitHub (ligne 0.86).
+
+Les services `talos` et `hulysse` tournent toujours sur l'hôte, sans dépôt
+vivant. Le moteur `galahad` n'a jamais été installé sur le VPS : `/opt/galahad` ne
+contient que des scripts de patrouille (ligne 0.89). L'installer est une
+installation neuve (G1, G2), pas un redéploiement. L'état de chacun des 43 points `[commit]` est dans
 l'[inventaire](INVENTAIRE-POINTS-OUVERTS.md#état-des-points-commit-au-11-novembre).
 
 ## 1. Ce qu'« achevé » peut vouloir dire
@@ -87,7 +98,7 @@ critère de sortie qu'une commande ou un reçu peut vérifier.
 |---|---|---|---|
 | **P1** | Le programme se mesure lui-même | `signaux-flotte.mjs --strict` vert, `make derive` vert, workflow hebdomadaire vert, un SLO réellement mesuré | Vert en local. Bloqué en CI par `FLEET_TOKEN`. SLO **mesuré** depuis le 12 novembre (tâche Coolify `slo-check`, ligne 0.82) : 23 kinds mesurés, 4 dépassés, triés (ligne 0.83) : deux défauts corrigés, deux budgets de latence au propriétaire. |
 | **P2** | Tout ce qu'un commit peut fermer est fermé | Chaque point `[commit]` a sa PR fusionnée, CI verte | À faire. Aucun prérequis extérieur. |
-| **P3** | Ce qui est construit est reçu en service | Chaque point `[prod]` et `[secret]` a son reçu daté | Exige l'accès au VPS et les clés. |
+| **P3** | Ce qui est construit est reçu en service | Chaque point `[prod]` et `[secret]` a son reçu daté | Exige l'accès au VPS et les clés. Accès ouvert depuis le poste le 13 novembre : DM1 reçu (ligne 0.87), sauvegarde et restauration de Danmem éprouvées sur l'hôte (DM2 en partie). |
 | **P4** | Le programme est vendu et mesuré | Un pilote réel avec sa mesure avant/après, une facture | Exige des tiers. Ne se décrète pas. |
 
 P1 et P2 sont à portée d'agent. P3 dépend de deux gestes du propriétaire. P4
@@ -147,6 +158,12 @@ Depuis le 10 novembre, une session d'agent lit et déclenche Coolify par son API
 Elle n'entre toujours pas sur l'hôte : ni SSH, ni systemd. Les points `[prod]` qui
 touchent `talos`, `hulysse`, `danmem` et la flotte commerciale de `galahad`, tous
 sous systemd, en dépendent encore. Le relevé obtenu est en [section 2.4](#23-relevé-de-production-du-10-novembre).
+
+**Levé le 13 novembre pour une session lancée sur le poste du propriétaire**, qui a
+SSH root sur l'hôte et les droits d'administration des dépôts
+([`REPRISE-POSTE.md`](REPRISE-POSTE.md)). Elle a reçu Danmem en service (ligne
+0.87), posé les écrivains de l'hôte (ligne 0.88) et relu l'hôte (ligne 0.89). Une
+session cloud reste sans accès à l'hôte.
 
 Le jeton Coolify transmis donne un accès large : il lit jusqu'à la liste des clés
 privées du serveur. Un jeton limité à la lecture et au déploiement suffirait.
@@ -419,6 +436,10 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.83 | `ADVE-project` : tri des quatre dépassements du premier relevé SLO, par lecture seule des émissions — deux défauts corrigés (lot 6.27.587) : les émissions `INVOKE_GLORY_TOOL` closes gardaient le statut « en attente », de sorte qu'un outil échoué passait pour réussi ; le caractère U+0000 extrait d'un document faisait refuser le dépôt par PostgreSQL. Les deux autres dépassements sont des budgets de latence posés sans mesure face à des appels au modèle | [#1201](https://github.com/xtincell/ADVE-project/pull/1201), **fusionnée** et livrée (`/api/version` 6.27.587, `/login` 200, tâche `slo-check` conservée) ; tests rouges avant correction, 4 657 tests gouvernance et services verts. Budgets de `GENERATE_RECOMMENDATIONS`, `INVOKE_GLORY_TOOL` et `LEGACY_GLORY_EXECUTE_SEQUENCE` : propriétaire, d'après les relevés qui s'accumulent |
 | 0.84 | `la-barre` : projets et livrables uniques entre postes (même générateur que les décisions, départage au rapprochement sans fusion, refus serveur `PROJET_EN_DOUBLE`, `PROJET_REMPLACE`, `LIVRABLE_EN_DOUBLE`, `LIVRABLE_REMPLACE`) ; puis la référence lisible d'un projet attribuée par le serveur au premier enregistrement, provisoire et jamais montrée au client avant (arbitrage du 12 novembre) — fin de 4.9 | [la-barre#28](https://github.com/xtincell/la-barre/pull/28) et [la-barre#29](https://github.com/xtincell/la-barre/pull/29), **fusionnées** (CI et deux images Docker vertes) et déployées sur `ce6abe7` ; 11 puis 12 tests rouges avant, toutes les suites et Playwright verts. Aucun identifiant ni référence existants réécrits ; `GET /radar/decisions` inchangé. Vitrine republiée, deux pages sans erreur |
 | 0.85 | `shinkiro` : le contrôle hebdomadaire propose le verrou rafraîchi en une seule PR quand le relevé le change, et l'issue de dérive la cite ; un échec d'ouverture ne cache pas la dérive (1.8). Budgets SLO des trois opérations qui appellent un modèle : décision d'attendre deux semaines de relevés (arbitrages du 12 novembre) | Ce dépôt ; syntaxe du bloc vérifiée et corps de PR simulé localement ; exécution réelle au premier passage avec `FLEET_TOKEN`. Rappel planifié au 26 novembre pour proposer les budgets |
+| 0.86 | GitHub, depuis le poste du propriétaire (DM4, arbitrage 5.3) : clé de déploiement en lecture `danmem-ci` ajoutée à `galahad`, secret `GALAHAD_DEPLOY_KEY` posé sur `danmem`, CI de danmem#6 relancée ; `talos` et `hulysse` archivés | [danmem#6](https://github.com/xtincell/danmem/pull/6) **fusionnée** (`970eb09`) : réception 41/41 en CI, consommateur Galahad compris, aucun test sauté. `isArchived: true` pour les deux dépôts le 13 novembre à 0 h 38 UTC ; le relevé du même jour l'enregistre (`archive: true`). Les services `talos.service` et `hulysse.service`, sans remote, ne sont pas touchés. La clé privée n'a jamais quitté le poste et y est supprimée |
+| 0.87 | VPS, `danmem` (DM1 ; DM2 en partie) : le service passe de la lignée locale `82b4182` (source servie `7430261…`, sans remote ni `sql/`) à `main` `970eb09` ; migrations `001` à `003` sur la base servie ; `/opt/danmem` devient un clone de `main`, par une clé de déploiement en lecture propre à l'hôte | Sauvegarde `npm run sauvegarder` avant (3 518 lignes, gel vérifié, aucun travail réclamé), puis à froid au moment de la bascule. Réception sur une copie restaurée du paquet, même image `pgvector/pgvector:pg16` : 24 contrôles sur 24 — restauration vérifiée par empreintes, trois pièces reçues puis rejouées sans perte, `/peers` et neuf rappels identiques à l'ancien code, écritures des clients réels (`dan-mem`, talos et hulysse, `delegate.sh`, `wiki-sync.py`), ancien code redémarré sur le schéma migré. Bascule le 13 novembre à 0 h 45 UTC : 5 s d'arrêt, `/health` 200 (11 pairs, 3 457 observations), `/whoami` = `danmem:instance`, statut du cockpit republié, aucune erreur dans les journaux de talos et hulysse. Retour arrière : `/opt/danmem-avant-20261113T0045Z`. Paquets sous `/root/sauvegardes/` **sur l'hôte**, pas hors de l'hôte. Unité servie relue, inchangée (root, sans durcissement) |
+| 0.88 | `hermes-cockpit` : les écrivains de l'hôte versés dans `ops/hote/` et posés sur le VPS (CK4, 3.8). Publication atomique et validée ; `dan-refresh.json` mis à jour sous le verrou de `SONDES.md` ; clés passées à `curl` hors ligne de commande ; `cerveau.txt` écrit de façon atomique | [hermes-cockpit#8](https://github.com/xtincell/hermes-cockpit/pull/8) **fusionnée** (`1be7648`) : 11 cas sur les scripts réels, dont 6 rouges contre les scripts servis (champs du cockpit effacés, demande forcée perdue, statut Danmem tronqué, index du coffre vidé, statut invalide publié, registre invalide propagé) ; suite 50/50 en CI, aucun test sauté. Posés par `ops/hote/installer.sh` (versions précédentes dans `/opt/dan/.avant-20261113T005635Z`) ; chaque script exécuté une fois : sept fichiers valides, aucun temporaire ni verrou laissé, `GET /api/state` avec ses 11 sources `available`. Le cockpit n'est pas redéployé : son code ne change pas |
+| 0.89 | VPS : relectures de `REPRISE-POSTE.md` (2.8, CK4, G1) et des jetons Coolify | **Port 7681** : connexion TCP depuis un poste extérieur au VPS vers `76.13.128.23` et `powerupgraders.com` refusée ; `ttyd` écoute sur toutes les interfaces, `ufw` le filtre. **CK4** : les sept fichiers relus ont la forme exigée et sont frais (2 min, 5 min, 6 h) ; leurs écrivains écrivaient sur place et sans verrou jusqu'à la ligne 0.88. **G1** : `/opt/galahad` n'est pas un dépôt et ne porte que `bin/`, `bureau/`, `patrol/`, `recall/` ; six des sept scripts communs avec `galahad/deploy/` diffèrent du dépôt, et quatre n'y sont pas (`telegram-healthcheck.sh`, `wiki-index.sh`, `session-close.sh`, `session-watchdog.sh`). La patrouille tourne bien en `root`. **Jetons** : le n° 8 (`claude-deploy`) sert le cockpit, `refresh-core.sh` et le coffre de l'hôte ; le n° 24 (`FableAcces`, transmis à la session cloud) n'a aucun consommateur sur l'hôte |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -447,8 +468,8 @@ Sans ce lot, rien de ce qui suit ne peut être déclaré fini.
 | 2.4 | `Argos-studio` | Monter `next` et les dépendances en alerte (S6) | `npm audit` sans alerte critique, CI verte | **Fait** — Argos-studio#4 ; restent 4 alertes hautes qui exigent une majeure (`prisma` 7, `zod` 4) |
 | 2.5 | `charadesign-generator` | Écoute locale, `.env.example`, `vite` à jour (S7) | CI verte | **Fait** — charadesign-generator#4 |
 | 2.6 | `datacollector` | Refuser adresses privées et redirections (S8) | Tests des cas refusés | **Fait** — datacollector#3 ; la course DNS reste ouverte |
-| 2.7 | `talos` | **Fait** — dépôt en `archive` (5.3) ; `radar_delete` passe sous confirmation dans le pont MCP de `galahad` ([galahad#29](https://github.com/xtincell/galahad/pull/29)) | Test, ou dépôt archivé | Archivage GitHub : propriétaire |
-| 2.8 | VPS | Vérifier le filtrage du terminal `:7681` (S5) | Un reçu : port fermé depuis l'extérieur | B2. Tenté le 10 novembre : la session ne joint aucun port non standard, même chez un témoin. À vérifier depuis un poste. |
+| 2.7 | `talos` | **Fait** — dépôt en `archive` (5.3) ; `radar_delete` passe sous confirmation dans le pont MCP de `galahad` ([galahad#29](https://github.com/xtincell/galahad/pull/29)) | Test, ou dépôt archivé | Archivé le 13 novembre (ligne 0.86) |
+| 2.8 | VPS | Vérifier le filtrage du terminal `:7681` (S5) | Un reçu : port fermé depuis l'extérieur | **Fait** le 13 novembre depuis un poste extérieur : connexion refusée (ligne 0.89). Le 10 novembre, la session cloud ne joignait aucun port non standard, même chez un témoin. |
 | 2.9 | Fournisseur | Révoquer la clé en dur de `BrandForge` (S9) | Clé révoquée | **Propriétaire** |
 
 ### Lot 3 — Écrire ce qui n'est écrit nulle part
@@ -470,7 +491,7 @@ journaux datés : le README le dit, sans les réécrire.
 | 3.5 | Une ADR sur le câblage La Barre → Radar | **Accepted** : [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md), sens 1, en production depuis le 12 novembre (ligne 0.68), signal `decisions-barre-radar` ; calcul de la mesure fait (ligne 0.75) | Saisie projet ↔ dossier dans Radar : usage |
 | 3.6 | Reprendre les jugements périmés de `fleet.yml` et les dix-huit contradictions | **Fait** le 10 novembre : seize contradictions corrigées à la source, deux journaux datés laissés tels quels ; jugements repris à chaque lot depuis | — |
 | 3.7 | La définition d'« achevé » | — | **B3** |
-| 3.8 | Le contrat de fichier `agent-brains.json` → `cerveau.txt` | **Écrit** dans `docs/INTERFACES.md` ; le maillon central reste hors git | Verser le script de l'hôte dans un dépôt : B2 |
+| 3.8 | Le contrat de fichier `agent-brains.json` → `cerveau.txt` | **Fait** : contrat dans `docs/INTERFACES.md` ; maillon central versé dans `hermes-cockpit/ops/hote/` et posé sur l'hôte le 13 novembre (ligne 0.88) | — |
 
 ### Lot 4 — Réparer, dépôt par dépôt
 
@@ -482,8 +503,8 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 | 4.2 | `galahad` | **Fait** ([galahad#29](https://github.com/xtincell/galahad/pull/29), [galahad#30](https://github.com/xtincell/galahad/pull/30), moteur 0.1.18) — pont MCP Radar, garde d'isolation, mur S7, mémoire stratifiée, contrôles de patrouille, alerte de repli ; sessions nommées, cron, briefing et veille étaient déjà couverts. Le rappel horaire et la sonde Coolify de Talos ne sont pas repris, avec leurs raisons | Mise en service sur l'hôte : B2 |
 | 4.3 | `radar` | README des migrations (F13) ; `npm ci` dans le Dockerfile ; format `RADAR_INSTANCES` | **Fait** — radar#6 |
 | 4.4 | `radar` | **Fait** ([radar#9](https://github.com/xtincell/radar/pull/9)) — `ndeg` unique par instance, homonymes renommés sans perte, flux privés par défaut ; en production sur les deux instances (ligne 0.68) | — |
-| 4.5 | `danmem` | **Faits** : F6 (danmem#2), unité, environnement et défauts morts (danmem#3), bail et remise en file F7 (danmem#4, à fusionner après #3). Restent l'appel de `release` côté Galahad et la relecture de l'unité servie | B2 pour l'unité servie |
-| 4.6 | `danmem`, `galahad` | **Écrit et éprouvé localement** (danmem#5, galahad#26). Reste la recette sur le VPS : noms réels, version de `pg_dump`, volume, stockage hors hôte | Recette B2 |
+| 4.5 | `danmem` | **Faits** : F6 (danmem#2), unité, environnement et défauts morts (danmem#3), bail et remise en file F7 (danmem#4, à fusionner après #3). Reste l'appel de `release` côté Galahad. Unité servie relue le 13 novembre (ligne 0.87) : root, sans le durcissement de l'exemple du dépôt ; son remplacement reste à faire | Agent, sur l'hôte |
+| 4.6 | `danmem`, `galahad` | **Écrit et éprouvé localement** (danmem#5, galahad#26). Danmem **reçu sur le VPS** le 13 novembre (ligne 0.87) : sauvegarde de la base servie, `pg_dump` 16.15, restauration vérifiée sur une copie. Restent le volume `galahad-memory` (moteur non installé) et le stockage hors hôte | Recette B2 |
 | 4.7 | `hermes-cockpit` | **Fait** : F10, titre et README (hermes-cockpit#3, #4) ; configuration morte retirée du compose et de `ops/redeploy.sh` — cinq secrets montés, `/gdrive`, `RCLONE_CONF` et le pont média, qu'aucun code ne lisait (hermes-cockpit#7, arbitrage du 12 novembre) | — |
 | 4.8 | `la-barre` | F1, F2 (la-barre#14), F3 et les tests (la-barre#15), README (la-barre#16), écarter et reprendre un écart (la-barre#25) **faits** ; `facturable` compté dans chaque version du bilan de campagne (la-barre#27, La Fusée l'accepte depuis #1199). Restent les outils du poste dédié coupés par la session | Arbitrage pour les outils |
 | 4.9 | `la-barre` | **Fait** (la-barre#17, #26, #28, #29) — fabrique de décision, identifiants uniques entre postes pour les décisions, projets et livrables, rapprochés sans fusion ; import par la fabrique ; le serveur refuse une base qui dupliquerait ou remplacerait l'un d'eux ; la référence lisible d'un projet est attribuée par le serveur au premier enregistrement (arbitrage du 12 novembre) | — |
@@ -502,7 +523,9 @@ Dans l'ordre de construction d'AGENTS.md. Une PR par dépôt et par sujet.
 Ce lot ne commence pas sans B2. Il reprend les 27 points `[prod]`, dont :
 
 - déployer les canons corrigés de `galahad` et de `danmem`, aujourd'hui reçus sur
-  copies seulement ;
+  copies seulement. *Danmem servi depuis le 13 novembre (ligne 0.87) ; le moteur
+  `galahad` n'est pas installé sur l'hôte, ce qui en fait une installation neuve
+  (ligne 0.89)* ;
 - relever les configurations réellement servies de `talos` et `hulysse` : quinze
   modules servis, aucun identique au dépôt ;
 - restaurer pour de vrai : base Radar, base Danmem, volume `galahad-memory`,
@@ -596,6 +619,7 @@ ont été déclenchés par l'API Coolify, sans attendre l'App GitHub.
   `git_commit_sha` et redéployer. Radar, `galahad-landing` et le portail suivent `HEAD`.
 - Les migrations `sql/002` et `sql/003` de `danmem` restent à passer **avant** de
   redémarrer le service de l'hôte. Aucun accès à l'hôte n'est ouvert à un agent.
+  *Fait le 13 novembre depuis le poste du propriétaire (ligne 0.87).*
 
 | Dépôt | Ordre | Ce qu'il faut savoir |
 |---|---|---|

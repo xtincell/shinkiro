@@ -9,7 +9,7 @@
 #   make releve                régénère ce fichier
 #   git diff fleet.lock.yml    ce qui a bougé dans la flotte depuis le dernier relevé
 #
-releve_le: "2026-11-12"
+releve_le: "2026-11-13"
 owner: xtincell
 topic: shinkiro
 fenetre_vitalite_jours: 90
@@ -21,8 +21,8 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 3959
-    poids_ko: 109961
+    fichiers: 3983
+    poids_ko: 110187
     licence: presente
     commits_90j: 100
     topics: ["layer-method", shinkiro]
@@ -100,17 +100,17 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 218
-    poids_ko: 38579
+    fichiers: 239
+    poids_ko: 38730
     licence: presente
-    commits_90j: 19
+    commits_90j: 26
     topics: ["layer-tools", shinkiro]
     racines: [., app, workers]
     artefacts:
       dockerfile: [Dockerfile]
       next: [app/next.config.ts]
       package: [app/package.json, workers/package.json]
-      prisma: [app/prisma/migrations/20260512171730_init/migration.sql, app/prisma/migrations/20261019112000_native_dossier_flow/migration.sql, app/prisma/migrations/migration_lock.toml, app/prisma/schema.prisma]
+      prisma: [app/prisma/migrations/20260512171730_init/migration.sql, app/prisma/migrations/20261019112000_native_dossier_flow/migration.sql, app/prisma/migrations/20261112090000_private_space/migration.sql, app/prisma/migrations/migration_lock.toml]
       workflows: [.github/workflows/ci.yml]
       env_example: [app/.env.example, workers/.env.example]
   - nom: LaFusee_ADVE
@@ -133,10 +133,10 @@ composants:
     branche: main
     prive: true
     langue: HTML
-    fichiers: 14
-    poids_ko: 68
+    fichiers: 17
+    poids_ko: 105
     licence: presente
-    commits_90j: 9
+    commits_90j: 14
     topics: ["layer-tools", shinkiro]
     racines: [.]
     artefacts:
@@ -145,10 +145,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 31
-    poids_ko: 400
+    fichiers: 33
+    poids_ko: 422
     licence: presente
-    commits_90j: 9
+    commits_90j: 11
     topics: ["layer-tools", shinkiro]
     racines: ["lsi-cd-app"]
     artefacts:
@@ -160,10 +160,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 26
-    poids_ko: 225
+    fichiers: 27
+    poids_ko: 238
     licence: presente
-    commits_90j: 18
+    commits_90j: 23
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
@@ -175,10 +175,10 @@ composants:
     branche: main
     prive: true
     langue: Python
-    fichiers: 22
-    poids_ko: 214
+    fichiers: 25
+    poids_ko: 247
     licence: presente
-    commits_90j: 16
+    commits_90j: 18
     topics: ["layer-tools", shinkiro]
     racines: [.]
     artefacts:
@@ -190,10 +190,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 128
-    poids_ko: 796
+    fichiers: 131
+    poids_ko: 851
     licence: presente
-    commits_90j: 75
+    commits_90j: 77
     topics: ["layer-execution", shinkiro]
     racines: [., bridge, cockpit, engine, setup]
     artefacts:
@@ -236,10 +236,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 17
-    poids_ko: 175
+    fichiers: 29
+    poids_ko: 215
     licence: presente
-    commits_90j: 13
+    commits_90j: 17
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
@@ -251,6 +251,7 @@ composants:
   - nom: hulysse
     branche: main
     prive: true
+    archive: true
     langue: JavaScript
     fichiers: 24
     poids_ko: 58
@@ -279,25 +280,25 @@ composants:
     branche: main
     prive: false
     langue: JavaScript
-    fichiers: 294
-    poids_ko: 8178
+    fichiers: 320
+    poids_ko: 8596
     licence: presente
     commits_90j: 100
     topics: ["layer-tools", shinkiro]
-    racines: [., profils/entreprise, sources/02_dossier_MT0020, sources/04_outils, sources/99_archive]
+    racines: [., profils/entreprise, sources/02_dossier_MT0020, sources/04_outils, sources/99_archive, vitrine, vitrine/demo]
     artefacts:
       dockerfile: [Dockerfile, profils/entreprise/Dockerfile]
-      index_html: [app/ateliers/approches/index.html, index.html]
+      index_html: [app/ateliers/approches/index.html, index.html, vitrine/demo/index.html, vitrine/index.html]
       package: [package.json]
       workflows: [.github/workflows/verification.yml]
   - nom: la-fusee-blueprint
     branche: main
     prive: true
     langue: HTML
-    fichiers: 17
-    poids_ko: 720
+    fichiers: 18
+    poids_ko: 790
     licence: presente
-    commits_90j: 3
+    commits_90j: 5
     topics: ["layer-method", shinkiro]
     racines: [., views]
     artefacts:
@@ -319,10 +320,10 @@ composants:
     branche: main
     prive: false
     langue: HTML
-    fichiers: 80
-    poids_ko: 1905
+    fichiers: 90
+    poids_ko: 2046
     licence: presente
-    commits_90j: 17
+    commits_90j: 21
     topics: ["layer-execution", shinkiro]
     racines: [., briefs, briefs/rh]
     artefacts:
@@ -335,6 +336,7 @@ composants:
   - nom: talos
     branche: main
     prive: true
+    archive: true
     langue: JavaScript
     fichiers: 29
     poids_ko: 155

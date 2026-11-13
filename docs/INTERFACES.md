@@ -604,21 +604,24 @@ compte.
 
 ## hermes-cockpit → galahad — changer le modèle d'un agent
 
-Relevé dans le code le 10 novembre 2026. Trois maillons, dont un seul hors git.
+Relevé dans le code le 10 novembre 2026. Trois maillons, tous dans git depuis le
+13 novembre (le maillon 2 était le seul hors git).
 
 | Maillon | Où | Ce qu'il fait |
 |---|---|---|
 | 1. Demande | `hermes-cockpit` `portal.mjs`, `requestBrain()` | `POST /api/brain` écrit `{ <agent>: <modèle> }` dans `agent-brains.json`, sous le dossier de données du cockpit. Le modèle doit figurer dans `options` de `agent-brains-status.json`, sinon la demande est refusée. Seuls `talos` et `hulysse` sont proposés. |
-| 2. Application | sur l'hôte, **dans aucun dépôt** | Une tâche planifiée (`brain-apply.sh`, puis `dan-brain set`) lit `agent-brains.json` et écrit `data/cerveau.txt` dans le dossier de l'agent. Elle produit aussi `agent-brains-status.json`, que le cockpit relit. |
-| 3. Prise en compte | `galahad` `engine/src/brain.js`, `getModel()` | Le moteur relit `data/cerveau.txt` dès que sa date de modification change, sans redémarrage. `GALAHAD_MODEL` ne sert qu'au premier démarrage. |
+| 2. Application | `hermes-cockpit` `ops/hote/brain-apply.sh` et `ops/hote/dan-brain`, posés sur l'hôte par `ops/hote/installer.sh` | Le cron de root lance `brain-apply.sh` toutes les 2 min. Il lit `agent-brains.json` et, par `dan-brain set`, écrit `data/cerveau.txt` dans le dossier de l'agent, de façon atomique. Il produit aussi `agent-brains-status.json`, que le cockpit relit. |
+| 3. Prise en compte | `galahad` `engine/src/brain.js`, `getModel()` | Le moteur relit `data/cerveau.txt` dès que sa date de modification change, sans redémarrage. `GALAHAD_MODEL` ne sert qu'au premier démarrage. Sur le VPS, le moteur n'est pas installé : ce sont `talos.service` et `hulysse.service` qui lisent ce fichier (`/opt/talos/src/brain.js`, même mécanisme). |
 
 Trois conséquences :
 
 - **Une demande n'est pas un changement.** Le cockpit enregistre une demande ;
   rien ne confirme qu'elle a été appliquée, sauf le statut que produit le maillon 2.
-- **Le maillon 2 ne se restaure pas depuis git.** Une réinstallation de l'hôte le
-  perd. `galahad` `LESSONS.md` (§ 3.5) décrit un incident de juillet où la chaîne
-  semblait cassée alors que c'est le moteur qui ne relisait plus le fichier.
+- **Le maillon 2 se réinstalle depuis git** (`hermes-cockpit/ops/hote/installer.sh`).
+  Une version modifiée à la main sur l'hôte ne se voit qu'en comparant
+  `ops/hote/` à `/opt/dan/`. `galahad` `LESSONS.md` (§ 3.5) décrit un incident de
+  juillet où la chaîne semblait cassée alors que c'est le moteur qui ne relisait
+  plus le fichier.
 - **Le fichier est le contrat.** Un modèle mal écrit dans `cerveau.txt` est pris
   tel quel au prochain appel ; aucune validation n'a lieu côté moteur.
 
