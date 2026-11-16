@@ -36,8 +36,10 @@ Relevé du jour : rien n'a bougé depuis le 13. Le propriétaire a tranché (lig
    réception et restauration : `hermes-cockpit/ops/sauvegarde/README.md`.
 2. **Danmem durci** : l'unité du dépôt, sous un utilisateur dédié (DM2, 4.5).
    **Fait le 16 novembre** (ligne 0.92), après répétition sur une copie. Le
-   worker échoue parce que son modèle a été retiré par le fournisseur : choisir
-   son successeur est au propriétaire.
+   modèle du worker, retiré par le fournisseur, est remplacé par son successeur.
+   Le worker échoue encore : ses deux fournisseurs sont sans crédit. Au
+   propriétaire : recharger un compte, ou le faire passer par le relais OAuth
+   local de talos et hulysse.
 3. **Moteur `galahad` 0.1.18 épinglé sous systemd** pour `talos.service` et
    `hulysse.service`, après réception sur une copie de leur état (G1, TA3, HU2) ;
    recette native dans Telegram avec le propriétaire (G2).
