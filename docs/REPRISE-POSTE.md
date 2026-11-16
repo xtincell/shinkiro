@@ -6,7 +6,8 @@ SSH sur le VPS (`powerupgraders.com`), droits d'administration sur les dépôts
 de ces trois accès : c'est pourquoi ces gestes sont regroupés ici.
 
 État au 12 novembre 2026, 17 h 30 UTC, **mis à jour le 13 novembre, 1 h 15 UTC**
-après une première reprise depuis le poste. Plan détaillé : [`PLAN-ACHEVEMENT.md`](PLAN-ACHEVEMENT.md).
+après une première reprise depuis le poste, puis le 16 novembre (décisions et
+ordre de la suite). Plan détaillé : [`PLAN-ACHEVEMENT.md`](PLAN-ACHEVEMENT.md).
 Inventaire : [`INVENTAIRE-POINTS-OUVERTS.md`](INVENTAIRE-POINTS-OUVERTS.md).
 
 ## Fait le 13 novembre depuis le poste
@@ -21,6 +22,28 @@ Reçus en lignes 0.86 à 0.89 du plan.
 | 4. galahad 0.1.18 | **Pas un redéploiement** : le moteur n'a jamais été installé sur l'hôte (section 4) |
 | 5. CK4 et port 7681 | **Faits** : écrivains versés dans `hermes-cockpit/ops/hote/` et posés (hermes-cockpit#8), port fermé de l'extérieur |
 | 1, `FLEET_TOKEN` (section 2), 6, 7, 8 | **Restent** au propriétaire, ou attendent un de ses gestes |
+
+## Suite décidée le 16 novembre
+
+Relevé du jour : rien n'a bougé depuis le 13. Le propriétaire a tranché (ligne
+0.90 du plan) et fixé l'ordre de ce qui reste. Chaque étape se clôt par un reçu.
+
+1. **Sauvegardes hors de l'hôte**, avant toute bascule : Danmem, Radar agence et
+   perso, La Fusée et son stockage privé, chiffrés puis envoyés vers le Google
+   Drive déjà raccordé à l'hôte ; une restauration réelle depuis ce Drive vaut
+   réception (DM2, RA5, F11, F12).
+2. **Danmem durci** : l'unité du dépôt, sous un utilisateur dédié (DM2, 4.5).
+3. **Moteur `galahad` 0.1.18 épinglé sous systemd** pour `talos.service` et
+   `hulysse.service`, après réception sur une copie de leur état (G1, TA3, HU2) ;
+   recette native dans Telegram avec le propriétaire (G2).
+4. **Cockpit** : point d'accès stable de `portal-api.service`, parcours
+   authentifié, fraîcheur des sources (CK1 à CK3).
+5. **Argos** : la section 6 ci-dessous, inchangée.
+6. **Tri du reste de l'inventaire** `[prod]` et `[secret]` : un reçu, ou une
+   décision datée qui sort le point du programme.
+7. **Le 26 novembre** : budgets SLO (section 8).
+8. **En dernier, les clés** : la section 1 ci-dessous, les rotations, puis
+   `FLEET_TOKEN` (section 2). Le contrôle hebdomadaire reste rouge jusque-là.
 
 ## Ce qui est déjà fait
 
@@ -215,8 +238,8 @@ versés dans `hermes-cockpit/ops/hote/` et posés par `ops/hote/installer.sh`
   - P4 constaté : un pilote réel, sa mesure avant/après et une facture.
 
   **Écrite le 13 novembre** en section 1 du plan (« Définition retenue »), avec
-  P1 comme condition de maintien. Elle vaut dès que le propriétaire fusionne la
-  PR qui la porte.
+  P1 comme condition de maintien. **Validée telle quelle par le propriétaire le
+  16 novembre** (ligne 0.90).
 - **Le 26 novembre** : budgets SLO de `GENERATE_RECOMMENDATIONS`,
   `INVOKE_GLORY_TOOL` et `LEGACY_GLORY_EXECUTE_SEQUENCE`, d'après les relevés de
   la tâche `slo-check` (rappel déjà planifié).
