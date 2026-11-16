@@ -141,9 +141,9 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 
 ### hermes-cockpit
 
-- CK1 `[prod]` `portal-api.service` raccordé à une adresse de conteneur — un endpoint stable — R-CK:75-78 ; INT:266-267
-- CK2 `[prod]` Navigateur authentifié et effet réel d'une commande — R-CK:71-73, 82 ; INT:256-257
-- CK3 `[prod]` Fraîcheur par source, identité des agents, isolation, restauration, coûts — R-CK:16-18, 81-83 — *en partie le 16 novembre* : données du cockpit sauvegardées hors de l'hôte chaque nuit, archive relue (ligne 0.91) ; le reste est ouvert
+- ~~CK1 `[prod]` `portal-api.service` raccordé à une adresse de conteneur — un endpoint stable — R-CK:75-78 ; INT:266-267~~ — **fermé le 16 novembre** : l'adresse avait changé au redémarrage de l'hôte du 29 octobre et quatre routes répondaient 500 ; le service vise désormais un relais sur la boucle locale, qui retrouve le conteneur par son nom (plan, ligne 0.95 ; hermes-cockpit#11)
+- CK2 `[prod]` Navigateur authentifié et effet réel d'une commande — R-CK:71-73, 82 ; INT:256-257 — *en partie le 16 novembre* : par l'API, sous l'authentification du cockpit, l'état rend ses onze sources, et la commande « rafraîchir maintenant » produit son effet réel sur l'hôte (ligne 0.95) ; reste le même parcours dans un navigateur
+- CK3 `[prod]` Fraîcheur par source, identité des agents, isolation, restauration, coûts — R-CK:16-18, 81-83 — *en partie le 16 novembre* : données du cockpit sauvegardées hors de l'hôte chaque nuit, archive relue (ligne 0.91) ; fraîcheur de chaque fichier lu relevée, onze sources disponibles (ligne 0.95) ; restent l'identité réelle des agents, que le cockpit affiche par rôle, l'isolation et les coûts
 - ~~CK4 `[commit]` Écrivains externes concurrents ; format des sondes non écrit — R-CK:80-81 ; INT:355~~ — **fermé le 13 novembre** : écrivains de l'hôte versés et posés, publication atomique, verrou partagé (hermes-cockpit#8, ligne 0.88)
 
 ### la-barre
@@ -158,7 +158,7 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 ### Argos-studio
 
 - AR1 `[décision]` Trois PR en brouillon : CI verte et relecteur exigés — R-AR:38-41
-- AR2 `[prod]` Aucun déploiement ; projection distante depuis La Fusée non reçue — R-AR:15-18, 42 ; MAT:268
+- AR2 `[prod]` Aucun déploiement ; projection distante depuis La Fusée non reçue — R-AR:15-18, 42 ; MAT:268 — *en partie* : le studio est déployé et sain depuis le 12 novembre (plan, 4.12) ; la projection des 13 dossiers ne se lance que depuis la console de La Fusée, aucun outil de son connecteur ne la porte (relevé du 16 novembre) : au propriétaire, puis `ARGOS_STUDIO_URL` sur la production
 - AR3 `[commit]` Authentifier l'admission ; espace privé absent ; licence par actif ; amendement concurrent — R-AR:47-50
 - AR4 `[commit]` Erreurs, focus, clavier, mobile, fraîcheur — R-AR:50-51
 - AR5 `[secret]` Collecte vivante : sécurité des URL, quotas, modèle payant — R-AR:52
@@ -177,7 +177,7 @@ du plan.
 - DC1 `[secret]` `datacollector` : fournisseurs réels jamais appelés — R-DC:21-22, 29
 - DC2 `[commit]` `datacollector` : interface native, exports, règles d'URL — R-DC:21-22, 29-30
 - DC3 `[commit]` `datacollector` : admission versionnée vers Seshat et Argos — R-DC:24-27
-- DC4 `[prod]` `datacollector` : déploiement de service, droits, restauration — TOPO:53-57 ; R-DC:30-31
+- ~~DC4 `[prod]` `datacollector` : déploiement de service, droits, restauration — TOPO:53-57 ; R-DC:30-31~~ — **sorti par l'arbitrage 5.9 du 12 novembre** : outil local d'opérateur, aucun hébergement ; il n'y a pas de service à déployer
 
 `generateur-approches` et le portail n'ont aucun point ouvert déclaré.
 
@@ -255,6 +255,25 @@ CI verte. Voici où en est chacun des 43.
 | **Attend un arbitrage** | Aucun point de cet inventaire. La proposition 5.13 (offres et grille) est validée depuis le 12 novembre. |
 | **Faisable par un agent** | Aucun point en attente d'un agent. |
 | **Hors programme** | SP1, SP9, SP10, SP11 (SPAWT) et BH3 (BanaHealth) sont des projets clients ; HF1 (15B Stories) et HF3 (CosmicMachine, Atlas, Tauri) sont au `labo`. [`CLOISON.md`](CLOISON.md) les tient hors du programme : ils se traitent dans leur propre cadre et ne conditionnent pas P2. |
+
+## État des points `[prod]` et `[secret]` au 16 novembre
+
+La définition d'« achevé » (plan, section 1) demande pour chacun des 38 points
+un reçu daté, ou une décision datée qui le sort du programme. Voici où en est
+chacun. Les lignes du plan citées portent les reçus.
+
+| État | Points |
+|---|---|
+| **Fermé par un reçu** (6) | F1 (0.82), DM1 (0.87), G1 (0.93, 0.94), TA3 (0.94), CK1 (0.95) ; GL2 était faux dès le relevé du 10 novembre, la page étant servie |
+| **Reçu en partie** (9) | F11 et F12 : base et stockage privé sauvegardés hors de l'hôte, base restaurée sur copie (0.91) ; restent la compensation sur archive réelle et la reprise d'un service entier. RA5 : sauvegardes et restauration sur copie (0.91) ; reste un second serveur. DM2 : sauvegarde, restauration, unité durcie (0.91, 0.92) ; restent l'isolation entre installations et le coût. HU2 : conversation persistée en service (0.94) ; reste une reprise après redémarrage. CK2 et CK3 (0.95) ; restent le navigateur, l'identité réelle des agents, l'isolation, les coûts. G2 : un message réel et une alerte de patrouille (0.94) ; restent `/status`, l'Agora, talos, le setup. AR2 : studio servi ; reste la projection |
+| **Sorti par une décision déjà inscrite** (6) | DC4 : arbitrage 5.9, outil local sans hébergement. SP5, SP6, SP7, SP13 (SPAWT) et BH2 (BanaHealth) : projets clients, que `CLOISON.md` tient hors du programme, comme leurs points `[commit]` |
+| **Attend le propriétaire** (5) | TR7 : `FLEET_TOKEN` et les secrets à demander. HF4 : révoquer la clé en dur de BrandForge. F10, F14, IM1 : un compte opérateur réel, un appareil réel, un bilan exporté à admettre |
+| **Attend une clé de fournisseur** (6) | F3 (stress sur artefact isolé), F5 et F6 (une forge réelle, ses octets durables), AR5 (collecte vivante), CD2 et DC1 (routes et fournisseurs réels des outils locaux) |
+| **Attend un hôte neuf** (4) | IN2, IN3, IN5, IN6 : le socle d'entreprise reçu ailleurs que sur l'hôte de recette |
+| **Attend un usage réel** (2) | G5 (coût persistant, seconde TPE), DM5 (bus des agents vivants jusqu'au retour vers une campagne) |
+
+Six fermés, neuf en partie, six sortis, dix-sept en attente d'un geste, d'une clé,
+d'un hôte ou d'un usage qu'aucune session ne peut produire seule.
 
 ## Contradictions entre documents
 

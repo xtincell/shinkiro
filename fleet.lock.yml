@@ -21,8 +21,8 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 3983
-    poids_ko: 110187
+    fichiers: 4009
+    poids_ko: 110420
     licence: presente
     commits_90j: 100
     topics: ["layer-method", shinkiro]
@@ -163,7 +163,7 @@ composants:
     fichiers: 27
     poids_ko: 238
     licence: presente
-    commits_90j: 23
+    commits_90j: 25
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
@@ -190,10 +190,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 131
-    poids_ko: 851
+    fichiers: 135
+    poids_ko: 860
     licence: presente
-    commits_90j: 77
+    commits_90j: 79
     topics: ["layer-execution", shinkiro]
     racines: [., bridge, cockpit, engine, setup]
     artefacts:
@@ -236,10 +236,10 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 29
-    poids_ko: 215
+    fichiers: 37
+    poids_ko: 265
     licence: presente
-    commits_90j: 17
+    commits_90j: 23
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
@@ -320,10 +320,10 @@ composants:
     branche: main
     prive: false
     langue: HTML
-    fichiers: 90
-    poids_ko: 2046
+    fichiers: 91
+    poids_ko: 2051
     licence: presente
-    commits_90j: 21
+    commits_90j: 23
     topics: ["layer-execution", shinkiro]
     racines: [., briefs, briefs/rh]
     artefacts:
