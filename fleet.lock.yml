@@ -21,8 +21,8 @@ composants:
     branche: main
     prive: false
     langue: TypeScript
-    fichiers: 4009
-    poids_ko: 110420
+    fichiers: 4011
+    poids_ko: 110437
     licence: presente
     commits_90j: 100
     topics: ["layer-method", shinkiro]
@@ -191,9 +191,9 @@ composants:
     prive: true
     langue: JavaScript
     fichiers: 135
-    poids_ko: 860
+    poids_ko: 883
     licence: presente
-    commits_90j: 79
+    commits_90j: 83
     topics: ["layer-execution", shinkiro]
     racines: [., bridge, cockpit, engine, setup]
     artefacts:
@@ -236,15 +236,16 @@ composants:
     branche: main
     prive: true
     langue: JavaScript
-    fichiers: 37
-    poids_ko: 265
+    fichiers: 50
+    poids_ko: 272
     licence: presente
-    commits_90j: 23
+    commits_90j: 25
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
       compose: ["docker-compose.yaml"]
       dockerfile: [Dockerfile]
+      systemd: ["ops/hote/systemd/dan-brain-apply.service", "ops/hote/systemd/dan-danmem-status.service", "ops/hote/systemd/dan-fallback-watch.service", "ops/hote/systemd/dan-refresh-tick.service"]
       index_html: [index.html]
       package: [package.json]
       workflows: [.github/workflows/checks.yml]
