@@ -44,9 +44,10 @@ Relevé du jour : rien n'a bougé depuis le 13. Le propriétaire a tranché (lig
    `hulysse.service`, après réception sur une copie de leur état (G1, TA3, HU2) ;
    recette native dans Telegram avec le propriétaire (G2). **Réception sur
    copie faite le 16 novembre** (ligne 0.93) : canon posé dans
-   `/opt/galahad-engine-0.1.18/`, 23 contrôles sur 23 pour chaque agent. Reste
-   la bascule : mettre de côté le `sessions.json` de juillet, poser le
-   complément d'unité, hulysse d'abord, puis la recette dans Telegram.
+   `/opt/galahad-engine-0.1.18/`, 23 contrôles sur 23 pour chaque agent.
+   **Bascule faite le même jour** (ligne 0.94), hulysse à 16 h 50 UTC puis
+   talos à 17 h 21. Reste la recette native complète dans Telegram : `/status`,
+   l'Agora, et talos.
 4. **Cockpit** : point d'accès stable de `portal-api.service`, parcours
    authentifié, fraîcheur des sources (CK1 à CK3).
 5. **Argos** : la section 6 ci-dessous, inchangée.
@@ -173,7 +174,17 @@ Reçu attendu :
 Chemins et noms d'unité à confirmer avec `systemctl cat` : ils viennent du README,
 pas de l'hôte.
 
-### galahad : moteur 0.1.18, jamais installé sur l'hôte
+### galahad : moteur 0.1.18, en service depuis le 16 novembre
+
+Hulysse puis talos tournent sur le canon, épinglé dans
+`/opt/galahad-engine-0.1.18/` (lignes 0.93 et 0.94). Seul le dossier de travail
+des deux unités change, par `/etc/systemd/system/<agent>.service.d/10-canon.conf` ;
+le retirer suffit à revenir en arrière. Passer à une version suivante : poser un
+nouveau dossier versionné, rejouer `/root/reception-galahad/recevoir-moteur.sh`
+sur une copie de l'état, puis changer le chemin du complément. L'outil d'état du
+canon ne s'applique pas à ces dossiers (liens vers `/opt/dan/core`) : leur
+sauvegarde passe par `/opt/sauvegarde-hors-hote/`. Le relevé du 13 novembre, plus
+bas, décrit l'état d'avant.
 
 Relevé le 13 novembre (ligne 0.89) : `/opt/galahad` n'est pas un dépôt et ne
 porte que des scripts (`bin/`, `bureau/`, `patrol/`, `recall/`). Aucun conteneur ni

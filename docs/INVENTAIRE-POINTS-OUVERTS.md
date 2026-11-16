@@ -108,8 +108,8 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 
 ### galahad
 
-- G1 `[prod]` Canon corrigé non déployé, aucun agent migré — services épinglés sur le canon — MAT:150-151 ; R-GD:58-59 — *en partie le 16 novembre* : canon 0.1.18 posé sur l'hôte et reçu sur une copie de l'état de talos et de hulysse (plan, ligne 0.93) ; reste la bascule des deux services
-- G2 `[secret]` Setup, cockpit, agents dans Telegram, alertes de patrouille non reçus — recette native — R-GD:22-23 ; R-TH:35, 80
+- ~~G1 `[prod]` Canon corrigé non déployé, aucun agent migré — services épinglés sur le canon — MAT:150-151 ; R-GD:58-59~~ — **fermé le 16 novembre** : canon 0.1.18 reçu sur une copie de l'état de chaque agent (plan, ligne 0.93), puis `hulysse.service` et `talos.service` épinglés dessus (ligne 0.94)
+- G2 `[secret]` Setup, cockpit, agents dans Telegram, alertes de patrouille non reçus — recette native — R-GD:22-23 ; R-TH:35, 80 — *en partie le 16 novembre* : sous le canon, hulysse reçoit un message réel de l'opérateur et y répond ; sa patrouille émet une alerte puis son analyse (ligne 0.94) ; restent `/status`, l'Agora, talos, le setup et le cockpit du moteur
 - G3 `[commit]` Garde par motifs, sans sandbox ni mandat lié à une cible ou un montant — R-GD:21-22
 - G4 `[commit]` Outbox interrompue pendant l'effet ; objectifs non isolés entre entreprises — R-GD:54 ; R-TH:66-71
 - G5 `[prod]` Coût persistant, cycle des agents actifs, exploitation par une seconde TPE — R-GD:22, 56 ; R-TH:80-81
@@ -127,9 +127,9 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 
 - TA1 `[commit]` Protocole MCP `talos/radar-mcp` ↔ `radar` écrit nulle part (répété ×6) — contrat figé dans INT — INT:285-295 ; TOPO:200-201 ; SHK3:87-89
 - TA2 `[commit]` Fusion décidée, non exécutée ; parité des capacités donneuses — SHK3:52-56, 83-85 ; R-TH:41-43
-- TA3 `[prod]` Services différents de git : quinze modules servis, aucun identique au dépôt — R-TH:18, 73-78 — *en partie le 16 novembre* : les quinze modules comparés au canon 0.1.18, qui connaît chacune de leurs variables et chacun de leurs fichiers d'état (ligne 0.93) ; l'écart se ferme à la bascule
+- ~~TA3 `[prod]` Services différents de git : quinze modules servis, aucun identique au dépôt — R-TH:18, 73-78~~ — **fermé le 16 novembre** : les quinze modules comparés au canon 0.1.18 (ligne 0.93), puis remplacés par lui ; les deux services servent le commit `a0e8426`, empreintes vérifiées fichier par fichier (ligne 0.94). Les scripts de `/opt/galahad` restent à réconcilier avec `galahad/deploy/`
 - HU1 `[décision]` Politique de veille et autorité d'action par installation — R-TH:44 ; FLEET:269-270
-- HU2 `[prod]` Reprise des sessions nommées — R-TH:41 ; FLEET:279 — *en partie le 16 novembre* : sur copie, le canon persiste la conversation dans `sessions.json` ; celui de juillet, encore dans les dossiers, est à mettre de côté à la bascule (ligne 0.93)
+- HU2 `[prod]` Reprise des sessions nommées — R-TH:41 ; FLEET:279 — *en partie le 16 novembre* : sur copie, le canon persiste la conversation dans `sessions.json` ; celui de juillet est mis de côté à la bascule, et hulysse persiste en service une conversation réelle (ligne 0.94) ; reste à observer une reprise après redémarrage
 
 ### danmem
 
