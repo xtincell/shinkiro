@@ -31,11 +31,23 @@ Relevé du jour : rien n'a bougé depuis le 13. Le propriétaire a tranché (lig
 1. **Sauvegardes hors de l'hôte**, avant toute bascule : Danmem, Radar agence et
    perso, La Fusée et son stockage privé, chiffrés puis envoyés vers le Google
    Drive déjà raccordé à l'hôte ; une restauration réelle depuis ce Drive vaut
-   réception (DM2, RA5, F11, F12).
+   réception (DM2, RA5, F11, F12). **Fait le 16 novembre** (ligne 0.91) : huit
+   éléments envoyés, huit reçus, cron chaque nuit à 3 h 15 UTC. Mise en place,
+   réception et restauration : `hermes-cockpit/ops/sauvegarde/README.md`.
 2. **Danmem durci** : l'unité du dépôt, sous un utilisateur dédié (DM2, 4.5).
+   **Fait le 16 novembre** (ligne 0.92), après répétition sur une copie. Le
+   modèle du worker avait été retiré par le fournisseur, et les deux comptes
+   étaient sans crédit : le cerveau de Danmem passe désormais par le relais
+   OAuth local de talos et hulysse (`dan-oauth`, port 8646), et le worker
+   produit de nouveau ses cartes.
 3. **Moteur `galahad` 0.1.18 épinglé sous systemd** pour `talos.service` et
    `hulysse.service`, après réception sur une copie de leur état (G1, TA3, HU2) ;
-   recette native dans Telegram avec le propriétaire (G2).
+   recette native dans Telegram avec le propriétaire (G2). **Réception sur
+   copie faite le 16 novembre** (ligne 0.93) : canon posé dans
+   `/opt/galahad-engine-0.1.18/`, 23 contrôles sur 23 pour chaque agent.
+   **Bascule faite le même jour** (ligne 0.94), hulysse à 16 h 50 UTC puis
+   talos à 17 h 21. Reste la recette native complète dans Telegram : `/status`,
+   l'Agora, et talos.
 4. **Cockpit** : point d'accès stable de `portal-api.service`, parcours
    authentifié, fraîcheur des sources (CK1 à CK3).
 5. **Argos** : la section 6 ci-dessous, inchangée.
@@ -133,8 +145,10 @@ et l'unité tourne en root, sans utilisateur `danmem`. Ce qui a été fait (lign
 `/opt/danmem` est désormais un clone de `main`. Mise à jour suivante : sauvegarde,
 `git pull --ff-only`, `npm ci --ignore-scripts`, `node scripts/migrate.mjs` avec
 l'environnement du service, redémarrage. Retour arrière de cette bascule :
-`/opt/danmem-avant-20261113T0045Z`. Restent : l'unité durcie du dépôt (utilisateur
-dédié) et une sauvegarde hors de l'hôte.
+`/opt/danmem-avant-20261113T0045Z`. La sauvegarde hors de l'hôte est en place
+depuis le 16 novembre (ligne 0.91), et l'unité durcie du dépôt sert sous
+l'utilisateur `danmem` depuis le même jour (ligne 0.92). L'unité servie ne
+diffère de `deploy/danmem.service` que par `After=docker.service`.
 
 Procédure d'origine, qui ne s'appliquait pas telle quelle :
 
@@ -160,7 +174,17 @@ Reçu attendu :
 Chemins et noms d'unité à confirmer avec `systemctl cat` : ils viennent du README,
 pas de l'hôte.
 
-### galahad : moteur 0.1.18, jamais installé sur l'hôte
+### galahad : moteur 0.1.18, en service depuis le 16 novembre
+
+Hulysse puis talos tournent sur le canon, épinglé dans
+`/opt/galahad-engine-0.1.18/` (lignes 0.93 et 0.94). Seul le dossier de travail
+des deux unités change, par `/etc/systemd/system/<agent>.service.d/10-canon.conf` ;
+le retirer suffit à revenir en arrière. Passer à une version suivante : poser un
+nouveau dossier versionné, rejouer `/root/reception-galahad/recevoir-moteur.sh`
+sur une copie de l'état, puis changer le chemin du complément. L'outil d'état du
+canon ne s'applique pas à ces dossiers (liens vers `/opt/dan/core`) : leur
+sauvegarde passe par `/opt/sauvegarde-hors-hote/`. Le relevé du 13 novembre, plus
+bas, décrit l'état d'avant.
 
 Relevé le 13 novembre (ligne 0.89) : `/opt/galahad` n'est pas un dépôt et ne
 porte que des scripts (`bin/`, `bureau/`, `patrol/`, `recall/`). Aucun conteneur ni
