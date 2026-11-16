@@ -31,7 +31,9 @@ Relevé du jour : rien n'a bougé depuis le 13. Le propriétaire a tranché (lig
 1. **Sauvegardes hors de l'hôte**, avant toute bascule : Danmem, Radar agence et
    perso, La Fusée et son stockage privé, chiffrés puis envoyés vers le Google
    Drive déjà raccordé à l'hôte ; une restauration réelle depuis ce Drive vaut
-   réception (DM2, RA5, F11, F12).
+   réception (DM2, RA5, F11, F12). **Fait le 16 novembre** (ligne 0.91) : huit
+   éléments envoyés, huit reçus, cron chaque nuit à 3 h 15 UTC. Mise en place,
+   réception et restauration : `hermes-cockpit/ops/sauvegarde/README.md`.
 2. **Danmem durci** : l'unité du dépôt, sous un utilisateur dédié (DM2, 4.5).
 3. **Moteur `galahad` 0.1.18 épinglé sous systemd** pour `talos.service` et
    `hulysse.service`, après réception sur une copie de leur état (G1, TA3, HU2) ;
@@ -133,8 +135,9 @@ et l'unité tourne en root, sans utilisateur `danmem`. Ce qui a été fait (lign
 `/opt/danmem` est désormais un clone de `main`. Mise à jour suivante : sauvegarde,
 `git pull --ff-only`, `npm ci --ignore-scripts`, `node scripts/migrate.mjs` avec
 l'environnement du service, redémarrage. Retour arrière de cette bascule :
-`/opt/danmem-avant-20261113T0045Z`. Restent : l'unité durcie du dépôt (utilisateur
-dédié) et une sauvegarde hors de l'hôte.
+`/opt/danmem-avant-20261113T0045Z`. La sauvegarde hors de l'hôte est en place
+depuis le 16 novembre (ligne 0.91). Reste l'unité durcie du dépôt (utilisateur
+dédié).
 
 Procédure d'origine, qui ne s'appliquait pas telle quelle :
 

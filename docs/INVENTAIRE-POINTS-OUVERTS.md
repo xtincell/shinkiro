@@ -88,8 +88,8 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 - F8 `[commit]` Écrivains à faire converger vers le gateway ; 76 archives sans filiation — tests PostgreSQL verts — R-AF:244-246 ; R-CS:564, 652-656
 - F9 `[commit]` Santé de campagne automatique inexistante ; brouillon après remontage ; éditions concurrentes — calcul et tests — INT:197-202 ; R-RS:26-28
 - F10 `[prod]` Rôle opérateur natif jamais reçu en production — recette sous un compte opérateur réel — R-RS:60-61 ; MAT:205-206
-- F11 `[prod]` Compensation jamais soumise sur une archive réelle ; restauration du SI non reçue — une annulation réelle et une restauration complète — R-CS:647-650, 655
-- F12 `[prod]` Stockage : récupération, reprise stockage et clé, orphelins `HTTP_BLOB` — restauration prouvée du volume privé — R-CS:908-911, 1003-1005
+- F11 `[prod]` Compensation jamais soumise sur une archive réelle ; restauration du SI non reçue — une annulation réelle et une restauration complète — R-CS:647-650, 655 — *en partie le 16 novembre* : base `lafusee` sauvegardée hors de l'hôte puis restaurée sur une copie, 239 tables aux comptes identiques (plan, ligne 0.91) ; restent la compensation sur une archive réelle et la reprise du service entier
+- F12 `[prod]` Stockage : récupération, reprise stockage et clé, orphelins `HTTP_BLOB` — restauration prouvée du volume privé — R-CS:908-911, 1003-1005 — *en partie le 16 novembre* : volume privé sauvegardé hors de l'hôte chaque semaine, archive relue de bout en bout, 3 133 entrées (ligne 0.91) ; restent la remise en place dans un service, la reprise stockage et clé, les orphelins
 - F13 `[commit]` Résiduels : clé MCP limitée refusée ; premier clic Sources sans effet ; historique des identifiants produit — correctifs et tests — R-CS:355-357, 183-184, 305-306, 269-271
 - F14 `[prod]` Aucun chargement intégral sans échec ; mobile réel, thème jour, partage public non reçus (répété ×10) — trace complète sur appareil réel — R-CS:1026-1027, 245-247, 74 ; R-AF:215-218
 - F15 `[tiers]` Aucun cycle métier réel : stratégie validée, production, validation, livraison — un cycle client complet — MAT:28, 166-167 ; R-CS:216-218
@@ -120,7 +120,7 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 - RA2 `[tiers?]` Trois rôles réels non prouvés sur le Radar personnel — R-RR:34-35
 - RA3 `[commit]` Permissions par rôle, concurrence des codes (`ndeg` non unique) — INT:37, 61-63
 - RA4 `[décision]` Flux publics par défaut : choix de `FEED_TOKEN` par installation — INT:72-75
-- RA5 `[prod]` PostgreSQL et `/data` sauvegardés ; reprise sur un second serveur — INT:87-91
+- RA5 `[prod]` PostgreSQL et `/data` sauvegardés ; reprise sur un second serveur — INT:87-91 — *en partie le 16 novembre* : bases et `/data` des deux instances sauvegardés hors de l'hôte chaque nuit, bases restaurées sur copies aux comptes identiques (ligne 0.91) ; reste la reprise sur un second serveur
 - RA6 `[tiers]` Gestes client réels, circulation des décisions, coût complet — R-RR:89-91
 
 ### talos et hulysse
@@ -134,7 +134,7 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 ### danmem
 
 - ~~DM1 `[prod]` Corrections reçues sur copies, non livrées au service actif — TOPO:12 ; MAT:157-158~~ — **fermé le 13 novembre** : le service sert `main` `970eb09`, schéma `001` à `003` en base, après réception sur une copie (plan, ligne 0.87)
-- DM2 `[prod]` Installation, restauration d'une sauvegarde, isolation, coût récurrent — TOPO:36 ; R-GD:54-56 — *en partie le 13 novembre* : sauvegarde de la base servie et restauration vérifiée sur une copie de l'hôte (ligne 0.87) ; restent l'installation durcie, l'isolation, le coût récurrent et une sauvegarde hors hôte
+- DM2 `[prod]` Installation, restauration d'une sauvegarde, isolation, coût récurrent — TOPO:36 ; R-GD:54-56 — *en partie le 13 novembre* : sauvegarde de la base servie et restauration vérifiée sur une copie de l'hôte (ligne 0.87) ; sauvegarde hors de l'hôte chaque nuit et restauration depuis celle-ci par l'outil de Danmem le 16 novembre (ligne 0.91) ; restent l'installation durcie, l'isolation et le coût récurrent
 - DM3 `[commit]` Clés globales : identités et mandats, bail de claim, rectification des souvenirs — INT:22 ; R-GD:54-57
 - ~~DM4 `[commit]` CI : consommateur Galahad sauté, deux contrôles vectoriels sautés en local — R-GD:39-44~~ — **fermé le 13 novembre** : danmem#6 fusionnée, 41/41 en CI, aucun saut (ligne 0.86)
 - DM5 `[prod]` Bus des agents vivants et retour vers une campagne — INT:25-26
@@ -143,7 +143,7 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 
 - CK1 `[prod]` `portal-api.service` raccordé à une adresse de conteneur — un endpoint stable — R-CK:75-78 ; INT:266-267
 - CK2 `[prod]` Navigateur authentifié et effet réel d'une commande — R-CK:71-73, 82 ; INT:256-257
-- CK3 `[prod]` Fraîcheur par source, identité des agents, isolation, restauration, coûts — R-CK:16-18, 81-83
+- CK3 `[prod]` Fraîcheur par source, identité des agents, isolation, restauration, coûts — R-CK:16-18, 81-83 — *en partie le 16 novembre* : données du cockpit sauvegardées hors de l'hôte chaque nuit, archive relue (ligne 0.91) ; le reste est ouvert
 - ~~CK4 `[commit]` Écrivains externes concurrents ; format des sondes non écrit — R-CK:80-81 ; INT:355~~ — **fermé le 13 novembre** : écrivains de l'hôte versés et posés, publication atomique, verrou partagé (hermes-cockpit#8, ligne 0.88)
 
 ### la-barre
