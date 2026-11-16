@@ -6,8 +6,8 @@ SSH sur le VPS (`powerupgraders.com`), droits d'administration sur les dépôts
 de ces trois accès : c'est pourquoi ces gestes sont regroupés ici.
 
 État au 12 novembre 2026, 17 h 30 UTC, **mis à jour le 13 novembre, 1 h 15 UTC**
-après une première reprise depuis le poste, puis le 16 novembre (décisions et
-ordre de la suite). Plan détaillé : [`PLAN-ACHEVEMENT.md`](PLAN-ACHEVEMENT.md).
+après une première reprise depuis le poste, puis le 16 novembre (décisions,
+ordre de la suite, sobriété des agents et réseau privé le soir). Plan détaillé : [`PLAN-ACHEVEMENT.md`](PLAN-ACHEVEMENT.md).
 Inventaire : [`INVENTAIRE-POINTS-OUVERTS.md`](INVENTAIRE-POINTS-OUVERTS.md).
 
 ## Fait le 13 novembre depuis le poste
@@ -70,6 +70,18 @@ Relevé du jour : rien n'a bougé depuis le 13. Le propriétaire a tranché (lig
 Ce qui reste après le 16 novembre, et qu'aucune session ne peut faire seule :
 la recette native dans Telegram (`/status`, l'Agora, talos), la projection
 Argos dans la console, les clés (étape 8), et, le 26 novembre, les budgets SLO.
+
+**Soir du 16 novembre, hors plan, sur demande du propriétaire** (ligne 0.96) :
+un seul gardien de l'hôte (talos), hulysse sans contrôles et à la demande,
+moteur 0.1.19, FABLE à la demande, écrivains du cockpit déclenchés par
+changement de fichier, livraison du soir en plusieurs messages. Un réseau
+privé WireGuard est monté (`wg0`, `192.168.177.1`, UDP 51820) et le port 22 y
+est admis. **Le SSH public reste ouvert** tant que le propriétaire n'a pas
+confirmé le tunnel depuis son poste (fichiers remis hors dépôt, alias SSH
+`vps-prive`) ; il sera fermé ensuite, en gardant `10.0.0.0/8` pour Coolify.
+Trois décisions lui reviennent : les ports 6001 et 6002 de Coolify, ouverts à
+tous ; la pile Honcho, qui tourne sans usage ; la clé `claude-spawt`, mise en
+commentaire avec deux autres lignes de `authorized_keys`.
 
 ## Ce qui est déjà fait
 
@@ -188,14 +200,20 @@ Reçu attendu :
 Chemins et noms d'unité à confirmer avec `systemctl cat` : ils viennent du README,
 pas de l'hôte.
 
-### galahad : moteur 0.1.18, en service depuis le 16 novembre
+### galahad : moteur 0.1.19, en service depuis le 16 novembre
 
 Hulysse puis talos tournent sur le canon, épinglé dans
-`/opt/galahad-engine-0.1.18/` (lignes 0.93 et 0.94). Seul le dossier de travail
-des deux unités change, par `/etc/systemd/system/<agent>.service.d/10-canon.conf` ;
-le retirer suffit à revenir en arrière. Passer à une version suivante : poser un
-nouveau dossier versionné, rejouer `/root/reception-galahad/recevoir-moteur.sh`
-sur une copie de l'état, puis changer le chemin du complément. L'outil d'état du
+`/opt/galahad-engine-0.1.19/` depuis 19 h 32 UTC (ligne 0.96), après quelques
+heures sur `/opt/galahad-engine-0.1.18/` (lignes 0.93 et 0.94), gardé comme
+retour arrière. Seul le dossier de travail des deux unités change, par
+`/etc/systemd/system/<agent>.service.d/10-canon.conf` ; le retirer suffit à
+revenir au code d'avant le canon. Talos est le seul gardien de l'hôte :
+`/etc/hulysse/hulysse.env` porte `GALAHAD_PATROL_CHECKS=off`. Passer à une
+version suivante : poser un nouveau dossier versionné, rejouer
+`/root/reception-galahad/recevoir-moteur.sh` sur une copie de l'état (variable
+`CANON`, et `SANS_CONTROLES=1` pour hulysse), puis
+`/root/reception-galahad/changer-version-moteur.sh <agent> <version>`, qui
+remet l'ancien chemin si le moteur ne tient pas vingt secondes. L'outil d'état du
 canon ne s'applique pas à ces dossiers (liens vers `/opt/dan/core`) : leur
 sauvegarde passe par `/opt/sauvegarde-hors-hote/`. Le relevé du 13 novembre, plus
 bas, décrit l'état d'avant.
