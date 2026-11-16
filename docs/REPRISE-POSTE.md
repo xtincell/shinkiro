@@ -49,13 +49,27 @@ Relevé du jour : rien n'a bougé depuis le 13. Le propriétaire a tranché (lig
    talos à 17 h 21. Reste la recette native complète dans Telegram : `/status`,
    l'Agora, et talos.
 4. **Cockpit** : point d'accès stable de `portal-api.service`, parcours
-   authentifié, fraîcheur des sources (CK1 à CK3).
-5. **Argos** : la section 6 ci-dessous, inchangée.
+   authentifié, fraîcheur des sources (CK1 à CK3). **Fait le 16 novembre**
+   (ligne 0.95) : CK1 fermé par un relais nommé ; CK2 et CK3 reçus par l'API.
+   Restent le parcours dans un navigateur, l'identité réelle des agents,
+   l'isolation et les coûts.
+5. **Argos** : la section 6 ci-dessous, inchangée. La projection ne se lance que
+   depuis la console de La Fusée : aucun outil de son connecteur ne la porte.
+   Ne pas poser `ARGOS_STUDIO_URL` avant elle, la page publique lirait un
+   studio vide.
 6. **Tri du reste de l'inventaire** `[prod]` et `[secret]` : un reçu, ou une
-   décision datée qui sort le point du programme.
+   décision datée qui sort le point du programme. **Fait le 16 novembre** :
+   tableau en fin d'inventaire. Six fermés, neuf en partie, six sortis,
+   dix-sept qui attendent un geste, une clé, un hôte ou un usage.
 7. **Le 26 novembre** : budgets SLO (section 8).
 8. **En dernier, les clés** : la section 1 ci-dessous, les rotations, puis
    `FLEET_TOKEN` (section 2). Le contrôle hebdomadaire reste rouge jusque-là.
+   La carte « quelle clé vit dans quel fichier, quoi relancer » est remise au
+   propriétaire hors de ce dépôt.
+
+Ce qui reste après le 16 novembre, et qu'aucune session ne peut faire seule :
+la recette native dans Telegram (`/status`, l'Agora, talos), la projection
+Argos dans la console, les clés (étape 8), et, le 26 novembre, les budgets SLO.
 
 ## Ce qui est déjà fait
 
