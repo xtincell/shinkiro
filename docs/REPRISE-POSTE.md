@@ -42,7 +42,11 @@ Relevé du jour : rien n'a bougé depuis le 13. Le propriétaire a tranché (lig
    produit de nouveau ses cartes.
 3. **Moteur `galahad` 0.1.18 épinglé sous systemd** pour `talos.service` et
    `hulysse.service`, après réception sur une copie de leur état (G1, TA3, HU2) ;
-   recette native dans Telegram avec le propriétaire (G2).
+   recette native dans Telegram avec le propriétaire (G2). **Réception sur
+   copie faite le 16 novembre** (ligne 0.93) : canon posé dans
+   `/opt/galahad-engine-0.1.18/`, 23 contrôles sur 23 pour chaque agent. Reste
+   la bascule : mettre de côté le `sessions.json` de juillet, poser le
+   complément d'unité, hulysse d'abord, puis la recette dans Telegram.
 4. **Cockpit** : point d'accès stable de `portal-api.service`, parcours
    authentifié, fraîcheur des sources (CK1 à CK3).
 5. **Argos** : la section 6 ci-dessous, inchangée.
