@@ -38,7 +38,9 @@ plusieurs touchent la sécurité. Ils sont en [section 3](#3-constats-que-les-do
 1. Le secret `FLEET_TOKEN` est refusé par GitHub depuis le 21 septembre.
 2. Aucun agent cloud n'a de voie d'accès au VPS. Une session lancée sur le poste
    du propriétaire en a une depuis le 13 novembre (lignes 0.86 à 0.89).
-3. La définition d'« achevé » est hors de git.
+3. ~~La définition d'« achevé » est hors de git.~~ *Écrite, puis validée par le
+   propriétaire le 16 novembre* ([section 1](#définition-retenue-point-37)).
+   Seul le découpage de LeRadar reste hors de git.
 4. Les clés des fournisseurs ne sont accessibles à aucun agent.
 5. Une vingtaine d'arbitrages attendent.
 6. Dix-sept points exigent un client, un cycle réel ou une facture.
@@ -103,6 +105,32 @@ critère de sortie qu'une commande ou un reçu peut vérifier.
 
 P1 et P2 sont à portée d'agent. P3 dépend de deux gestes du propriétaire. P4
 dépend du marché : aucun plan ne le ferme, il se constate.
+
+### Définition retenue (point 3.7)
+
+*Proposée le 13 novembre à partir de `REPRISE-POSTE.md` § 8 ; validée telle
+quelle par le propriétaire le 16 novembre (ligne 0.90).*
+
+Le programme est **achevé** quand les trois conditions suivantes sont vraies en
+même temps :
+
+1. **P2 fermé** : chaque point `[commit]` de l'inventaire a sa PR fusionnée, CI
+   verte. Se vérifie dans la section « État des points `[commit]` » de
+   l'inventaire : plus aucune ligne « En cours » ni « Faisable par un agent ».
+2. **P3 reçu** : chaque point `[prod]` et `[secret]` a un reçu daté dans ce plan,
+   ou une décision datée qui le sort du programme. Se vérifie dans l'inventaire :
+   aucun de ces points n'y reste non barré.
+3. **P4 constaté** : au moins un pilote réel, avec sa mesure avant/après tirée du
+   journal de Radar, et une facture émise rapprochée de son coût. Ce palier se
+   constate ; il ne se planifie pas.
+
+**P1 est la condition de maintien.** Un contrôle hebdomadaire rouge ou non
+mesurable suspend le statut « achevé » jusqu'au passage suivant vert.
+
+**Hors de cette définition** : les sept chantiers, les dix portes et les 116
+parcours de LeRadar, tant que leur définition n'est pas exportée dans ce dépôt
+(B3). Les y faire entrer est une décision du propriétaire, qui modifierait cette
+section.
 
 **Ce que les documents permettent de reconstruire des chantiers**, sans
 garantie :
@@ -196,6 +224,11 @@ privé `release/preuves-mvp-commercial-20261020/requirements-and-baseline.json` 
 Le geste : exporter de LeRadar la liste des chantiers et de leurs lots, la liste
 des portes, et les critères du MVP, dans un fichier de ce dépôt. Les preuves
 restent privées ; seule la définition entre.
+
+*Mise à jour du 16 novembre.* La définition d'« achevé » est écrite et validée
+([section 1](#définition-retenue-point-37)) : elle tient sans LeRadar. L'export
+des chantiers, des portes et des critères du MVP reste à faire ; tant qu'il
+manque, ils sont hors de la définition.
 
 **B4 — Les clés des fournisseurs.**
 Aucune n'est dans un dépôt, et c'est voulu. Mais onze points en dépendent :
@@ -440,6 +473,7 @@ Chaque intervention nomme son dépôt, son geste, sa preuve et son prérequis.
 | 0.87 | VPS, `danmem` (DM1 ; DM2 en partie) : le service passe de la lignée locale `82b4182` (source servie `7430261…`, sans remote ni `sql/`) à `main` `970eb09` ; migrations `001` à `003` sur la base servie ; `/opt/danmem` devient un clone de `main`, par une clé de déploiement en lecture propre à l'hôte | Sauvegarde `npm run sauvegarder` avant (3 518 lignes, gel vérifié, aucun travail réclamé), puis à froid au moment de la bascule. Réception sur une copie restaurée du paquet, même image `pgvector/pgvector:pg16` : 24 contrôles sur 24 — restauration vérifiée par empreintes, trois pièces reçues puis rejouées sans perte, `/peers` et neuf rappels identiques à l'ancien code, écritures des clients réels (`dan-mem`, talos et hulysse, `delegate.sh`, `wiki-sync.py`), ancien code redémarré sur le schéma migré. Bascule le 13 novembre à 0 h 45 UTC : 5 s d'arrêt, `/health` 200 (11 pairs, 3 457 observations), `/whoami` = `danmem:instance`, statut du cockpit republié, aucune erreur dans les journaux de talos et hulysse. Retour arrière : `/opt/danmem-avant-20261113T0045Z`. Paquets sous `/root/sauvegardes/` **sur l'hôte**, pas hors de l'hôte. Unité servie relue, inchangée (root, sans durcissement) |
 | 0.88 | `hermes-cockpit` : les écrivains de l'hôte versés dans `ops/hote/` et posés sur le VPS (CK4, 3.8). Publication atomique et validée ; `dan-refresh.json` mis à jour sous le verrou de `SONDES.md` ; clés passées à `curl` hors ligne de commande ; `cerveau.txt` écrit de façon atomique | [hermes-cockpit#8](https://github.com/xtincell/hermes-cockpit/pull/8) **fusionnée** (`1be7648`) : 11 cas sur les scripts réels, dont 6 rouges contre les scripts servis (champs du cockpit effacés, demande forcée perdue, statut Danmem tronqué, index du coffre vidé, statut invalide publié, registre invalide propagé) ; suite 50/50 en CI, aucun test sauté. Posés par `ops/hote/installer.sh` (versions précédentes dans `/opt/dan/.avant-20261113T005635Z`) ; chaque script exécuté une fois : sept fichiers valides, aucun temporaire ni verrou laissé, `GET /api/state` avec ses 11 sources `available`. Le cockpit n'est pas redéployé : son code ne change pas |
 | 0.89 | VPS : relectures de `REPRISE-POSTE.md` (2.8, CK4, G1) et des jetons Coolify | **Port 7681** : connexion TCP depuis un poste extérieur au VPS vers `76.13.128.23` et `powerupgraders.com` refusée ; `ttyd` écoute sur toutes les interfaces, `ufw` le filtre. **CK4** : les sept fichiers relus ont la forme exigée et sont frais (2 min, 5 min, 6 h) ; leurs écrivains écrivaient sur place et sans verrou jusqu'à la ligne 0.88. **G1** : `/opt/galahad` n'est pas un dépôt et ne porte que `bin/`, `bureau/`, `patrol/`, `recall/` ; six des sept scripts communs avec `galahad/deploy/` diffèrent du dépôt, et quatre n'y sont pas (`telegram-healthcheck.sh`, `wiki-index.sh`, `session-close.sh`, `session-watchdog.sh`). La patrouille tourne bien en `root`. **Jetons** : le n° 8 (`claude-deploy`) sert le cockpit, `refresh-core.sh` et le coffre de l'hôte ; le n° 24 (`FableAcces`, transmis à la session cloud) n'a aucun consommateur sur l'hôte |
+| 0.90 | Arbitrages du 16 novembre, pris depuis le poste (3.7, DM2, G1, clés), et relevé de l'hôte du même jour | **Définition d'« achevé »** validée telle quelle (section 1). **Sauvegardes hors de l'hôte** : vers le Google Drive déjà raccordé à l'hôte (remote `rclone` de `gdrive-bridge`), paquets chiffrés, clé gardée aussi hors de l'hôte. **Moteur `galahad`** : le canon 0.1.18 épinglé sous systemd pour `talos.service` et `hulysse.service`, sur le modèle de la flotte commerciale ; ni Compose, ni rôle chef, ni nouveau bot. **Clés** : révocations, rotations et `FLEET_TOKEN` regroupés en fin de travail ; d'ici là le contrôle hebdomadaire reste non mesurable en CI et la mesure se fait en local. **Relevé** : aucun geste depuis le 13 novembre ; jeton Coolify n° 24 encore présent ; `ARGOS_STUDIO_URL` absente de la production, studio sain ; `danmem` sur `main` `970eb09`, unité inchangée (root, sans durcissement), worker en 402 sur le fournisseur de repli (96 échecs en 48 h) ; `talos.service` et `hulysse.service` servent toujours quinze modules identiques entre eux |
 
 ### Lot 1 — Rendre les contrôles mesurables
 
@@ -490,7 +524,7 @@ journaux datés : le README le dit, sans les réécrire.
 | 3.4 | Une ADR sur la jointure des taxonomies d'écart | **Accepted** : [SHK-0004](adr/SHK-0004-jointure-des-taxonomies-ecart.md), option C ; hors écart signalé (la-barre#23) | — |
 | 3.5 | Une ADR sur le câblage La Barre → Radar | **Accepted** : [SHK-0005](adr/SHK-0005-cablage-la-barre-radar.md), sens 1, en production depuis le 12 novembre (ligne 0.68), signal `decisions-barre-radar` ; calcul de la mesure fait (ligne 0.75) | Saisie projet ↔ dossier dans Radar : usage |
 | 3.6 | Reprendre les jugements périmés de `fleet.yml` et les dix-huit contradictions | **Fait** le 10 novembre : seize contradictions corrigées à la source, deux journaux datés laissés tels quels ; jugements repris à chaque lot depuis | — |
-| 3.7 | La définition d'« achevé » | — | **B3** |
+| 3.7 | La définition d'« achevé » | **Fait** : écrite en section 1, « Définition retenue », validée par le propriétaire le 16 novembre (ligne 0.90). Les chantiers de LeRadar restent hors de git | **B3** pour les chantiers |
 | 3.8 | Le contrat de fichier `agent-brains.json` → `cerveau.txt` | **Fait** : contrat dans `docs/INTERFACES.md` ; maillon central versé dans `hermes-cockpit/ops/hote/` et posé sur l'hôte le 13 novembre (ligne 0.88) | — |
 
 ### Lot 4 — Réparer, dépôt par dépôt
@@ -669,7 +703,7 @@ Chacun est posé comme une question. Une réponse courte suffit.
 | régénère `FLEET_TOKEN` | Fermer P1 côté flotte |
 | ~~donne son accord sur #873~~ | *Fait le 12 novembre* : #873 fusionnée au tri 5.14 ; 1.3 se ferme par le workflow |
 | ouvre une voie vers le VPS | Commencer le lot 5 |
-| exporte la définition des chantiers | Écrire 3.7, et rattacher chaque intervention à son chantier |
+| exporte la définition des chantiers | Rattacher chaque intervention à son chantier ; 3.7 est écrite sans eux depuis le 16 novembre |
 | ~~tranche les arbitrages 5.2 à 5.5~~ | *Fait le 12 novembre* : SHK-0004 et SHK-0005 Accepted, signaux `ecart-types-alignes` et `decisions-barre-radar`, câblage en production. Reste le calcul des indicateurs 5.6 |
 
 ## Méthode et limites
