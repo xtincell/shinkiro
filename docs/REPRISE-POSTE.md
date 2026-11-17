@@ -5,9 +5,14 @@ SSH sur le VPS (`powerupgraders.com`), droits d'administration sur les dépôts
 `xtincell/*`, compte administrateur Coolify. Une session dans le cloud n'a aucun
 de ces trois accès : c'est pourquoi ces gestes sont regroupés ici.
 
+**Depuis le 17 novembre, 23 h 21 UTC, le SSH ne répond plus sur l'adresse
+publique** (ligne 0.97) : il faut le tunnel WireGuard du poste activé, et viser
+`192.168.177.1` (alias `vps` du poste).
+
 État au 12 novembre 2026, 17 h 30 UTC, **mis à jour le 13 novembre, 1 h 15 UTC**
 après une première reprise depuis le poste, puis le 16 novembre (décisions,
-ordre de la suite, sobriété des agents et réseau privé le soir). Plan détaillé : [`PLAN-ACHEVEMENT.md`](PLAN-ACHEVEMENT.md).
+ordre de la suite, sobriété des agents et réseau privé le soir) et le 17
+(SSH public fermé). Plan détaillé : [`PLAN-ACHEVEMENT.md`](PLAN-ACHEVEMENT.md).
 Inventaire : [`INVENTAIRE-POINTS-OUVERTS.md`](INVENTAIRE-POINTS-OUVERTS.md).
 
 ## Fait le 13 novembre depuis le poste
@@ -76,12 +81,19 @@ un seul gardien de l'hôte (talos), hulysse sans contrôles et à la demande,
 moteur 0.1.19, FABLE à la demande, écrivains du cockpit déclenchés par
 changement de fichier, livraison du soir en plusieurs messages. Un réseau
 privé WireGuard est monté (`wg0`, `192.168.177.1`, UDP 51820) et le port 22 y
-est admis. **Le SSH public reste ouvert** tant que le propriétaire n'a pas
-confirmé le tunnel depuis son poste (fichiers remis hors dépôt, alias SSH
-`vps-prive`) ; il sera fermé ensuite, en gardant `10.0.0.0/8` pour Coolify.
-Trois décisions lui reviennent : les ports 6001 et 6002 de Coolify, ouverts à
-tous ; la pile Honcho, qui tourne sans usage ; la clé `claude-spawt`, mise en
-commentaire avec deux autres lignes de `authorized_keys`.
+est admis. **Le SSH public est fermé depuis le 17 novembre, 23 h 21 UTC**
+(ligne 0.97), après preuve du tunnel depuis le poste : le port 22 ne répond
+plus qu'à `wg0` et à `10.0.0.0/8`, dont Coolify a besoin. Le rouvrir, par le
+tunnel : `ufw allow OpenSSH`. Seul le poste a son tunnel activé ; le
+téléphone et l'appareil de secours restent à activer par le propriétaire, et
+la connexion distante de Claude Code doit viser `root@192.168.177.1`. Si le
+tunnel du poste tombe : un autre appareil du tunnel, le terminal de serveur de
+l'interface Coolify (non essayé), puis le mode de récupération du hPanel ; le
+terminal du navigateur du hPanel passe par le port 22 et ne compte plus.
+Trois décisions reviennent au propriétaire : les ports 6001 et 6002 de
+Coolify, ouverts à tous ; la pile Honcho, qui tourne sans usage ; la clé
+`claude-spawt`, mise en commentaire avec deux autres lignes de
+`authorized_keys`.
 
 ## Ce qui est déjà fait
 
