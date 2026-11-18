@@ -94,10 +94,18 @@ la connexion distante de Claude Code vise `root@192.168.177.1`. Si le
 tunnel du poste tombe : un autre appareil du tunnel, le terminal de serveur de
 l'interface Coolify (non essayé), puis le mode de récupération du hPanel ; le
 terminal du navigateur du hPanel passe par le port 22 et ne compte plus.
-Trois décisions reviennent au propriétaire : les ports 6001 et 6002 de
-Coolify, ouverts à tous ; la pile Honcho, qui tourne sans usage ; la clé
-`claude-spawt`, mise en commentaire avec deux autres lignes de
-`authorized_keys`.
+Deux décisions reviennent au propriétaire : les ports 6001 et 6002 de
+Coolify, ouverts à tous ; la clé `claude-spawt`, mise en commentaire avec deux
+autres lignes de `authorized_keys`. La pile Honcho, elle, **ne doit pas être
+arrêtée** : son API ne sert plus, mais son Ollama calcule les vecteurs de
+`danmem` et de La Fusée (ligne 0.99) ; il faudrait d'abord leur donner un
+autre modèle.
+
+**18 novembre, `danmem`** (ligne 0.99) : un quart des souvenirs n'avait pas de
+vecteur, la première écriture après chaque silence perdant le sien. Le worker
+les rattrape désormais (cinq par tick) et le modèle reste chargé
+(`EMBED_KEEP_ALIVE=24h` dans `/etc/danmem/danmem.env`). À suivre :
+`unembedded` dans `/health` doit tomber à zéro, puis y rester.
 
 ## Ce qui est déjà fait
 
