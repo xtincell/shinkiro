@@ -85,8 +85,12 @@ est admis. **Le SSH public est fermé depuis le 17 novembre, 23 h 21 UTC**
 (ligne 0.97), après preuve du tunnel depuis le poste : le port 22 ne répond
 plus qu'à `wg0` et à `10.0.0.0/8`, dont Coolify a besoin. Le rouvrir, par le
 tunnel : `ufw allow OpenSSH`. Seul le poste a son tunnel activé ; le
-téléphone et l'appareil de secours restent à activer par le propriétaire, et
-la connexion distante de Claude Code doit viser `root@192.168.177.1`. Si le
+téléphone et l'appareil de secours restent à activer par le propriétaire. Un
+second appareil de travail a son propre pair (`vps-appareil2`,
+`192.168.177.5`) et une clé d'enrôlement à usage unique, valable jusqu'au
+25 novembre : il installe sa clé SSH par `/usr/local/sbin/enroler-cle-ssh`
+(ligne 0.98) ; un appareil de plus se prépare de la même façon. Sur le poste,
+la connexion distante de Claude Code vise `root@192.168.177.1`. Si le
 tunnel du poste tombe : un autre appareil du tunnel, le terminal de serveur de
 l'interface Coolify (non essayé), puis le mode de récupération du hPanel ; le
 terminal du navigateur du hPanel passe par le port 22 et ne compte plus.
