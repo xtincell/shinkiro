@@ -1,5 +1,8 @@
 # Shinkiro
 
+> **Programme clos le 18 novembre 2026.** Décision, justification et issue de chaque point :
+> [`docs/CLOTURE.md`](docs/CLOTURE.md). Ce dépôt reste l'index de la flotte et la trace des reçus.
+
 **Le programme qui unifie la méthode, l'entreprise, l'exécution et les outils.**
 
 Construit par [UPgraders](https://github.com/xtincell). Anciennement désigné « Galahad 360 »,
