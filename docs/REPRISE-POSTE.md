@@ -1,5 +1,9 @@
 # Reprise depuis le poste du propriétaire
 
+> **Programme clos le 18 novembre 2026** ([`CLOTURE.md`](CLOTURE.md)). Plus aucun geste
+> n'est attendu. Ce document reste le mode d'emploi du serveur : accès, sauvegardes,
+> agents, ce qui a été changé et comment revenir en arrière.
+
 À ouvrir dans une session Claude Code lancée **sur un poste qui a les droits** :
 SSH sur le VPS (`powerupgraders.com`), droits d'administration sur les dépôts
 `xtincell/*`, compte administrateur Coolify. Une session dans le cloud n'a aucun
@@ -75,6 +79,8 @@ Relevé du jour : rien n'a bougé depuis le 13. Le propriétaire a tranché (lig
 Ce qui reste après le 16 novembre, et qu'aucune session ne peut faire seule :
 la recette native dans Telegram (`/status`, l'Agora, talos), la projection
 Argos dans la console, les clés (étape 8), et, le 26 novembre, les budgets SLO.
+*Clôture du 18 novembre : ces gestes sortent du programme, chacun avec sa raison
+(`CLOTURE.md`).*
 
 **Soir du 16 novembre, hors plan, sur demande du propriétaire** (ligne 0.96) :
 un seul gardien de l'hôte (talos), hulysse sans contrôles et à la demande,
@@ -94,9 +100,13 @@ la connexion distante de Claude Code vise `root@192.168.177.1`. Si le
 tunnel du poste tombe : un autre appareil du tunnel, le terminal de serveur de
 l'interface Coolify (non essayé), puis le mode de récupération du hPanel ; le
 terminal du navigateur du hPanel passe par le port 22 et ne compte plus.
-Deux décisions reviennent au propriétaire : les ports 6001 et 6002 de
-Coolify, ouverts à tous ; la clé `claude-spawt`, mise en commentaire avec deux
-autres lignes de `authorized_keys`. La pile Honcho, elle, **ne doit pas être
+Tranché à la clôture du 18 novembre : les ports 6001 et 6002 de Coolify restent
+ouverts, la clé `claude-spawt` reste en commentaire. Le même jour, la clé SSH du
+poste est remplacée (l'ancienne, exposée en juillet, n'ouvre plus l'hôte), le
+terminal web `ttyd` est arrêté et désactivé, trois jetons de l'API Coolify
+inutilisés sont mis à échéance, le mot de passe du cockpit et le jeton du portail
+sont remplacés (ligne 1.00). Le mot de passe du cockpit se lit dans le coffre :
+`dan-vault get cockpit-basic-auth`. La pile Honcho, elle, **ne doit pas être
 arrêtée** : son API ne sert plus, mais son Ollama calcule les vecteurs de
 `danmem` et de La Fusée (ligne 0.99) ; il faudrait d'abord leur donner un
 autre modèle.

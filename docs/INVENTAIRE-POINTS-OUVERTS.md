@@ -80,18 +80,18 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 
 - ~~F1 `[prod]` Le contrôle SLO n'a jamais mesuré : la base de production est injoignable depuis les runners — un run SLO qui mesure — MAT:335 ; INT:338~~ — **fermé le 12 novembre** : tâche Coolify `slo-check`, premier relevé réel (ADVE-project#1198, #1200)
 - F2 `[commit]` Conflit de contrats : maturité COMPLETE/100, sources périmées, schéma strict (80 chemins refusés) — un contrat unique pour le S, ses écrivains et ses consommateurs — R-AF:209-213 ; R-CS:1023-1025
-- F3 `[secret?]` Stress global en échec : 22 findings, 230 surfaces HTTP non reçues — un stress vert sur un artefact isolé — R-AF:228-230, 258-260
+- ~~F3 `[secret?]` Stress global en échec : 22 findings, 230 surfaces HTTP non reçues — un stress vert sur un artefact isolé — R-AF:228-230, 258-260~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : aucune clé de fournisseur ne sera engagée pour ce programme
 - F4 `[commit]` Comparaison schéma/migrations non mesurée en CI — un job vert avec une base temporaire — R-AF:231-233, 152-153
-- F5 `[secret]` Aucune forge réelle : zéro tâche Ptah en production — une forge tracée de la demande au coffre — R-AF:241-251, 49-52
-- F6 `[secret]` Octets durables après expiration de l'URL du fournisseur — relecture d'un média réel après expiration — R-AF:253-255
+- ~~F5 `[secret]` Aucune forge réelle : zéro tâche Ptah en production — une forge tracée de la demande au coffre — R-AF:241-251, 49-52~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : aucune forge réelle ne sera lancée : pas de clé de fournisseur engagée
+- ~~F6 `[secret]` Octets durables après expiration de l'URL du fournisseur — relecture d'un média réel après expiration — R-AF:253-255~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : dépend d'une forge réelle (F5), qui n'aura pas lieu
 - F7 `[tiers]` Facture du fournisseur et coût réel — une facture rapprochée d'un reçu de coût — R-AF:255-256, 178
 - F8 `[commit]` Écrivains à faire converger vers le gateway ; 76 archives sans filiation — tests PostgreSQL verts — R-AF:244-246 ; R-CS:564, 652-656
 - F9 `[commit]` Santé de campagne automatique inexistante ; brouillon après remontage ; éditions concurrentes — calcul et tests — INT:197-202 ; R-RS:26-28
-- F10 `[prod]` Rôle opérateur natif jamais reçu en production — recette sous un compte opérateur réel — R-RS:60-61 ; MAT:205-206
-- F11 `[prod]` Compensation jamais soumise sur une archive réelle ; restauration du SI non reçue — une annulation réelle et une restauration complète — R-CS:647-650, 655 — *en partie le 16 novembre* : base `lafusee` sauvegardée hors de l'hôte puis restaurée sur une copie, 239 tables aux comptes identiques (plan, ligne 0.91) ; restent la compensation sur une archive réelle et la reprise du service entier
-- F12 `[prod]` Stockage : récupération, reprise stockage et clé, orphelins `HTTP_BLOB` — restauration prouvée du volume privé — R-CS:908-911, 1003-1005 — *en partie le 16 novembre* : volume privé sauvegardé hors de l'hôte chaque semaine, archive relue de bout en bout, 3 133 entrées (ligne 0.91) ; restent la remise en place dans un service, la reprise stockage et clé, les orphelins
+- ~~F10 `[prod]` Rôle opérateur natif jamais reçu en production — recette sous un compte opérateur réel — R-RS:60-61 ; MAT:205-206~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : demande un compte opérateur réel ; aucune recette native n'est prévue
+- ~~F11 `[prod]` Compensation jamais soumise sur une archive réelle ; restauration du SI non reçue — une annulation réelle et une restauration complète — R-CS:647-650, 655~~ — *en partie le 16 novembre* : base `lafusee` sauvegardée hors de l'hôte puis restaurée sur une copie, 239 tables aux comptes identiques (plan, ligne 0.91) ; restent la compensation sur une archive réelle et la reprise du service entier — **clos le 18 novembre** : le reçu ci-dessus vaut tel quel ; le reste sort du programme ([`CLOTURE.md`](CLOTURE.md)) — la compensation sur une archive réelle et la reprise d'un service entier demandent un cas réel et un second serveur
+- ~~F12 `[prod]` Stockage : récupération, reprise stockage et clé, orphelins `HTTP_BLOB` — restauration prouvée du volume privé — R-CS:908-911, 1003-1005~~ — *en partie le 16 novembre* : volume privé sauvegardé hors de l'hôte chaque semaine, archive relue de bout en bout, 3 133 entrées (ligne 0.91) ; restent la remise en place dans un service, la reprise stockage et clé, les orphelins — **clos le 18 novembre** : le reçu ci-dessus vaut tel quel ; le reste sort du programme ([`CLOTURE.md`](CLOTURE.md)) — la reprise du stockage et de sa clé demande un second serveur
 - F13 `[commit]` Résiduels : clé MCP limitée refusée ; premier clic Sources sans effet ; historique des identifiants produit — correctifs et tests — R-CS:355-357, 183-184, 305-306, 269-271
-- F14 `[prod]` Aucun chargement intégral sans échec ; mobile réel, thème jour, partage public non reçus (répété ×10) — trace complète sur appareil réel — R-CS:1026-1027, 245-247, 74 ; R-AF:215-218
+- ~~F14 `[prod]` Aucun chargement intégral sans échec ; mobile réel, thème jour, partage public non reçus (répété ×10) — trace complète sur appareil réel — R-CS:1026-1027, 245-247, 74 ; R-AF:215-218~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : demande un appareil réel et une trace complète ; aucune n'est prévue
 - F15 `[tiers]` Aucun cycle métier réel : stratégie validée, production, validation, livraison — un cycle client complet — MAT:28, 166-167 ; R-CS:216-218
 - F16 `[commit]` Les « autres promesses publiques » — recette de chaque section publique — MAT:300-301 ; FLEET:84-85
 
@@ -99,20 +99,20 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 
 - BP1 `[commit]` `la-fusee-blueprint` : la vue interactive est restée sur une itération antérieure — schéma régénéré et recette visuelle — R-MM:39-41, 49-50
 - BP2 `[tiers]` `la-fusee-blueprint` : une révision de méthode réellement appliquée à une décision métier — R-MM:52-54
-- IM1 `[prod]` `indice-maturite` : admission du bilan exporté dans le bon dossier Fusée — INT:278-283 ; MAT:312-313
+- ~~IM1 `[prod]` `indice-maturite` : admission du bilan exporté dans le bon dossier Fusée — INT:278-283 ; MAT:312-313~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : demande un bilan exporté à admettre ; aucun n'est prévu
 - IM2 `[commit]` `indice-maturite` : ouverture hors ligne et repli sans stockage — INT:282-283
 - ME1 `[décision]` `market-expansion-system` : en faire une offre packagée — MAT:348
 - ME2 `[commit]` `market-expansion-system` : jointure avec la taxonomie d'écarts de La Barre — TOPO:153-166, 206-207
 - GL1 `[commit]` `galahad-landing` : réécrire pour le patron d'agence — PORT:84-88
-- GL2 `[prod]` `galahad-landing` : aucune page publiée — MAT:345 ; FLEET:158. **Faux au 10 novembre** : la page est servie sur `galahad.powerupgraders.com`, au commit de `main`. Reste GL1, le contenu.
+- ~~GL2 `[prod]` `galahad-landing` : aucune page publiée — MAT:345 ; FLEET:158~~. **Faux au 10 novembre** : la page est servie sur `galahad.powerupgraders.com`, au commit de `main`. Reste GL1, le contenu.
 
 ### galahad
 
 - ~~G1 `[prod]` Canon corrigé non déployé, aucun agent migré — services épinglés sur le canon — MAT:150-151 ; R-GD:58-59~~ — **fermé le 16 novembre** : canon 0.1.18 reçu sur une copie de l'état de chaque agent (plan, ligne 0.93), puis `hulysse.service` et `talos.service` épinglés dessus (ligne 0.94)
-- G2 `[secret]` Setup, cockpit, agents dans Telegram, alertes de patrouille non reçus — recette native — R-GD:22-23 ; R-TH:35, 80 — *en partie le 16 novembre* : sous le canon, hulysse reçoit un message réel de l'opérateur et y répond ; sa patrouille émet une alerte puis son analyse (ligne 0.94) ; restent `/status`, l'Agora, talos, le setup et le cockpit du moteur
+- ~~G2 `[secret]` Setup, cockpit, agents dans Telegram, alertes de patrouille non reçus — recette native — R-GD:22-23 ; R-TH:35, 80~~ — *en partie le 16 novembre* : sous le canon, hulysse reçoit un message réel de l'opérateur et y répond ; sa patrouille émet une alerte puis son analyse (ligne 0.94) ; restent `/status`, l'Agora, talos, le setup et le cockpit du moteur — **clos le 18 novembre** : le reçu ci-dessus vaut tel quel ; le reste sort du programme ([`CLOTURE.md`](CLOTURE.md)) — `/status`, l'Agora et Talos sont reçus sur copie, Telegram simulé (ligne 0.93) ; la recette native demandait le propriétaire
 - G3 `[commit]` Garde par motifs, sans sandbox ni mandat lié à une cible ou un montant — R-GD:21-22
 - G4 `[commit]` Outbox interrompue pendant l'effet ; objectifs non isolés entre entreprises — R-GD:54 ; R-TH:66-71
-- G5 `[prod]` Coût persistant, cycle des agents actifs, exploitation par une seconde TPE — R-GD:22, 56 ; R-TH:80-81
+- ~~G5 `[prod]` Coût persistant, cycle des agents actifs, exploitation par une seconde TPE — R-GD:22, 56 ; R-TH:80-81~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : relève d'un usage réel par une seconde entreprise, c'est-à-dire du palier P4, retiré à la clôture
 
 ### radar
 
@@ -120,7 +120,7 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 - RA2 `[tiers?]` Trois rôles réels non prouvés sur le Radar personnel — R-RR:34-35
 - RA3 `[commit]` Permissions par rôle, concurrence des codes (`ndeg` non unique) — INT:37, 61-63
 - RA4 `[décision]` Flux publics par défaut : choix de `FEED_TOKEN` par installation — INT:72-75
-- RA5 `[prod]` PostgreSQL et `/data` sauvegardés ; reprise sur un second serveur — INT:87-91 — *en partie le 16 novembre* : bases et `/data` des deux instances sauvegardés hors de l'hôte chaque nuit, bases restaurées sur copies aux comptes identiques (ligne 0.91) ; reste la reprise sur un second serveur
+- ~~RA5 `[prod]` PostgreSQL et `/data` sauvegardés ; reprise sur un second serveur — INT:87-91~~ — *en partie le 16 novembre* : bases et `/data` des deux instances sauvegardés hors de l'hôte chaque nuit, bases restaurées sur copies aux comptes identiques (ligne 0.91) ; reste la reprise sur un second serveur — **clos le 18 novembre** : le reçu ci-dessus vaut tel quel ; le reste sort du programme ([`CLOTURE.md`](CLOTURE.md)) — la reprise sur un second serveur n'aura pas lieu, faute de second serveur
 - RA6 `[tiers]` Gestes client réels, circulation des décisions, coût complet — R-RR:89-91
 
 ### talos et hulysse
@@ -129,21 +129,21 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 - TA2 `[commit]` Fusion décidée, non exécutée ; parité des capacités donneuses — SHK3:52-56, 83-85 ; R-TH:41-43
 - ~~TA3 `[prod]` Services différents de git : quinze modules servis, aucun identique au dépôt — R-TH:18, 73-78~~ — **fermé le 16 novembre** : les quinze modules comparés au canon 0.1.18 (ligne 0.93), puis remplacés par lui ; les deux services servent le commit `a0e8426`, empreintes vérifiées fichier par fichier (ligne 0.94). Les scripts de `/opt/galahad` restent à réconcilier avec `galahad/deploy/`
 - HU1 `[décision]` Politique de veille et autorité d'action par installation — R-TH:44 ; FLEET:269-270
-- HU2 `[prod]` Reprise des sessions nommées — R-TH:41 ; FLEET:279 — *en partie le 16 novembre* : sur copie, le canon persiste la conversation dans `sessions.json` ; celui de juillet est mis de côté à la bascule, et hulysse persiste en service une conversation réelle (ligne 0.94) ; reste à observer une reprise après redémarrage
+- ~~HU2 `[prod]` Reprise des sessions nommées — R-TH:41 ; FLEET:279~~ — *en partie le 16 novembre* : sur copie, le canon persiste la conversation dans `sessions.json` ; celui de juillet est mis de côté à la bascule, et hulysse persiste en service une conversation réelle (ligne 0.94) ; reste à observer une reprise après redémarrage — **clos le 18 novembre** : le reçu ci-dessus vaut tel quel ; le reste sort du programme ([`CLOTURE.md`](CLOTURE.md)) — la conversation est toujours sur le disque après le redémarrage du 16 novembre, mais aucun message réel n'est venu la reprendre
 
 ### danmem
 
 - ~~DM1 `[prod]` Corrections reçues sur copies, non livrées au service actif — TOPO:12 ; MAT:157-158~~ — **fermé le 13 novembre** : le service sert `main` `970eb09`, schéma `001` à `003` en base, après réception sur une copie (plan, ligne 0.87)
-- DM2 `[prod]` Installation, restauration d'une sauvegarde, isolation, coût récurrent — TOPO:36 ; R-GD:54-56 — *en partie le 13 novembre* : sauvegarde de la base servie et restauration vérifiée sur une copie de l'hôte (ligne 0.87) ; sauvegarde hors de l'hôte chaque nuit et restauration depuis celle-ci par l'outil de Danmem le 16 novembre (ligne 0.91) ; unité durcie du dépôt en service, sous un utilisateur dédié, le même jour (ligne 0.92) ; restent l'isolation entre installations et le coût récurrent : le worker passe depuis le 16 novembre par le relais OAuth local, son coût devient une part du quota de l'abonnement, à mesurer (ligne 0.92)
+- ~~DM2 `[prod]` Installation, restauration d'une sauvegarde, isolation, coût récurrent — TOPO:36 ; R-GD:54-56~~ — *en partie le 13 novembre* : sauvegarde de la base servie et restauration vérifiée sur une copie de l'hôte (ligne 0.87) ; sauvegarde hors de l'hôte chaque nuit et restauration depuis celle-ci par l'outil de Danmem le 16 novembre (ligne 0.91) ; unité durcie du dépôt en service, sous un utilisateur dédié, le même jour (ligne 0.92) ; restent l'isolation entre installations et le coût récurrent : le worker passe depuis le 16 novembre par le relais OAuth local, son coût devient une part du quota de l'abonnement, à mesurer (ligne 0.92) — **clos le 18 novembre** : le reçu ci-dessus vaut tel quel ; le reste sort du programme ([`CLOTURE.md`](CLOTURE.md)) — l'isolation entre installations et le coût récurrent n'ont pas d'objet tant qu'il n'existe qu'une installation
 - DM3 `[commit]` Clés globales : identités et mandats, bail de claim, rectification des souvenirs — INT:22 ; R-GD:54-57
 - ~~DM4 `[commit]` CI : consommateur Galahad sauté, deux contrôles vectoriels sautés en local — R-GD:39-44~~ — **fermé le 13 novembre** : danmem#6 fusionnée, 41/41 en CI, aucun saut (ligne 0.86)
-- DM5 `[prod]` Bus des agents vivants et retour vers une campagne — INT:25-26
+- ~~DM5 `[prod]` Bus des agents vivants et retour vers une campagne — INT:25-26~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : relève d'une campagne réelle, c'est-à-dire du palier P4, retiré à la clôture
 
 ### hermes-cockpit
 
 - ~~CK1 `[prod]` `portal-api.service` raccordé à une adresse de conteneur — un endpoint stable — R-CK:75-78 ; INT:266-267~~ — **fermé le 16 novembre** : l'adresse avait changé au redémarrage de l'hôte du 29 octobre et quatre routes répondaient 500 ; le service vise désormais un relais sur la boucle locale, qui retrouve le conteneur par son nom (plan, ligne 0.95 ; hermes-cockpit#11)
-- CK2 `[prod]` Navigateur authentifié et effet réel d'une commande — R-CK:71-73, 82 ; INT:256-257 — *en partie le 16 novembre* : par l'API, sous l'authentification du cockpit, l'état rend ses onze sources, et la commande « rafraîchir maintenant » produit son effet réel sur l'hôte (ligne 0.95) ; reste le même parcours dans un navigateur
-- CK3 `[prod]` Fraîcheur par source, identité des agents, isolation, restauration, coûts — R-CK:16-18, 81-83 — *en partie le 16 novembre* : données du cockpit sauvegardées hors de l'hôte chaque nuit, archive relue (ligne 0.91) ; fraîcheur de chaque fichier lu relevée, onze sources disponibles (ligne 0.95) ; restent l'identité réelle des agents, que le cockpit affiche par rôle, l'isolation et les coûts
+- ~~CK2 `[prod]` Navigateur authentifié et effet réel d'une commande — R-CK:71-73, 82 ; INT:256-257~~ — *en partie le 16 novembre* : par l'API, sous l'authentification du cockpit, l'état rend ses onze sources, et la commande « rafraîchir maintenant » produit son effet réel sur l'hôte (ligne 0.95) ; reste le même parcours dans un navigateur — **clos le 18 novembre** : le reçu ci-dessus vaut tel quel ; le reste sort du programme ([`CLOTURE.md`](CLOTURE.md)) — le parcours dans un navigateur demandait le propriétaire
+- ~~CK3 `[prod]` Fraîcheur par source, identité des agents, isolation, restauration, coûts — R-CK:16-18, 81-83~~ — *en partie le 16 novembre* : données du cockpit sauvegardées hors de l'hôte chaque nuit, archive relue (ligne 0.91) ; fraîcheur de chaque fichier lu relevée, onze sources disponibles (ligne 0.95) ; restent l'identité réelle des agents, que le cockpit affiche par rôle, l'isolation et les coûts — **clos le 18 novembre** : le reçu ci-dessus vaut tel quel ; le reste sort du programme ([`CLOTURE.md`](CLOTURE.md)) — l'identité réelle des agents, l'isolation et les coûts n'ont pas d'objet sur une installation unique
 - ~~CK4 `[commit]` Écrivains externes concurrents ; format des sondes non écrit — R-CK:80-81 ; INT:355~~ — **fermé le 13 novembre** : écrivains de l'hôte versés et posés, publication atomique, verrou partagé (hermes-cockpit#8, ligne 0.88)
 
 ### la-barre
@@ -158,10 +158,10 @@ Format : `[classe]` énoncé — ce qui le fermerait — référence.
 ### Argos-studio
 
 - AR1 `[décision]` Trois PR en brouillon : CI verte et relecteur exigés — R-AR:38-41
-- AR2 `[prod]` Aucun déploiement ; projection distante depuis La Fusée non reçue — R-AR:15-18, 42 ; MAT:268 — *en partie* : le studio est déployé et sain depuis le 12 novembre (plan, 4.12) ; la projection des 13 dossiers ne se lance que depuis la console de La Fusée, aucun outil de son connecteur ne la porte (relevé du 16 novembre) : au propriétaire, puis `ARGOS_STUDIO_URL` sur la production
+- ~~AR2 `[prod]` Aucun déploiement ; projection distante depuis La Fusée non reçue — R-AR:15-18, 42 ; MAT:268~~ — *en partie* : le studio est déployé et sain depuis le 12 novembre (plan, 4.12) ; la projection des 13 dossiers ne se lance que depuis la console de La Fusée, aucun outil de son connecteur ne la porte (relevé du 16 novembre) : au propriétaire, puis `ARGOS_STUDIO_URL` sur la production — **clos le 18 novembre** : le reçu ci-dessus vaut tel quel ; le reste sort du programme ([`CLOTURE.md`](CLOTURE.md)) — la projection ne se lance que depuis la console de La Fusée, par le propriétaire ; Argos reste autonome, `ARGOS_STUDIO_URL` n'est pas posée
 - AR3 `[commit]` Authentifier l'admission ; espace privé absent ; licence par actif ; amendement concurrent — R-AR:47-50
 - AR4 `[commit]` Erreurs, focus, clavier, mobile, fraîcheur — R-AR:50-51
-- AR5 `[secret]` Collecte vivante : sécurité des URL, quotas, modèle payant — R-AR:52
+- ~~AR5 `[secret]` Collecte vivante : sécurité des URL, quotas, modèle payant — R-AR:52~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : la collecte vivante demande un modèle payant ; aucune clé n'est engagée
 - AR6 `[commit]` SHK-0002 non exécutée côté Fusée : lecture encore sur le dossier interne — R-AR:19 ; SHK2:52-56, 96-97
 - AR7 `[tiers]` Boucle de mesure vers les résultats client — MAT:342 ; PORT:52, 81
 
@@ -171,10 +171,10 @@ du plan.
 ### Ateliers et outils versés
 
 - CD1 `[commit]` `charadesign-generator` : propriétaire des écritures, retours tardifs, import versionné — R-AT:39-42
-- CD2 `[secret]` `charadesign-generator` : routes du fournisseur absentes en production — TOPO:61-64
+- ~~CD2 `[secret]` `charadesign-generator` : routes du fournisseur absentes en production — TOPO:61-64~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : outil local d'opérateur (arbitrage 5.9) ; ses routes de fournisseur ne seront pas ouvertes en production
 - CD3 `[tiers]` `charadesign-generator` : validation qualitative humaine des sorties — R-AT:80-82 ; MAT:286
 - CE1 `[commit]` `character-engine` : contradiction scorée valide, prompt tronqué, vecteur non conservé — R-AT:12 ; FLEET:422-425
-- DC1 `[secret]` `datacollector` : fournisseurs réels jamais appelés — R-DC:21-22, 29
+- ~~DC1 `[secret]` `datacollector` : fournisseurs réels jamais appelés — R-DC:21-22, 29~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : outil local d'opérateur (arbitrage 5.9) ; ses fournisseurs réels ne seront pas appelés
 - DC2 `[commit]` `datacollector` : interface native, exports, règles d'URL — R-DC:21-22, 29-30
 - DC3 `[commit]` `datacollector` : admission versionnée vers Seshat et Argos — R-DC:24-27
 - ~~DC4 `[prod]` `datacollector` : déploiement de service, droits, restauration — TOPO:53-57 ; R-DC:30-31~~ — **sorti par l'arbitrage 5.9 du 12 novembre** : outil local d'opérateur, aucun hébergement ; il n'y a pas de service à déployer
@@ -184,11 +184,11 @@ du plan.
 ### installation
 
 - IN1 `[commit]` Écrivain sur identifiant étranger : HTTP 500 au lieu d'un 404 typé — J1:70-76, 85-89
-- IN2 `[prod]` Fusée 6.27.493 : choix de marque et retour portefeuille sur l'image CI — INST:132-133, 152-156 ; J2:33
-- IN3 `[prod]` Image La Barre qualifiée seulement dans le cache du VPS de recette — INST:156-158 ; J2:34
+- ~~IN2 `[prod]` Fusée 6.27.493 : choix de marque et retour portefeuille sur l'image CI — INST:132-133, 152-156 ; J2:33~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : aucun second hôte n'est prévu : le socle d'entreprise reste reçu sur l'hôte de recette
+- ~~IN3 `[prod]` Image La Barre qualifiée seulement dans le cache du VPS de recette — INST:156-158 ; J2:34~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : aucun second hôte n'est prévu
 - IN4 `[commit]` Profil sans Radar, Argos, rôles d'agents, files ni mémoires — INST:109-115, 141-142 ; J1:95
-- IN5 `[prod]` Proxy HTTPS public, sauvegardes hors hôte, rétention — INST:111-112 ; J1:96
-- IN6 `[prod]` RPO et RTO de service, charge, coût mensuel réel — J1:97 ; J2:36
+- ~~IN5 `[prod]` Proxy HTTPS public, sauvegardes hors hôte, rétention — INST:111-112 ; J1:96~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : aucun second hôte n'est prévu ; sur l'hôte en place, les sauvegardes hors hôte et leur rétention sont reçues (ligne 0.91)
+- ~~IN6 `[prod]` RPO et RTO de service, charge, coût mensuel réel — J1:97 ; J2:36~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : RPO, RTO, charge et coût d'un service d'entreprise demandent un service vendu ; il n'y en a pas
 - IN7 `[commit]` Comptes ordinaires : rétrogradation, suppression, réaffectation — R-CS:405-406
 - IN8 `[tiers]` Tout est sur données fictives : aucune seconde entreprise réelle installée — J1:6 ; R-CS:602-604
 
@@ -200,7 +200,7 @@ du plan.
 - TR4 `[décision]` Critères d'acceptation de Content Operations ; modèle de Content Velocity — PORT:50-51, 79-80
 - TR5 `[tiers]` Grille tarifaire à valider sur coûts réels et premiers pilotes — PORT:83, 90
 - TR6 `[décision]` Lignées : 80 à qualifier, 111 modifications non commitées d'`ADVERT_01`, sort de `BrandForge` — MAT:350, 354-357, 368-369
-- TR7 `[secret]` Secrets à demander ; `FLEET_TOKEN` ; endpoints de modèles — INT:334-342 ; DER:124-128 ; TOPO:194-196
+- ~~TR7 `[secret]` Secrets à demander ; `FLEET_TOKEN` ; endpoints de modèles — INT:334-342 ; DER:124-128 ; TOPO:194-196~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : le contrôle hebdomadaire est suspendu à la clôture et le relevé se fait à la demande ; les secrets des fournisseurs restent au titulaire des comptes
 - TR8 `[commit]` Signal « deux composants, un seul produit », promis par SHK-0001, jamais écrit — SHK1:100-105 ; SHK2:74-85
 - TR9 `[commit]` Documents du programme périmés — voir plus bas
 
@@ -212,20 +212,20 @@ du plan.
 - SP2 `[tiers]` Retour de valeur : version choisie, usages publiés, effet mesuré — R-CS:47-48, 143-144 ; R-SA:276
 - SP3 `[décision]` Aucune approbation humaine : piliers proposés par l'IA, S v3 non approuvable — R-CS:388-393, 948-949 ; R-AF:207-208
 - SP4 `[décision]` Arbitrages non tranchés : mue, seuil, amendement du PRD absent de `main` — R-CS:420-427, 496-497
-- SP5 `[prod]` Données anciennes hors schéma — amendements gouvernés — R-CS:223-225, 398-399, 503-505, 1031
-- SP6 `[prod]` Filiation HD des masters ; équivalence WOFF2 ; deux slugs invalides — R-CS:941-945, 736-739
-- SP7 `[secret]` Application jamais reçue authentifiée — R-SA:39-40, 113-115, 274-276 ; R-RS:126-131
+- ~~SP5 `[prod]` Données anciennes hors schéma — amendements gouvernés — R-CS:223-225, 398-399, 503-505, 1031~~ — **sorti par `CLOISON.md`** : projet client, tenu hors du programme comme ses points `[commit]`
+- ~~SP6 `[prod]` Filiation HD des masters ; équivalence WOFF2 ; deux slugs invalides — R-CS:941-945, 736-739~~ — **sorti par `CLOISON.md`** : projet client, tenu hors du programme comme ses points `[commit]`
+- ~~SP7 `[secret]` Application jamais reçue authentifiée — R-SA:39-40, 113-115, 274-276 ; R-RS:126-131~~ — **sorti par `CLOISON.md`** : projet client, tenu hors du programme comme ses points `[commit]`
 - SP8 `[tiers]` Publication iOS et Android ; paiement — R-SA:69, 288 ; R-CS:528-532
 - SP9 `[commit]` Rejeu d'avis déplaçant plusieurs fois le Palais — R-SA:116-119, 183-184
 - SP10 `[commit]` File analytique, isolation, purge, finalisations simultanées — R-SA:111-115, 206-207, 274-276
 - SP11 `[commit]` Liens profonds restés sur `spawt.ci` — R-SA:85-87 ; INT:250-251
 - SP12 `[tiers?]` Confidentialité et CGU en brouillon juridique — R-SA:84-85 ; INT:249-250
-- SP13 `[prod]` Permissions non reçues ; fichier Edge servi différent du canon — R-SA:46-47, 241-242 ; R-CS:494-495
+- ~~SP13 `[prod]` Permissions non reçues ; fichier Edge servi différent du canon — R-SA:46-47, 241-242 ; R-CS:494-495~~ — **sorti par `CLOISON.md`** : projet client, tenu hors du programme comme ses points `[commit]`
 
 **BanaHealth**
 
 - BH1 `[tiers]` Droits client, chemin de l'éditeur client — R-BH:11-12, 28-29, 51-52
-- BH2 `[secret?]` Prochaine publication et son retour arrière — R-BH:41-42, 52
+- ~~BH2 `[secret?]` Prochaine publication et son retour arrière — R-BH:41-42, 52~~ — **sorti par `CLOISON.md`** : projet client, tenu hors du programme comme ses points `[commit]`
 - BH3 `[commit]` Revue visuelle et accessibilité, rattachement marque et projet — R-BH:50-51
 - BH4 `[tiers]` Coûts de maintenance ; assertions médicales non validées — R-BH:7, 52
 
@@ -239,7 +239,7 @@ du plan.
 - HF1 `[commit]` 15B Stories : quatre ruptures reproduites — R-15B:20-45
 - HF2 `[décision]` 15B ↔ Ngoma : aucun import compatible — R-15B:47-57
 - HF3 `[commit]` CosmicMachine, Atlas, Tauri-v1 : défauts listés — R-AT:14-16, 57-58
-- HF4 `[secret]` BrandForge : clé de fournisseur en dur à révoquer — R-MM:17-35
+- ~~HF4 `[secret]` BrandForge : clé de fournisseur en dur à révoquer — R-MM:17-35~~ — **sorti le 18 novembre** ([`CLOTURE.md`](CLOTURE.md)) : révoquer cette clé demande le compte du fournisseur ; la consigne est remise au propriétaire, hors programme
 - HF5 `[décision]` Radar de l'employeur : autres créateurs de codes, 995 événements non qualifiés — INT:109-112, 144-149 ; R-RR:81-88 ; R-CS:593-598
 
 ## État des points `[commit]` au 12 novembre
@@ -256,24 +256,24 @@ CI verte. Voici où en est chacun des 43.
 | **Faisable par un agent** | Aucun point en attente d'un agent. |
 | **Hors programme** | SP1, SP9, SP10, SP11 (SPAWT) et BH3 (BanaHealth) sont des projets clients ; HF1 (15B Stories) et HF3 (CosmicMachine, Atlas, Tauri) sont au `labo`. [`CLOISON.md`](CLOISON.md) les tient hors du programme : ils se traitent dans leur propre cadre et ne conditionnent pas P2. |
 
-## État des points `[prod]` et `[secret]` au 16 novembre
+## État des points `[prod]` et `[secret]` à la clôture du 18 novembre
 
-La définition d'« achevé » (plan, section 1) demande pour chacun des 38 points
-un reçu daté, ou une décision datée qui le sort du programme. Voici où en est
-chacun. Les lignes du plan citées portent les reçus.
+Le programme est clos le 18 novembre 2026 ([`CLOTURE.md`](CLOTURE.md)). Chacun des 38
+points a un reçu daté, ou une décision datée qui le sort du programme : plus aucun
+n'est non barré dans cet inventaire.
 
-| État | Points |
+| Issue | Points |
 |---|---|
-| **Fermé par un reçu** (6) | F1 (0.82), DM1 (0.87), G1 (0.93, 0.94), TA3 (0.94), CK1 (0.95) ; GL2 était faux dès le relevé du 10 novembre, la page étant servie |
-| **Reçu en partie** (9) | F11 et F12 : base et stockage privé sauvegardés hors de l'hôte, base restaurée sur copie (0.91) ; restent la compensation sur archive réelle et la reprise d'un service entier. RA5 : sauvegardes et restauration sur copie (0.91) ; reste un second serveur. DM2 : sauvegarde, restauration, unité durcie (0.91, 0.92) ; restent l'isolation entre installations et le coût. HU2 : conversation persistée en service (0.94) ; reste une reprise après redémarrage. CK2 et CK3 (0.95) ; restent le navigateur, l'identité réelle des agents, l'isolation, les coûts. G2 : un message réel et une alerte de patrouille (0.94) ; restent `/status`, l'Agora, talos, le setup. AR2 : studio servi ; reste la projection |
-| **Sorti par une décision déjà inscrite** (6) | DC4 : arbitrage 5.9, outil local sans hébergement. SP5, SP6, SP7, SP13 (SPAWT) et BH2 (BanaHealth) : projets clients, que `CLOISON.md` tient hors du programme, comme leurs points `[commit]` |
-| **Attend le propriétaire** (5) | TR7 : `FLEET_TOKEN` et les secrets à demander. HF4 : révoquer la clé en dur de BrandForge. F10, F14, IM1 : un compte opérateur réel, un appareil réel, un bilan exporté à admettre |
-| **Attend une clé de fournisseur** (6) | F3 (stress sur artefact isolé), F5 et F6 (une forge réelle, ses octets durables), AR5 (collecte vivante), CD2 et DC1 (routes et fournisseurs réels des outils locaux) |
-| **Attend un hôte neuf** (4) | IN2, IN3, IN5, IN6 : le socle d'entreprise reçu ailleurs que sur l'hôte de recette |
-| **Attend un usage réel** (2) | G5 (coût persistant, seconde TPE), DM5 (bus des agents vivants jusqu'au retour vers une campagne) |
+| **Fermé par un reçu** (6) | F1 (0.82), DM1 (0.87), G1 (0.93, 0.94), TA3 (0.94), CK1 (0.95) ; GL2 était faux dès le relevé du 10 novembre |
+| **Reçu en partie, le reste sorti le 18 novembre** (9) | F11, F12 et RA5 : sauvegardes hors de l'hôte et restauration sur copie (0.91). DM2 : sauvegarde, restauration, unité durcie, vecteurs rattrapés (0.91, 0.92, 0.99). HU2 : conversation persistée en service (0.94). CK2 et CK3 : reçus par l'API (0.95). G2 : un message réel, une alerte de patrouille, et toute la recette sur copie (0.93, 0.94). AR2 : studio servi |
+| **Sorti par une décision antérieure** (6) | DC4 : arbitrage 5.9. SP5, SP6, SP7, SP13 et BH2 : projets clients, `CLOISON.md` |
+| **Sorti le 18 novembre** (17) | TR7, HF4, F10, F14, IM1 : attendaient le propriétaire. F3, F5, F6, AR5, CD2, DC1 : attendaient une clé de fournisseur. IN2, IN3, IN5, IN6 : attendaient un second hôte. G5, DM5 : attendaient un usage réel |
 
-Six fermés, neuf en partie, six sortis, dix-sept en attente d'un geste, d'une clé,
-d'un hôte ou d'un usage qu'aucune session ne peut produire seule.
+Six fermés par un reçu, neuf reçus en partie, vingt-trois sortis. La raison de chaque
+sortie est sur la ligne du point, plus haut, et dans [`CLOTURE.md`](CLOTURE.md).
+
+*État précédent, au 16 novembre : six fermés, neuf en partie, six sortis, dix-sept en
+attente d'un geste, d'une clé, d'un hôte ou d'un usage.*
 
 ## Contradictions entre documents
 

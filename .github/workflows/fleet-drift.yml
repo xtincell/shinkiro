@@ -8,10 +8,17 @@ name: Dérive de flotte (hebdomadaire)
 # contrôle qui passe : il échoue en rouge et le dit. C'est la leçon des 541
 # fausses issues ouvertes par un slo-check qui confondait « aucune violation »
 # et « base de données injoignable ».
+#
+# Programme clos le 18 novembre 2026 (docs/CLOTURE.md) : le passage hebdomadaire
+# est suspendu. Il lui fallait le secret FLEET_TOKEN, que seul le propriétaire
+# peut créer, et il serait resté rouge chaque lundi sans personne pour le lire.
+# Le contrôle se lance toujours à la main, ici ou depuis un poste authentifié :
+#   node scripts/releve-flotte.mjs && node scripts/signaux-flotte.mjs --strict
+# Pour le rétablir : poser FLEET_TOKEN, puis remettre les deux lignes ci-dessous.
+#   schedule:
+#     - cron: "0 7 * * 1"      # lundi 07:00 UTC
 
 on:
-  schedule:
-    - cron: "0 7 * * 1"      # lundi 07:00 UTC
   workflow_dispatch:
 
 permissions:
