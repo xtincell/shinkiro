@@ -103,8 +103,9 @@ autre modèle.
 
 **18 novembre, `danmem`** (ligne 0.99) : un quart des souvenirs n'avait pas de
 vecteur, la première écriture après chaque silence perdant le sien. Le worker
-les rattrape désormais (cinq par tick) et le modèle reste chargé
-(`EMBED_KEEP_ALIVE=24h` dans `/etc/danmem/danmem.env`). À suivre :
+les rattrape désormais et le modèle reste chargé (`EMBED_KEEP_ALIVE=24h`
+dans `/etc/danmem/danmem.env`). Le worker de cet hôte passe toutes les
+trente minutes : `WORKER_EMBED_BATCH=30` y règle trente vecteurs par passage. À suivre :
 `unembedded` dans `/health` doit tomber à zéro, puis y rester.
 
 ## Ce qui est déjà fait
