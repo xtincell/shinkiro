@@ -9,7 +9,7 @@
 #   make releve                régénère ce fichier
 #   git diff fleet.lock.yml    ce qui a bougé dans la flotte depuis le dernier relevé
 #
-releve_le: "2026-11-17"
+releve_le: "2026-11-18"
 owner: xtincell
 topic: shinkiro
 fenetre_vitalite_jours: 90
@@ -161,9 +161,9 @@ composants:
     prive: true
     langue: JavaScript
     fichiers: 27
-    poids_ko: 238
+    poids_ko: 253
     licence: presente
-    commits_90j: 25
+    commits_90j: 27
     topics: ["layer-execution", shinkiro]
     racines: [.]
     artefacts:
